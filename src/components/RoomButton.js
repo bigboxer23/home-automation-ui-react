@@ -11,7 +11,7 @@ class RoomButton extends React.Component
 
 	render()
 	{
-		return <Button onClick={() => this.handleClick()} bsStyle={this.getButtonStyle(this.props.room)} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}><i className="mdi mdi-lightbulb-outline"></i><div className="position-absolute bottom w-100 m-2 pl-2 pr-2">{this.props.room.name}</div></Button>;
+		return <Button onClick={() => this.handleClick()} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}><i className="mdi mdi-lightbulb-outline"></i><div className="position-absolute bottom w-100 m-2 pl-2 pr-3">{this.props.room.name}</div></Button>;
 	}
 
 	handleClick(e)

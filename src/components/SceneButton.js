@@ -23,7 +23,7 @@ class ClimateButton extends React.Component
 
 	getButtonStyle()
 	{
-		return true ? "success" : "default";
+		return true ? "default" : "default";
 	}
 }
 export default ClimateButton;
