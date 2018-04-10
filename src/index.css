@@ -21,7 +21,7 @@ body,html,#root
   white-space: normal !important;
   border-radius: 1rem !important;
   text-align: left !important;
-  padding-top: 24px !important;
+	padding: 0.5rem 2rem !important;
 }
 
 .mdi::before {
@@ -30,4 +30,19 @@ body,html,#root
   position: absolute;
   top: 10px;
   left: 10px;
+}
+
+.btn-success .mdi-lightbulb-outline:before
+{
+	content:'\f6e8';
+}
+
+.bottom
+{
+	bottom: 0;
+}
+
+.btn-danger .mdi-garage:before
+{
+  content: "\f6d9";
 }
