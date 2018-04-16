@@ -16,16 +16,16 @@ class RoomButton extends React.Component
 
 	handleClick(e)
 	{
-		this.props.handleClick(this.props.room.id, this.isOn() ? 0 : 1);
+		this.props.handleClick(this.props.room.id, RoomButton.isOn(this.props.room) ? 0 : 1);
 	}
 
-	isOn()
+	static isOn(theRoom)
 	{
-		if (this.props.room.devices == null)
+		if (theRoom.devices == null)
 		{
 			return false;
 		}
-		let anOnDevice = this.props.room.devices.find(theDevice =>
+		let anOnDevice = theRoom.devices.find(theDevice =>
 		{
 			return RoomButton.isLight(theDevice) && theDevice.status === "1";
 		});
@@ -39,7 +39,7 @@ class RoomButton extends React.Component
 
 	getButtonStyle()
 	{
-		return this.isOn() ? "success" : "default";
+		return RoomButton.isOn(this.props.room) ? "success" : "default";
 	}
 }
 export default RoomButton;
