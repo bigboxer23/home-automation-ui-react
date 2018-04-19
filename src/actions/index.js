@@ -48,13 +48,13 @@ const fetchStatus = function() {
 export function roomClicked(id, state)
 {
 	return (dispatch, getState) => {
-		let aRoom = getState().rooms.find(theRoom => theRoom.id === id);
+		let aRoom = getState().house.rooms.find(theRoom => theRoom.id === id);
 		if (aRoom != null)
 		{
 			dispatch(requestStatus());
 			dispatch(updateStoreRoom(id));
 			fetch("S/Vera/Room/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + state).finally(() => {
-				dispatch(statusUpdated(getState().rooms));
+				dispatch(statusUpdated(getState().house.rooms));
 			});
 		}
 	}
@@ -62,7 +62,7 @@ export function roomClicked(id, state)
 
 export function fetchStatusIfNecessary() {
 	return (dispatch, getState) => {
-		if (shouldFetchStatus(getState(), dispatch)) {
+		if (shouldFetchStatus(getState().house, dispatch)) {
 			return dispatch(fetchStatus())
 		}
 	}

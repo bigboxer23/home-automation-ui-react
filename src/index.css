@@ -25,7 +25,7 @@ body,html,#root
 	padding: 0.5rem 2rem !important;
 }
 
-.mdi::before {
+.btn-lg .mdi::before {
   font-size: 24px !important;
   line-height: 24px !important;
   position: absolute;
@@ -59,4 +59,10 @@ body,html,#root
 	color:white;
 	right: .5rem;
 	top: .5rem;
+}
+
+.header
+{
+	background-color:#69d040;
+	height:60px;
 }

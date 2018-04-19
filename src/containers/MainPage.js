@@ -26,7 +26,7 @@ const hasLights = function(theRoom)
 };
 
 const mapStateToProps = state => ({
-	rooms: getRooms (state.rooms)
+	rooms: getRooms (state.house.rooms)
 });
 
 const mapDispatchToProps = dispatch => ({
