@@ -1,7 +1,21 @@
 import { connect } from 'react-redux'
-import { roomClicked } from '../actions'
+import {fetchStatusIfNecessary, roomClicked} from '../actions'
 import MainPageComponent from "../components/MainPageComponent";
-import RoomButton from "../components/RoomButton";
+import React from "react";
+import RoomButton from "../components/RoomButton"
+
+class MainPage extends React.Component
+{
+	componentDidMount()
+	{
+		this.props.fetchStatus();
+	}
+
+	render()
+	{
+		return <MainPageComponent {...this.props}/>
+	}
+}
 
 const getRooms = (rooms) => {
 	if (rooms == null)
@@ -17,7 +31,7 @@ const getRooms = (rooms) => {
 
 const shouldDisplay = function(theRoom)
 {
-	return (hasLights(theRoom) || theRoom.name === "Climate Control" || theRoom.name === "Scenes"/*(theRoom.scenes != null && theRoom.scenes.length > 0)*/);
+	return (hasLights(theRoom) || theRoom.name === "Climate Control" || theRoom.name === "Scenes");
 };
 
 const hasLights = function(theRoom)
@@ -33,10 +47,14 @@ const mapDispatchToProps = dispatch => ({
 	handleClick: (id, state) =>
 	{
 		dispatch(roomClicked(id, state))
+	},
+	fetchStatus: () =>
+	{
+		dispatch(fetchStatusIfNecessary());
 	}
 });
 
 export default connect(
 		mapStateToProps,
 		mapDispatchToProps
-)(MainPageComponent)
+)(MainPage)

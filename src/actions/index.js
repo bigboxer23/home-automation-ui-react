@@ -57,9 +57,20 @@ export function roomClicked(id, state)
 				dispatch(statusUpdated(getState().house.rooms));
 			});
 		}
-	}
+	};
 }
 
+export function sceneClicked(id)
+{
+	return (dispatch, getState) =>
+	{
+		console.log("trigger scene: " + id);
+		dispatch(requestStatus());
+		fetch("S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene").finally(() => {
+			dispatch(statusUpdated(getState().house.rooms));
+		});
+	};
+}
 export function fetchStatusIfNecessary() {
 	return (dispatch, getState) => {
 		if (shouldFetchStatus(getState().house, dispatch)) {

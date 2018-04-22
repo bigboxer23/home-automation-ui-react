@@ -1,7 +1,7 @@
 import React from 'react'
 import RoomButton from "./RoomButton";
 import GarageButton from "./GarageButton";
-import SceneButton from "./SceneButton";
+import ScenesButton from "./ScenesButton";
 import ClimateButton from "./ClimateButton";
 
 const MainPageComponent = ({ rooms, handleClick }) => (
@@ -22,7 +22,7 @@ const mapRoom = function(theRoom, handleClick)
 	}
 	else if ("Scenes" === theRoom.name)
 	{
-		return <SceneButton key={theRoom.name} room={theRoom}/>
+		return <ScenesButton key={theRoom.name} room={theRoom}/>
 	}
 	return <RoomButton key={theRoom.name} room={theRoom} handleClick={handleClick}/>;
 };
