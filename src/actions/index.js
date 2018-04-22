@@ -45,6 +45,13 @@ const fetchStatus = function() {
 	}
 };
 
+export function garageClicked(action)
+{
+	return () => {
+		fetch("S/Garage/" + action);
+	}
+}
+
 export function roomClicked(id, state)
 {
 	return (dispatch, getState) => {

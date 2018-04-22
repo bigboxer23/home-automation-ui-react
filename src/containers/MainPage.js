@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {fetchStatusIfNecessary, roomClicked} from '../actions'
+import {fetchStatusIfNecessary, garageClicked, roomClicked} from '../actions'
 import MainPageComponent from "../components/MainPageComponent";
 import React from "react";
 import RoomButton from "../components/RoomButton"
@@ -51,6 +51,10 @@ const mapDispatchToProps = dispatch => ({
 	fetchStatus: () =>
 	{
 		dispatch(fetchStatusIfNecessary());
+	},
+	handleGarageClick: (action) =>
+	{
+		dispatch(garageClicked(action));
 	}
 });
 
