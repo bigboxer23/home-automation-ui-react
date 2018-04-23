@@ -1,29 +1,34 @@
 import React from "react";
 import { Button } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { push } from 'react-router-redux'
+import {
+	getClimateData,
+	getCurrentTemp, getHumidity,
+	getIndoorTemp,
+	getThermostatModeStyle
+} from "../containers/ClimatePage";
+import {getFormattedTemp, getTempStyle} from "./WeatherUtilities";
 
-class ClimateButton extends React.Component
-{
-	constructor(props)
-	{
-		super(props);
-		this.handleClick = this.handleClick.bind(this);
-	}
+const ClimateButton = props => (
+		<Button onClick={() => props.changePage()} bsStyle={"default"} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
+			<i className="mdi mdi-thermometer-lines" style={getThermostatModeStyle(props.deviceMap)}></i>
+			<div className="tempDisplay pr-1 pl-1 position-absolute" style={getTempStyle(getCurrentTemp(props.deviceMap))}>{getFormattedTemp(getCurrentTemp(props.deviceMap))}</div>
+			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2"><div className="currentTemp">{getFormattedTemp(getIndoorTemp(props.deviceMap))}/{getHumidity(props.deviceMap)}</div>
+				Climate</div>
+		</Button>
+);
 
-	render()
-	{
-		return <Button onClick={() => this.handleClick()} bsStyle={this.getButtonStyle(this.props.room)} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}><i className="mdi mdi-thermometer-lines"></i><div className="position-absolute bottom w-100 m-2 pl-2 pr-2">Climate</div></Button>;
-	}
+const mapStateToProps = state => ({
+	deviceMap: getClimateData (state.house.rooms)
+});
 
-	handleClick(e)
-	{
-		this.setState({style:this.isOn() ? "default" : "success"});
-		this.props.handleClick(this.props.room.id, this.isOn() ? 0 : 1);
-	}
+const mapDispatchToProps = dispatch => bindActionCreators({
+	changePage: () => push('/Climate')
+}, dispatch);
 
-
-	getButtonStyle()
-	{
-		return true ? "default" : "default";
-	}
-}
-export default ClimateButton;
+export default connect(
+		mapStateToProps,
+		mapDispatchToProps
+)(ClimateButton)

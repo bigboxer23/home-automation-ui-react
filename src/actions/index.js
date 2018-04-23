@@ -71,7 +71,6 @@ export function sceneClicked(id)
 {
 	return (dispatch, getState) =>
 	{
-		console.log("trigger scene: " + id);
 		dispatch(requestStatus());
 		fetch("S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene").finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
@@ -83,5 +82,27 @@ export function fetchStatusIfNecessary() {
 		if (shouldFetchStatus(getState().house, dispatch)) {
 			return dispatch(fetchStatus())
 		}
+	}
+}
+
+export function fanModeChange(action, id)
+{
+	return (dispatch, getState) =>
+	{
+		dispatch(requestStatus());
+		fetch("S/Vera/Device/" + id + "/HVAC_FanOperatingMode1&action=SetMode&NewMode=" + action).finally(() => {
+			dispatch(statusUpdated(getState().house.rooms));
+		});
+	}
+}
+
+export function hvacModeChange(action, id)
+{
+	return (dispatch, getState) =>
+	{
+		dispatch(requestStatus());
+		fetch("S/Vera/Device/" + id + "/HVAC_UserOperatingMode1&action=SetModeTarget&NewModeTarget=" + action).finally(() => {
+			dispatch(statusUpdated(getState().house.rooms));
+		});
 	}
 }

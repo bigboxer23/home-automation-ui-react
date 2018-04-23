@@ -12,7 +12,12 @@ class GarageButton extends React.Component
 
 	render()
 	{
-		return <Button onClick={() => this.props.handleGarageClick(this.isDoorOpen() ? "Close" : "Open")} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}><i className="mdi mdi-garage"></i><div className="garageTemp pr-1 pl-1 position-absolute" style={getTempStyle(this.findGarageDevice().temperature)}>{getFormattedTemp(this.findGarageDevice().temperature)}</div><div className="autoClose">{this.getAutoClose()}</div><div className="position-absolute bottom w-100 m-2 pl-2 pr-2">{this.props.room.name}</div></Button>;
+		return <Button onClick={() => this.props.handleGarageClick(this.isDoorOpen() ? "Close" : "Open")} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
+			<i className="mdi mdi-garage"></i>
+			<div className="tempDisplay pr-1 pl-1 position-absolute" style={getTempStyle(this.findGarageDevice().temperature)}>{getFormattedTemp(this.findGarageDevice().temperature)}</div>
+			<div className="autoClose">{this.getAutoClose()}</div>
+			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2">{this.props.room.name}</div>
+		</Button>;
 	}
 
 	getButtonStyle()
