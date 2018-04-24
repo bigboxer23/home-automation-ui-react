@@ -18,6 +18,25 @@ const roomReducer = (state = {}, action) => {
 			return Object.assign({}, state, {
 				isFetching: true
 			});
+		case 'SET_TIMER_ID':
+			return Object.assign({}, state, {
+				timer: action.timer
+			});
+		case 'UPDATE_THERMOSTAT_SET_POINT':
+			return Object.assign({}, state, {rooms:state.rooms.map(room => {
+					if (room.name === "Climate Control")
+					{
+						room = Object.assign({}, room, {devices:room.devices.map(theDevice =>
+							{
+								if (theDevice.name === "Thermostat")
+								{
+									return Object.assign({}, theDevice, {setpoint:action.setpoint})
+								}
+								return theDevice;
+							})});
+					}
+					return room;
+				}), lastUpdate:Date.now()});
 		default:
 			return state
 	}

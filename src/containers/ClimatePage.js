@@ -3,7 +3,13 @@ import { connect } from 'react-redux'
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import ClimatePageComponent from "../components/ClimatePageComponent";
-import {fanModeChange, fetchStatusIfNecessary, hvacModeChange, requestStatus, statusUpdated} from "../actions";
+import {
+	cancelFetchTimer,
+	fanModeChange,
+	fetchStatusIfNecessary,
+	hvacModeChange, setLocalThermostatSetPoint,
+	setThermostatSetPoint
+} from "../actions";
 
 class ClimatePage extends React.Component
 {
@@ -41,7 +47,7 @@ export const getThermostatModeStyle = deviceMap =>
 	return {};
 };
 
-export const getCurrentTemp = deviceMap =>
+export const getCurrentOutsideTemp = deviceMap =>
 {
 	return deviceMap["Temperature"].temperature;
 };
@@ -49,6 +55,11 @@ export const getCurrentTemp = deviceMap =>
 export const getIndoorTemp = deviceMap =>
 {
 	return deviceMap["Thermostat"] != null ? parseInt(deviceMap["Thermostat"].temperature, 10) : 72;
+};
+
+export const getThermostatSetPoint = deviceMap =>
+{
+	return deviceMap["Thermostat"] != null ? deviceMap["Thermostat"].setpoint : 72;
 };
 
 export const getHumidity = deviceMap =>
@@ -80,7 +91,7 @@ export const getThermostatId = deviceMap =>
 {
 	return deviceMap["Thermostat"] != null ? deviceMap["Thermostat"].id : -1;
 };
-
+/*
 const getHighTemp = deviceMap =>
 {
 	return deviceMap["High Temperature"].temperature;
@@ -89,7 +100,7 @@ const getHighTemp = deviceMap =>
 const getLowTemp = deviceMap =>
 {
 	return deviceMap["Low Temperature"].temperature;
-};
+};*/
 
 
 
@@ -100,17 +111,17 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
 	back: () => push('/'),
 	fetchStatus: () => fetchStatusIfNecessary(),
-	sliderChange: (event) => (getState) =>
+	sliderChange: (event) => () =>
 	{
-		console.log("slider: " + event.target.value);
-		//console.log("trigger scene: " + id);
-		/*dispatch(requestStatus());
-		fetch("S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene").finally(() => {
-			dispatch(statusUpdated(getState().house.rooms));
-		});*/
+		dispatch(cancelFetchTimer());
+		dispatch(setLocalThermostatSetPoint(event.target.value));
 	},
-	fanModeChange: (value, id) => fanModeChange(value, id),
-	hvacModeChange: (value, id) => hvacModeChange(value, id)
+	slideStop: (event) => () =>
+	{
+		dispatch(setThermostatSetPoint(event.target.value));
+	},
+	fanModeChange: (value) => fanModeChange(value),
+	hvacModeChange: (value) => hvacModeChange(value)
 }, dispatch);
 
 export default connect(
