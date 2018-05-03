@@ -26,11 +26,7 @@ const updateThermostatSetPoint = setpoint => ({
 
 const fetchStatus = function() {
 	return (dispatch, getState) => {
-		if (getState().house.timer != null)
-		{
-			clearTimeout(getState().house.timer);
-			dispatch(setTimerId(null));
-		}
+		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		return fetch("SceneStatus").then(theResults =>
 		{
@@ -58,8 +54,8 @@ export function setThermostatSetPoint(setPoint)
 {
 	return (dispatch, getState) =>
 	{
-		fetch("S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/TemperatureSetpoint1&action=SetCurrentSetpoint&NewCurrentSetpoint=" + setPoint).
-		finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
+		fetch("S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/TemperatureSetpoint1&action=SetCurrentSetpoint&NewCurrentSetpoint=" + setPoint)
+				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
 
@@ -97,10 +93,11 @@ export function roomClicked(id, state)
 		let aRoom = getState().house.rooms.find(theRoom => theRoom.id === id);
 		if (aRoom != null)
 		{
+			dispatch(cancelFetchTimer());
 			dispatch(requestStatus());
 			dispatch(updateStoreRoom(id));
 			fetch("S/Vera/Room/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + state).finally(() => {
-				dispatch(statusUpdated(getState().house.rooms));
+				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
 			});
 		}
 	};
@@ -111,7 +108,8 @@ export function sceneClicked(id)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetch("S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene").finally(() => {
+		fetch("S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene")
+				.finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	};
