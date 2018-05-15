@@ -27,9 +27,9 @@ const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanMode
 					</div>
 				</div>
 				<div className="form-group w-100">
-					<label>Thermostat: {getThermostatSetPoint(deviceMap)}</label>
+					<label>Thermostat: {getThermostatSetPoint(deviceMap)}°</label>
 					<div className="d-flex btn-group btn-group-toggle justify-content-center">
-					<ReactBootstrapSlider value={getThermostatSetPoint(deviceMap)}
+						<ReactBootstrapSlider value={getThermostatSetPoint(deviceMap)}
 					                      change={sliderChange}
 					                      slideStop={slideStop}
 					                      max={75}

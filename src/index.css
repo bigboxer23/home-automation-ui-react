@@ -25,12 +25,18 @@ body,html,#root
 	padding: 0.5rem 2rem !important;
 }
 
-.btn-lg .mdi::before {
+.btn-lg .mdi {
   font-size: 24px !important;
   line-height: 24px !important;
   position: absolute;
   top: 10px;
   left: 10px;
+}
+
+.mdi-dots-horizontal
+{
+	right:10px;
+	left:auto !important;
 }
 
 .btn-success .mdi-lightbulb-outline:before

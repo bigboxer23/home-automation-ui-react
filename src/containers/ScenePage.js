@@ -18,7 +18,7 @@ class ScenePage extends React.Component
 	}
 }
 
-const getRooms = (rooms) => {
+const getSceneRoom = (rooms) => {
 	if (rooms == null)
 	{
 		return [];
@@ -27,7 +27,7 @@ const getRooms = (rooms) => {
 };
 
 const mapStateToProps = state => ({
-	rooms: getRooms (state.house.rooms)
+	rooms: getSceneRoom (state.house.rooms)
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

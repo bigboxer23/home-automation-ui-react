@@ -1,8 +1,14 @@
 import { connect } from 'react-redux'
-import {fetchStatusIfNecessary, garageClicked, roomClicked} from '../actions'
+import {
+	fetchStatusIfNecessary,
+	garageClicked,
+	roomClicked,
+} from '../actions'
 import MainPageComponent from "../components/MainPageComponent";
 import React from "react";
 import RoomButton from "../components/RoomButton"
+import {push} from "react-router-redux";
+import {bindActionCreators} from "redux";
 
 class MainPage extends React.Component
 {
@@ -43,20 +49,25 @@ const mapStateToProps = state => ({
 	rooms: getRooms (state.house.rooms)
 });
 
-const mapDispatchToProps = dispatch => ({
-	handleClick: (id, state) =>
+const mapDispatchToProps = dispatch => bindActionCreators({
+	handleClick: (id, state) => (dispatch, getState) =>
 	{
 		dispatch(roomClicked(id, state))
 	},
-	fetchStatus: () =>
+	fetchStatus: () => (dispatch, getState) =>
 	{
 		dispatch(fetchStatusIfNecessary());
 	},
-	handleGarageClick: (action) =>
+	handleGarageClick: (action) => (dispatch, getState) =>
 	{
 		dispatch(garageClicked(action));
+	},
+	handleMoreClick: (event, name) => (dispatch, getState) =>
+	{
+		event.stopPropagation();
+		dispatch(push('/Room/' + name));
 	}
-});
+}, dispatch);
 
 export default connect(
 		mapStateToProps,

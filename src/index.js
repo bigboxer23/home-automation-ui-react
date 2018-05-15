@@ -16,6 +16,7 @@ import createHistory from 'history/createBrowserHistory'
 import 'bootstrap/dist/css/bootstrap.css'
 import '@mdi/font/css/materialdesignicons.min.css'
 import 'react-bootstrap-slider/src/css/bootstrap-slider.min.css'
+import RoomPage from "./containers/RoomPage";
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
@@ -30,6 +31,7 @@ ReactDOM.render( <Provider store={store}>
 			<Route exact path="/" component={MainPage}/>
 			<Route path="/Scenes" component={ScenePage}/>
 			<Route path="/Climate" component={ClimatePage}/>
+			<Route path="/Room/:name" component={RoomPage}/>
 		</div>
 	</ConnectedRouter>
 </Provider>, document.getElementById('root'));
