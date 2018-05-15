@@ -2,10 +2,9 @@ import React from 'react'
 import HeaderComponent from "./HeaderComponent"
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 import {
-	getFanModeStyle,
-	getHVACStyle,
-	getThermostatSetPoint
+	getCurrentOutsideTemp, getFanModeStyle, getHVACStyle, getIndoorTemp, getThermostatSetPoint
 } from "../containers/ClimatePage";
+import {getFormattedTemp, getTempStyle} from "./WeatherUtilities";
 
 const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanModeChange, hvacModeChange}) => (
 		<div>
@@ -22,9 +21,17 @@ const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanMode
 					<label>HVAC Mode</label>
 					<div className="w-100 d-flex btn-group btn-group-toggle">
 						<label className={getHVACStyle("Off", deviceMap)} onClick={() => hvacModeChange("Off")}>Off</label>
-						<label className={getHVACStyle("Cool", deviceMap)} onClick={() => hvacModeChange("CoolOn")}>Cool</label>
-						<label className={getHVACStyle("Heat", deviceMap)} onClick={() => hvacModeChange("HeatOn")}>Heat</label>
+						<label className={getHVACStyle("CoolOn", deviceMap)} onClick={() => hvacModeChange("CoolOn")}>Cool</label>
+						<label className={getHVACStyle("HeatOn", deviceMap)} onClick={() => hvacModeChange("HeatOn")}>Heat</label>
 					</div>
+				</div>
+				<div className="form-group w-100 d-flex">
+					<label className="flex-grow-1">Outside Temperature</label>
+					<div className="tempDisplay pr-1 pl-1 d-flex align-items-center" style={getTempStyle(getCurrentOutsideTemp(deviceMap))}>{getFormattedTemp(getCurrentOutsideTemp(deviceMap))}</div>
+				</div>
+				<div className="form-group w-100 d-flex">
+					<label className="flex-grow-1">Inside Temperature</label>
+					<div className="tempDisplay pr-1 pl-1 d-flex align-items-center" style={getTempStyle(getIndoorTemp(deviceMap))}>{getFormattedTemp(getIndoorTemp(deviceMap))}</div>
 				</div>
 				<div className="form-group w-100">
 					<label>Thermostat: {getThermostatSetPoint(deviceMap)}°</label>

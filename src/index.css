@@ -90,3 +90,8 @@ body,html,#root
 {
 	z-index: 1;
 }
+
+.flex-grow-1
+{
+	flex-grow: 1;
+}

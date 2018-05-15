@@ -49,7 +49,7 @@ export const getThermostatModeStyle = deviceMap =>
 
 export const getCurrentOutsideTemp = deviceMap =>
 {
-	return deviceMap["Temperature"].temperature;
+	return deviceMap["Temperature"] != null ? deviceMap["Temperature"].temperature : 50;
 };
 
 export const getIndoorTemp = deviceMap =>
