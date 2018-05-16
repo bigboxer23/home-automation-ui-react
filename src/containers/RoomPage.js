@@ -43,9 +43,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	{
 		dispatch(cancelFetchTimer());
 	},
-	slideStop: (event, device) => (dispatch) =>
+	slideStop: (event, id, subject) => (dispatch) =>
 	{
-		dispatch(setDeviceDim(event.target.value, device.id));
+		dispatch(setDeviceDim(event.target.value, id, subject));
 	},
 	setDeviceStatus: (status) => (dispatch) =>
 	{

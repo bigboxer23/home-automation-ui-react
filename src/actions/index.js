@@ -67,11 +67,11 @@ export function setLocalThermostatSetPoint(setPoint)
 	}
 }
 
-export function setDeviceDim(setPoint, deviceId)
+export function setDeviceDim(setPoint, deviceId, subject)
 {
 	return (dispatch, getState) =>
 	{
-		fetch("/S/Vera/Device/" + deviceId + "/Dimming1&action=SetLoadLevelTarget&newLoadlevelTarget=" + setPoint)
+		fetch("/S/Vera/" + subject + "/" + deviceId + "/Dimming1&action=SetLoadLevelTarget&newLoadlevelTarget=" + setPoint)
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
