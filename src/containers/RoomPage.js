@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import {
-	cancelFetchTimer, fetchStatusIfNecessary, setDeviceDim,
+	cancelFetchTimer, fetchStatusIfNecessary, setDim, setOnOff,
 } from '../actions'
 import RoomPageComponent from "../components/RoomPageComponent";
 
@@ -43,13 +43,14 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	{
 		dispatch(cancelFetchTimer());
 	},
-	slideStop: (event, id, subject) => (dispatch) =>
+	slideStop: (level, id, subject) => (dispatch) =>
 	{
-		dispatch(setDeviceDim(event.target.value, id, subject));
+		dispatch(setDim(level, id, subject));
 	},
-	setDeviceStatus: (status) => (dispatch) =>
+	setDeviceStatus: (id, status) => (dispatch) =>
 	{
-		console.log("set device status " + status);
+		dispatch(cancelFetchTimer());
+		dispatch(setOnOff(status, id, "Device"));
 	},
 	fetchStatus: () => fetchStatusIfNecessary()
 }, dispatch);

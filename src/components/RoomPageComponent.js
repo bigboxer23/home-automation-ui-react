@@ -14,7 +14,7 @@ const RoomPageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus
 						<div className="d-flex btn-group btn-group-toggle justify-content-center">
 							<ReactBootstrapSlider value={getRoomDimLevel(room)}
 							                      change={sliderChange}
-							                      slideStop={(event) => slideStop(event, room.id, "Room")}
+							                      slideStop={(event) => slideStop(event.target.value, room.id, "Room")}
 							                      max={100}
 							                      min={0}
 							                      tooltip={"show"}/>
