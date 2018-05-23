@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from 'react-bootstrap'
-import {getFormattedTemp, getTempStyle} from "./WeatherUtilities";
+import {getFormattedTemp, getTempStyle} from "../../utils/WeatherUtilities";
 
 class GarageButton extends React.Component
 {

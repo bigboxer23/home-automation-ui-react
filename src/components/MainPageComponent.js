@@ -1,8 +1,8 @@
 import React from 'react'
-import RoomButton from "./RoomButton";
-import GarageButton from "./GarageButton";
-import ScenesButton from "./ScenesButton";
-import ClimateButton from "./ClimateButton";
+import RoomButton from "./room/RoomButton";
+import GarageButton from "./garage/GarageButton";
+import ScenesButton from "./scene/ScenesButton";
+import ClimateButton from "./climate/ClimateButton";
 
 const MainPageComponent = ({ rooms, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick}) => (
 		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">{rooms.map(room =>

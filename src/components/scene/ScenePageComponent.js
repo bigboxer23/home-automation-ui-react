@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderComponent from "./HeaderComponent"
+import HeaderComponent from "../HeaderComponent"
 import SceneButton from "./SceneButton";
 
 const ScenePageComponent = ({back, rooms, handleClick }) => (

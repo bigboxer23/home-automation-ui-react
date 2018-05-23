@@ -5,7 +5,7 @@ import {bindActionCreators} from "redux";
 import {
 	cancelFetchTimer, fetchStatusIfNecessary, setDim, setOnOff,
 } from '../actions'
-import RoomPageComponent from "../components/RoomPageComponent";
+import RoomPageComponent from "../components/room/RoomPageComponent";
 
 class RoomPage extends React.Component
 {

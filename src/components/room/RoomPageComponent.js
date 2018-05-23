@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderComponent from "./HeaderComponent"
+import HeaderComponent from "../HeaderComponent"
 import LightComponent from "./LightComponent";
 import RoomButton from "./RoomButton";
 import {ReactBootstrapSlider} from "react-bootstrap-slider";

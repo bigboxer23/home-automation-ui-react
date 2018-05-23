@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import {fetchStatusIfNecessary, sceneClicked} from '../actions'
-import GaragePageComponent from "../components/GaragePageComponent";
-import GarageButton from "../components/GarageButton";
+import GaragePageComponent from "../components/garage/GaragePageComponent";
+import GarageButton from "../components/garage/GarageButton";
 
 class GaragePage extends React.Component
 {

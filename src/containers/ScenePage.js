@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import ScenePageComponent from "../components/ScenePageComponent";
+import ScenePageComponent from "../components/scene/ScenePageComponent";
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import {fetchStatusIfNecessary, sceneClicked} from '../actions'

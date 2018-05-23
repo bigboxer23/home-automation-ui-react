@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
-import ClimatePageComponent from "../components/ClimatePageComponent";
+import ClimatePageComponent from "../components/climate/ClimatePageComponent";
 import {
 	cancelFetchTimer,
 	fanModeChange,

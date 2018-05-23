@@ -1,10 +1,10 @@
 import React from 'react'
-import HeaderComponent from "./HeaderComponent"
+import HeaderComponent from "../HeaderComponent"
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 import {
 	getCurrentOutsideTemp, getFanModeStyle, getHVACStyle, getIndoorTemp, getThermostatSetPoint
-} from "../containers/ClimatePage";
-import {getFormattedTemp, getTempStyle} from "./WeatherUtilities";
+} from "../../containers/ClimatePage";
+import {getFormattedTemp, getTempStyle} from "../../utils/WeatherUtilities";
 
 const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanModeChange, hvacModeChange}) => (
 		<div>

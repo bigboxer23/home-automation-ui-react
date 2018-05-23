@@ -8,8 +8,8 @@ import {
 	getCurrentOutsideTemp, getHumidity,
 	getIndoorTemp,
 	getThermostatModeStyle
-} from "../containers/ClimatePage";
-import {getFormattedTemp, getTempStyle} from "./WeatherUtilities";
+} from "../../containers/ClimatePage";
+import {getFormattedTemp, getTempStyle} from "../../utils/WeatherUtilities";
 
 const ClimateButton = props => (
 		<Button onClick={() => props.changePage()} bsStyle={"default"} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>

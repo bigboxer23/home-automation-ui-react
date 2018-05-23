@@ -1,7 +1,6 @@
 import React from 'react'
-import HeaderComponent from "./HeaderComponent"
-import GarageButton from "./GarageButton";
-import {getHeader} from "../containers/GaragePage";
+import HeaderComponent from "../HeaderComponent"
+import {getHeader} from "../../containers/GaragePage";
 
 const GaragePageComponent = ({back, room, handleClick }) => (
 		<div>

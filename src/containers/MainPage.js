@@ -6,7 +6,7 @@ import {
 } from '../actions'
 import MainPageComponent from "../components/MainPageComponent";
 import React from "react";
-import RoomButton from "../components/RoomButton"
+import RoomButton from "../components/room/RoomButton"
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 

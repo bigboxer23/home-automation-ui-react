@@ -1,4 +1,4 @@
-import RoomButton from "../components/RoomButton"
+import RoomButton from "../components/room/RoomButton"
 
 const roomReducer = (state = {}, action) => {
 	switch (action.type) {
