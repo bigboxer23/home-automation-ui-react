@@ -4,17 +4,17 @@ import GarageButton from "./GarageButton";
 import ScenesButton from "./ScenesButton";
 import ClimateButton from "./ClimateButton";
 
-const MainPageComponent = ({ rooms, handleClick, handleGarageClick, handleMoreClick}) => (
+const MainPageComponent = ({ rooms, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick}) => (
 		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">{rooms.map(room =>
-				mapRoom(room, handleClick, handleGarageClick, handleMoreClick)
+				mapRoom(room, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick)
 		)}</div>
 );
 
-const mapRoom = function(theRoom, handleClick, handleGarageClick, handleMoreClick)
+const mapRoom = function(theRoom, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick)
 {
 	if ("Garage" === theRoom.name)
 	{
-		return <GarageButton key={theRoom.name} room={theRoom} handleGarageClick={handleGarageClick}/>;
+		return <GarageButton key={theRoom.name} room={theRoom} handleGarageClick={handleGarageClick} handleGarageMoreClick={handleGarageMoreClick}/>;
 	}
 	else if ("Climate Control" === theRoom.name)
 	{

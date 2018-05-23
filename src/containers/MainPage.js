@@ -66,6 +66,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	{
 		event.stopPropagation();
 		dispatch(push('/Room/' + name));
+	},
+	handleGarageMoreClick : (event) => (dispatch, getState) =>
+	{
+		event.stopPropagation();
+		dispatch(push('/Garage'));
 	}
 }, dispatch);
 
