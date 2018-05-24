@@ -37,6 +37,7 @@ body,html,#root
 {
 	right:10px;
 	left:auto !important;
+	opacity:.3;
 }
 
 .btn-success .mdi-lightbulb-outline:before
@@ -70,6 +71,7 @@ body,html,#root
 	color:white;
 	right: .5rem;
 	top: .5rem;
+	min-width:35px;
 }
 
 .currentTemp
@@ -100,3 +102,21 @@ body,html,#root
 {
 	flex-grow: 1;
 }
+
+.slider-handle
+{
+	transform: scale(1.6);
+}
+
+.h32
+{
+	height:32px;
+}
+
+/*
+
+.slider-handle:active
+{
+	background-color: #1f24b7 !important;
+	background-image: linear-gradient(to bottom,#149bdf 0,#1f24b7 100%);
+}*/

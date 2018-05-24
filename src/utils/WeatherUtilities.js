@@ -8,6 +8,35 @@ export const getTempStyle = (temperature) =>
 	return {backgroundColor:getTempColor(temperature)};
 };
 
+export const getIndoorTempStyle = (temperature) =>
+{
+	return {backgroundColor:getIndoorTempColor(temperature)};
+};
+
+const getIndoorTempColor = (temperature) =>
+{
+	if(temperature < 66)
+	{
+		return "#3993CE";
+	} else if(temperature < 70)
+	{
+		return "#0772B8";
+	} else if(temperature < 71)
+	{
+		return "#03902B";
+	} else if(temperature < 73)
+	{
+		return "#2DC558";
+	} else if(temperature < 74)
+	{
+		return "#FECF3B";
+	} else if(temperature < 75)
+	{
+		return "#EC9800";
+	}
+	return "#6F0015";
+};
+
 const getTempColor = (temperature) =>
 {
 	if(temperature < 0)
