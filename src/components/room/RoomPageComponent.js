@@ -26,9 +26,18 @@ const RoomPageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus
 		</div>
 );
 
-const getRoomDimLevel = (room) => {
+export const getRoomDimLevel = (room) => {
 	let level = 0;
-	room.devices.map(device => level = Math.max(level, device.level));
+	if (room != null)
+	{
+		room.devices
+				.filter(device => device.level != null)
+				.forEach(device =>
+		{
+			level = Math.max(level, parseInt(device.level, 10));
+		});
+		//room.devices.map(device => level = Math.max(level, parseInt(device.level)));
+	}
 	return level;
 };
 

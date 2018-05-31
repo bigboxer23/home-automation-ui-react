@@ -49,7 +49,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	},
 	setDeviceStatus: (id, status) => (dispatch) =>
 	{
-		dispatch(cancelFetchTimer());
 		dispatch(setOnOff(status, id, "Device"));
 	},
 	fetchStatus: () => fetchStatusIfNecessary()

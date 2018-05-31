@@ -4,7 +4,6 @@ import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import ClimatePageComponent from "../components/climate/ClimatePageComponent";
 import {
-	cancelFetchTimer,
 	fanModeChange,
 	fetchStatusIfNecessary,
 	hvacModeChange, setLocalThermostatSetPoint,
@@ -113,7 +112,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	fetchStatus: () => fetchStatusIfNecessary(),
 	sliderChange: (event) => () =>
 	{
-		dispatch(cancelFetchTimer());
 		dispatch(setLocalThermostatSetPoint(event.target.value));
 	},
 	slideStop: (event) => () =>

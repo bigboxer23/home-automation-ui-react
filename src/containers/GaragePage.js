@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
-import {fetchStatusIfNecessary, sceneClicked} from '../actions'
+import {cancelFetchTimer, disableAutoClose, enableAutoClose, fetchStatusIfNecessary, setDim, setOnOff} from '../actions'
 import GaragePageComponent from "../components/garage/GaragePageComponent";
 import GarageButton from "../components/garage/GarageButton";
 
@@ -20,7 +20,11 @@ class GaragePage extends React.Component
 }
 
 const findGarageRoom = (rooms) => {
-	return rooms == null ? null : rooms.filter(theRoom => "Garage" === theRoom.name)[0];
+	if (rooms == null)
+	{
+		return {devices:[]};
+	}
+	return rooms.filter(theRoom => "Garage" === theRoom.name)[0];
 };
 
 export const getHeader = (room) =>
@@ -37,14 +41,49 @@ export const getHeader = (room) =>
 	return room.name + anAutoClose;
 };
 
+export const getAutoCloseButtonText = (room) =>
+{
+	let anAutoClose = GarageButton.getAutoClose(room);
+	if (anAutoClose === "")
+	{
+		return "Disable Auto Close";
+	}
+	anAutoClose = GarageButton.findGarageDevice(room).autoClose;
+	if (anAutoClose > 10 * 60 * 1000)
+	{
+		return "Enable Auto Close";
+	}
+	return "Disable Auto Close";
+};
+
+export const getAutoCloseButtonStyle = (room) =>
+{
+	return GarageButton.getAutoClose(room) === "" ? "disabled " : "";
+};
+
 const mapStateToProps = state => ({
 	room: findGarageRoom (state.house.rooms)
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	back: () => push('/'),
-	handleClick: (id) => sceneClicked(id),
-	fetchStatus: () => fetchStatusIfNecessary()
+	sliderChange: (event) => (dispatch) =>
+	{
+		dispatch(cancelFetchTimer());
+	},
+	slideStop: (level, id, subject) => (dispatch) =>
+	{
+		dispatch(setDim(level, id, subject));
+	},
+	setDeviceStatus: (id, status) => (dispatch) =>
+	{
+		dispatch(setOnOff(status, id, "Device"));
+	},
+	fetchStatus: () => fetchStatusIfNecessary(),
+	autoCloseClickHandler: (status) => (dispatch) =>
+	{
+		dispatch(status === "Disable Auto Close" ? disableAutoClose() : enableAutoClose());
+	}
 }, dispatch);
 
 export default connect(

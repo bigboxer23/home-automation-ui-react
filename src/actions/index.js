@@ -68,6 +68,7 @@ export function setLocalThermostatSetPoint(setPoint)
 {
 	return (dispatch, getState) =>
 	{
+		dispatch(cancelFetchTimer());
 		dispatch(updateThermostatSetPoint(setPoint));
 	}
 }
@@ -85,6 +86,7 @@ export function setOnOff(on, id, subject)
 {
 	return (dispatch, getState) =>
 	{
+		dispatch(cancelFetchTimer());
 		fetch("/S/Vera/" + subject + "/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + (on ? "1" : "0"))
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
@@ -161,4 +163,26 @@ export function hvacModeChange(action)
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
+}
+
+export function disableAutoClose()
+{
+	console.log("disable auto close");
+	return (dispatch, getState) =>
+	{
+		dispatch(cancelFetchTimer());
+		dispatch(requestStatus());
+		fetch("/S/Garage/DisableAutoClose").finally(() => {
+			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
+		});
+	}
+}
+
+export function enableAutoClose()
+{
+	return (dispatch, getState) =>
+	{
+		console.log("enableAutoClose")
+		//todo
+	};
 }
