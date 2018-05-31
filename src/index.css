@@ -40,6 +40,11 @@ body,html,#root
 	opacity:.3;
 }
 
+.mdi-lightbulb-outline
+{
+	color: rgba(0,0,0,.3);
+}
+
 .btn-success .mdi-lightbulb-outline:before
 {
 	content:'\f6e8';
@@ -113,6 +118,10 @@ body,html,#root
 	height:32px;
 }
 
+.btn
+{
+	/*transition: 1s;*/
+}
 /*
 
 .slider-handle:active

@@ -10,6 +10,11 @@ const updateStoreRoom = room => ({
 	room
 });
 
+const updateGarageState = state => ({
+	type: 'GARAGE_STATE_CHANGE',
+	state
+});
+
 const requestStatus = () => ({
 		type: "REQUEST_STATUS"
 });
@@ -98,8 +103,13 @@ export function cancelFetchTimer()
 
 export function garageClicked(action)
 {
-	return () => {
-		fetch("/S/Garage/" + action);
+	return (dispatch, getState) => {
+		dispatch(cancelFetchTimer());
+		dispatch(requestStatus());
+		dispatch(updateGarageState(action));
+		fetch("/S/Garage/" + action).finally(() => {
+			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
+		});
 	}
 }
 

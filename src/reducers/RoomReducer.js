@@ -7,12 +7,27 @@ const roomReducer = (state = {}, action) => {
 		case 'ROOM_CLICKED':
 			const id = action.room;
 			return Object.assign({}, state, {isFetching: true, rooms:state.rooms.map(room => {
-					if (room.id === id)
+					if (room.id !== id)
 					{
-						let isOn = RoomButton.isOn(room) ? "0" : "1";
-						room = Object.assign({}, room, {devices:room.devices.map(theDevice => Object.assign({}, theDevice, {status:isOn}))});
+						return room;
 					}
-					return room;
+					let isOn = RoomButton.isOn(room) ? "0" : "1";
+					return Object.assign({}, room, {devices:room.devices.map(theDevice => Object.assign({}, theDevice, {status:isOn}))});
+				}), lastUpdate:Date.now()});
+		case 'GARAGE_STATE_CHANGE':
+			return Object.assign({}, state, {isFetching: true, rooms:state.rooms.map(room => {
+					if (room.name !== 'Garage')
+					{
+						return room;
+					}
+					return Object.assign({}, room, {devices:room.devices.map(theDevice =>
+						{
+							if (theDevice.name !== "Garage Opener")
+							{
+								return theDevice;
+							}
+							return Object.assign({}, theDevice, {door:action.state === "Open"});
+						})});
 				}), lastUpdate:Date.now()});
 		case 'REQUEST_STATUS':
 			return Object.assign({}, state, {
@@ -24,18 +39,18 @@ const roomReducer = (state = {}, action) => {
 			});
 		case 'UPDATE_THERMOSTAT_SET_POINT':
 			return Object.assign({}, state, {rooms:state.rooms.map(room => {
-					if (room.name === "Climate Control")
+					if (room.name !== "Climate Control")
 					{
-						room = Object.assign({}, room, {devices:room.devices.map(theDevice =>
-							{
-								if (theDevice.name === "Thermostat")
-								{
-									return Object.assign({}, theDevice, {setpoint:action.setpoint})
-								}
-								return theDevice;
-							})});
+						return room;
 					}
-					return room;
+					return Object.assign({}, room, {devices:room.devices.map(theDevice =>
+						{
+							if (theDevice.name === "Thermostat")
+							{
+								return Object.assign({}, theDevice, {setpoint:action.setpoint})
+							}
+							return theDevice;
+						})});
 				}), lastUpdate:Date.now()});
 		default:
 			return state
