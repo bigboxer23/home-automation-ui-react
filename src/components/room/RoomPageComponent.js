@@ -32,11 +32,11 @@ export const getRoomDimLevel = (room) => {
 	{
 		room.devices
 				.filter(device => device.level != null)
+				.filter(device => RoomButton.isLight(device))
 				.forEach(device =>
 		{
 			level = Math.max(level, parseInt(device.level, 10));
 		});
-		//room.devices.map(device => level = Math.max(level, parseInt(device.level)));
 	}
 	return level;
 };
