@@ -29,11 +29,26 @@ const updateThermostatSetPoint = setpoint => ({
 	setpoint
 });
 
+const fetchWithCookies = function(theUrl) {
+	return fetch(theUrl, {
+		credentials: 'same-origin'
+	});
+};
+
+const handleErrors = function(response) {
+	if (!response.ok) {
+		fetchWithCookies("/getToken");
+		console.log("Attempting registration...");
+	}
+	return response;
+};
+
 const fetchStatus = function() {
 	return (dispatch, getState) => {
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
-		return fetch("/SceneStatus").then(theResults =>
+		return fetchWithCookies("/SceneStatus").
+		then(handleErrors).then(theResults =>
 		{
 			return theResults.json();
 		}).then(theData =>
@@ -59,7 +74,7 @@ export function setThermostatSetPoint(setPoint)
 {
 	return (dispatch, getState) =>
 	{
-		fetch("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/TemperatureSetpoint1&action=SetCurrentSetpoint&NewCurrentSetpoint=" + setPoint)
+		fetchWithCookies("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/TemperatureSetpoint1&action=SetCurrentSetpoint&NewCurrentSetpoint=" + setPoint)
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
@@ -77,7 +92,7 @@ export function setDim(setPoint, id, subject)
 {
 	return (dispatch, getState) =>
 	{
-		fetch("/S/Vera/" + subject + "/" + id + "/Dimming1&action=SetLoadLevelTarget&newLoadlevelTarget=" + setPoint)
+		fetchWithCookies("/S/Vera/" + subject + "/" + id + "/Dimming1&action=SetLoadLevelTarget&newLoadlevelTarget=" + setPoint)
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
@@ -87,7 +102,7 @@ export function setOnOff(on, id, subject)
 	return (dispatch, getState) =>
 	{
 		dispatch(cancelFetchTimer());
-		fetch("/S/Vera/" + subject + "/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + (on ? "1" : "0"))
+		fetchWithCookies("/S/Vera/" + subject + "/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + (on ? "1" : "0"))
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
@@ -109,7 +124,7 @@ export function garageClicked(action)
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		dispatch(updateGarageState(action));
-		fetch("/S/Garage/" + action).finally(() => {
+		fetchWithCookies("/S/Garage/" + action).finally(() => {
 			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
 		});
 	}
@@ -124,7 +139,7 @@ export function roomClicked(id, state)
 			dispatch(cancelFetchTimer());
 			dispatch(requestStatus());
 			dispatch(updateStoreRoom(id));
-			fetch("/S/Vera/Room/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + state).finally(() => {
+			fetchWithCookies("/S/Vera/Room/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + state).finally(() => {
 				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
 			});
 		}
@@ -136,7 +151,7 @@ export function sceneClicked(id)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetch("/S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene")
+		fetchWithCookies("/S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene")
 				.finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
@@ -148,7 +163,7 @@ export function fanModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetch("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_FanOperatingMode1&action=SetMode&NewMode=" + action).finally(() => {
+		fetchWithCookies("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_FanOperatingMode1&action=SetMode&NewMode=" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
@@ -159,7 +174,7 @@ export function hvacModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetch("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_UserOperatingMode1&action=SetModeTarget&NewModeTarget=" + action).finally(() => {
+		fetchWithCookies("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_UserOperatingMode1&action=SetModeTarget&NewModeTarget=" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
@@ -172,7 +187,7 @@ export function disableAutoClose()
 	{
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
-		fetch("/S/Garage/DisableAutoClose").finally(() => {
+		fetchWithCookies("/S/Garage/DisableAutoClose").finally(() => {
 			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
 		});
 	}
