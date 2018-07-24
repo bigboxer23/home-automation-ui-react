@@ -9,6 +9,7 @@ import React from "react";
 import RoomButton from "../components/room/RoomButton"
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
+import LoadingStatusComponent from "../components/LoadingStatusComponent";
 
 class MainPage extends React.Component
 {
@@ -19,7 +20,7 @@ class MainPage extends React.Component
 
 	render()
 	{
-		return <MainPageComponent {...this.props}/>
+		return <div><LoadingStatusComponent {...this.props}/><MainPageComponent {...this.props}/></div>
 	}
 }
 
@@ -46,7 +47,9 @@ const hasLights = function(theRoom)
 };
 
 const mapStateToProps = state => ({
-	rooms: getRooms (state.house.rooms)
+	rooms: getRooms (state.house.rooms),
+	loaded: state.house.lastUpdate,
+	authError: state.house.authError
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

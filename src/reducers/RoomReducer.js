@@ -52,6 +52,8 @@ const roomReducer = (state = {}, action) => {
 							return theDevice;
 						})});
 				}), lastUpdate:Date.now()});
+		case 'AUTH_ERROR':
+			return Object.assign({}, state, {authError: action.authError});
 		default:
 			return state
 	}

@@ -122,6 +122,26 @@ body,html,#root
 {
 	/*transition: 1s;*/
 }
+
+.LoadingStatus
+{
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	color:#28a745;
+	background-color:white;
+}
+
+.sk-spinner
+{
+	width:30px;
+}
+
+.authText
+{
+	max-width:125px;
+}
 /*
 
 .slider-handle:active

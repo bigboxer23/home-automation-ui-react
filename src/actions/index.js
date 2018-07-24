@@ -15,6 +15,11 @@ const updateGarageState = state => ({
 	state
 });
 
+const setAuthError = authError => ({
+	type: 'AUTH_ERROR',
+	authError
+});
+
 const requestStatus = () => ({
 		type: "REQUEST_STATUS"
 });
@@ -35,10 +40,15 @@ const fetchWithCookies = function(theUrl) {
 	});
 };
 
-const handleErrors = function(response) {
-	if (!response.ok) {
-		fetchWithCookies("/getToken");
-		console.log("Attempting registration...");
+const handleErrors = function(response, dispatch) {
+	if (!response.ok && response.status === 401) {
+		console.log("Auth error, attempting registration.");
+		dispatch(setAuthError(true));
+		fetchWithCookies("/getToken").
+				then((response) =>
+		{
+			dispatch(setAuthError(!response.ok))
+		});
 	}
 	return response;
 };
@@ -48,7 +58,7 @@ const fetchStatus = function() {
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		return fetchWithCookies("/SceneStatus").
-		then(handleErrors).then(theResults =>
+		then(response => handleErrors(response, dispatch)).then(theResults =>
 		{
 			return theResults.json();
 		}).then(theData =>
