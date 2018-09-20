@@ -32,7 +32,8 @@ class GarageButton extends React.Component
 
 	static isDoorOpen(room)
 	{
-		return GarageButton.findGarageDevice(room).door;
+		let aRoom = GarageButton.findGarageDevice(room);
+		return aRoom == null || aRoom.door;
 	}
 
 	static getAutoClose(room)
