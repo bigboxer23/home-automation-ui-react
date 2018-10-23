@@ -44,8 +44,8 @@ const handleErrors = function(response, dispatch) {
 	if (!response.ok && response.status === 401) {
 		console.log("Auth error, attempting registration.");
 		dispatch(setAuthError(true));
-		fetchWithCookies("/getToken").
-				then((response) =>
+		fetchWithCookies("/getToken")
+				.then((response) =>
 		{
 			dispatch(setAuthError(!response.ok))
 		});
@@ -57,8 +57,8 @@ const fetchStatus = function() {
 	return (dispatch, getState) => {
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
-		return fetchWithCookies("/SceneStatus").
-		then(response => handleErrors(response, dispatch)).then(theResults =>
+		return fetchWithCookies("/SceneStatus")
+				.then(response => handleErrors(response, dispatch)).then(theResults =>
 		{
 			return theResults.json();
 		}).then(theData =>
@@ -84,7 +84,7 @@ export function setThermostatSetPoint(setPoint)
 {
 	return (dispatch, getState) =>
 	{
-		fetchWithCookies("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/TemperatureSetpoint1&action=SetCurrentSetpoint&NewCurrentSetpoint=" + setPoint)
+		fetchWithCookies("/S/OpenHAB/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/TemperatureSetpoint1&action=SetCurrentSetpoint&NewCurrentSetpoint=" + setPoint)
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
@@ -102,7 +102,7 @@ export function setDim(setPoint, id, subject)
 {
 	return (dispatch, getState) =>
 	{
-		fetchWithCookies("/S/Vera/" + subject + "/" + id + "/Dimming1&action=SetLoadLevelTarget&newLoadlevelTarget=" + setPoint)
+		fetchWithCookies("/S/OpenHAB/" + subject + "/" + id + "/" + setPoint)
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
@@ -112,7 +112,7 @@ export function setOnOff(on, id, subject)
 	return (dispatch, getState) =>
 	{
 		dispatch(cancelFetchTimer());
-		fetchWithCookies("/S/Vera/" + subject + "/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + (on ? "1" : "0"))
+		fetchWithCookies("/S/OpenHAB/" + subject + "/" + id + "/" + (on ? "ON" : "OFF"))
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
@@ -149,7 +149,7 @@ export function roomClicked(id, state)
 			dispatch(cancelFetchTimer());
 			dispatch(requestStatus());
 			dispatch(updateStoreRoom(id));
-			fetchWithCookies("/S/Vera/Room/" + id + "/SwitchPower1&action=SetTarget&newTargetValue=" + state).finally(() => {
+			fetchWithCookies("/S/OpenHAB/Room/" + id + "/" + state).finally(() => {
 				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
 			});
 		}
@@ -161,7 +161,7 @@ export function sceneClicked(id)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/Vera/Scene/" + id + "/HomeAutomationGateway1&action=RunScene")
+		fetchWithCookies("/S/OpenHAB/Scene/" + id + "/HomeAutomationGateway1&action=RunScene")
 				.finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
@@ -173,7 +173,7 @@ export function fanModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_FanOperatingMode1&action=SetMode&NewMode=" + action).finally(() => {
+		fetchWithCookies("/S/OpenHAB/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_FanOperatingMode1&action=SetMode&NewMode=" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
@@ -184,7 +184,7 @@ export function hvacModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/Vera/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_UserOperatingMode1&action=SetModeTarget&NewModeTarget=" + action).finally(() => {
+		fetchWithCookies("/S/OpenHAB/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_UserOperatingMode1&action=SetModeTarget&NewModeTarget=" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
