@@ -161,7 +161,7 @@ export function sceneClicked(id)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/OpenHAB/Scene/" + id + "/HomeAutomationGateway1&action=RunScene")
+		fetchWithCookies("/S/OpenHAB/Device/" + id + "/ON")
 				.finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
