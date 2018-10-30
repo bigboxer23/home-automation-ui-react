@@ -13,16 +13,16 @@ const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanMode
 				<div className="form-group w-100">
 					<label>Fan Mode</label>
 					<div className="w-100 d-flex btn-group btn-group-toggle">
-						<label className={getFanModeStyle("On", deviceMap)} onClick={() => fanModeChange("ContinuousOn")}>On</label>
-						<label className={getFanModeStyle("Auto", deviceMap)} onClick={() => fanModeChange("Auto")}>Auto</label>
+						<label className={getFanModeStyle("1", deviceMap)} onClick={() => fanModeChange("1")}>On</label>
+						<label className={getFanModeStyle("0", deviceMap)} onClick={() => fanModeChange("0")}>Auto</label>
 					</div>
 				</div>
 				<div className="form-group w-100">
 					<label>HVAC Mode</label>
 					<div className="w-100 d-flex btn-group btn-group-toggle">
-						<label className={getHVACStyle("Off", deviceMap)} onClick={() => hvacModeChange("Off")}>Off</label>
-						<label className={getHVACStyle("CoolOn", deviceMap)} onClick={() => hvacModeChange("CoolOn")}>Cool</label>
-						<label className={getHVACStyle("HeatOn", deviceMap)} onClick={() => hvacModeChange("HeatOn")}>Heat</label>
+						<label className={getHVACStyle("0", deviceMap)} onClick={() => hvacModeChange("0")}>Off</label>
+						<label className={getHVACStyle("2", deviceMap)} onClick={() => hvacModeChange("2")}>Cool</label>
+						<label className={getHVACStyle("1", deviceMap)} onClick={() => hvacModeChange("1")}>Heat</label>
 					</div>
 				</div>
 				<div className="form-group w-100 d-flex">

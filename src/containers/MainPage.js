@@ -30,15 +30,15 @@ const getRooms = (rooms) => {
 		return [];
 	}
 	let allItems = rooms.filter(theRoom => shouldDisplay(theRoom));
-	return allItems.filter(theRoom => "Climate Control" === theRoom.name)
+	return allItems.filter(theRoom => "Climate" === theRoom.name)
 			.concat(allItems.filter(theRoom => "Garage" === theRoom.name))
 			.concat(allItems.filter(theRoom => "Scenes" === theRoom.name))
-			.concat(allItems.filter(theRoom => "Garage" !== theRoom.name && "Climate Control" !== theRoom.name && "Scenes" !== theRoom.name));
+			.concat(allItems.filter(theRoom => "Garage" !== theRoom.name && "Climate" !== theRoom.name && "Scenes" !== theRoom.name));
 };
 
 const shouldDisplay = function(theRoom)
 {
-	return (hasLights(theRoom) || theRoom.name === "Climate Control" || theRoom.name === "Scenes");
+	return (hasLights(theRoom) || theRoom.name === "Climate" || theRoom.name === "Scenes");
 };
 
 const hasLights = function(theRoom)

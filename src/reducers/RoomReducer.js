@@ -39,15 +39,15 @@ const roomReducer = (state = {}, action) => {
 			});
 		case 'UPDATE_THERMOSTAT_SET_POINT':
 			return Object.assign({}, state, {rooms:state.rooms.map(room => {
-					if (room.name !== "Climate Control")
+					if (room.name !== "Climate")
 					{
 						return room;
 					}
 					return Object.assign({}, room, {devices:room.devices.map(theDevice =>
 						{
-							if (theDevice.name === "Thermostat")
+							if (theDevice.name === "Heating Setpoint" || theDevice.name === "Cooling Setpoint")
 							{
-								return Object.assign({}, theDevice, {setpoint:action.setpoint})
+								return Object.assign({}, theDevice, {level:action.setpoint + ""})
 							}
 							return theDevice;
 						})});

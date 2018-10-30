@@ -28,18 +28,18 @@ export const getClimateData = (rooms) => {
 	{
 		return {};
 	}
-	return rooms.filter(theRoom => "Climate Control" === theRoom.name).map(room => room.devices)[0].reduce((map, device) => {
+	return rooms.filter(theRoom => "Climate" === theRoom.name).map(room => room.devices)[0].reduce((map, device) => {
 		return (map[device.name] = device, map);
 	}, {});
 };
 
 export const getThermostatModeStyle = deviceMap =>
 {
-	let aMode = deviceMap["Thermostat"].mode;
-	if (aMode === "HeatOn")
+	let aMode = deviceMap["Thermostat Mode"] != null ? deviceMap["Thermostat Mode"].level : null;
+	if (aMode === "1")
 	{
 		return {color:"#DD531E"};
-	} else if (aMode === "CoolOn")
+	} else if (aMode === "2")
 	{
 		return {color:"#0772B8"};
 	}
@@ -48,32 +48,50 @@ export const getThermostatModeStyle = deviceMap =>
 
 export const getCurrentOutsideTemp = deviceMap =>
 {
-	return deviceMap["Temperature"] != null ? deviceMap["Temperature"].temperature : 50;
+	let aTemperature = deviceMap["Outside Temperature"];
+	if (aTemperature == null)
+	{
+		return 99;
+	}
+	aTemperature = aTemperature.level;
+	if (aTemperature.indexOf(" ") > -1)
+	{
+		aTemperature = aTemperature.substring(0, aTemperature.indexOf(" "));
+	}
+	return aTemperature;
 };
 
 export const getIndoorTemp = deviceMap =>
 {
-	return deviceMap["Thermostat"] != null ? parseInt(deviceMap["Thermostat"].temperature, 10) : 72;
+	return deviceMap["Inside Temperature"] != null ? parseInt(deviceMap["Inside Temperature"].level, 10) : 99;
 };
 
 export const getThermostatSetPoint = deviceMap =>
 {
-	return deviceMap["Thermostat"] != null ? deviceMap["Thermostat"].setpoint : 72;
+	let aDevice = getSetpointDevice(deviceMap);
+	return aDevice != null ? parseInt(aDevice.level, 10) : 72;
+};
+
+export const getSetpointDevice = deviceMap =>
+{
+	return getMode(deviceMap) === "2" ? deviceMap["Cooling Setpoint"] : deviceMap["Heating Setpoint"];
 };
 
 export const getHumidity = deviceMap =>
 {
-	return deviceMap["Humidity Sensor"].humidity + "%";
+	return deviceMap["Inside Humidity"] != null ? deviceMap["Inside Humidity"].level + "%" : "";
 };
 
 const getFanMode = deviceMap =>
 {
-	return deviceMap["Thermostat"] != null ? deviceMap["Thermostat"].fanmode : "";//"Auto", "On"
+	//0 auto, 1 on
+	return deviceMap["Thermostat Fan Mode"] != null ? deviceMap["Thermostat Fan Mode"].level : "";//"Auto", "On"
 };
 
 const getMode = deviceMap =>
 {
-	return deviceMap["Thermostat"] != null ? deviceMap["Thermostat"].mode : "";
+	//1 heat, 0 off, 2 cool, 3 auto
+	return deviceMap["Thermostat Mode"] != null ? deviceMap["Thermostat Mode"].level : "";
 };
 
 export const getFanModeStyle = (fanOption, deviceMap) =>
@@ -85,23 +103,6 @@ export const getHVACStyle = (hvacValue, deviceMap) =>
 {
 	return "btn btn-secondary w-100" + (getMode(deviceMap) === hvacValue ? " active" : "");
 };
-
-export const getThermostatId = deviceMap =>
-{
-	return deviceMap["Thermostat"] != null ? deviceMap["Thermostat"].id : -1;
-};
-/*
-const getHighTemp = deviceMap =>
-{
-	return deviceMap["High Temperature"].temperature;
-};
-
-const getLowTemp = deviceMap =>
-{
-	return deviceMap["Low Temperature"].temperature;
-};*/
-
-
 
 const mapStateToProps = state => ({
 	deviceMap: getClimateData (state.house.rooms)

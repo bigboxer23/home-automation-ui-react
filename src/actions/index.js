@@ -1,4 +1,4 @@
-import {getClimateData, getThermostatId} from "../containers/ClimatePage";
+import {getClimateData, getSetpointDevice} from "../containers/ClimatePage";
 
 const statusUpdated = data => ({
 	type: 'STATUS_UPDATED',
@@ -80,24 +80,6 @@ export function fetchStatusIfNecessary() {
 	}
 }
 
-export function setThermostatSetPoint(setPoint)
-{
-	return (dispatch, getState) =>
-	{
-		fetchWithCookies("/S/OpenHAB/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/TemperatureSetpoint1&action=SetCurrentSetpoint&NewCurrentSetpoint=" + setPoint)
-				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
-	}
-}
-
-export function setLocalThermostatSetPoint(setPoint)
-{
-	return (dispatch, getState) =>
-	{
-		dispatch(cancelFetchTimer());
-		dispatch(updateThermostatSetPoint(setPoint));
-	}
-}
-
 export function setDim(setPoint, id, subject)
 {
 	return (dispatch, getState) =>
@@ -173,7 +155,7 @@ export function fanModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/OpenHAB/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_FanOperatingMode1&action=SetMode&NewMode=" + action).finally(() => {
+		fetchWithCookies("/S/OpenHAB/Device/ThermostatFanMode/" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
@@ -184,15 +166,32 @@ export function hvacModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/OpenHAB/Device/" + getThermostatId(getClimateData(getState().house.rooms)) + "/HVAC_UserOperatingMode1&action=SetModeTarget&NewModeTarget=" + action).finally(() => {
+		fetchWithCookies("/S/OpenHAB/Device/ThermostatMode/" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
 }
 
+export function setThermostatSetPoint(setPoint)
+{
+	return (dispatch, getState) =>
+	{
+		fetchWithCookies("/S/OpenHAB/Device/" + getSetpointDevice(getClimateData(getState().house.rooms)).id + "/" + setPoint)
+				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
+	}
+}
+
+export function setLocalThermostatSetPoint(setPoint)
+{
+	return (dispatch, getState) =>
+	{
+		dispatch(cancelFetchTimer());
+		dispatch(updateThermostatSetPoint(setPoint));
+	}
+}
+
 export function disableAutoClose()
 {
-	console.log("disable auto close");
 	return (dispatch, getState) =>
 	{
 		dispatch(cancelFetchTimer());

@@ -16,7 +16,7 @@ const mapRoom = function(theRoom, handleClick, handleGarageClick, handleMoreClic
 	{
 		return <GarageButton key={theRoom.name} room={theRoom} handleGarageClick={handleGarageClick} handleGarageMoreClick={handleGarageMoreClick}/>;
 	}
-	else if ("Climate Control" === theRoom.name)
+	else if ("Climate" === theRoom.name)
 	{
 		return <ClimateButton key={theRoom.name} room={theRoom} handleClick={handleClick}/>;
 	}
