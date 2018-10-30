@@ -13,8 +13,8 @@ class GarageButton extends React.Component
 	render()
 	{
 		return <Button onClick={() => this.props.handleGarageClick(GarageButton.isDoorOpen(this.props.room) ? "Close" : "Open")} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
-			<i className="mdi mdi-garage"></i>
-			<div className="tempDisplay pr-1 pl-1 position-absolute" style={getTempStyle(GarageButton.findGarageDevice(this.props.room).temperature)} onClick={(event) => this.props.handleGarageMoreClick(event)}>{getFormattedTemp(GarageButton.findGarageDevice(this.props.room).temperature)}</div>
+			<i className="mdi mdi-garage"/>
+			<div className="tempDisplay pr-1 pl-1 position-absolute" style={getTempStyle(GarageButton.findTemperature(this.props.room).temperature)} onClick={(event) => this.props.handleGarageMoreClick(event)}>{getFormattedTemp(GarageButton.findGarageDevice(this.props.room).temperature)}</div>
 			<div className="autoClose">{GarageButton.getAutoClose(this.props.room)}</div>
 			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2">{this.props.room.name}</div>
 		</Button>;
@@ -28,6 +28,12 @@ class GarageButton extends React.Component
 	static findGarageDevice(room)
 	{
 		return room == null ? null : room.devices.find(theDevice => "Garage Opener" === theDevice.name);
+	}
+
+	static findTemperature(room)
+	{
+		let aGarage = GarageButton.findGarageDevice(room);
+		return aGarage === null ? 100 : aGarage.temperature;
 	}
 
 	static isDoorOpen(room)
