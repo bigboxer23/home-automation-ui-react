@@ -29,7 +29,13 @@ const getRooms = (rooms) => {
 	{
 		return [];
 	}
-	let allItems = rooms.filter(theRoom => shouldDisplay(theRoom));
+	let allItems = rooms.filter(theRoom => shouldDisplay(theRoom))
+			.sort((theRoom, theRoom2) =>
+			{
+				if(theRoom.name < theRoom2.name) { return -1; }
+				if(theRoom.name > theRoom2.name) { return 1; }
+				return 0;
+			});
 	return allItems.filter(theRoom => "Climate" === theRoom.name)
 			.concat(allItems.filter(theRoom => "Garage" === theRoom.name))
 			.concat(allItems.filter(theRoom => "Scenes" === theRoom.name))
