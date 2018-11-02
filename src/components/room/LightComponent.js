@@ -21,7 +21,7 @@ const LightComponent = ({device, sliderChange, slideStop, setDeviceStatus}) => {
 				<div className="d-flex btn-group btn-group-toggle justify-content-center">
 					<ReactBootstrapSlider value={parseInt(device.level, 10)}
 					                      change={sliderChange}
-					                      slideStop={(event) => slideStop(event.target.value, device.id, "Device")}
+					                      slideStop={(event) => slideStop(event.target.value, device.id)}
 					                      max={100}
 					                      min={0}
 					                      tooltip={"show"}/>

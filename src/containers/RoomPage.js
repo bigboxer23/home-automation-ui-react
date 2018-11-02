@@ -43,13 +43,13 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	{
 		dispatch(cancelFetchTimer());
 	},
-	slideStop: (level, id, subject) => (dispatch) =>
+	slideStop: (level, id) => (dispatch) =>
 	{
-		dispatch(setDim(level, id, subject));
+		dispatch(setDim(level, id));
 	},
 	setDeviceStatus: (id, status) => (dispatch) =>
 	{
-		dispatch(setOnOff(status, id, "Device"));
+		dispatch(setOnOff(status, id));
 	},
 	fetchStatus: () => fetchStatusIfNecessary()
 }, dispatch);

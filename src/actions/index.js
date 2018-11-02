@@ -80,21 +80,21 @@ export function fetchStatusIfNecessary() {
 	}
 }
 
-export function setDim(setPoint, id, subject)
+export function setDim(setPoint, id)
 {
 	return (dispatch, getState) =>
 	{
-		fetchWithCookies("/S/OpenHAB/" + subject + "/" + id + "/" + setPoint)
+		fetchWithCookies("/S/OpenHAB/" + id + "/" + setPoint)
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
 
-export function setOnOff(on, id, subject)
+export function setOnOff(on, id)
 {
 	return (dispatch, getState) =>
 	{
 		dispatch(cancelFetchTimer());
-		fetchWithCookies("/S/OpenHAB/" + subject + "/" + id + "/" + (on ? "ON" : "OFF"))
+		fetchWithCookies("/S/OpenHAB/" + id + "/" + (on ? "ON" : "OFF"))
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
@@ -131,7 +131,7 @@ export function roomClicked(id, state)
 			dispatch(cancelFetchTimer());
 			dispatch(requestStatus());
 			dispatch(updateStoreRoom(id));
-			fetchWithCookies("/S/OpenHAB/Room/" + id + "/" + state).finally(() => {
+			fetchWithCookies("/S/OpenHAB/" + id + "/" + state).finally(() => {
 				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
 			});
 		}
@@ -143,7 +143,7 @@ export function sceneClicked(id)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/OpenHAB/Device/" + id + "/ON")
+		fetchWithCookies("/S/OpenHAB/" + id + "/ON")
 				.finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
@@ -155,7 +155,7 @@ export function fanModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/OpenHAB/Device/ThermostatFanMode/" + action).finally(() => {
+		fetchWithCookies("/S/OpenHAB/ThermostatFanMode/" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
@@ -166,7 +166,7 @@ export function hvacModeChange(action)
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/OpenHAB/Device/ThermostatMode/" + action).finally(() => {
+		fetchWithCookies("/S/OpenHAB/ThermostatMode/" + action).finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});
 	}
@@ -176,7 +176,7 @@ export function setThermostatSetPoint(setPoint)
 {
 	return (dispatch, getState) =>
 	{
-		fetchWithCookies("/S/OpenHAB/Device/" + getSetpointDevice(getClimateData(getState().house.rooms)).id + "/" + setPoint)
+		fetchWithCookies("/S/OpenHAB/" + getSetpointDevice(getClimateData(getState().house.rooms)).id + "/" + setPoint)
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
