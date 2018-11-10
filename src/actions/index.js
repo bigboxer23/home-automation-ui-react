@@ -176,7 +176,7 @@ export function setThermostatSetPoint(setPoint)
 {
 	return (dispatch, getState) =>
 	{
-		fetchWithCookies("/S/OpenHAB/" + getSetpointDevice(getClimateData(getState().house.rooms)).id + "/" + setPoint)
+		fetchWithCookies("/S/OpenHAB/" + getSetpointDevice(getClimateData(getState().house.rooms)).id + "/" + setPoint + " °F")
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}
 }
