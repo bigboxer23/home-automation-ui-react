@@ -2,9 +2,10 @@ import React from 'react'
 import HeaderComponent from "../HeaderComponent"
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 import {
-	getCurrentOutsideTemp, getFanModeStyle, getHVACStyle, getIndoorTemp, getThermostatSetPoint
+	getCurrentOutsideTemp, getFanModeStyle, getHVACStyle, getIndoorTemp, getThermostatBattery, getThermostatSetPoint
 } from "../../containers/ClimatePage";
 import {getFormattedTemp, getTempStyle, getIndoorTempStyle} from "../../utils/WeatherUtilities";
+import MotionSensorComponent from "../room/MotionSensorComponent";
 
 const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanModeChange, hvacModeChange}) => (
 		<div>
@@ -44,8 +45,7 @@ const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanMode
 						                      max={74}
 						                      min={65}
 						                      tooltip={"show"}/>
-
-				<div className="tempLabel"></div>
+				<MotionSensorComponent key={getThermostatBattery(deviceMap).name} device={getThermostatBattery(deviceMap)} />
 			</div>
 		</div>
 );

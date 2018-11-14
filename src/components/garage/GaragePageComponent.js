@@ -3,7 +3,7 @@ import HeaderComponent from "../HeaderComponent"
 import {getAutoCloseButtonStyle, getAutoCloseButtonText, getHeader} from "../../containers/GaragePage";
 import RoomButton from "../room/RoomButton";
 import LightComponent from "../room/LightComponent";
-import {getRoomDimLevel} from "../room/RoomPageComponent";
+import {getRoomDimLevel} from "../../containers/RoomPage";
 import {ReactBootstrapSlider} from "react-bootstrap-slider";
 import GarageAutoCloseButton from "./GarageAutoCloseButton";
 

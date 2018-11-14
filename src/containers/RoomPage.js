@@ -6,6 +6,7 @@ import {
 	cancelFetchTimer, fetchStatusIfNecessary, setDim, setOnOff,
 } from '../actions'
 import RoomPageComponent from "../components/room/RoomPageComponent";
+import RoomButton from "../components/room/RoomButton";
 
 class RoomPage extends React.Component
 {
@@ -31,6 +32,58 @@ const filterRoom = (rooms, name) => {
 		return aRoom[0];
 	}
 	return {devices:[]};
+};
+
+export const getBatteryStyle = (theDevice) =>
+{
+	return {backgroundColor:getBatteryColorFromLevel(parseInt(theDevice.level, 10))};
+};
+
+const getBatteryColorFromLevel = (theLevel) =>
+{
+	if(theLevel === 100 || theLevel === 0)
+	{
+		return "#03902B";
+	} else if(theLevel >= 90)
+	{
+		return "#2DC558";
+	} else if(theLevel >= 60)
+	{
+		return "#FECF3B";
+	} else if(theLevel >= 40)
+	{
+		return "#EC9800";
+	} else if(theLevel >= 30)
+	{
+		return "#DD531E";
+	} else if(theLevel >= 20)
+	{
+		return "#C53600";
+	} else if(theLevel >= 10)
+	{
+		return "#B10909";
+	}
+	return "#6F0015";
+};
+
+export const isMotionDevice = (theDevice) =>
+{
+	return theDevice.name.endsWith("Battery");
+};
+
+export const getRoomDimLevel = (room) => {
+	let level = 0;
+	if (room != null)
+	{
+		room.devices
+				.filter(device => device.level != null)
+				.filter(device => RoomButton.isLight(device))
+				.forEach(device =>
+				{
+					level = Math.max(level, parseInt(device.level, 10));
+				});
+	}
+	return level;
 };
 
 const mapStateToProps = (state, props) => ({

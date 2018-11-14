@@ -133,6 +133,12 @@ body,html,#root
 	background-color:white;
 }
 
+.danger
+{
+	color:#dc3545;
+	font-weight: 700;
+}
+
 .sk-spinner
 {
 	width:30px;

@@ -2,7 +2,9 @@ import React from 'react'
 import HeaderComponent from "../HeaderComponent"
 import LightComponent from "./LightComponent";
 import RoomButton from "./RoomButton";
+import {getRoomDimLevel, isMotionDevice} from "../../containers/RoomPage";
 import {ReactBootstrapSlider} from "react-bootstrap-slider";
+import MotionSensorComponent from "./MotionSensorComponent";
 
 const RoomPageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus}) => (
 		<div>
@@ -21,24 +23,14 @@ const RoomPageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus
 						</div>
 					</div>
 				</div>
-				{room.devices.map(device => RoomButton.isLight(device) ? <LightComponent key={device.name} device={device} sliderChange={sliderChange} slideStop={slideStop} setDeviceStatus={setDeviceStatus}/> : "")}
+				{room.devices
+						.map(device =>
+								RoomButton.isLight(device) ?
+										<LightComponent key={device.name} device={device} sliderChange={sliderChange} slideStop={slideStop} setDeviceStatus={setDeviceStatus}/>
+										: isMotionDevice(device) ?
+										<MotionSensorComponent key={device.name} device={device} /> : "")}
 			</div>
 		</div>
 );
-
-export const getRoomDimLevel = (room) => {
-	let level = 0;
-	if (room != null)
-	{
-		room.devices
-				.filter(device => device.level != null)
-				.filter(device => RoomButton.isLight(device))
-				.forEach(device =>
-		{
-			level = Math.max(level, parseInt(device.level, 10));
-		});
-	}
-	return level;
-};
 
 export default RoomPageComponent

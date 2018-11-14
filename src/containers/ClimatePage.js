@@ -23,6 +23,11 @@ class ClimatePage extends React.Component
 	}
 }
 
+export const getThermostatBattery = (deviceMap) =>
+{
+	return deviceMap["Thermostat Battery"] == null ? {"name": "Thermostat Battery", "level" : "100"} : deviceMap["Thermostat Battery"];
+};
+
 export const getClimateData = (rooms) => {
 	if (rooms == null)
 	{
