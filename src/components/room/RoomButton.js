@@ -39,7 +39,7 @@ class RoomButton extends React.Component
 	{
 		let aLowBatteries = theRoom.devices.find(theDevice =>
 		{
-			return theDevice.name.endsWith("Battery") && parseInt(theDevice.level, 10) < 40 && parseInt(theDevice.level, 10) !== 0;
+			return theDevice.name != null && theDevice.name.endsWith("Battery") && parseInt(theDevice.level, 10) < 40 && parseInt(theDevice.level, 10) !== 0;
 		});
 		if (aLowBatteries != null)
 		{
