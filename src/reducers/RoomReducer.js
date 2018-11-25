@@ -52,6 +52,21 @@ const roomReducer = (state = {}, action) => {
 							return theDevice;
 						})});
 				}), lastUpdate:Date.now()});
+		case 'UPDATE_ON_OFF':
+			return Object.assign({}, state, {rooms:state.rooms.map(room => {
+					if (room.devices.find(theDevice => theDevice.id === action.id) == null)
+					{
+						return room;
+					}
+					return Object.assign({}, room, {devices:room.devices.map(theDevice =>
+						{
+							if (theDevice.id !== action.id)
+							{
+								return theDevice;
+							}
+							return Object.assign({}, theDevice, {level:(action.on === true ? "1" : "0")});
+						})});
+				}), lastUpdate:Date.now()});
 		case 'AUTH_ERROR':
 			return Object.assign({}, state, {authError: action.authError});
 		default:

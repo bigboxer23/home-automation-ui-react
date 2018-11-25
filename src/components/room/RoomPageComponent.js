@@ -13,7 +13,7 @@ const RoomPageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
 					<div className="form-group w-100">
 						<label>Overall Room</label>
-						<div className="d-flex btn-group btn-group-toggle justify-content-center">
+						<div className="pr-3 pl-3 d-flex btn-group btn-group-toggle justify-content-center">
 							<ReactBootstrapSlider value={getRoomDimLevel(room)}
 							                      change={sliderChange}
 							                      slideStop={(event) => slideStop(event.target.value, room.id)}

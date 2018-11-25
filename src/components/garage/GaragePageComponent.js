@@ -15,7 +15,7 @@ const GaragePageComponent = ({back, room, sliderChange, slideStop, setDeviceStat
 					<GarageAutoCloseButton onClick={autoCloseClickHandler} buttonText={getAutoCloseButtonText(room)} class={getAutoCloseButtonStyle(room)}/>
 					<div className="form-group w-100">
 						<label>Overall Room</label>
-						<div className="d-flex btn-group btn-group-toggle justify-content-center">
+						<div className="p-2 d-flex btn-group btn-group-toggle justify-content-center">
 							<ReactBootstrapSlider value={getRoomDimLevel(room)}
 							                      change={sliderChange}
 							                      slideStop={(event) => slideStop(event.target.value, room.id)}

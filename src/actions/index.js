@@ -34,6 +34,12 @@ const updateThermostatSetPoint = setpoint => ({
 	setpoint
 });
 
+const updateOnOff = (id, on) => ({
+	type: "UPDATE_ON_OFF",
+	id,
+	on
+});
+
 const fetchWithCookies = function(theUrl) {
 	return fetch(theUrl, {
 		credentials: 'same-origin'
@@ -94,6 +100,7 @@ export function setOnOff(on, id)
 	return (dispatch, getState) =>
 	{
 		dispatch(cancelFetchTimer());
+		dispatch(updateOnOff(id, on));
 		fetchWithCookies("/S/OpenHAB/" + id + "/" + (on ? "ON" : "OFF"))
 				.finally(() => dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))));
 	}

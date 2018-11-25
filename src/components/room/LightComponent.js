@@ -9,8 +9,8 @@ const LightComponent = ({device, sliderChange, slideStop, setDeviceStatus}) => {
 						<div className="form-group w-100">
 							<label>{device.name}</label>
 							<div className="w-100 d-flex btn-group btn-group-toggle">
-								<label className={getFanStyling("1", device.status)} onClick={() => setDeviceStatus(device.id, true)}>On</label>
-								<label className={getFanStyling("0", device.status)} onClick={() => setDeviceStatus(device.id, false)}>Off</label>
+								<label className={getFanStyling("1", device.level)} onClick={() => setDeviceStatus(device.id, true)}>On</label>
+								<label className={getFanStyling("0", device.level)} onClick={() => setDeviceStatus(device.id, false)}>Off</label>
 							</div>
 						</div>
 					</div>
@@ -18,7 +18,7 @@ const LightComponent = ({device, sliderChange, slideStop, setDeviceStatus}) => {
 		return <div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
 			<div className="form-group w-100">
 				<label>{device.name}</label>
-				<div className="d-flex btn-group btn-group-toggle justify-content-center">
+				<div className="pr-3 pl-3 d-flex btn-group btn-group-toggle justify-content-center">
 					<ReactBootstrapSlider value={parseInt(device.level, 10)}
 					                      change={sliderChange}
 					                      slideStop={(event) => slideStop(event.target.value, device.id)}
