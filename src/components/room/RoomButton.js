@@ -25,6 +25,23 @@ class RoomButton extends React.Component
 		return anOnDevice != null;
 	}
 
+	static onCount(theRoom)
+	{
+		let aCount = 0;
+		if (theRoom.devices == null)
+		{
+			return aCount;
+		}
+		theRoom.devices.forEach(theDevice =>
+		{
+			if (RoomButton.isLight(theDevice) && theDevice.status === "1")
+			{
+				aCount++;
+			}
+		});
+		return aCount;
+	}
+
 	static isLight(theDevice)
 	{
 		return theDevice.category === "2" || theDevice.category === "3";

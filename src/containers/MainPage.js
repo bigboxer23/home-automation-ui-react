@@ -36,10 +36,25 @@ const getRooms = (rooms) => {
 				if(theRoom.name > theRoom2.name) { return 1; }
 				return 0;
 			});
+	let aScenes = allItems.filter(theRoom => "Scenes" === theRoom.name);
+	aScenes[0].totalLights = countTotalLights(rooms);
 	return allItems.filter(theRoom => "Climate" === theRoom.name)
 			.concat(allItems.filter(theRoom => "Garage" === theRoom.name))
-			.concat(allItems.filter(theRoom => "Scenes" === theRoom.name))
+			.concat(aScenes)
 			.concat(allItems.filter(theRoom => "Garage" !== theRoom.name && "Climate" !== theRoom.name && "Scenes" !== theRoom.name));
+};
+
+const countTotalLights = function (rooms)
+{
+	let aLightCount = 0;
+	rooms.forEach(room =>
+	{
+		if (hasLights(room) && "Scenes" !== room.name)
+		{
+			aLightCount += RoomButton.onCount(room)
+		}
+	});
+	return aLightCount === 0 ? "" : aLightCount;
 };
 
 const shouldDisplay = function(theRoom)

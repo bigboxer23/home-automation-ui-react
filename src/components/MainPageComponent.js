@@ -1,8 +1,8 @@
 import React from 'react'
 import RoomButton from "./room/RoomButton";
 import GarageButton from "./garage/GarageButton";
-import ScenesButton from "./scene/ScenesButton";
 import ClimateButton from "./climate/ClimateButton";
+import HouseButton from "./house/HouseButton";
 
 const MainPageComponent = ({ rooms, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick}) => (
 		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">{rooms.map(room =>
@@ -22,7 +22,7 @@ const mapRoom = function(theRoom, handleClick, handleGarageClick, handleMoreClic
 	}
 	else if ("Scenes" === theRoom.name)
 	{
-		return <ScenesButton key={theRoom.name} room={theRoom}/>
+		return <HouseButton key={theRoom.name} room={theRoom}/>
 	}
 	return <RoomButton key={theRoom.name} room={theRoom} handleClick={handleClick} handleMoreClick={handleMoreClick}/>;
 };

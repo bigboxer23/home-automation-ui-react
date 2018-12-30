@@ -145,12 +145,12 @@ export function roomClicked(id, state)
 	};
 }
 
-export function sceneClicked(id)
+export function sceneClicked(id, verb)
 {
 	return (dispatch, getState) =>
 	{
 		dispatch(requestStatus());
-		fetchWithCookies("/S/OpenHAB/" + id + "/ON")
+		fetchWithCookies("/S/OpenHAB/" + id + "/" + verb)
 				.finally(() => {
 			dispatch(statusUpdated(getState().house.rooms));
 		});

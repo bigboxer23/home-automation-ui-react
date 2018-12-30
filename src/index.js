@@ -18,6 +18,7 @@ import '@mdi/font/css/materialdesignicons.min.css'
 import 'react-bootstrap-slider/src/css/bootstrap-slider.min.css'
 import RoomPage from "./containers/RoomPage";
 import GaragePage from "./containers/GaragePage";
+import HousePage from "./containers/HousePage";
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
@@ -31,6 +32,7 @@ ReactDOM.render( <Provider store={store}>
 		<div>
 			<Route exact path="/" component={MainPage}/>
 			<Route path="/Scenes" component={ScenePage}/>
+			<Route path="/House" component={HousePage}/>
 			<Route path="/Climate" component={ClimatePage}/>
 			<Route path="/Room/:name" component={RoomPage}/>
 			<Route path="/Garage" component={GaragePage}/>

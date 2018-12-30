@@ -40,11 +40,15 @@ body,html,#root
 	opacity:.3;
 }
 
-.mdi-lightbulb-outline
+.mdi-lightbulb-outline, .mdi-clock, .mdi-garage
 {
 	color: rgba(0,0,0,.3);
 }
 
+.btn-danger .mdi-garage
+{
+	color:#fff;
+}
 .btn-success .mdi-lightbulb-outline:before
 {
 	content:'\f6e8';
@@ -131,6 +135,14 @@ body,html,#root
 	right:0;
 	color:#28a745;
 	background-color:white;
+}
+
+.total-lights-bg
+{
+	background-color:lightgray;
+	min-width: 22px !important;
+	display:flex;
+	justify-content: center;
 }
 
 .danger

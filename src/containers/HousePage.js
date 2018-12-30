@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import ScenePageComponent from "../components/scene/ScenePageComponent";
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import {fetchStatusIfNecessary, sceneClicked} from '../actions'
+import HousePageComponent from "../components/house/HousePageComponent";
 
-class ScenePage extends React.Component
+class HousePage extends React.Component
 {
 	componentDidMount()
 	{
@@ -14,7 +14,7 @@ class ScenePage extends React.Component
 
 	render()
 	{
-		return <ScenePageComponent {...this.props}/>
+		return <HousePageComponent {...this.props}/>
 	}
 }
 
@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
 		mapStateToProps,
 		mapDispatchToProps
-)(ScenePage)
+)(HousePage)
