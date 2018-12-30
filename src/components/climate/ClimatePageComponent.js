@@ -28,15 +28,15 @@ const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanMode
 				</div>
 				<div className="p-2 form-group w-100 d-flex">
 					<label className="flex-grow-1">Outside Temperature</label>
-					<div className="tempDisplay pr-1 pl-1 d-flex align-items-center" style={getTempStyle(getCurrentOutsideTemp(deviceMap))}>{getFormattedTemp(getCurrentOutsideTemp(deviceMap))}</div>
+					<div className="temp-display pr-1 pl-1 d-flex align-items-center" style={getTempStyle(getCurrentOutsideTemp(deviceMap))}>{getFormattedTemp(getCurrentOutsideTemp(deviceMap))}</div>
 				</div>
 				<div className="p-2 form-group w-100 d-flex">
 					<label className="flex-grow-1">Inside Temperature</label>
-					<div className="tempDisplay pr-1 pl-1 d-flex align-items-center" style={getIndoorTempStyle(getIndoorTemp(deviceMap))}>{getFormattedTemp(getIndoorTemp(deviceMap))}</div>
+					<div className="temp-display pr-1 pl-1 d-flex align-items-center" style={getIndoorTempStyle(getIndoorTemp(deviceMap))}>{getFormattedTemp(getIndoorTemp(deviceMap))}</div>
 				</div>
 				<div className="p-2 form-group w-100 d-flex">
 					<label className="flex-grow-1">Thermostat</label>
-					<div className="tempDisplay pr-1 pl-1 d-flex align-items-center" style={getIndoorTempStyle(getThermostatSetPoint(deviceMap))}>{getFormattedTemp(getThermostatSetPoint(deviceMap))}</div>
+					<div className="temp-display pr-1 pl-1 d-flex align-items-center" style={getIndoorTempStyle(getThermostatSetPoint(deviceMap))}>{getFormattedTemp(getThermostatSetPoint(deviceMap))}</div>
 				</div>
 				<div className="p-2 form-group w-100 d-flex">
 						<ReactBootstrapSlider value={getThermostatSetPoint(deviceMap)}

@@ -7,7 +7,8 @@ class RoomButton extends React.Component
 	{
 		return <Button onClick={() => this.props.handleClick(this.props.room.id, RoomButton.isOn(this.props.room) ? 0 : 100)} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
 			<i className={"mdi mdi-lightbulb-outline" + this.getBatteryWarningStyle(this.props.room)}/>
-			<i className="mdi mdi-dots-horizontal" onClick={(event) => this.props.handleMoreClick(event, this.props.room.name)}/>
+			<i className="mdi mdi-dots-horizontal inFront" onClick={(event) => this.props.handleMoreClick(event, this.props.room.name)}/>
+			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg">{this.getCountContent(this.props.room)}</div>
 			<div className="position-absolute bottom w-100 m-2 pl-2 pr-3">{this.props.room.name}</div>
 		</Button>;
 	}
@@ -50,6 +51,12 @@ class RoomButton extends React.Component
 	static isFan(theDevice)
 	{
 		return theDevice.category === "3";
+	}
+
+	getCountContent(theRoom)
+	{
+		let aCount = RoomButton.onCount(theRoom);
+		return aCount === 0 ? "" : aCount;
 	}
 
 	getBatteryWarningStyle(theRoom)

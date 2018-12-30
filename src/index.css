@@ -74,7 +74,7 @@ body,html,#root
 	color:white;
 }
 
-.tempDisplay
+.temp-display
 {
 	border-radius: .5rem;
 	color:white;
@@ -100,6 +100,22 @@ body,html,#root
 	background-color:#69d040;
 	height:60px;
 	color:#fff;
+}
+
+.btn-success .mdi-dots-horizontal:before
+{
+	opacity:0;
+}
+
+.btn-success .temp-display
+{
+	background-color: transparent;
+	border:1px solid #fff;
+}
+
+.inFront
+{
+	z-index: 1;
 }
 
 .slider-horizontal
