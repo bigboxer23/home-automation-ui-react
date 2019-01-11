@@ -6,7 +6,7 @@ class RoomButton extends React.Component
 	render()
 	{
 		return <Button onClick={() => this.props.handleClick(this.props.room.id, RoomButton.isOn(this.props.room) ? 0 : 100)} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
-			<i className={"mdi mdi-lightbulb-outline" + this.getBatteryWarningStyle(this.props.room)}/>
+			<i className={"mdi mdi-lightbulb-outline" + this.getBatteryWarningStyle(this.props.room) + this.getLockedStatus(this.props.room)}/>
 			<i className="mdi mdi-dots-horizontal inFront" onClick={(event) => this.props.handleMoreClick(event, this.props.room.name)}/>
 			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg">{this.getCountContent(this.props.room)}</div>
 			<div className="position-absolute bottom w-100 m-2 pl-2 pr-3">{this.props.room.name}</div>
@@ -21,7 +21,7 @@ class RoomButton extends React.Component
 		}
 		let anOnDevice = theRoom.devices.find(theDevice =>
 		{
-			return RoomButton.isLight(theDevice) && theDevice.status === "1";
+			return RoomButton.isLight(theDevice) && theDevice.status === "1" && !theDevice.name.includes("Override");
 		});
 		return anOnDevice != null;
 	}
@@ -35,7 +35,7 @@ class RoomButton extends React.Component
 		}
 		theRoom.devices.forEach(theDevice =>
 		{
-			if (RoomButton.isLight(theDevice) && theDevice.status === "1")
+			if (RoomButton.isLight(theDevice) && theDevice.status === "1" && !theDevice.name.includes("Override"))
 			{
 				aCount++;
 			}
@@ -45,12 +45,22 @@ class RoomButton extends React.Component
 
 	static isLight(theDevice)
 	{
-		return theDevice.category === "2" || theDevice.category === "3";
+		return theDevice.category === "2" || theDevice.category === "3" /*&& !theDevice.name.includes("Override")*/;
 	}
 
 	static isFan(theDevice)
 	{
 		return theDevice.category === "3";
+	}
+
+	getLockedStatus(theRoom)
+	{
+		if (theRoom.devices != null && theRoom.devices
+				.some(theDevice => theDevice.name != null && theDevice.name.includes("Override") && theDevice.status === "1"))
+		{
+			return " mdi-lock-outline";
+		}
+		return "";
 	}
 
 	getCountContent(theRoom)

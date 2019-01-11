@@ -54,6 +54,17 @@ body,html,#root
 	content:'\f6e8';
 }
 
+.mdi-lightbulb-outline.mdi-lock-outline:before
+{
+	content: '\F341';
+	color:#dc3545;
+}
+
+.btn-success .mdi-lightbulb-outline.mdi-lock-outline:before
+{
+	content: '\f33e';
+}
+
 .btn-success .mdi-lightbulb-outline
 {
 	color: #fff700;
