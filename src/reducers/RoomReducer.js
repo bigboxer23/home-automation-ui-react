@@ -12,7 +12,15 @@ const roomReducer = (state = {}, action) => {
 						return room;
 					}
 					let isOn = RoomButton.isOn(room) ? "0" : "1";
-					return Object.assign({}, room, {devices:room.devices.map(theDevice => Object.assign({}, theDevice, {status:isOn}))});
+					return Object.assign({}, room, {devices:room.devices
+								.map(theDevice =>
+								{
+									if (theDevice.name.includes("Override"))
+									{
+										return theDevice;
+									}
+									return Object.assign({}, theDevice, {status:isOn})
+								})});
 				}), lastUpdate:Date.now()});
 		case 'GARAGE_STATE_CHANGE':
 			return Object.assign({}, state, {isFetching: true, rooms:state.rooms.map(room => {

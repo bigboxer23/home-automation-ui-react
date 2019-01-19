@@ -36,8 +36,8 @@ const getRooms = (rooms) => {
 				if(theRoom.name > theRoom2.name) { return 1; }
 				return 0;
 			});
-	let aScenes = allItems.filter(theRoom => "Scenes" === theRoom.name);
-	aScenes[0].totalLights = countTotalLights(rooms);
+	let aScenes = allItems.find(theRoom => "Scenes" === theRoom.name);
+	aScenes.totalLights = countTotalLights(rooms);
 	return allItems.filter(theRoom => "Climate" === theRoom.name)
 			.concat(allItems.filter(theRoom => "Garage" === theRoom.name))
 			.concat(aScenes)
