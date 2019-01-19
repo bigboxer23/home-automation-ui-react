@@ -78,6 +78,7 @@ export const getRoomDimLevel = (room) => {
 		room.devices
 				.filter(device => device.level != null)
 				.filter(device => RoomButton.isLight(device))
+				.filter(device => !device.name.includes("Override"))
 				.forEach(device =>
 				{
 					level = Math.max(level, parseInt(device.level, 10));
