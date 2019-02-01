@@ -32,7 +32,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	back: () => push('/'),
-	handleClick: (id) => sceneClicked(id, "ON"),
+	handleClick: (id, state) => sceneClicked(id, state),
 	fetchStatus: () => fetchStatusIfNecessary()
 }, dispatch);
 

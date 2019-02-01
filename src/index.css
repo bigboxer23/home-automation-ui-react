@@ -49,6 +49,12 @@ body,html,#root
 {
 	color:#fff;
 }
+
+.btn-success
+{
+	background-color:#28a745;
+}
+
 .btn-success .mdi-lightbulb-outline:before
 {
 	content:'\f6e8';

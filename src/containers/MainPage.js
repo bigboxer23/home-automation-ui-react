@@ -54,7 +54,7 @@ const countTotalLights = function (rooms)
 			aLightCount += RoomButton.onCount(room)
 		}
 	});
-	return aLightCount === 0 ? "" : aLightCount;
+	return aLightCount;
 };
 
 const shouldDisplay = function(theRoom)

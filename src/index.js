@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'jquery';
 import { createStore, applyMiddleware } from 'redux'
-import './index.css';
 import { Provider } from "react-redux";
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers'
@@ -16,6 +15,7 @@ import createHistory from 'history/createBrowserHistory'
 import 'bootstrap/dist/css/bootstrap.css'
 import '@mdi/font/css/materialdesignicons.min.css'
 import 'react-bootstrap-slider/src/css/bootstrap-slider.min.css'
+import './index.css';
 import RoomPage from "./containers/RoomPage";
 import GaragePage from "./containers/GaragePage";
 import HousePage from "./containers/HousePage";
