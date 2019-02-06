@@ -51,6 +51,11 @@ body,html,#root
 	background-color:#28a745;
 }
 
+.btn-danger
+{
+	background-color: #dc3545;
+}
+
 .btn-success .mdi-lightbulb-outline:before
 {
 	content:'\f6e8';
