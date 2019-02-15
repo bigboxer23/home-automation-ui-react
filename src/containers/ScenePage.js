@@ -33,7 +33,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
 	back: () => push('/'),
 	handleClick: (id, state) => sceneClicked(id, state),
-	fetchStatus: () => fetchStatusIfNecessary()
+	fetchStatus: () => fetchStatusIfNecessary(),
+	gotoSecurity: () => push('Security')
 }, dispatch);
 
 export default connect(

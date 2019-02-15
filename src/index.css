@@ -198,6 +198,13 @@ body,html,#root
 {
 	max-width:125px;
 }
+
+.security
+{
+	width:100%;
+	height:960px;
+	border:0;
+}
 /*
 
 .slider-handle:active
