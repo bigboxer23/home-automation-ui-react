@@ -5,7 +5,7 @@ export const getFormattedTemp = (temperature) =>
 
 export const getTempStyle = (temperature) =>
 {
-	return {backgroundColor:getTempColor(temperature)};
+	return temperature === -1 ? {opacity:0} : {backgroundColor:getTempColor(temperature)};
 };
 
 export const getIndoorTempStyle = (temperature) =>

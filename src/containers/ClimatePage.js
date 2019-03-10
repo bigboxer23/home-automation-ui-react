@@ -54,9 +54,9 @@ export const getThermostatModeStyle = deviceMap =>
 export const getCurrentOutsideTemp = deviceMap =>
 {
 	let aTemperature = deviceMap["Outside Temperature"];
-	if (aTemperature == null)
+	if (aTemperature == null || aTemperature.level === 'NULL')
 	{
-		return 99;
+		return -1;
 	}
 	aTemperature = aTemperature.level;
 	if (aTemperature.indexOf(" ") > -1)
