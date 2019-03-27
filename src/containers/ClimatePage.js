@@ -9,6 +9,7 @@ import {
 	hvacModeChange, setLocalThermostatSetPoint,
 	setThermostatSetPoint
 } from "../actions";
+import {getFormattedTemp} from "../utils/WeatherUtilities";
 
 class ClimatePage extends React.Component
 {
@@ -36,6 +37,17 @@ export const getClimateData = (rooms) => {
 	return rooms.filter(theRoom => "Climate" === theRoom.name).map(room => room.devices)[0].reduce((map, device) => {
 		return (map[device.name] = device, map);
 	}, {});
+};
+
+export const getThermostatDisplayInfo = deviceMap =>
+{
+	let anIndoorTemp = getIndoorTemp(deviceMap);
+	let anIndoorHumidity = getHumidity(deviceMap);
+	if (isNaN(anIndoorTemp) || anIndoorHumidity === "")
+	{
+		return "";
+	}
+	return <div className="currentTemp">{getFormattedTemp(anIndoorTemp)}/{anIndoorHumidity}</div>
 };
 
 export const getThermostatModeStyle = deviceMap =>
@@ -84,7 +96,7 @@ export const getSetpointDevice = deviceMap =>
 
 export const getHumidity = deviceMap =>
 {
-	return deviceMap["Inside Humidity"] != null ? deviceMap["Inside Humidity"].level + "%" : "";
+	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level != "NULL" ? deviceMap["Inside Humidity"].level + "%" : "";
 };
 
 const getFanMode = deviceMap =>
