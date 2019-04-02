@@ -96,7 +96,7 @@ export const getSetpointDevice = deviceMap =>
 
 export const getHumidity = deviceMap =>
 {
-	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level != "NULL" ? deviceMap["Inside Humidity"].level + "%" : "";
+	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level !== "NULL" ? deviceMap["Inside Humidity"].level + "%" : "";
 };
 
 const getFanMode = deviceMap =>
