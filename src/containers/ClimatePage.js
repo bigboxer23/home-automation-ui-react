@@ -42,7 +42,7 @@ export const getClimateData = (rooms) => {
 export const getThermostatDisplayInfo = deviceMap =>
 {
 	let anIndoorTemp = getIndoorTemp(deviceMap);
-	let anIndoorHumidity = getHumidity(deviceMap);
+	let anIndoorHumidity = getInsideHumidity(deviceMap);
 	if (isNaN(anIndoorTemp) || anIndoorHumidity === "")
 	{
 		return "";
@@ -94,9 +94,19 @@ export const getSetpointDevice = deviceMap =>
 	return getMode(deviceMap) === "2" ? deviceMap["Cooling Setpoint"] : deviceMap["Heating Setpoint"];
 };
 
-export const getHumidity = deviceMap =>
+export const getInsideHumidity = deviceMap =>
 {
-	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level !== "NULL" ? deviceMap["Inside Humidity"].level + "%" : "";
+	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Inside Humidity"].level) + "%" : "";
+};
+
+export const getOutsideHumidity = deviceMap =>
+{
+	return deviceMap["Outside Humidity"] != null && deviceMap["Outside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Outside Humidity"].level) + "%" : "";
+};
+
+const roundToTwo = number =>
+{
+	return +(Math.round(parseFloat(number) + "e+2")  + "e-2");
 };
 
 const getFanMode = deviceMap =>

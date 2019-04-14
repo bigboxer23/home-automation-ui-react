@@ -58,7 +58,7 @@ export const getAutoCloseButtonText = (room) =>
 
 export const getAutoCloseButtonStyle = (room) =>
 {
-	return GarageButton.getAutoClose(room) === "" ? "disabled " : "";
+	return GarageButton.getAutoClose(room) === "" ? "point-events-none " : "";
 };
 
 const mapStateToProps = state => ({
