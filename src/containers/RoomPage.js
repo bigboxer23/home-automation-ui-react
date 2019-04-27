@@ -39,6 +39,15 @@ export const getBatteryStyle = (theDevice) =>
 	return {backgroundColor:getBatteryColorFromLevel(parseInt(theDevice.level, 10))};
 };
 
+export const getBatteryContent = (theDevice) =>
+{
+	if (theDevice.level === 'NULL')
+	{
+		return 'Not Available';
+	}
+	return theDevice.level + '%';
+};
+
 const getBatteryColorFromLevel = (theLevel) =>
 {
 	if(theLevel === 100 || theLevel === 0)
