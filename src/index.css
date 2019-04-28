@@ -25,8 +25,8 @@ body,html,#root
   font-size: 24px !important;
   line-height: 24px !important;
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: .5rem;
+  left: .5rem;
 }
 
 .mdi-dots-horizontal
@@ -126,9 +126,16 @@ body,html,#root
 	color:#fff;
 }
 
-.btn-success .mdi-dots-horizontal:before
+.btn-success .mdi-dots-horizontal:before, .hide
 {
 	opacity:0;
+}
+
+.header-temperature
+{
+	display:inline;
+	font-weight: bold;
+	opacity:.5;
 }
 
 .btn-success .temp-display

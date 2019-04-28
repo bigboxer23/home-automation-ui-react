@@ -6,9 +6,9 @@ class RoomButton extends React.Component
 	render()
 	{
 		return <Button onClick={() => this.props.handleClick(this.props.room.id, RoomButton.isOn(this.props.room) ? 0 : 100)} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
-			<i className={"mdi mdi-lightbulb-outline" + this.getBatteryWarningStyle(this.props.room) + this.getLockedStatus(this.props.room)}/>
-			<i className="mdi mdi-dots-horizontal inFront" onClick={(event) => this.props.handleMoreClick(event, this.props.room.name)}/>
-			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg">{this.getCountContent(this.props.room)}</div>
+			<i className={"mdi mdi-lightbulb-outline" + this.getBatteryWarningStyle(this.props.room) + RoomButton.getLockedStatus(this.props.room)}/>
+			<i className={"mdi mdi-dots-horizontal inFront" + RoomButton.areDotsHidden(this.props.room)} onClick={(event) => this.props.handleMoreClick(event, this.props.room.name)}/>
+			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg">{RoomButton.getCountContent(this.props.room)}</div>
 			<div className="position-absolute bottom w-100 m-2 pl-2 pr-3">{this.props.room.name}</div>
 		</Button>;
 	}
@@ -53,7 +53,24 @@ class RoomButton extends React.Component
 		return theDevice.category === "3";
 	}
 
-	getLockedStatus(theRoom)
+	static areDotsHidden(theRoom)
+	{
+		return RoomButton.getCountContent(theRoom) === "" ? "" : " hide";
+	}
+
+	static getRoomTemp(theRoom)
+	{
+		let aDevice = theRoom.devices != null && theRoom.devices
+				.find(theDevice => theDevice.name != null && theDevice.name.includes("Temperature"));
+
+		if (aDevice != null)
+		{
+			return (aDevice.level * 9 / 5 + 32) + "°";
+		}
+		return "";
+	}
+
+	static getLockedStatus(theRoom)
 	{
 		if (theRoom.devices != null && theRoom.devices
 				.some(theDevice => theDevice.name != null && theDevice.name.includes("Override") && theDevice.status === "1"))
@@ -63,10 +80,10 @@ class RoomButton extends React.Component
 		return "";
 	}
 
-	getCountContent(theRoom)
+	static getCountContent(theRoom)
 	{
 		let aCount = RoomButton.onCount(theRoom);
-		return aCount === 0 ? "" : aCount;
+		return aCount === 0 ? RoomButton.getRoomTemp(theRoom) : aCount;
 	}
 
 	getBatteryWarningStyle(theRoom)

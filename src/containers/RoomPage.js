@@ -80,6 +80,16 @@ export const isMotionDevice = (theDevice) =>
 	return theDevice.name.endsWith("Battery");
 };
 
+export const getHeaderTitle = (room) =>
+{
+	let  aTemp = RoomButton.getRoomTemp(room);
+	if (aTemp === '')
+	{
+		return room.name;
+	}
+	return <div>{room.name} <div className="header-temperature">{RoomButton.getRoomTemp(room)}</div></div>;
+};
+
 export const getRoomDimLevel = (room) => {
 	let level = 0;
 	if (room != null)
