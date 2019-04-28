@@ -63,9 +63,9 @@ class RoomButton extends React.Component
 		let aDevice = theRoom.devices != null && theRoom.devices
 				.find(theDevice => theDevice.name != null && theDevice.name.includes("Temperature"));
 
-		if (aDevice != null)
+		if (aDevice != null && aDevice.level !== "0")
 		{
-			return (aDevice.level * 9 / 5 + 32) + "°";
+			return aDevice.level + "°";
 		}
 		return "";
 	}
