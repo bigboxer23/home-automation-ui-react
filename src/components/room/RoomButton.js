@@ -65,7 +65,12 @@ class RoomButton extends React.Component
 
 		if (aDevice != null && aDevice.level !== "0")
 		{
-			return aDevice.level + "°";
+			let aTemp = parseInt(aDevice.level);
+			if (aTemp > 15 && aTemp <  30)//C
+			{
+				aTemp = (aTemp * 9 / 5 + 32)
+			}
+			return aTemp + "°";
 		}
 		return "";
 	}
