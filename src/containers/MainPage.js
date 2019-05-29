@@ -10,6 +10,9 @@ import RoomButton from "../components/room/RoomButton"
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import LoadingStatusComponent from "../components/LoadingStatusComponent";
+import GarageButton from "../components/garage/GarageButton";
+import ClimateButton from "../components/climate/ClimateButton";
+import HouseButton from "../components/house/HouseButton";
 
 class MainPage extends React.Component
 {
@@ -65,6 +68,24 @@ const shouldDisplay = function(theRoom)
 const hasLights = function(theRoom)
 {
 	return theRoom.devices != null && theRoom.devices.filter(theDevice => RoomButton.isLight(theDevice)).length > 0;
+};
+
+
+export const mapRoom = function(theRoom, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick)
+{
+	if ("Garage" === theRoom.name)
+	{
+		return <GarageButton key={theRoom.name} room={theRoom} handleGarageClick={handleGarageClick} handleGarageMoreClick={handleGarageMoreClick}/>;
+	}
+	else if ("Climate" === theRoom.name)
+	{
+		return <ClimateButton key={theRoom.name} room={theRoom} handleClick={handleClick}/>;
+	}
+	else if ("Scenes" === theRoom.name)
+	{
+		return <HouseButton key={theRoom.name} room={theRoom}/>
+	}
+	return <RoomButton key={theRoom.name} room={theRoom} handleClick={handleClick} handleMoreClick={handleMoreClick}/>;
 };
 
 const mapStateToProps = state => ({

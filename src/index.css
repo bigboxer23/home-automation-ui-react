@@ -218,6 +218,11 @@ body,html,#root
 	height:960px;
 	border:0;
 }
+
+.thermostat-content
+{
+	background-color:rgba(248, 249, 250, .34);
+}
 /*
 
 .slider-handle:active

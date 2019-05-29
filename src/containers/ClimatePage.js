@@ -10,6 +10,7 @@ import {
 	setThermostatSetPoint
 } from "../actions";
 import {getFormattedTemp} from "../utils/WeatherUtilities";
+import ThermostatComponent, {getName} from "../components/room/ThermostatComponent";
 
 class ClimatePage extends React.Component
 {
@@ -23,6 +24,25 @@ class ClimatePage extends React.Component
 		return <ClimatePageComponent {...this.props}/>
 	}
 }
+
+export const getThermometerItems = (deviceMap) =>
+{
+	if (deviceMap == null)
+	{
+		return "";
+	}
+	let aSensorNames = Object.keys(deviceMap)
+			.filter(theDeviceName => theDeviceName.endsWith(" Air Quality"))
+			.map(theDeviceName => theDeviceName.substr(0, theDeviceName.indexOf(" Air Quality")));
+	let aSensors = aSensorNames
+			.map(theSensorName =>
+			{
+				return Object.keys(deviceMap)
+						.filter(theDeviceName => theDeviceName.startsWith(theSensorName))
+						.map(theDeviceName => deviceMap[theDeviceName]);
+			});
+	return aSensors.map(theDevice => <ThermostatComponent key={getName(theDevice)} deviceMap={theDevice}/>);
+};
 
 export const getThermostatBattery = (deviceMap) =>
 {

@@ -15,12 +15,12 @@ export const getIndoorTempStyle = (temperature) =>
 
 const getIndoorTempColor = (temperature) =>
 {
-	if(temperature < 66)
+	if(temperature < 68)
 	{
 		return "#3993CE";
 	} else if(temperature < 70)
 	{
-		return "#0772B8";
+		return "#008990";
 	} else if(temperature < 71)
 	{
 		return "#03902B";
@@ -30,7 +30,7 @@ const getIndoorTempColor = (temperature) =>
 	} else if(temperature < 74)
 	{
 		return "#FECF3B";
-	} else if(temperature < 75)
+	} else if(temperature < 76)
 	{
 		return "#EC9800";
 	}
