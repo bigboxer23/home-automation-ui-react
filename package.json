@@ -7,7 +7,7 @@
     "@types/react-redux": "^5.0.16",
     "bootstrap": "^4.3.1",
     "history": "^4.7.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.4.0",
     "popper.js": "^1.14.3",
     "react": "^16.3.1",
     "react-addons-css-transition-group": "^15.6.2",
