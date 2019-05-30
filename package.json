@@ -6,6 +6,7 @@
     "@mdi/font": "^3.6.95",
     "@types/react-redux": "^5.0.16",
     "bootstrap": "^4.3.1",
+    "macaddress": ">=0.2.9",
     "history": "^4.7.2",
     "jquery": ">=3.4.1",
     "popper.js": "^1.14.3",
