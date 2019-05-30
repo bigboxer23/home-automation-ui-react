@@ -6,9 +6,10 @@
     "@mdi/font": "^3.6.95",
     "@types/react-redux": "^5.0.16",
     "bootstrap": "^4.3.1",
-    "macaddress": ">=0.2.9",
+    "braces": ">=2.3.1",
     "history": "^4.7.2",
     "jquery": ">=3.4.1",
+    "macaddress": ">=0.2.9",
     "popper.js": "^1.14.3",
     "react": "^16.3.1",
     "react-addons-css-transition-group": "^15.6.2",
@@ -18,7 +19,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
-    "react-scripts": "1.1.4",
+    "react-scripts": "3.0.1",
     "react-spinkit": "^3.0.0",
     "redux-actions": "^2.3.0",
     "redux-devtools-extension": "^2.13.2",
@@ -35,5 +36,17 @@
   "devDependencies": {
     "react-redux": "^5.0.7",
     "redux": "^3.7.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
