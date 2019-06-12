@@ -6,21 +6,28 @@ import { push } from 'react-router-redux'
 import {sceneClicked} from "../../actions";
 
 const HouseButton = props => (
-		<Button onClick={() => props.allOff()} bsStyle={"default"} bsSize="large" className={"m-2 position-relative d-flex justify-content-center house-button"}>
-			<i className="mdi mdi-clock"></i>
+		<Button onClick={() => props.houseOff()} bsStyle={"default"} bsSize="large" className={"m-2 position-relative d-flex justify-content-center house-button"}>
+			<i className={getButtonStyling()}/>
 			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg" onClick={(event) => props.changePage(event)}>{props.room.totalLights}</div>
-			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2">All Off</div>
+			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2">House Off</div>
 		</Button>
 );
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-	changePage: (event) => (dispatch, getState) =>
+	changePage: (event) => (dispatch) =>
 	{
 		event.stopPropagation();
 		dispatch(push('/Scenes'));
 	},
-	allOff: (event) => sceneClicked("Morning", "OFF")
+	houseOff: () => sceneClicked(isNight() ? "Evening" : "Morning", "OFF")
 }, dispatch);
+
+const getButtonStyling = () =>
+{
+	return "mdi " + (isNight() ? "mdi-weather-night" : "mdi-clock");
+};
+
+const isNight = () => new Date().getHours() >= 20;
 
 export default connect(
 		null,
