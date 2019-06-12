@@ -4,14 +4,11 @@ import ReactBootstrapSlider from 'react-bootstrap-slider';
 import {
 	getCurrentOutsideTemp,
 	getFanModeStyle,
-	getInsideHumidity,
 	getHVACStyle,
-	getIndoorTemp,
 	getThermostatSetPoint,
-	getOutsideHumidity,
 	getThermostatBattery, getThermometerItems
 } from "../../containers/ClimatePage";
-import {getFormattedTemp, getTempStyle, getIndoorTempStyle} from "../../utils/WeatherUtilities";
+import {getFormattedTemp, getTempStyle, getIndoorTempStyle, getOutsideHumidity} from "../../utils/WeatherUtilities";
 import MotionSensorComponent from "../room/MotionSensorComponent";
 
 const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanModeChange, hvacModeChange}) => (
@@ -21,10 +18,6 @@ const ClimatePageComponent = ({back, deviceMap, sliderChange, slideStop, fanMode
 				<div className="p-2 form-group w-100 d-flex">
 					<label className="flex-grow-1">Outside</label>
 					<div className="temp-display pr-1 pl-1 d-flex align-items-center" style={getTempStyle(getCurrentOutsideTemp(deviceMap))}>{getFormattedTemp(getCurrentOutsideTemp(deviceMap))} / {getOutsideHumidity(deviceMap)}</div>
-				</div>
-				<div className="p-2 form-group w-100 d-flex">
-					<label className="flex-grow-1">Inside</label>
-					<div className="temp-display pr-1 pl-1 d-flex align-items-center" style={getIndoorTempStyle(getIndoorTemp(deviceMap))}>{getFormattedTemp(getIndoorTemp(deviceMap))} / {getInsideHumidity(deviceMap)}</div>
 				</div>
 				{getThermometerItems(deviceMap)}
 				<div className="thermostat-content w-100"><div className="p-2 form-group w-100 disabled">

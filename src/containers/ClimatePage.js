@@ -9,8 +9,8 @@ import {
 	hvacModeChange, setLocalThermostatSetPoint,
 	setThermostatSetPoint
 } from "../actions";
-import {getFormattedTemp} from "../utils/WeatherUtilities";
-import ThermostatComponent, {getName} from "../components/room/ThermostatComponent";
+import {getFormattedTemp, getIndoorTemp, getInsideHumidity} from "../utils/WeatherUtilities";
+import ThermostatComponent, {getName} from "../components/climate/ClimateSensorComponent";
 
 class ClimatePage extends React.Component
 {
@@ -98,11 +98,6 @@ export const getCurrentOutsideTemp = deviceMap =>
 	return aTemperature;
 };
 
-export const getIndoorTemp = deviceMap =>
-{
-	return deviceMap["Inside Temperature"] != null ? parseInt(deviceMap["Inside Temperature"].level, 10) : 99;
-};
-
 export const getThermostatSetPoint = deviceMap =>
 {
 	let aDevice = getSetpointDevice(deviceMap);
@@ -112,21 +107,6 @@ export const getThermostatSetPoint = deviceMap =>
 export const getSetpointDevice = deviceMap =>
 {
 	return getMode(deviceMap) === "2" ? deviceMap["Cooling Setpoint"] : deviceMap["Heating Setpoint"];
-};
-
-export const getInsideHumidity = deviceMap =>
-{
-	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Inside Humidity"].level) + "%" : "";
-};
-
-export const getOutsideHumidity = deviceMap =>
-{
-	return deviceMap["Outside Humidity"] != null && deviceMap["Outside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Outside Humidity"].level) + "%" : "";
-};
-
-const roundToTwo = number =>
-{
-	return +(Math.round(parseFloat(number) + "e+2")  + "e-2");
 };
 
 const getFanMode = deviceMap =>

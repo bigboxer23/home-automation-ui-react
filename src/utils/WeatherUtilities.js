@@ -1,3 +1,49 @@
+export const getHumidity = deviceMap =>
+{
+	if (deviceMap == null)
+	{
+		return "";
+	}
+	let aDevice = deviceMap.find(device => device.name.endsWith("Humidity"));
+	return aDevice != null ? roundToTwo(aDevice.level) : "";
+};
+
+export const getInsideHumidity = deviceMap =>
+{
+	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Inside Humidity"].level) + "%" : "";
+};
+
+
+export const getOutsideHumidity = deviceMap =>
+{
+	return deviceMap["Outside Humidity"] != null && deviceMap["Outside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Outside Humidity"].level) + "%" : "";
+};
+
+export const getTemp = deviceMap =>
+{
+	if (deviceMap == null)
+	{
+		return 99;
+	}
+	let aDevice = deviceMap.find(device => device.name.endsWith("Temperature"));
+	let aTemp = aDevice != null ? parseInt(aDevice.level, 10) : 99;
+	if (aTemp > 15 && aTemp <  30)//C
+	{
+		aTemp = (aTemp * 9 / 5 + 32)
+	}
+	return aTemp;
+};
+
+export const getIndoorTemp = deviceMap =>
+{
+	return deviceMap["Inside Temperature"] != null ? parseInt(deviceMap["Inside Temperature"].level, 10) : 99;
+};
+
+const roundToTwo = number =>
+{
+	return +(Math.round(parseFloat(number) + "e+2")  + "e-2");
+};
+
 export const getFormattedTemp = (temperature) =>
 {
 	return formatTemp(temperature) + "°";

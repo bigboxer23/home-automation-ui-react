@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'jquery';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from "react-redux";
-import registerServiceWorker, {unregister} from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers'
 import thunkMiddleware from 'redux-thunk'
 import ScenePage from "./containers/ScenePage";
@@ -44,4 +44,3 @@ ReactDOM.render( <Provider store={store}>
 	</ConnectedRouter>
 </Provider>, document.getElementById('root'));
 registerServiceWorker();
-unregister();
