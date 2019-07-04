@@ -27,7 +27,7 @@ const getButtonStyling = () =>
 	return "mdi " + (isNight() ? "mdi-weather-night" : "mdi-clock");
 };
 
-const isNight = () => new Date().getHours() >= 20;
+const isNight = () => new Date().getHours() >= 20 || new Date().getHours() < 7;
 
 export default connect(
 		null,
