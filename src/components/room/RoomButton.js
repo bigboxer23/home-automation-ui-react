@@ -5,7 +5,7 @@ class RoomButton extends React.Component
 {
 	render()
 	{
-		return <Button onClick={() => this.props.handleClick(this.props.room.id, RoomButton.isOn(this.props.room) ? 0 : 100)} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
+		return <Button onClick={() => this.props.handleClick(this.props.room.id, RoomButton.isOn(this.props.room) ? 0 : 100)} bsStyle={this.getButtonStyle()} bsSize="large" className={"m-1 position-relative d-flex justify-content-center"}>
 			<i className={"mdi mdi-lightbulb-outline" + this.getBatteryWarningStyle(this.props.room) + RoomButton.getLockedStatus(this.props.room)}/>
 			<i className={"mdi mdi-dots-horizontal inFront" + RoomButton.areDotsHidden(this.props.room)} onClick={(event) => this.props.handleMoreClick(event, this.props.room.name)}/>
 			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg">{RoomButton.getCountContent(this.props.room)}</div>
@@ -21,7 +21,7 @@ class RoomButton extends React.Component
 		}
 		let anOnDevice = theRoom.devices.find(theDevice =>
 		{
-			return RoomButton.isLight(theDevice) && theDevice.status === "1" && !theDevice.name.includes("Override");
+			return RoomButton.isLight(theDevice) && theDevice.status === "1" && theDevice.level !== "NULL" && !theDevice.name.includes("Override");
 		});
 		return anOnDevice != null;
 	}
@@ -35,7 +35,7 @@ class RoomButton extends React.Component
 		}
 		theRoom.devices.forEach(theDevice =>
 		{
-			if (RoomButton.isLight(theDevice) && theDevice.status === "1" && !theDevice.name.includes("Override"))
+			if (RoomButton.isLight(theDevice) && theDevice.status === "1" && theDevice.level !== "NULL" && !theDevice.name.includes("Override"))
 			{
 				aCount++;
 			}

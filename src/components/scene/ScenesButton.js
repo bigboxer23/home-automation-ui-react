@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 
 const ScenesButton = props => (
-		<Button onClick={() => props.changePage()} bsStyle={"default"} bsSize="large" className={"m-2 position-relative d-flex justify-content-center"}>
+		<Button onClick={() => props.changePage()} bsStyle={"default"} bsSize="large" className={"m-1 position-relative d-flex justify-content-center"}>
 			<i className="mdi mdi-clock"></i>
 			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2">Scenes</div>
 		</Button>

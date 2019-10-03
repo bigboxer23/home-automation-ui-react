@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 	background-color: lightgray !important;
+	/*background-image: linear-gradient(to bottom, #2462d4, #007cd8, #0091d1, #2ca2c6, #6cb0bd);*/
 }
 
 body,html,#root
@@ -11,19 +12,19 @@ body,html,#root
 }
 
 .btn-lg {
-  height: 100px;
-  width: 100px;
+  height: 115px;
+  width: 115px;
   font-size: 1rem !important;
   white-space: normal !important;
-  border-radius: 1rem !important;
+  border-radius: .75rem !important;
   text-align: left !important;
   padding: 0.5rem 2rem !important;
   background-color:rgba(255,255,255,.6);
 }
 
 .btn-lg .mdi {
-  font-size: 24px !important;
-  line-height: 24px !important;
+  font-size: 32px !important;
+  line-height: 32px !important;
   position: absolute;
   top: .5rem;
   left: .5rem;
@@ -48,7 +49,9 @@ body,html,#root
 
 .btn-success
 {
-	background-color:#28a745;
+	background-color:rgba(255,255,255,.8);
+	border-color:rgba(255,255,255,.8);
+	color: #212529;
 }
 
 .btn-danger
@@ -74,7 +77,7 @@ body,html,#root
 
 .btn-success .mdi-lightbulb-outline
 {
-	color: #fff700;
+	color: rgb(248,204,70);
 }
 
 .bottom
@@ -138,9 +141,9 @@ body,html,#root
 	opacity:.5;
 }
 
-.btn-success .temp-display
+.btn-success .temp-display, .total-lights-bg
 {
-	background-color: rgba(255,255,255,.2);
+	background-color: rgba(0,0,0,.3);
 }
 
 .inFront
@@ -175,7 +178,7 @@ body,html,#root
 
 .btn
 {
-	/*transition: 1s;*/
+	transition: .5s;
 }
 
 .LoadingStatus
@@ -190,7 +193,6 @@ body,html,#root
 
 .total-lights-bg
 {
-	background-color:lightgray;
 	min-width: 22px !important;
 	display:flex;
 	justify-content: center;
