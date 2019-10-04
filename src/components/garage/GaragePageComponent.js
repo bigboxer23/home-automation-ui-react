@@ -11,11 +11,11 @@ const GaragePageComponent = ({back, room, sliderChange, slideStop, setDeviceStat
 		<div>
 			<HeaderComponent back={back} name={getHeader(room)}/>
 			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
-				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
-					<GarageAutoCloseButton onClick={autoCloseClickHandler} buttonText={getAutoCloseButtonText(room)} class={getAutoCloseButtonStyle(room)}/>
+				<GarageAutoCloseButton onClick={autoCloseClickHandler} buttonText={getAutoCloseButtonText(room)} class={getAutoCloseButtonStyle(room)}/>
+				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 					<div className="form-group w-100">
 						<label>Overall Room</label>
-						<div className="p-2 d-flex btn-group btn-group-toggle justify-content-center">
+						<div className="pr-3 pl-3 d-flex btn-group btn-group-toggle justify-content-center">
 							<ReactBootstrapSlider value={getRoomDimLevel(room)}
 							                      change={sliderChange}
 							                      slideStop={(event) => slideStop(event.target.value, room.id)}
@@ -25,9 +25,8 @@ const GaragePageComponent = ({back, room, sliderChange, slideStop, setDeviceStat
 						</div>
 					</div>
 				</div>
+				{room.devices.map(device => RoomButton.isLight(device) ? <LightComponent key={device.name} device={device} sliderChange={sliderChange} slideStop={slideStop} setDeviceStatus={setDeviceStatus}/> : "")}
 			</div>
-			{room.devices.map(device => RoomButton.isLight(device) ? <LightComponent key={device.name} device={device} sliderChange={sliderChange} slideStop={slideStop} setDeviceStatus={setDeviceStatus}/> : "")}
-
 		</div>
 );
 

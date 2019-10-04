@@ -5,19 +5,19 @@ import RoomButton from "./RoomButton";
 const LightComponent = ({device, sliderChange, slideStop, setDeviceStatus}) => {
 		if (RoomButton.isFan(device))
 		{
-			return <div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
+			return <div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 						<div className="form-group w-100">
-							<label>{device.name}</label>
-							<div className="w-100 d-flex btn-group btn-group-toggle">
+							<label className="ml-3">{device.name}</label>
+							<div className="w-100 d-flex btn-group btn-group-toggle pl-2 pr-2">
 								<label className={getFanStyling("1", device.level)} onClick={() => setDeviceStatus(device.id, true)}>On</label>
 								<label className={getFanStyling("0", device.level)} onClick={() => setDeviceStatus(device.id, false)}>Off</label>
 							</div>
 						</div>
 					</div>
 		}
-		return <div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
+		return <div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 			<div className="form-group w-100">
-				<label>{device.name}</label>
+				<label className="ml-3">{device.name}</label>
 				<div className="pr-3 pl-3 d-flex btn-group btn-group-toggle justify-content-center">
 					<ReactBootstrapSlider value={parseInt(device.level, 10)}
 					                      change={sliderChange}
