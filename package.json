@@ -24,7 +24,7 @@
     "redux-actions": "^2.3.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "yarn": "^1.6.0"
+    "yarn": "^1.17.3"
   },
   "scripts": {
     "start": "react-scripts start",
