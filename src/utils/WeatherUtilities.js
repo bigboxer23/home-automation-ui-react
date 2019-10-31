@@ -27,7 +27,7 @@ export const getTemp = deviceMap =>
 	}
 	let aDevice = deviceMap.find(device => device.name.endsWith("Temperature"));
 	let aTemp = aDevice != null ? parseInt(aDevice.level, 10) : 99;
-	if (aTemp > 15 && aTemp <  30)//C
+	if (aTemp > 15 && aTemp <  35)//C
 	{
 		aTemp = (aTemp * 9 / 5 + 32)
 	}
