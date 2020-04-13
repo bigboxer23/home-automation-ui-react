@@ -29,6 +29,14 @@ const filterRoom = (rooms, name) => {
 	let aRoom = rooms.filter(theRoom => name === theRoom.name);
 	if (aRoom.length > 0)
 	{
+		aRoom[0].devices.sort((theDevice, theDevice2) => {
+			if (RoomButton.isFan(theDevice) && !RoomButton.isFan(theDevice2)) { return -1; }
+			if (isMotionDevice(theDevice) && !isMotionDevice(theDevice2)) { return 1; }
+			if (!isMotionDevice(theDevice) && isMotionDevice(theDevice2)) { return -1; }
+			if(theDevice.name < theDevice2.name) { return -1; }
+			if(theDevice.name > theDevice2.name) { return 1; }
+			return 0;
+		});
 		return aRoom[0];
 	}
 	return {devices:[]};
