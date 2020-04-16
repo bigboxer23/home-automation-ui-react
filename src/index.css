@@ -39,9 +39,19 @@ body,html,#root
 
 .mdi-dots-horizontal
 {
-	right:10px;
+	right:0 !important;
+	top:0 !important;
+	width:50px;
+	height:50px;
 	left:auto !important;
 	opacity:.3;
+}
+
+.mdi-dots-horizontal::before
+{
+	position: absolute;
+	right:.5rem;
+	top:.5rem;
 }
 
 .mdi-lightbulb-outline, .mdi-clock, .mdi-garage, .mdi-weather-night, .mdi-calendar
