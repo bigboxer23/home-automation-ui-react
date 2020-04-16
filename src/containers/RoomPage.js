@@ -31,6 +31,7 @@ const filterRoom = (rooms, name) => {
 	{
 		aRoom[0].devices.sort((theDevice, theDevice2) => {
 			if (RoomButton.isFan(theDevice) && !RoomButton.isFan(theDevice2)) { return -1; }
+			if (!RoomButton.isFan(theDevice) && RoomButton.isFan(theDevice2)) { return 1; }
 			if (isMotionDevice(theDevice) && !isMotionDevice(theDevice2)) { return 1; }
 			if (!isMotionDevice(theDevice) && isMotionDevice(theDevice2)) { return -1; }
 			if(theDevice.name < theDevice2.name) { return -1; }

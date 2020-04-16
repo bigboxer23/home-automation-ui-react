@@ -9,7 +9,7 @@ import MotionSensorComponent from "./MotionSensorComponent";
 const RoomPageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus}) => (
 		<div className={"room_component"}>
 			<HeaderComponent back={back} name={getHeaderTitle(room)}/>
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
+			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 					<div className="form-group w-100">
 						<label className="ml-4">Overall Room</label>
