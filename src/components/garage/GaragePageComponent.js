@@ -10,7 +10,7 @@ import GarageAutoCloseButton from "./GarageAutoCloseButton";
 const GaragePageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus, autoCloseClickHandler}) => (
 		<div>
 			<HeaderComponent back={back} name={getHeader(room)}/>
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
+			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 				<GarageAutoCloseButton onClick={autoCloseClickHandler} buttonText={getAutoCloseButtonText(room)} class={getAutoCloseButtonStyle(room)}/>
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 					<div className="form-group w-100">

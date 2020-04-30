@@ -8,7 +8,7 @@
     "bootstrap": "^4.3.1",
     "braces": ">=2.3.1",
     "history": "^4.7.2",
-    "jquery": ">=3.4.1",
+    "jquery": ">=3.5.0",
     "macaddress": ">=0.2.9",
     "popper.js": "^1.14.3",
     "react": "^16.3.1",
