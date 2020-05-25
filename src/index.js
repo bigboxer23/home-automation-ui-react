@@ -14,7 +14,6 @@ import { Route } from 'react-router'
 import createHistory from 'history/createBrowserHistory'
 import 'bootstrap/dist/css/bootstrap.css'
 import '@mdi/font/css/materialdesignicons.min.css'
-import 'react-bootstrap-slider/src/css/bootstrap-slider.min.css'
 import './index.css';
 import RoomPage from "./containers/RoomPage";
 import GaragePage from "./containers/GaragePage";

@@ -40,6 +40,12 @@ const updateOnOff = (id, on) => ({
 	on
 });
 
+const updateDim = (id, level) => ({
+	type: "UPDATE_DIM",
+	id,
+	level
+});
+
 const fetchWithCookies = function(theUrl) {
 	return fetch(theUrl, {
 		credentials: 'same-origin'
@@ -83,6 +89,15 @@ export function fetchStatusIfNecessary() {
 		{
 			dispatch(fetchStatus());
 		}
+	}
+}
+
+export function setDimLocal(level, id)
+{
+	return (dispatch, getState) =>
+	{
+		dispatch(cancelFetchTimer());
+		dispatch(updateDim(id, level));
 	}
 }
 

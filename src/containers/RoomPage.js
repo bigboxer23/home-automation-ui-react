@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import {
-	cancelFetchTimer, fetchStatusIfNecessary, setDim, setOnOff,
+	fetchStatusIfNecessary, setDim, setDimLocal, setOnOff,
 } from '../actions'
 import RoomPageComponent from "../components/room/RoomPageComponent";
 import RoomButton from "../components/room/RoomButton";
@@ -121,9 +121,9 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	back: () => push('/'),
-	sliderChange: (event) => (dispatch) =>
+	sliderChange: (level, id) => (dispatch) =>
 	{
-		dispatch(cancelFetchTimer());
+		dispatch(setDimLocal(level, id));
 	},
 	slideStop: (level, id) => (dispatch) =>
 	{

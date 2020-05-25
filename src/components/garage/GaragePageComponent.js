@@ -4,30 +4,34 @@ import {getAutoCloseButtonStyle, getAutoCloseButtonText, getHeader} from "../../
 import RoomButton from "../room/RoomButton";
 import LightComponent from "../room/LightComponent";
 import {getRoomDimLevel} from "../../containers/RoomPage";
-import {ReactBootstrapSlider} from "react-bootstrap-slider";
 import GarageAutoCloseButton from "./GarageAutoCloseButton";
+import IOSSlider from "../ui/IOSSlider";
+import IOSSwitch from "../ui/IOSSwitch";
 
-const GaragePageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus, autoCloseClickHandler}) => (
-		<div>
-			<HeaderComponent back={back} name={getHeader(room)}/>
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
-				<GarageAutoCloseButton onClick={autoCloseClickHandler} buttonText={getAutoCloseButtonText(room)} class={getAutoCloseButtonStyle(room)}/>
-				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-					<div className="form-group w-100">
-						<label>Overall Room</label>
-						<div className="pr-3 pl-3 d-flex btn-group btn-group-toggle justify-content-center">
-							<ReactBootstrapSlider value={getRoomDimLevel(room)}
-							                      change={sliderChange}
-							                      slideStop={(event) => slideStop(event.target.value, room.id)}
-							                      max={100}
-							                      min={0}
-							                      tooltip={"show"}/>
+export default function GaragePageComponent({back, room, sliderChange, slideStop, setDeviceStatus, autoCloseClickHandler}){
+	return (
+			<div>
+				<HeaderComponent back={back} name={getHeader(room)}/>
+				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
+					<GarageAutoCloseButton onClick={autoCloseClickHandler} buttonText={getAutoCloseButtonText(room)} class={getAutoCloseButtonStyle(room)}/>
+					<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
+						<div className="form-group w-100">
+							<div className="w-100 d-flex">
+								<label className="ml-4 w-100">Overall Room</label>
+								<IOSSwitch  checked={getRoomDimLevel(room) > 0} onChange={(event) => setDeviceStatus(room.id, event.target.checked)}/></div>
+							<div className="d-flex btn-group btn-group-toggle justify-content-center">
+								{<IOSSlider
+										value={getRoomDimLevel(room)}
+										onChange={sliderChange}
+										onChangeCommitted={(event, newValue) => slideStop(newValue, room.id)}
+										valueLabelDisplay={"auto"}
+										min={0}
+										max={100}/>}
+							</div>
 						</div>
 					</div>
+					{room.devices.map(device => RoomButton.isLight(device) ? <LightComponent key={device.name} device={device} sliderChange={sliderChange} slideStop={slideStop} setDeviceStatus={setDeviceStatus}/> : "")}
 				</div>
-				{room.devices.map(device => RoomButton.isLight(device) ? <LightComponent key={device.name} device={device} sliderChange={sliderChange} slideStop={slideStop} setDeviceStatus={setDeviceStatus}/> : "")}
 			</div>
-		</div>
-);
-
-export default GaragePageComponent
+	)
+};

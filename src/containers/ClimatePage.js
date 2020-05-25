@@ -138,13 +138,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
 	back: () => push('/'),
 	fetchStatus: () => fetchStatusIfNecessary(),
-	sliderChange: (event) => () =>
+	sliderChange: (event, newValue) => () =>
 	{
-		dispatch(setLocalThermostatSetPoint(event.target.value));
+		dispatch(setLocalThermostatSetPoint(newValue));
 	},
-	slideStop: (event) => () =>
+	slideStop: (event, newValue) => () =>
 	{
-		dispatch(setThermostatSetPoint(event.target.value));
+		dispatch(setThermostatSetPoint(newValue));
 	},
 	fanModeChange: (value) => fanModeChange(value),
 	hvacModeChange: (value) => hvacModeChange(value)

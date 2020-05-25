@@ -72,7 +72,22 @@ const roomReducer = (state = {}, action) => {
 							{
 								return theDevice;
 							}
-							return Object.assign({}, theDevice, {level:(action.on === true ? "1" : "0")});
+							return Object.assign({}, theDevice, {level:(action.on === true ? "100" : "0")});
+						})});
+				}), lastUpdate:Date.now()});
+		case 'UPDATE_DIM':
+			return Object.assign({}, state, {rooms:state.rooms.map(room => {
+					if (room.devices.find(theDevice => theDevice.id === action.id) == null)
+					{
+						return room;
+					}
+					return Object.assign({}, room, {devices:room.devices.map(theDevice =>
+						{
+							if (theDevice.id !== action.id)
+							{
+								return theDevice;
+							}
+							return Object.assign({}, theDevice, {level:(action.level)});
 						})});
 				}), lastUpdate:Date.now()});
 		case 'AUTH_ERROR':
