@@ -23,8 +23,7 @@ const getSceneRoom = (rooms) => {
 	{
 		return [];
 	}
-	let aScenes = rooms.filter(theRoom => "Scenes" === theRoom.name).map(room => room.devices)[0];
-	return aScenes.filter(theRoom => theRoom.name !== "Vacation Mode");
+	return rooms.filter(theRoom => "Scenes" === theRoom.name).map(room => room.devices)[0];
 };
 
 const mapStateToProps = state => ({

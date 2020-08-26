@@ -6,7 +6,7 @@ import { push } from 'react-router-redux'
 import {sceneClicked} from "../../actions";
 
 const HouseButton = props => (
-		<Button onClick={() => props.houseOff()} bsStyle={"default"} bsSize="large" className={"m-1 position-relative d-flex justify-content-center house-button"}>
+		<Button onClick={() => props.houseOff(props.room.devices)} bsStyle={"default"} bsSize="large" className={"m-1 position-relative d-flex justify-content-center house-button"}>
 			<i className={getButtonStyling(props.room.devices)}/>
 			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg" onClick={(event) => props.changePage(event)}>{props.room.totalLights}</div>
 			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2">{getButtonText(props.room.devices)}</div>
@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 		event.stopPropagation();
 		dispatch(push('/Scenes'));
 	},
-	houseOff: () => sceneClicked(isNight() ? "Evening" : "Morning", "OFF")
+	houseOff: (scenes) => sceneClicked(isVacationMode(scenes) ? "VacationMode" : (isNight() ? "Evening" : "Morning"), "OFF")
 }, dispatch);
 
 const getButtonStyling = (scenes) =>
