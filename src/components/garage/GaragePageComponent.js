@@ -1,6 +1,6 @@
 import React from 'react'
 import HeaderComponent from "../HeaderComponent"
-import {getAutoCloseButtonStyle, getAutoCloseButtonText, getHeader} from "../../containers/GaragePage";
+import {getAutoCloseButtonStyle, getAutoCloseDelay, getHeader} from "../../containers/GaragePage";
 import RoomButton from "../room/RoomButton";
 import LightComponent from "../room/LightComponent";
 import {getRoomDimLevel} from "../../containers/RoomPage";
@@ -13,7 +13,7 @@ export default function GaragePageComponent({back, room, sliderChange, slideStop
 			<div>
 				<HeaderComponent back={back} name={getHeader(room)}/>
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
-					<GarageAutoCloseButton onClick={autoCloseClickHandler} buttonText={getAutoCloseButtonText(room)} class={getAutoCloseButtonStyle(room)}/>
+					<GarageAutoCloseButton onClick={() => autoCloseClickHandler(getAutoCloseDelay(room))} buttonText="Disable Auto Close" class={getAutoCloseButtonStyle(room)}/>
 					<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 						<div className="form-group w-100">
 							<div className="w-100 d-flex">

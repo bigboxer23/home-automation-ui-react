@@ -53,15 +53,17 @@ class GarageButton extends React.Component
 		{
 			return "";
 		}
-		let seconds = Math.round((anAutoClose /1000 ) % 60);
-		let minutes = Math.round((anAutoClose / (1000 * 60)) % 60);
-		let hours = Math.round((anAutoClose / (1000 * 60 * 60)) % 24);
+		anAutoClose = anAutoClose / 1000;
+		let hours = ~~(anAutoClose / 3600);
+		let minutes = ~~((anAutoClose % 3600) / 60);
+		let seconds = ~~anAutoClose % 60;
 		let aAutoCloseString = "";
-		if (hours > 0)
-		{
-			aAutoCloseString += hours + ":";
+		if (hours > 0) {
+			aAutoCloseString += "" + hours + ":" + (minutes < 10 ? "0" : "");
 		}
-		return aAutoCloseString + (minutes < 10 && hours > 0 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + "";
+
+		aAutoCloseString += "" + minutes + ":" + (seconds < 10 ? "0" : "");
+		return aAutoCloseString + "" + seconds;
 	}
 }
 export default GarageButton;

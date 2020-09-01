@@ -212,23 +212,14 @@ export function setLocalThermostatSetPoint(setPoint)
 	}
 }
 
-export function disableAutoClose()
+export function disableAutoClose(delay)
 {
 	return (dispatch, getState) =>
 	{
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
-		fetchWithCookies("/S/Garage/DisableAutoClose").finally(() => {
+		fetchWithCookies("/S/Garage/SetAutoCloseDelay/" + delay).finally(() => {
 			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)));
 		});
 	}
-}
-
-export function enableAutoClose()
-{
-	return (dispatch, getState) =>
-	{
-		console.log("enableAutoClose")
-		//todo
-	};
 }

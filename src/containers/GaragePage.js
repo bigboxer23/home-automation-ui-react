@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {push} from "react-router-redux";
 import {bindActionCreators} from "redux";
-import {cancelFetchTimer, disableAutoClose, enableAutoClose, fetchStatusIfNecessary, setDim, setOnOff} from '../actions'
+import {cancelFetchTimer, disableAutoClose, fetchStatusIfNecessary, setDim, setOnOff} from '../actions'
 import GaragePageComponent from "../components/garage/GaragePageComponent";
 import GarageButton from "../components/garage/GarageButton";
 
@@ -41,19 +41,15 @@ export const getHeader = (room) =>
 	return room.name + anAutoClose;
 };
 
-export const getAutoCloseButtonText = (room) =>
+export const getAutoCloseDelay = (room) =>
 {
-	let anAutoClose = GarageButton.getAutoClose(room);
-	if (anAutoClose === "")
+	let anAutoClose = GarageButton.findGarageDevice(room)?.autoClose;
+	anAutoClose = anAutoClose === undefined ? 0 : anAutoClose;
+	if (anAutoClose < 600000)//1000 * 60 * 10, 10m
 	{
-		return "Disable Auto Close";
+		return 10800000;//1000 * 60 * 60 * 3// 3 hours;
 	}
-	anAutoClose = GarageButton.findGarageDevice(room).autoClose;
-	if (anAutoClose > 10 * 60 * 1000)
-	{
-		return "Enable Auto Close";
-	}
-	return "Disable Auto Close";
+	return 10800000 + anAutoClose;
 };
 
 export const getAutoCloseButtonStyle = (room) =>
@@ -80,9 +76,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 		dispatch(setOnOff(status, id));
 	},
 	fetchStatus: () => fetchStatusIfNecessary(),
-	autoCloseClickHandler: (status) => (dispatch) =>
+	autoCloseClickHandler: (delay) => (dispatch) =>
 	{
-		dispatch(status === "Disable Auto Close" ? disableAutoClose() : enableAutoClose());
+		dispatch(disableAutoClose(delay));
 	}
 }, dispatch);
 
