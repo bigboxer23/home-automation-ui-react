@@ -1,9 +1,9 @@
 import roomReducer from './RoomReducer'
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
+import { connectRouter } from 'connected-react-router'
 
-
-export default combineReducers({
+const createRootReducer = (history) => combineReducers({
 	house: roomReducer,
-	router: routerReducer
-})
+	router: connectRouter(history),
+});
+export default createRootReducer;

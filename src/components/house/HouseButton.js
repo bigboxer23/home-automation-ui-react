@@ -2,14 +2,14 @@ import React from "react";
 import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import {sceneClicked} from "../../actions";
 
 const HouseButton = props => (
-		<Button onClick={() => props.houseOff(props.room.devices)} bsStyle={"default"} bsSize="large" className={"m-1 position-relative d-flex justify-content-center house-button"}>
+		<Button onClick={() => props.houseOff(props.room.devices)} variant="" size="lg" className={"m-1 position-relative d-flex justify-content-center house-button"}>
 			<i className={getButtonStyling(props.room.devices)}/>
-			<div className="temp-display pr-1 pl-1 position-absolute total-lights-bg" onClick={(event) => props.changePage(event)}>{props.room.totalLights}</div>
-			<div className="position-absolute bottom w-100 m-2 pl-2 pr-2">{getButtonText(props.room.devices)}</div>
+			<div className="temp-display pe-1 ps-1 position-absolute total-lights-bg" onClick={(event) => props.changePage(event)}>{props.room.totalLights}</div>
+			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">{getButtonText(props.room.devices)}</div>
 		</Button>
 );
 

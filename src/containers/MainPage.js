@@ -7,7 +7,7 @@ import {
 import MainPageComponent from "../components/MainPageComponent";
 import React from "react";
 import RoomButton from "../components/room/RoomButton"
-import {push} from "react-router-redux";
+import {push} from "connected-react-router";
 import {bindActionCreators} from "redux";
 import LoadingStatusComponent from "../components/LoadingStatusComponent";
 import GarageButton from "../components/garage/GarageButton";
@@ -95,24 +95,24 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-	handleClick: (id, state) => (dispatch, getState) =>
+	handleClick: (id, state) => (dispatch) =>
 	{
 		dispatch(roomClicked(id, state))
 	},
-	fetchStatus: () => (dispatch, getState) =>
+	fetchStatus: () => (dispatch) =>
 	{
 		dispatch(fetchStatusIfNecessary());
 	},
-	handleGarageClick: (action) => (dispatch, getState) =>
+	handleGarageClick: (action) => (dispatch) =>
 	{
 		dispatch(garageClicked(action));
 	},
-	handleMoreClick: (event, name) => (dispatch, getState) =>
+	handleMoreClick: (event, name) => (dispatch) =>
 	{
 		event.stopPropagation();
 		dispatch(push('/Room/' + name));
 	},
-	handleGarageMoreClick : (event) => (dispatch, getState) =>
+	handleGarageMoreClick : (event) => (dispatch) =>
 	{
 		event.stopPropagation();
 		dispatch(push('/Garage'));

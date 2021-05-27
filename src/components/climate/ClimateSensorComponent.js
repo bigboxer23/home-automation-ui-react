@@ -4,7 +4,7 @@ import {getFormattedTemp, getHumidity, getIndoorTempStyle, getTemp} from "../../
 const ClimateSensorComponent = ({deviceMap}) => {
 	return <div className="p-2 form-group w-100 d-flex light_slider mb-2">
 		<label className="flex-grow-1 mt-2 ml-2">{getName(deviceMap)}</label>
-		{<div className="temp-display pr-1 pl-1 d-flex align-items-center mr-2" style={getIndoorTempStyle(getTemp(deviceMap))}>{getFormattedTemp(getTemp(deviceMap))} / {getHumidity(deviceMap)}%</div>}
+		{<div className="temp-display pe-1 ps-1 d-flex align-items-center mr-2" style={getIndoorTempStyle(getTemp(deviceMap))}>{getFormattedTemp(getTemp(deviceMap))} / {getHumidity(deviceMap)}%</div>}
 	</div>
 };
 

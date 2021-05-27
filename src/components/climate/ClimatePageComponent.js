@@ -18,7 +18,7 @@ export default function ClimatePageComponent({back, deviceMap, sliderChange, sli
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 					<div className="p-2 form-group w-100 d-flex light_slider mb-2">
 						<label className="flex-grow-1 mt-2 ml-2">Outside</label>
-						<div className="temp-display pr-1 pl-1 d-flex align-items-center mr-2" style={getTempStyle(getCurrentOutsideTemp(deviceMap))}>{getFormattedTemp(getCurrentOutsideTemp(deviceMap))} / {getOutsideHumidity(deviceMap)}</div>
+						<div className="temp-display pe-1 ps-1 d-flex align-items-center mr-2" style={getTempStyle(getCurrentOutsideTemp(deviceMap))}>{getFormattedTemp(getCurrentOutsideTemp(deviceMap))} / {getOutsideHumidity(deviceMap)}</div>
 					</div>
 					{getThermometerItems(deviceMap)}
 					<div className="thermostat-content w-100">
@@ -39,7 +39,7 @@ export default function ClimatePageComponent({back, deviceMap, sliderChange, sli
 						</div>
 						<div className="p-2 form-group w-100 d-flex disabled">
 							<label className="flex-grow-1">Thermostat</label>
-							<div className="temp-display pr-1 pl-1 d-flex align-items-center" style={getIndoorTempStyle(getThermostatSetPoint(deviceMap))}>{getFormattedTemp(getThermostatSetPoint(deviceMap))}</div>
+							<div className="temp-display pe-1 ps-1 d-flex align-items-center" style={getIndoorTempStyle(getThermostatSetPoint(deviceMap))}>{getFormattedTemp(getThermostatSetPoint(deviceMap))}</div>
 						</div>
 						<div className="p-2 form-group w-100 d-flex disabled">
 							{<IOSSlider
