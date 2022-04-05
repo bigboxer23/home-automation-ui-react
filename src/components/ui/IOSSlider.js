@@ -1,57 +1,57 @@
-import withStyles from "@material-ui/core/styles/withStyles";
-import Slider from "@material-ui/core/Slider";
+import Slider from "@mui/material/Slider";
+import { styled } from '@mui/material/styles';
 
 const iOSBoxShadow =
 		'0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
-const IOSSlider = withStyles({
-	root: {
-		color: '#3880ff',
-		height: 2,
-		padding: '15px 0',
-		margin: '0 1.5rem',
-	},
-	thumb: {
+const IOSSlider = styled(Slider)(({ theme }) => ({
+	color: theme.palette.mode === 'dark' ? '#3880ff' : '#3880ff',
+	height: 2,
+	padding: '15px 0',
+	margin: '0 1.5rem',
+	'& .MuiSlider-thumb': {
 		height: 28,
 		width: 28,
 		backgroundColor: '#fff',
 		boxShadow: iOSBoxShadow,
-		marginTop: -14,
-		marginLeft: -14,
-		'&:focus, &:hover, &$active': {
-			boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+		'&:focus, &:hover, &.Mui-active': {
+			boxShadow:
+					'0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
 			// Reset on touch devices, it doesn't add specificity
 			'@media (hover: none)': {
 				boxShadow: iOSBoxShadow,
 			},
 		},
 	},
-	active: {},
-	valueLabel: {
-		left: 'calc(-50% + 12px)',
-		top: -22,
+	'& .MuiSlider-valueLabel': {
+		fontSize: 12,
+		fontWeight: 'normal',
+		top: -6,
+		backgroundColor: 'unset',
+		color: theme.palette.text.primary,
+		'&:before': {
+			display: 'none',
+		},
 		'& *': {
 			background: 'transparent',
-			color: '#000',
+			color: theme.palette.mode === 'dark' ? '#fff' : '#000',
 		},
 	},
-	track: {
-		height: 2,
+	'& .MuiSlider-track': {
+		border: 'none',
 	},
-	rail: {
-		height: 2,
+	'& .MuiSlider-rail': {
 		opacity: 0.5,
 		backgroundColor: '#bfbfbf',
 	},
-	mark: {
+	'& .MuiSlider-mark': {
 		backgroundColor: '#bfbfbf',
 		height: 8,
 		width: 1,
-		marginTop: -3,
+		'&.MuiSlider-markActive': {
+			opacity: 1,
+			backgroundColor: 'currentColor',
+		},
 	},
-	markActive: {
-		opacity: 1,
-		backgroundColor: 'currentColor',
-	},
-})(Slider);
+}));
 
 export default IOSSlider;
