@@ -3,7 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 	background-color: lightgray !important;
-	background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+	background-image: linear-gradient(to right, #a2daee 0%, #bbbfc1 19%, #57a8e1 42%, #9fc5da 79%, #7ac5d8 100%);
 }
 
 .light_slider
@@ -15,6 +15,16 @@ body {
 body,html,#root
 {
   height:100%;
+}
+
+body {
+	justify-content: center;
+	display: flex;
+}
+
+#root
+{
+	max-width:1024px;
 }
 
 .btn-lg {
@@ -136,12 +146,12 @@ body,html,#root
 .header
 {
 	background-color: rgba(255,255,255,.2);
-	background-image: linear-gradient(to right, #e3a5a5 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
 	height:60px;
 	width:100%;
 	color:#fff;
 	position:fixed;
 	z-index: 2;
+	max-width:1024px;
 }
 
 .sub-header
