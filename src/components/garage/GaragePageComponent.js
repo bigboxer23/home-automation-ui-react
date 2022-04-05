@@ -17,8 +17,8 @@ export default function GaragePageComponent({back, room, sliderChange, slideStop
 					<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 						<div className="form-group w-100">
 							<div className="w-100 d-flex">
-								<label className="ml-4 w-100">Overall Room</label>
-								<IOSSwitch  checked={getRoomDimLevel(room) > 0} onChange={(event) => setDeviceStatus(room.id, event.target.checked)}/></div>
+								<label className="ms-4 w-100">Overall Room</label>
+								<IOSSwitch className="me-2" checked={getRoomDimLevel(room) > 0} onChange={(event) => setDeviceStatus(room.id, event.target.checked)}/></div>
 							<div className="d-flex btn-group btn-group-toggle justify-content-center">
 								{<IOSSlider
 										value={getRoomDimLevel(room)}
