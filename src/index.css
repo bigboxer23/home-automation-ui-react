@@ -229,7 +229,7 @@ body {
 
 .total-lights-bg
 {
-	min-width: 22px !important;
+	min-width: 35px !important;
 	display:flex;
 	justify-content: center;
 }

@@ -6,10 +6,10 @@ import { push } from 'connected-react-router'
 import {sceneClicked} from "../../actions";
 
 const HouseButton = props => (
-		<Button onClick={() => props.houseOff(props.room.devices)} variant="" size="lg" className={"m-1 position-relative d-flex justify-content-center house-button"}>
-			<i className={getButtonStyling(props.room.devices)}/>
+		<Button onClick={() => props.houseOff(props.time, props.room.devices)} variant="" size="lg" className={"m-1 position-relative d-flex justify-content-center house-button"}>
+			<i className={getButtonStyling(props.time, props.room.devices)}/>
 			<div className="temp-display pe-1 ps-1 position-absolute total-lights-bg" onClick={(event) => props.changePage(event)}>{props.room.totalLights}</div>
-			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">{getButtonText(props.room.devices)}</div>
+			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">{getScene(props.time, props.room.devices)}</div>
 		</Button>
 );
 
@@ -19,28 +19,52 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 		event.stopPropagation();
 		dispatch(push('/Scenes'));
 	},
-	houseOff: (scenes) => sceneClicked(isVacationMode(scenes) ? "VacationMode" : (isNight() ? "Evening" : "Morning"), "OFF")
+	houseOff: (time, scenes) => {
+		let aScene = getScene(time, scenes);
+		return sceneClicked(aScene.replace(" Off", ""), aScene.indexOf(" Off") > -1 ? "OFF" : "ON");
+	}
 }, dispatch);
 
-const getButtonStyling = (scenes) =>
+const getButtonStyling = (time, scenes) =>
 {
-	return "mdi " + (isVacationMode(scenes) ? "mdi-calendar" : isNight() ? "mdi-weather-night" : "mdi-clock");
+	let aButtonText = getScene(time, scenes);
+	let aPrefix = "mdi mdi-";
+	switch (aButtonText)
+	{
+		case "Vacation Mode": return aPrefix + "calendar";
+		case "Evening Off":
+		case "House Off":
+			return aPrefix + "weather-night";
+		case "Evening On":
+			return aPrefix + "lightbulb-outline";
+		default : return aPrefix + "clock";
+	}
 };
 
-const getButtonText = (scenes) =>
-{
-	return isVacationMode(scenes) ? "Vacation Mode" : isNight() ? "Evening Off" : "House Off";
-};
-
-const isNight = () => new Date().getHours() >= 20 || new Date().getHours() < 7;
+const getScene = (time, scenes) => {
+	if (isVacationMode(scenes))
+	{
+		return "Vacation Mode";
+	}
+	if (time != null)
+	{
+		if (time.devices.find(theDevice => "IsMorning" === theDevice.id).status === "1")
+		{
+			return "House Off";
+		} else if (time.devices.find(theDevice => "IsDay" === theDevice.id).status === "1")
+		{
+			return "Evening On"
+		} else if (time.devices.find(theDevice => "IsEvening" === theDevice.id).status === "1" ||
+				time.devices.find(theDevice => "IsNight" === theDevice.id).status === "1")
+		{
+			return "Evening Off";
+		}
+	}
+	return "House Off"
+}
 
 const isVacationMode = (scenes) => {
-	if (scenes == null)
-	{
-		return false;
-	}
-	let aVacation = scenes.find(scene => scene.name === "Vacation Mode");
-	return aVacation != null ? aVacation.level === "1" : false;
+	return scenes?.find(scene => "Vacation Mode" === scene.name)?.level === "1";
 };
 
 export default connect(

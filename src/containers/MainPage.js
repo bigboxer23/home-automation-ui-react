@@ -26,6 +26,9 @@ class MainPage extends React.Component
 		return <div><LoadingStatusComponent {...this.props}/><MainPageComponent {...this.props}/></div>
 	}
 }
+const getTime = (rooms) => {
+	return rooms?.find(theRoom => "Time" === theRoom.name);
+};
 
 const getRooms = (rooms) => {
 	if (rooms == null)
@@ -44,7 +47,10 @@ const getRooms = (rooms) => {
 	return allItems.filter(theRoom => "Climate" === theRoom.name)
 			.concat(allItems.filter(theRoom => "Garage" === theRoom.name))
 			.concat(aScenes)
-			.concat(allItems.filter(theRoom => "Garage" !== theRoom.name && "Climate" !== theRoom.name && "Scenes" !== theRoom.name));
+			.concat(allItems.filter(theRoom => "Garage" !== theRoom.name
+					&& "Climate" !== theRoom.name
+					&& "Scenes" !== theRoom.name
+					&& "Time" !== theRoom.name));
 };
 
 const countTotalLights = function (rooms)
@@ -71,7 +77,7 @@ const hasLights = function(theRoom)
 };
 
 
-export const mapRoom = function(theRoom, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick)
+export const mapRoom = function(theTime, theRoom, handleClick, handleGarageClick, handleMoreClick, handleGarageMoreClick)
 {
 	if ("Garage" === theRoom.name)
 	{
@@ -83,13 +89,14 @@ export const mapRoom = function(theRoom, handleClick, handleGarageClick, handleM
 	}
 	else if ("Scenes" === theRoom.name)
 	{
-		return <HouseButton key={theRoom.name} room={theRoom}/>
+		return <HouseButton key={theRoom.name} room={theRoom} time={theTime}/>
 	}
 	return <RoomButton key={theRoom.name} room={theRoom} handleClick={handleClick} handleMoreClick={handleMoreClick}/>;
 };
 
 const mapStateToProps = state => ({
 	rooms: getRooms (state.house.rooms),
+	time: getTime(state.house.rooms),
 	loaded: state.house.lastUpdate,
 	authError: state.house.authError
 });
