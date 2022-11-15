@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	},
 	houseOff: (time, scenes) => {
 		let aScene = getScene(time, scenes);
-		return sceneClicked(aScene.replace(" Off", ""), aScene.indexOf(" Off") > -1 ? "OFF" : "ON");
+		return sceneClicked(aScene.replace(" Off", "").replace(" On", ""), aScene.indexOf(" Off") > -1 ? "OFF" : "ON");
 	}
 }, dispatch);
 
