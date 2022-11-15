@@ -10,13 +10,18 @@ export const getHumidity = deviceMap =>
 
 export const getInsideHumidity = deviceMap =>
 {
-	return deviceMap["Inside Humidity"] != null && deviceMap["Inside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Inside Humidity"].level) + "%" : "";
+	return getDeviceHumidity(deviceMap, "Inside Humidity");
 };
 
 
 export const getOutsideHumidity = deviceMap =>
 {
-	return deviceMap["Outside Humidity"] != null && deviceMap["Outside Humidity"].level !== "NULL" ? roundToTwo(deviceMap["Outside Humidity"].level) + "%" : "";
+	return getDeviceHumidity(deviceMap, "Outside Humidity");
+};
+
+const getDeviceHumidity = (deviceMap, deviceId) =>
+{
+	return deviceMap[deviceId] != null && deviceMap[deviceId].level !== "NULL" ? roundToTwo(deviceMap[deviceId].level) + "%" : "";
 };
 
 export const getTemp = deviceMap =>
