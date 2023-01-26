@@ -1,6 +1,19 @@
-This project is a front end gui written in react for [VeraAutomationHub](https://github.com/bigboxer23/VeraAutomationHub).
+## About
+This project is a web front end written in react for [VeraAutomationHub](https://github.com/bigboxer23/VeraAutomationHub).
 
-It consists of UI to control house climate controls, various room's lights, garage integration ([PiGarage2](https://github.com/bigboxer23/PiGarage2)), and scenes setup via Vera UI7 device
+It provides UI to control services exposed via VeraAutomationHub, including: 
+1) House climate controls
+2) Room's lights
+3) Garage door integration ([PiGarage2](https://github.com/bigboxer23/PiGarage2))
+4) Scenes defined via OpenHAB
+5) Meural artwork control 
 
+## Sample UI
+<img src='https://user-images.githubusercontent.com/716472/214951617-84efab9b-1083-4707-bb5b-c9a935f63418.png' width='250px'/>
+
+## Installation
 To build this project, run `yarn build`
+
 To debug/develop run `yarn start`
+
+deploy.sh can be used to push content to the public directory created with a deployed VeraAutomationHub so the content can be served.
