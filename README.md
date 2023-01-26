@@ -9,7 +9,7 @@ It provides UI to control services exposed via VeraAutomationHub, including:
 5) Meural artwork control 
 
 ## Sample UI
-<img src='https://user-images.githubusercontent.com/716472/214951617-84efab9b-1083-4707-bb5b-c9a935f63418.png' width='250px'/>
+<img src='https://user-images.githubusercontent.com/716472/214951617-84efab9b-1083-4707-bb5b-c9a935f63418.png' width='250px'/> <img src='https://user-images.githubusercontent.com/716472/214954054-4892999b-db47-47a7-bbda-0e71d4d9bc09.png' width='250px'/>
 
 ## Installation
 To build this project, run `yarn build`
