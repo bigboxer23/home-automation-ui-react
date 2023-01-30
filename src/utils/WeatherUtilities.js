@@ -92,37 +92,37 @@ const getTempColor = (temperature) =>
 {
 	if(temperature < 0)
 	{
-		return "#d1c9df";
+		return "#2757ea";
 	} else if(temperature < 10)
 	{
-		return "#a496c0";
+		return "#4a9cdd";
 	} else if(temperature < 20)
 	{
-		return "#3993CE";
-	} else if(temperature < 30)
+		return "#68dce2";
+	} else if(temperature < 40)
 	{
-		return "#0772B8";
-	} else if(temperature < 55)
+		return "#86eff9";
+	} else if(temperature < 50)
 	{
-		return "#03902B";
+		return "#75f87a";
 	} else if(temperature < 74)
 	{
-		return "#2DC558";
+		return "#6edf4f";
 	} else if(temperature < 80)
 	{
-		return "#FECF3B";
+		return "#bbf950";
 	} else if(temperature < 85)
 	{
-		return "#EC9800";
+		return "#dbdd4c";
 	} else if(temperature < 90)
 	{
-		return "#DD531E";
+		return "#e8a43b";
 	} else if(temperature < 93)
 	{
-		return "#C53600";
+		return "#df5827";
 	} else if(temperature < 97)
 	{
-		return "#B10909";
+		return "#9a1e14";
 	}
 	return "#6F0015";
 };

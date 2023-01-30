@@ -61,7 +61,7 @@ class RoomButton extends React.Component
 	static getRoomTemp(theRoom)
 	{
 		let temp = getTemp(theRoom.devices);
-		return temp < 99 ? temp : "";
+		return temp < 99 ? temp + "°" : "";
 	}
 
 	static getLockedStatus(theRoom)
