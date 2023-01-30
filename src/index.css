@@ -39,6 +39,10 @@ body {
   color:rgba(0,0,0, .6);
 }
 
+.btn-lg:hover {
+	background-color:rgba(255,255,255,.7);
+}
+
 .btn-lg .mdi {
   font-size: 32px !important;
   line-height: 32px !important;
@@ -214,7 +218,7 @@ body {
 
 .btn
 {
-	transition: .5s;
+	transition: .3s;
 }
 
 .LoadingStatus
