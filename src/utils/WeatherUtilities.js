@@ -31,7 +31,7 @@ export const getTemp = deviceMap =>
 		return 99;
 	}
 	let aDevice = deviceMap.find(device => device.name.endsWith("Temperature"));
-	let aTemp = aDevice != null ? parseInt(aDevice.level, 10) : 99;
+	let aTemp = aDevice != null ? parseFloat(aDevice.level, 10) : 99;
 	if (aTemp > 15 && aTemp <  35)//C
 	{
 		aTemp = (aTemp * 9 / 5 + 32)
@@ -41,7 +41,7 @@ export const getTemp = deviceMap =>
 
 export const getIndoorTemp = deviceMap =>
 {
-	return deviceMap["Inside Temperature"] != null ? parseInt(deviceMap["Inside Temperature"].level, 10) : 99;
+	return deviceMap["Inside Temperature"] != null ? parseFloat(deviceMap["Inside Temperature"].level, 10) : 99;
 };
 
 const roundToTwo = number =>

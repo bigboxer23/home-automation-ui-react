@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from 'react-bootstrap'
-
+import {getTemp} from "../../utils/WeatherUtilities";
 class RoomButton extends React.Component
 {
 	render()
@@ -60,19 +60,8 @@ class RoomButton extends React.Component
 
 	static getRoomTemp(theRoom)
 	{
-		let aDevice = theRoom.devices != null && theRoom.devices
-				.find(theDevice => theDevice.name != null && theDevice.name.includes("Temperature"));
-
-		if (aDevice != null && aDevice.level !== "0" && aDevice.level !== "NULL")
-		{
-			let aTemp = parseInt(aDevice.level, 10);
-			if (aTemp > 15 && aTemp <  30)//C
-			{
-				aTemp = (aTemp * 9 / 5 + 32)
-			}
-			return aTemp + "°";
-		}
-		return "";
+		let temp = getTemp(theRoom.devices);
+		return temp < 99 ? temp : "";
 	}
 
 	static getLockedStatus(theRoom)
