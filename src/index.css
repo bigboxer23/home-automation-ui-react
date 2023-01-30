@@ -68,7 +68,9 @@ body {
 	top:.5rem;
 }
 
-.mdi-lightbulb-outline, .mdi-clock, .mdi-garage, .mdi-weather-night, .mdi-calendar
+.mdi-lightbulb-outline, .mdi-clock, .mdi-garage, .mdi-weather-night, .mdi-calendar,
+.mdi-lightbulb-group-outline, .mdi-lightbulb-group, .mdi-lightbulb-group-off-outline,
+.mdi-thermometer-lines
 {
 	color: rgba(0,0,0,.3);
 }
@@ -127,6 +129,8 @@ body {
 	right: .5rem;
 	top: .5rem;
 	min-width:35px;
+	display: flex;
+	justify-content: center;
 }
 
 .currentTemp

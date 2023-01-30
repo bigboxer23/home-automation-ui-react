@@ -36,7 +36,7 @@ const getButtonStyling = (time, scenes) =>
 		case "House Off":
 			return aPrefix + "weather-night";
 		case "Evening On":
-			return aPrefix + "lightbulb-outline";
+			return aPrefix + "lightbulb-group-outline";
 		default : return aPrefix + "clock";
 	}
 };
