@@ -228,7 +228,12 @@ export function setMeuralOn(setOn)
 {
 	return (dispatch, getState) =>
 	{
-		fetchWithCookies(new Request("/S/meural/" + (setOn ? "wakeup" : "sleep"), {method: 'POST', body: '{"foo": "bar"}'}))
+		fetchWithCookies(new Request("/S/meural/" + (setOn ? "wakeup" : "sleep"), {method: 'POST', body: '{}'}))
 				.finally(dispatch(statusUpdated(getState().house.rooms)));
 	};
+}
+
+export function nextMeuralImage()
+{
+	fetchWithCookies(new Request("/S/meural/nextPicture", {method: 'POST', body: '{}'}));
 }
