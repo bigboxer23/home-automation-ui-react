@@ -5,6 +5,7 @@ import {Button} from "react-bootstrap";
 
 const ScenePageComponent = ({back, rooms, handleClick, gotoSecurity }) => (
 		<div>
+			<div className='background'></div>
 			<HeaderComponent back={back} name={"Scenes"}/>
 			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 				{rooms.map(room => <SceneButton key={room.name} room={room} handleClick={handleClick}/>)}

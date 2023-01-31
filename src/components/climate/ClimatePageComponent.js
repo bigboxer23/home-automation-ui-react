@@ -14,6 +14,7 @@ import IOSSlider from "../ui/IOSSlider";
 export default function ClimatePageComponent({back, deviceMap, sliderChange, slideStop, fanModeChange, hvacModeChange}){
 	return (
 			<div>
+				<div className='background'></div>
 				<HeaderComponent back={back} name={"Climate"}/>
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 					<div className="p-2 form-group w-100 d-flex light_slider mb-2">

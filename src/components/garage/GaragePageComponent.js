@@ -11,6 +11,7 @@ import IOSSwitch from "../ui/IOSSwitch";
 export default function GaragePageComponent({back, room, sliderChange, slideStop, setDeviceStatus, autoCloseClickHandler}){
 	return (
 			<div>
+				<div className='background'></div>
 				<HeaderComponent back={back} name={getHeader(room)}/>
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 					<GarageAutoCloseButton onClick={() => autoCloseClickHandler(getAutoCloseDelay(room))} buttonText="Disable Auto Close" class={getAutoCloseButtonStyle(room)}/>
