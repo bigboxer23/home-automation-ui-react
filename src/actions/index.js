@@ -237,3 +237,8 @@ export function nextMeuralImage()
 {
 	fetchWithCookies(new Request("/S/meural/nextPicture", {method: 'POST', body: '{}'}));
 }
+
+export function previousMeuralImage()
+{
+	fetchWithCookies(new Request("/S/meural/previousPicture", {method: 'POST', body: '{}'}));
+}
