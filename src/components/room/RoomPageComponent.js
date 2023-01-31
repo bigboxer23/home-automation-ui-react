@@ -9,6 +9,7 @@ import IOSSwitch from "../ui/IOSSwitch";
 
 const RoomPageComponent = ({back, room, sliderChange, slideStop, setDeviceStatus}) => (
 		<div className={"room_component"}>
+			<div className='background'></div>
 			<HeaderComponent back={back} name={getHeaderTitle(room)}/>
 			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
