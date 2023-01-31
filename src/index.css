@@ -82,7 +82,7 @@ body {
 
 .mdi-lightbulb-outline, .mdi-clock, .mdi-garage, .mdi-weather-night, .mdi-calendar,
 .mdi-lightbulb-group-outline, .mdi-lightbulb-group, .mdi-lightbulb-group-off-outline,
-.mdi-thermometer-lines, .mdi-image-frame
+.mdi-thermometer-lines, .mdi-image-frame, .mdi-image-filter-frames
 {
 	color: rgba(0,0,0,.3);
 }

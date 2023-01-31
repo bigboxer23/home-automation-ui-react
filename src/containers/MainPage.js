@@ -48,11 +48,12 @@ const getRooms = (rooms) => {
 	return allItems.filter(theRoom => "Climate" === theRoom.name)
 			.concat(allItems.filter(theRoom => "Garage" === theRoom.name))
 			.concat(aScenes)
-			.concat(getTime(allItems))
+			.concat(allItems.filter(theRoom => "Meural" === theRoom.name))
 			.concat(allItems.filter(theRoom => "Garage" !== theRoom.name
 					&& "Climate" !== theRoom.name
 					&& "Scenes" !== theRoom.name
-					&& "Time" !== theRoom.name));
+					&& "Time" !== theRoom.name
+					&& "Meural" !== theRoom.name));
 };
 
 const countTotalLights = function (rooms)
@@ -70,7 +71,7 @@ const countTotalLights = function (rooms)
 
 const shouldDisplay = function(theRoom)
 {
-	return (hasLights(theRoom) || theRoom.name === "Climate" || theRoom.name === "Scenes");
+	return (hasLights(theRoom) || theRoom.name === "Climate" || theRoom.name === "Scenes" || theRoom.name === "Meural");
 };
 
 const hasLights = function(theRoom)
@@ -92,9 +93,9 @@ export const mapRoom = function(theTime, theRoom, handleClick, handleGarageClick
 	else if ("Scenes" === theRoom.name)
 	{
 		return <HouseButton key={theRoom.name} room={theRoom} time={theTime}/>
-	} else if ("Time" === theRoom.name)
+	} else if ("Meural" === theRoom.name)
 	{
-		return <MeuralButton key={theRoom.name}/>
+		return <MeuralButton key={theRoom.name} room={theRoom}/>
 	}
 	return <RoomButton key={theRoom.name} room={theRoom} handleClick={handleClick} handleMoreClick={handleMoreClick}/>;
 };

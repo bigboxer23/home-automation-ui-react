@@ -223,3 +223,11 @@ export function disableAutoClose(delay)
 		});
 	}
 }
+
+export function setMeuralOn(setOn)
+{
+	return (dispatch, getState) =>
+	{
+		fetchWithCookies(new Request("/S/meural/" + (setOn ? "wakeup" : "sleep"), {method: 'POST', body: '{"foo": "bar"}'}));
+	}
+}
