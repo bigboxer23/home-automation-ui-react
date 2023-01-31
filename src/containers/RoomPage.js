@@ -109,10 +109,15 @@ export const getRoomDimLevel = (room) => {
 				.filter(device => !device.name.includes("Override"))
 				.forEach(device =>
 				{
-					level = Math.max(level, parseInt(device.level, 10));
+					level = Math.max(level, getIntegerLevel(device));
 				});
 	}
 	return level;
+};
+
+export const getIntegerLevel = (device) =>
+{
+	return device.level === "NULL" ? 0 : parseInt(device.level, 10);
 };
 
 const mapStateToProps = (state, props) => ({

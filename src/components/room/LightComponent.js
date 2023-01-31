@@ -2,6 +2,7 @@ import React from "react";
 import RoomButton from "./RoomButton";
 import IOSSlider from "../ui/IOSSlider";
 import IOSSwitch from "../ui/IOSSwitch";
+import {getIntegerLevel} from "../../containers/RoomPage";
 
 export default function LightComponent({device, sliderChange, slideStop, setDeviceStatus}) {
 	if (RoomButton.isFan(device))
@@ -19,7 +20,7 @@ export default function LightComponent({device, sliderChange, slideStop, setDevi
 					<IOSSwitch className="me-2" checked={device.level > 0} onChange={(event) => setDeviceStatus(device.id, event.target.checked)}/></div>
 				<div className=" d-flex btn-group btn-group-toggle justify-content-center">
 					<IOSSlider
-							value={parseInt(device.level, 10)}
+							value={getIntegerLevel(device)}
 							onChange={(event, newValue) => sliderChange(newValue, device.id)}
 							onChangeCommitted={(event, newValue) => slideStop(newValue, device.id)}
 							valueLabelDisplay={"auto"}
