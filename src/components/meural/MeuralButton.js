@@ -4,22 +4,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { push } from 'connected-react-router'
 import {setMeuralOn} from "../../actions";
+import {findMeuralDeviceFromRoom, isOn} from "../../containers/MeuralPage";
 
-const HouseButton = props => (
-		<Button onClick={(event) => props.changePage(event, isOn(props.room.devices))} variant="" size="lg" className={"m-1 position-relative d-flex justify-content-center house-button"}>
-			<i className={getButtonStyling(props.room.devices)}/>
+const MeuralButton = props => (
+		<Button onClick={(event) => props.changePage(event, isOn(findMeuralDeviceFromRoom(props.room)))} variant="" size="lg" className={"m-1 position-relative d-flex justify-content-center house-button"}>
+			<i className={getButtonStyling(findMeuralDeviceFromRoom(props.room))}/>
 			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">Meural</div>
 		</Button>
 );
 
-const getButtonStyling = (devices) =>
+export const getButtonStyling = (device) =>
 {
-	return "mdi mdi-image-" + (isOn(devices) ? "frame" : "filter-frames");
-};
-
-const isOn = (devices) =>
-{
-	return "1.0" === devices.find(device => "Meural" === device.name)?.level;
+	return "mdi mdi-image-" + (isOn(device) ? "frame" : "filter-frames");
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -37,4 +33,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
 		null,
 		mapDispatchToProps
-)(HouseButton)
+)(MeuralButton);
