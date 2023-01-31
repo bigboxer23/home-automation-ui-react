@@ -13,6 +13,7 @@ import LoadingStatusComponent from "../components/LoadingStatusComponent";
 import GarageButton from "../components/garage/GarageButton";
 import ClimateButton from "../components/climate/ClimateButton";
 import HouseButton from "../components/house/HouseButton";
+import MeuralButton from "../components/meural/MeuralButton";
 
 class MainPage extends React.Component
 {
@@ -42,11 +43,12 @@ const getRooms = (rooms) => {
 				if(theRoom.name > theRoom2.name) { return 1; }
 				return 0;
 			});
-	let aScenes = allItems.find(theRoom => "Scenes" === theRoom.name);
+	const aScenes = allItems.find(theRoom => "Scenes" === theRoom.name);
 	aScenes.totalLights = countTotalLights(rooms);
 	return allItems.filter(theRoom => "Climate" === theRoom.name)
 			.concat(allItems.filter(theRoom => "Garage" === theRoom.name))
 			.concat(aScenes)
+			.concat(getTime(allItems))
 			.concat(allItems.filter(theRoom => "Garage" !== theRoom.name
 					&& "Climate" !== theRoom.name
 					&& "Scenes" !== theRoom.name
@@ -90,6 +92,9 @@ export const mapRoom = function(theTime, theRoom, handleClick, handleGarageClick
 	else if ("Scenes" === theRoom.name)
 	{
 		return <HouseButton key={theRoom.name} room={theRoom} time={theTime}/>
+	} else if ("Time" === theRoom.name)
+	{
+		return <MeuralButton key={theRoom.name}/>
 	}
 	return <RoomButton key={theRoom.name} room={theRoom} handleClick={handleClick} handleMoreClick={handleMoreClick}/>;
 };

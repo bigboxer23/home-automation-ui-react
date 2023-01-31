@@ -21,6 +21,7 @@ import GaragePage from "./containers/GaragePage";
 import HousePage from "./containers/HousePage";
 import FrontDoorSecurity from "./containers/FrontDoorSecurityPage";
 import ErrorPage from "./containers/ErrorPage";
+import MeuralPage from "./containers/MeuralPage"
 
 export const history = createBrowserHistory();
 
@@ -46,6 +47,7 @@ ReactDOM.createRoot(document.getElementById('root'))
 		<Route path="/Room/:name" component={RoomPage}/>
 		<Route path="/Garage" component={GaragePage}/>
 		<Route path="/Security" component={FrontDoorSecurity}/>
+		<Route path="/Meural" component={MeuralPage}/>
 		<Route path="/error" component={ErrorPage}/>
 	</ConnectedRouter>
 </Provider>);
