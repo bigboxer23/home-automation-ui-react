@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import 'jquery';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from "react-redux";
@@ -36,7 +36,8 @@ export default function configureStore(preloadedState) {
 			),
 	);
 }
-ReactDOM.render( <Provider store={configureStore({})}>
+ReactDOM.createRoot(document.getElementById('root'))
+		.render(<Provider store={configureStore({})}>
 	<ConnectedRouter history={history}>
 		<Route exact path="/" component={MainPage}/>
 		<Route path="/Scenes" component={ScenePage}/>
@@ -47,5 +48,5 @@ ReactDOM.render( <Provider store={configureStore({})}>
 		<Route path="/Security" component={FrontDoorSecurity}/>
 		<Route path="/error" component={ErrorPage}/>
 	</ConnectedRouter>
-</Provider>, document.getElementById('root'));
+</Provider>);
 registerServiceWorker();
