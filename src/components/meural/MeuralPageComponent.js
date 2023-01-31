@@ -2,6 +2,7 @@ import React from 'react'
 import HeaderComponent from "../HeaderComponent"
 import MeuralNextButton from "./MeuralNextButton";
 import MeuralOnOffButton from "./MeuralOnOffButton";
+import MeuralPreviousButton from "./MeuralPreviousButton";
 
 const MeuralPageComponent = ({back, device}) => (
 		<div>
@@ -9,6 +10,7 @@ const MeuralPageComponent = ({back, device}) => (
 			<HeaderComponent back={back} name={"Meural Control"}/>
 			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 				<MeuralOnOffButton key={device} device={device}/>
+				<MeuralPreviousButton key={"previous"}/>
 				<MeuralNextButton key={"next"}/>
 			</div>
 		</div>

@@ -10,7 +10,7 @@ body {
 	width: 100%;
 	height:100%;
 	background-image: url(https://node-sdk-sample-be63c44b-1e97-432d-ba78-7149b57a7bac.s3.amazonaws.com/background.jpeg);
-	position: absolute;
+	position: fixed;
 	background-size: cover;
 	filter:blur(8px);
 	z-index:-2;
@@ -279,4 +279,9 @@ body {
 .thermostat-content
 {
 	background-color:rgba(248, 249, 250, .34);
+}
+
+.flip-horizontal {
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
 }
