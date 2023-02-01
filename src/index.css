@@ -82,7 +82,8 @@ body {
 
 .mdi-lightbulb-outline, .mdi-clock, .mdi-garage, .mdi-weather-night, .mdi-calendar,
 .mdi-lightbulb-group-outline, .mdi-lightbulb-group, .mdi-lightbulb-group-off-outline,
-.mdi-thermometer-lines, .mdi-image-frame, .mdi-image-filter-frames, .mdi-image-move
+.mdi-thermometer-lines, .mdi-image-frame, .mdi-image-filter-frames, .mdi-image-move,
+.mdi-image-refresh-outline, .mdi-message-image-outline
 {
 	color: rgba(0,0,0,.3);
 }
@@ -306,7 +307,7 @@ body {
 	background-color: inherit !important;
 }
 
-.MuiButtonBase-root
+.MuiToggleButton-root
 {
 	justify-content: start !important;
 	text-transform:none !important;
@@ -314,7 +315,7 @@ body {
 	padding-left: 1rem !important;
 }
 
-.MuiButtonBase-root.mdi:before {
+.MuiToggleButton-root.mdi:before {
 	position:absolute;
 	right:1rem;
 	font-size: 24px !important;
@@ -323,6 +324,6 @@ body {
 	visibility: hidden;
 }
 
-.MuiButtonBase-root.Mui-selected.mdi:before {
+.MuiToggleButton-root.Mui-selected.mdi:before {
 	visibility: visible;
 }
