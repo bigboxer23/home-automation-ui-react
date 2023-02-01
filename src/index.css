@@ -285,3 +285,44 @@ body {
 	-webkit-transform: scaleX(-1);
 	transform: scaleX(-1);
 }
+
+.meural-source-button {
+	width:100%;
+}
+
+.meural-source-button-label {
+	color:rgba(0,0,0, .6);
+}
+
+.MuiToggleButtonGroup-root {
+	width:100%;
+	background-color:white;
+	border-radius: 1rem !important;
+	overflow: hidden;
+}
+
+.Mui-selected {
+	color: rgba(0,0,0, .6) !important;
+	background-color: inherit !important;
+}
+
+.MuiButtonBase-root
+{
+	justify-content: start !important;
+	text-transform:none !important;
+	font-size:inherit !important;
+	padding-left: 1rem !important;
+}
+
+.MuiButtonBase-root.mdi:before {
+	position:absolute;
+	right:1rem;
+	font-size: 24px !important;
+	line-height: 24px !important;
+	color:#3378fb;
+	visibility: hidden;
+}
+
+.MuiButtonBase-root.Mui-selected.mdi:before {
+	visibility: visible;
+}

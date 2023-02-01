@@ -242,3 +242,11 @@ export function previousMeuralImage()
 {
 	fetchWithCookies(new Request("/S/meural/previousPicture", {method: 'POST', body: '{}'}));
 }
+
+export function setMeuralSource(sourceInt)
+{
+	return (dispatch, getState) => {
+		fetchWithCookies(new Request("/S/meural/changeSource?source=" + sourceInt, {method: 'POST', body: '{}'}))
+				.finally(dispatch(statusUpdated(getState().house.rooms)));
+	}
+}
