@@ -2,7 +2,6 @@ import React from "react";
 import {ToggleButton, ToggleButtonGroup} from "@mui/material";
 import {setMeuralOn, setMeuralSource} from "../../actions";
 import {bindActionCreators} from "redux";
-import {push} from "connected-react-router";
 import {connect} from "react-redux";
 
 const MeuralSourceButton = props => (
