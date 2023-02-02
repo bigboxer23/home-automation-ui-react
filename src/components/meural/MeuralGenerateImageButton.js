@@ -1,15 +1,24 @@
 import React from "react";
 import { Button } from 'react-bootstrap'
-import MuiAlert from "@mui/material/Alert";
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, TextField} from "@mui/material";
-import {updateOpenAIPrompt} from "../../actions";
+import {
+	Dialog, DialogActions, DialogContent, DialogTitle, TextField
+} from "@mui/material";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+import {updateOpenAIPrompt} from "../../actions";
+import {makeStyles} from "@mui/styles";
+
+const useStyles = makeStyles({
+	topScrollPaper: {
+		alignItems: "flex-start !important"
+	},
+	topPaperScrollBody: {
+		verticalAlign: "top"
+	}
 });
 
 export default function MeuralGenerateImageButton(props) {
 	const [open, setOpen] = React.useState(false);
+	const classes = useStyles();
 
 	const handleClick = () => {
 		setOpen(true);
@@ -37,7 +46,10 @@ export default function MeuralGenerateImageButton(props) {
 					<i className="mdi mdi-message-image-outline"/>
 					<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">Image from Prompt</div>
 				</Button>
-				<Dialog fullWidth open={open} onClose={() => handleClose(false)}>
+				<Dialog scroll="paper" classes={{
+					scrollPaper: classes.topScrollPaper,
+					paperScrollBody: classes.topPaperScrollBody
+				}} fullWidth open={open} onClose={() => handleClose(false)}>
 					<DialogTitle>Create Image From Prompt</DialogTitle>
 					<DialogContent>
 						<TextField
