@@ -240,7 +240,7 @@ export function nextMeuralImage()
 
 export function previousMeuralImage()
 {
-	fetchWithCookies(new Request("/S/meural/previousPicture", {method: 'POST', body: '{}'}));
+	fetchWithCookies(new Request("/S/meural/prevPicture", {method: 'POST', body: '{}'}));
 }
 
 export function setMeuralSource(sourceInt)
