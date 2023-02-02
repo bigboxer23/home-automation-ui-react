@@ -250,3 +250,8 @@ export function setMeuralSource(sourceInt)
 				.finally(dispatch(statusUpdated(getState().house.rooms)));
 	}
 }
+
+export function updateOpenAIPrompt(prompt)
+{
+	fetchWithCookies(new Request("/S/meural/updateOpenAIPrompt?prompt=" + encodeURIComponent(prompt), {method: 'POST', body: '{}'}));
+}
