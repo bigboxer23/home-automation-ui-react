@@ -32,7 +32,7 @@ export default connect(
 
 	return (
 			<div className={"meural-source-button pb-2"}>
-				<div className={"ms-3 meural-source-button-label"}>Source</div>
+				<div className={"ms-3 meural-source-button-label fw-bold"}>Source</div>
 				<ToggleButtonGroup
 						color="primary"
 						value={props.device?.status}

@@ -255,3 +255,13 @@ export function updateOpenAIPrompt(prompt)
 {
 	fetchWithCookies(new Request("/S/meural/updateOpenAIPrompt?prompt=" + encodeURIComponent(prompt), {method: 'POST', body: '{}'}));
 }
+
+export function showInfo()
+{
+	fetchWithCookies(new Request("/S/meural/showInfo", {method: 'POST', body: '{}'}));
+}
+
+export function hideInfo()
+{
+	fetchWithCookies(new Request("/S/meural/hideInfo", {method: 'POST', body: '{}'}));
+}
