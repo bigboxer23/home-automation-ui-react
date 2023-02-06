@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 class ErrorPage extends React.Component {
-  render() {
-    return "Shouldn't get here";
-  }
+	render() {
+		return "Shouldn't get here";
+	}
 }
 
 const mapStateToProps = (state) => ({});

@@ -3,80 +3,80 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { bindActionCreators } from "redux";
 import {
-  cancelFetchTimer,
-  disableAutoClose,
-  fetchStatusIfNecessary,
-  setDim,
-  setOnOff,
+	cancelFetchTimer,
+	disableAutoClose,
+	fetchStatusIfNecessary,
+	setDim,
+	setOnOff,
 } from "../actions";
 import GaragePageComponent from "../components/garage/GaragePageComponent";
 import GarageButton from "../components/garage/GarageButton";
 
 class GaragePage extends React.Component {
-  componentDidMount() {
-    this.props.fetchStatus();
-  }
+	componentDidMount() {
+		this.props.fetchStatus();
+	}
 
-  render() {
-    return <GaragePageComponent {...this.props} />;
-  }
+	render() {
+		return <GaragePageComponent {...this.props} />;
+	}
 }
 
 const findGarageRoom = (rooms) => {
-  if (rooms == null) {
-    return { devices: [] };
-  }
-  return rooms.filter((theRoom) => "Garage" === theRoom.name)[0];
+	if (rooms == null) {
+		return { devices: [] };
+	}
+	return rooms.filter((theRoom) => "Garage" === theRoom.name)[0];
 };
 
 export const getHeader = (room) => {
-  if (room == null) {
-    return "";
-  }
-  let anAutoClose = GarageButton.getAutoClose(room);
-  if (anAutoClose !== "") {
-    anAutoClose = " - " + anAutoClose;
-  }
-  return room.name + anAutoClose;
+	if (room == null) {
+		return "";
+	}
+	let anAutoClose = GarageButton.getAutoClose(room);
+	if (anAutoClose !== "") {
+		anAutoClose = " - " + anAutoClose;
+	}
+	return room.name + anAutoClose;
 };
 
 export const getAutoCloseDelay = (room) => {
-  let anAutoClose = GarageButton.findGarageDevice(room)?.autoClose;
-  anAutoClose = anAutoClose === undefined ? 0 : anAutoClose;
-  if (anAutoClose < 600000) {
-    //1000 * 60 * 10, 10m
-    return 10800000; //1000 * 60 * 60 * 3// 3 hours;
-  }
-  return 10800000 + anAutoClose;
+	let anAutoClose = GarageButton.findGarageDevice(room)?.autoClose;
+	anAutoClose = anAutoClose === undefined ? 0 : anAutoClose;
+	if (anAutoClose < 600000) {
+		//1000 * 60 * 10, 10m
+		return 10800000; //1000 * 60 * 60 * 3// 3 hours;
+	}
+	return 10800000 + anAutoClose;
 };
 
 export const getAutoCloseButtonStyle = (room) => {
-  return GarageButton.getAutoClose(room) === "" ? "point-events-none " : "";
+	return GarageButton.getAutoClose(room) === "" ? "point-events-none " : "";
 };
 
 const mapStateToProps = (state) => ({
-  room: findGarageRoom(state.house.rooms),
+	room: findGarageRoom(state.house.rooms),
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      back: () => push("/"),
-      sliderChange: (event) => (dispatch) => {
-        dispatch(cancelFetchTimer());
-      },
-      slideStop: (level, id) => (dispatch) => {
-        dispatch(setDim(level, id));
-      },
-      setDeviceStatus: (id, status) => (dispatch) => {
-        dispatch(setOnOff(status, id));
-      },
-      fetchStatus: () => fetchStatusIfNecessary(),
-      autoCloseClickHandler: (delay) => (dispatch) => {
-        dispatch(disableAutoClose(delay));
-      },
-    },
-    dispatch
-  );
+	bindActionCreators(
+		{
+			back: () => push("/"),
+			sliderChange: (event) => (dispatch) => {
+				dispatch(cancelFetchTimer());
+			},
+			slideStop: (level, id) => (dispatch) => {
+				dispatch(setDim(level, id));
+			},
+			setDeviceStatus: (id, status) => (dispatch) => {
+				dispatch(setOnOff(status, id));
+			},
+			fetchStatus: () => fetchStatusIfNecessary(),
+			autoCloseClickHandler: (delay) => (dispatch) => {
+				dispatch(disableAutoClose(delay));
+			},
+		},
+		dispatch
+	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(GaragePage);

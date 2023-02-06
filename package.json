@@ -1,62 +1,62 @@
 {
-  "name": "home-automation-ui-react",
-  "version": "1.0.4",
-  "private": true,
-  "dependencies": {
-    "@babel/core": "^7.20.12",
-    "@babel/runtime": "^7.20.13",
-    "@babel/runtime-corejs3": "^7.20.13",
-    "@csstools/normalize.css": "csstools/normalize.css",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mdi/font": "^7.1.96",
-    "@mui/material": "^5.11.7",
-    "@mui/styles": "^5.11.7",
-    "@types/react-redux": "^7.1.25",
-    "bootstrap": "^5.2.3",
-    "braces": ">=3.0.2",
-    "connected-react-router": "^6.9.3",
-    "handlebars": ">=4.7.7",
-    "history": "4.10.1",
-    "http-proxy": ">=1.18.1",
-    "jquery": ">=3.6.3",
-    "macaddress": ">=0.5.3",
-    "popper.js": "^1.16.1",
-    "postcss-normalize": "^10.0.1",
-    "react": "^18.2.0",
-    "react-addons-css-transition-group": "^15.6.2",
-    "react-bootstrap": "^2.7.0",
-    "react-dom": "18.2.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.2",
-    "react-scripts": "5.0.1",
-    "react-spinkit": "^3.0.0",
-    "redux-actions": "^2.6.5",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.2",
-    "serialize-javascript": "^6.0.1",
-    "yargs-parser": ">=21.1.1",
-    "yarn": "^1.22.19"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "proxy": "http://192.168.0.7:8080",
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.20.5",
-    "prettier": "2.8.3",
-    "react-redux": "^8.0.5",
-    "redux": "^4.2.1"
-  },
-  "resolutions": {
-    "sanitize.css": "12.0.1"
-  },
-  "browserslist": [
-    ">0.5%",
-    "not dead",
-    "not op_mini all"
-  ]
+	"name": "home-automation-ui-react",
+	"version": "1.0.4",
+	"private": true,
+	"dependencies": {
+		"@babel/core": "^7.20.12",
+		"@babel/runtime": "^7.20.13",
+		"@babel/runtime-corejs3": "^7.20.13",
+		"@csstools/normalize.css": "csstools/normalize.css",
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.10.5",
+		"@mdi/font": "^7.1.96",
+		"@mui/material": "^5.11.7",
+		"@mui/styles": "^5.11.7",
+		"@types/react-redux": "^7.1.25",
+		"bootstrap": "^5.2.3",
+		"braces": ">=3.0.2",
+		"connected-react-router": "^6.9.3",
+		"handlebars": ">=4.7.7",
+		"history": "4.10.1",
+		"http-proxy": ">=1.18.1",
+		"jquery": ">=3.6.3",
+		"macaddress": ">=0.5.3",
+		"popper.js": "^1.16.1",
+		"postcss-normalize": "^10.0.1",
+		"react": "^18.2.0",
+		"react-addons-css-transition-group": "^15.6.2",
+		"react-bootstrap": "^2.7.0",
+		"react-dom": "18.2.0",
+		"react-router": "^5.2.0",
+		"react-router-dom": "^5.2.2",
+		"react-scripts": "5.0.1",
+		"react-spinkit": "^3.0.0",
+		"redux-actions": "^2.6.5",
+		"redux-devtools-extension": "^2.13.9",
+		"redux-thunk": "^2.4.2",
+		"serialize-javascript": "^6.0.1",
+		"yargs-parser": ">=21.1.1",
+		"yarn": "^1.22.19"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build && sw-precache --config=sw-precache-config.js",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	},
+	"proxy": "http://192.168.0.7:8080",
+	"devDependencies": {
+		"@babel/plugin-proposal-private-property-in-object": "^7.20.5",
+		"prettier": "2.8.3",
+		"react-redux": "^8.0.5",
+		"redux": "^4.2.1"
+	},
+	"resolutions": {
+		"sanitize.css": "12.0.1"
+	},
+	"browserslist": [
+		">0.5%",
+		"not dead",
+		"not op_mini all"
+	]
 }
