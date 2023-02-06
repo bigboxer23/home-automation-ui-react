@@ -26,30 +26,30 @@ import MeuralPage from "./containers/MeuralPage";
 export const history = createBrowserHistory();
 
 export default function configureStore(preloadedState) {
-  return createStore(
-    createRootReducer(history), // root reducer with router state
-    preloadedState,
-    compose(
-      applyMiddleware(
-        thunkMiddleware,
-        routerMiddleware(history) // for dispatching history actions
-      )
-    )
-  );
+	return createStore(
+		createRootReducer(history), // root reducer with router state
+		preloadedState,
+		compose(
+			applyMiddleware(
+				thunkMiddleware,
+				routerMiddleware(history) // for dispatching history actions
+			)
+		)
+	);
 }
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={configureStore({})}>
-    <ConnectedRouter history={history}>
-      <Route exact path="/" component={MainPage} />
-      <Route path="/Scenes" component={ScenePage} />
-      <Route path="/House" component={HousePage} />
-      <Route path="/Climate" component={ClimatePage} />
-      <Route path="/Room/:name" component={RoomPage} />
-      <Route path="/Garage" component={GaragePage} />
-      <Route path="/Security" component={FrontDoorSecurity} />
-      <Route path="/Meural" component={MeuralPage} />
-      <Route path="/error" component={ErrorPage} />
-    </ConnectedRouter>
-  </Provider>
+	<Provider store={configureStore({})}>
+		<ConnectedRouter history={history}>
+			<Route exact path="/" component={MainPage} />
+			<Route path="/Scenes" component={ScenePage} />
+			<Route path="/House" component={HousePage} />
+			<Route path="/Climate" component={ClimatePage} />
+			<Route path="/Room/:name" component={RoomPage} />
+			<Route path="/Garage" component={GaragePage} />
+			<Route path="/Security" component={FrontDoorSecurity} />
+			<Route path="/Meural" component={MeuralPage} />
+			<Route path="/error" component={ErrorPage} />
+		</ConnectedRouter>
+	</Provider>
 );
 registerServiceWorker();

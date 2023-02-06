@@ -6,44 +6,44 @@ import { fetchStatusIfNecessary, sceneClicked, setMeuralOn } from "../actions";
 import MeuralPageComponent from "../components/meural/MeuralPageComponent";
 
 class MeuralPage extends React.Component {
-  render() {
-    return <MeuralPageComponent {...this.props} />;
-  }
+	render() {
+		return <MeuralPageComponent {...this.props} />;
+	}
 
-  componentDidMount() {
-    this.props.fetchStatus();
-  }
+	componentDidMount() {
+		this.props.fetchStatus();
+	}
 }
 
 const mapStateToProps = (state) => ({
-  device: findMeuralDeviceFromRooms(state.house.rooms),
+	device: findMeuralDeviceFromRooms(state.house.rooms),
 });
 
 const findMeuralDeviceFromRooms = (rooms) => {
-  return findMeuralDeviceFromRoom(
-    rooms?.find((theRoom) => "Meural" === theRoom.name)
-  );
+	return findMeuralDeviceFromRoom(
+		rooms?.find((theRoom) => "Meural" === theRoom.name)
+	);
 };
 
 export const findMeuralDeviceFromRoom = (room) => {
-  return room?.devices?.find((device) => "Meural" === device.name);
+	return room?.devices?.find((device) => "Meural" === device.name);
 };
 
 export const getOnOffText = (devices) => {
-  return isOn(devices) ? "Turn Off" : "Turn On";
+	return isOn(devices) ? "Turn Off" : "Turn On";
 };
 
 export const isOn = (device) => {
-  return "1.0" === device?.level;
+	return "1.0" === device?.level;
 };
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      back: () => push("/"),
-      fetchStatus: () => fetchStatusIfNecessary(),
-    },
-    dispatch
-  );
+	bindActionCreators(
+		{
+			back: () => push("/"),
+			fetchStatus: () => fetchStatusIfNecessary(),
+		},
+		dispatch
+	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MeuralPage);

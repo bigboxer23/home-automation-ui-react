@@ -6,36 +6,36 @@ import { fetchStatusIfNecessary, sceneClicked } from "../actions";
 import HousePageComponent from "../components/house/HousePageComponent";
 
 class HousePage extends React.Component {
-  componentDidMount() {
-    this.props.fetchStatus();
-  }
+	componentDidMount() {
+		this.props.fetchStatus();
+	}
 
-  render() {
-    return <HousePageComponent {...this.props} />;
-  }
+	render() {
+		return <HousePageComponent {...this.props} />;
+	}
 }
 
 const getSceneRoom = (rooms) => {
-  if (rooms == null) {
-    return [];
-  }
-  return rooms
-    .filter((theRoom) => "Scenes" === theRoom.name)
-    .map((room) => room.devices)[0];
+	if (rooms == null) {
+		return [];
+	}
+	return rooms
+		.filter((theRoom) => "Scenes" === theRoom.name)
+		.map((room) => room.devices)[0];
 };
 
 const mapStateToProps = (state) => ({
-  rooms: getSceneRoom(state.house.rooms),
+	rooms: getSceneRoom(state.house.rooms),
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      back: () => push("/"),
-      handleClick: (id) => sceneClicked(id, "ON"),
-      fetchStatus: () => fetchStatusIfNecessary(),
-    },
-    dispatch
-  );
+	bindActionCreators(
+		{
+			back: () => push("/"),
+			handleClick: (id) => sceneClicked(id, "ON"),
+			fetchStatus: () => fetchStatusIfNecessary(),
+		},
+		dispatch
+	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HousePage);
