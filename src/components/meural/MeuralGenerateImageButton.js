@@ -40,6 +40,12 @@ export default function MeuralGenerateImageButton(props) {
 		setOpen(false);
 	};
 
+	const handleKeyUp = (event) => {
+		if (event.key === 'Enter') {
+			handleClose(true);
+		}
+	};
+
 	return (
 			<div>
 				<Button onClick={handleClick} variant="" size="lg" className={shouldDisplay(props.device?.status)}>
@@ -53,6 +59,7 @@ export default function MeuralGenerateImageButton(props) {
 					<DialogTitle>Create Image From Prompt</DialogTitle>
 					<DialogContent>
 						<TextField
+								onKeyUp={handleKeyUp}
 								autoFocus
 								margin="normal"
 								id="creationPrompt"
