@@ -1,51 +1,49 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import {push} from "connected-react-router";
-import {bindActionCreators} from "redux";
-import {fetchStatusIfNecessary, sceneClicked, setMeuralOn} from '../actions'
+import React from "react";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+import { bindActionCreators } from "redux";
+import { fetchStatusIfNecessary, sceneClicked, setMeuralOn } from "../actions";
 import MeuralPageComponent from "../components/meural/MeuralPageComponent";
 
-class MeuralPage extends React.Component
-{
-	render()
-	{
-		return <MeuralPageComponent {...this.props}/>
-	}
+class MeuralPage extends React.Component {
+  render() {
+    return <MeuralPageComponent {...this.props} />;
+  }
 
-	componentDidMount()
-	{
-		this.props.fetchStatus();
-	}
+  componentDidMount() {
+    this.props.fetchStatus();
+  }
 }
 
-const mapStateToProps = state => ({
-	device: findMeuralDeviceFromRooms (state.house.rooms)
+const mapStateToProps = (state) => ({
+  device: findMeuralDeviceFromRooms(state.house.rooms),
 });
 
 const findMeuralDeviceFromRooms = (rooms) => {
-	return findMeuralDeviceFromRoom(rooms?.find(theRoom => "Meural" === theRoom.name));
+  return findMeuralDeviceFromRoom(
+    rooms?.find((theRoom) => "Meural" === theRoom.name)
+  );
 };
 
 export const findMeuralDeviceFromRoom = (room) => {
-	return room?.devices?.find(device => "Meural" === device.name);
+  return room?.devices?.find((device) => "Meural" === device.name);
 };
 
-export const getOnOffText = (devices) =>
-{
-	return isOn(devices) ? "Turn Off" : "Turn On";
-}
-
-export const isOn = (device) =>
-{
-	return "1.0" === device?.level;
+export const getOnOffText = (devices) => {
+  return isOn(devices) ? "Turn Off" : "Turn On";
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-	back: () => push('/'),
-	fetchStatus: () => fetchStatusIfNecessary()
-}, dispatch);
+export const isOn = (device) => {
+  return "1.0" === device?.level;
+};
 
-export default connect(
-		mapStateToProps,
-		mapDispatchToProps
-)(MeuralPage)
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      back: () => push("/"),
+      fetchStatus: () => fetchStatusIfNecessary(),
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(MeuralPage);
