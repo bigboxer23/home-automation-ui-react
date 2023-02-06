@@ -55,8 +55,8 @@
     "sanitize.css": "12.0.1"
   },
   "browserslist": [
-	">0.5%",
-	"not dead",
-	"not op_mini all"
+    ">0.5%",
+    "not dead",
+    "not op_mini all"
   ]
 }
