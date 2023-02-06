@@ -31,7 +31,7 @@ const setTimerId = (timer) => ({
 
 const updateThermostatSetPoint = (setPoint) => ({
   type: "UPDATE_THERMOSTAT_SET_POINT",
-	setPoint,
+  setPoint,
 });
 
 const updateOnOff = (id, on) => ({
