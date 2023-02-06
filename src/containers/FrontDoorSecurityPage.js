@@ -1,24 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import {push} from "connected-react-router";
-import {bindActionCreators} from "redux";
+import React from "react";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+import { bindActionCreators } from "redux";
 import FrontDoorSecurityComponent from "../components/FrontDoorSecurityComponent";
 
-class FrontDoorSecurityPage extends React.Component
-{
-	render()
-	{
-		return <FrontDoorSecurityComponent {...this.props}/>
-	}
+class FrontDoorSecurityPage extends React.Component {
+  render() {
+    return <FrontDoorSecurityComponent {...this.props} />;
+  }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-	back: () => push('/')
-}, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      back: () => push("/"),
+    },
+    dispatch
+  );
 
 export default connect(
-		mapStateToProps,
-		mapDispatchToProps
-)(FrontDoorSecurityPage)
+  mapStateToProps,
+  mapDispatchToProps
+)(FrontDoorSecurityPage);
