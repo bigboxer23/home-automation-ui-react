@@ -53,20 +53,19 @@ class GarageButton extends React.Component {
 	}
 
 	static findGarageTemperature(room) {
-		let aGarage = GarageButton.findGarageDevice(room);
-		return aGarage == null ? 100 : aGarage.temperature;
+		let device = GarageButton.findGarageDevice(room);
+		return device == null ? 100 : device.temperature;
 	}
 
 	static isDoorOpen(room) {
-		let aRoom = GarageButton.findGarageDevice(room);
-		return "true" === aRoom.status;
+		return "true" === GarageButton.findGarageDevice(room)?.status;
 	}
 
 	static getAutoClose(room) {
 		if (GarageButton.findGarageDevice(room) == null) {
 			return "";
 		}
-		let anAutoClose = GarageButton.findGarageDevice(room).autoClose;
+		let anAutoClose = GarageButton.findGarageDevice(room)?.autoClose;
 		if (anAutoClose === 0) {
 			return "";
 		}
