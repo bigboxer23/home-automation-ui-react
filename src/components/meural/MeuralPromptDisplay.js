@@ -3,7 +3,7 @@ import React from "react";
 export default function MeuralPromptDisplay(props) {
 	const getClassnames = (status) => {
 		return (
-			"m-1 position-relative d-flex flex-column justify-content-center" +
+			"w-100 m-1 position-relative d-flex flex-column justify-content-center" +
 			("0" === status ? " d-none" : " pb-2")
 		);
 	};
