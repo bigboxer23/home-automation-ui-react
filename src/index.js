@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import "jquery";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import registerServiceWorker from "./registerServiceWorker";
 import thunkMiddleware from "redux-thunk";
 import ScenePage from "./containers/ScenePage";
 import MainPage from "./containers/MainPage";
@@ -52,4 +51,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		</ConnectedRouter>
 	</Provider>
 );
-registerServiceWorker();
