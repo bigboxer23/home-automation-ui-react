@@ -211,54 +211,56 @@ export function disableAutoClose(delay) {
 export function setMeuralOn(setOn) {
 	return (dispatch, getState) => {
 		fetchWithCookies(
-			new Request("/S/meural/" + (setOn ? "wakeup" : "sleep"), {
-				method: "POST",
-				body: "{}",
-			})
+			getPostRequest("/S/meural/" + (setOn ? "wakeup" : "sleep"))
 		).finally(dispatch(statusUpdated(getState().house.rooms)));
 	};
 }
 
 export function nextMeuralImage() {
-	fetchWithCookies(
-		new Request("/S/meural/nextPicture", { method: "POST", body: "{}" })
-	);
+	fetchWithCookies(getPostRequest("/S/meural/nextPicture"));
 }
 
 export function previousMeuralImage() {
-	fetchWithCookies(
-		new Request("/S/meural/prevPicture", { method: "POST", body: "{}" })
-	);
+	fetchWithCookies(getPostRequest("/S/meural/prevPicture"));
 }
 
 export function setMeuralSource(sourceInt) {
 	return (dispatch, getState) => {
 		fetchWithCookies(
-			new Request("/S/meural/changeSource?source=" + sourceInt, {
-				method: "POST",
-				body: "{}",
-			})
+			getPostRequest("/S/meural/changeSource?source=" + sourceInt)
 		).finally(dispatch(statusUpdated(getState().house.rooms)));
 	};
 }
 
 export function updateOpenAIPrompt(prompt) {
 	fetchWithCookies(
-		new Request(
-			"/S/meural/updateOpenAIPrompt?prompt=" + encodeURIComponent(prompt),
-			{ method: "POST", body: "{}" }
+		getPostRequest(
+			"/S/meural/updateOpenAIPrompt?prompt=" + encodeURIComponent(prompt)
 		)
 	);
 }
 
 export function showInfo() {
-	fetchWithCookies(
-		new Request("/S/meural/showInfo", { method: "POST", body: "{}" })
-	);
+	fetchWithCookies(getPostRequest("/S/meural/showInfo"));
 }
 
 export function hideInfo() {
-	fetchWithCookies(
-		new Request("/S/meural/hideInfo", { method: "POST", body: "{}" })
-	);
+	fetchWithCookies(getPostRequest("/S/meural/hideInfo"));
+}
+
+function getPostRequest(url) {
+	return new Request(url, getBody());
+}
+
+function getBody() {
+	return {
+		method: "POST",
+		body: "{}",
+		headers: {
+			"X-XSRF-TOKEN": document.cookie.replace(
+				/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+				"$1"
+			),
+		},
+	};
 }
