@@ -21,6 +21,7 @@ import HousePage from "./containers/HousePage";
 import FrontDoorSecurity from "./containers/FrontDoorSecurityPage";
 import ErrorPage from "./containers/ErrorPage";
 import MeuralPage from "./containers/MeuralPage";
+import MeuralPromptPage from "./containers/MeuralPromptPage";
 
 export const history = createBrowserHistory();
 
@@ -46,7 +47,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 			<Route path="/Room/:name" component={RoomPage} />
 			<Route path="/Garage" component={GaragePage} />
 			<Route path="/Security" component={FrontDoorSecurity} />
-			<Route path="/Meural" component={MeuralPage} />
+			<Route path="/Meural" exact={true} component={MeuralPage} />
+			<Route path="/Meural/prompt" component={MeuralPromptPage} />
 			<Route path="/error" component={ErrorPage} />
 		</ConnectedRouter>
 	</Provider>
