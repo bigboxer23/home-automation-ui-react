@@ -22,7 +22,7 @@ const MeuralPromptPageComponent = ({ back, handleKeyUp, handleClick }) => (
 						className={"pb-2"}
 					/>
 				</div>
-				<Button onClick={handleClick}>Create Image</Button>
+				<Button onClick={handleClick}>Create New Image</Button>
 			</div>
 		</div>
 	</div>
