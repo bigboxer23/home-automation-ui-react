@@ -18,7 +18,6 @@ const MeuralPageComponent = ({ back, device }) => (
 			<MeuralOnOffButton key={device} device={device} />
 			<MeuralPreviousButton key={"previous"} device={device} />
 			<MeuralNextButton key={"next"} device={device} />
-			<MeuralGenerateImageButton key={"generate"} device={device} />
 			<MeuralShowInfoButton device={device} />
 		</div>
 	</div>

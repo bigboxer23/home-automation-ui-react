@@ -303,3 +303,17 @@ body {
 .MuiToggleButton-root.Mui-selected.mdi:before {
 	visibility: visible;
 }
+
+.position-inherit {
+	position: inherit !important;
+}
+
+.p-3.btn-lg
+{
+	padding:1rem !important;
+}
+
+.meural-prompt-display
+{
+	background-color: #fff;
+}

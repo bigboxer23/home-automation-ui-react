@@ -15,7 +15,7 @@ class MeuralPage extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
 	device: findMeuralDeviceFromRooms(state.house.rooms),
 });
 
