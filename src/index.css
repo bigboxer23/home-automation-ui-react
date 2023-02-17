@@ -308,12 +308,10 @@ body {
 	position: inherit !important;
 }
 
-.p-3.btn-lg
-{
-	padding:1rem !important;
+.p-3.btn-lg {
+	padding: 1rem !important;
 }
 
-.meural-prompt-display
-{
+.meural-prompt-display {
 	background-color: #fff;
 }
