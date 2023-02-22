@@ -1,3 +1,5 @@
+[![CodeQL](https://github.com/bigboxer23/home-automation-ui-react/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/bigboxer23/home-automation-ui-react/actions/workflows/github-code-scanning/codeql)
+
 ## About
 
 This project is a web front end written in react for [VeraAutomationHub](https://github.com/bigboxer23/VeraAutomationHub).
