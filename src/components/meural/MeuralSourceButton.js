@@ -55,7 +55,14 @@ export default connect(
 					value="1"
 					className={"mdi mdi-check-circle"}
 				>
-					OpenAI
+					OpenAI TextCompletion
+				</ToggleButton>
+				<ToggleButton
+					disableRipple
+					value="2"
+					className={"mdi mdi-check-circle"}
+				>
+					OpenAI ChatGPT
 				</ToggleButton>
 			</ToggleButtonGroup>
 			<Snackbar

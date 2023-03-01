@@ -7,8 +7,8 @@ import { Button } from "react-bootstrap";
 function MeuralPromptDisplay(props) {
 	const getClassnames = (status) => {
 		return (
-			"meural-prompt-display p-3 position-relative d-flex justify-content-center w-100 m-1 position-relative d-flex flex-column justify-content-center" +
-			("0" === status ? " d-none" : " pb-2")
+			"meural-prompt-display p-3 position-relative d-flex justify-content-center w-100 position-relative d-flex flex-column justify-content-center" +
+			("0" === status ? " d-none" : " mb-1")
 		);
 	};
 
