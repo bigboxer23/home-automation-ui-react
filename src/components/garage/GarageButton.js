@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { getFormattedTemp, getTempStyle } from "../../utils/WeatherUtilities";
+import { isOn } from "../room/RoomButton";
 
 class GarageButton extends React.Component {
 	constructor(props) {
@@ -8,42 +9,42 @@ class GarageButton extends React.Component {
 		GarageButton.findGarageDevice = GarageButton.findGarageDevice.bind(this);
 	}
 
-	render() {
-		return (
-			<Button
-				onClick={() =>
-					this.props.handleGarageClick(
-						GarageButton.isDoorOpen(this.props.room) ? "Close" : "Open"
-					)
-				}
-				variant={this.getButtonStyle()}
-				size="lg"
-				className={"m-1 position-relative d-flex justify-content-center"}
+	render = () => (
+		<Button
+			onClick={() =>
+				this.props.handleGarageClick(
+					GarageButton.isDoorOpen(this.props.room) ? "Close" : "Open"
+				)
+			}
+			variant={this.getButtonStyle()}
+			size="lg"
+			className={"m-1 position-relative d-flex justify-content-center"}
+		>
+			<i className="mdi mdi-garage" />
+			<div
+				className="temp-display pe-1 ps-1 position-absolute"
+				style={getTempStyle(
+					GarageButton.findGarageTemperature(this.props.room)
+				)}
+				onClick={(event) => this.props.handleGarageMoreClick(event)}
 			>
-				<i className="mdi mdi-garage" />
-				<div
-					className="temp-display pe-1 ps-1 position-absolute"
-					style={getTempStyle(
-						GarageButton.findGarageTemperature(this.props.room)
-					)}
-					onClick={(event) => this.props.handleGarageMoreClick(event)}
-				>
-					{getFormattedTemp(
-						GarageButton.findGarageTemperature(this.props.room)
-					)}
-				</div>
-				<div className="autoClose">
-					{GarageButton.getAutoClose(this.props.room)}
-				</div>
-				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
-					{this.props.room.name}
-				</div>
-			</Button>
-		);
-	}
+				{getFormattedTemp(GarageButton.findGarageTemperature(this.props.room))}
+			</div>
+			<div className="autoClose">
+				{GarageButton.getAutoClose(this.props.room)}
+			</div>
+			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+				{this.props.room.name}
+			</div>
+		</Button>
+	);
 
 	getButtonStyle() {
-		return GarageButton.isDoorOpen(this.props.room) ? "danger" : "default";
+		return GarageButton.isDoorOpen(this.props.room)
+			? "danger"
+			: isOn(this.props.room)
+			? "success"
+			: "default";
 	}
 
 	static findGarageDevice(room) {
