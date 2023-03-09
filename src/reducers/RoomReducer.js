@@ -102,6 +102,17 @@ const roomReducer = (state = {}, action) => {
 		case "UPDATE_DIM":
 			return Object.assign({}, state, {
 				rooms: state.rooms.map((room) => {
+					if (room.id === action.id) {
+						//whole room dimming
+						return Object.assign({}, room, {
+							devices: room.devices.map((theDevice) => {
+								if (theDevice.category !== "2") {
+									return theDevice;
+								}
+								return Object.assign({}, theDevice, { level: action.level });
+							}),
+						});
+					}
 					if (
 						room.devices.find((theDevice) => theDevice.id === action.id) == null
 					) {
