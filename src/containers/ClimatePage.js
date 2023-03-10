@@ -73,7 +73,7 @@ export const getThermostatDisplayInfo = (deviceMap) => {
 		return "";
 	}
 	return (
-		<div className="currentTemp">
+		<div className="currentTemp minor-text">
 			{getFormattedTemp(anIndoorTemp)}/{anIndoorHumidity}
 		</div>
 	);

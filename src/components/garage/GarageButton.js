@@ -30,10 +30,10 @@ class GarageButton extends React.Component {
 			>
 				{getFormattedTemp(GarageButton.findGarageTemperature(this.props.room))}
 			</div>
-			<div className="autoClose">
-				{GarageButton.getAutoClose(this.props.room)}
-			</div>
 			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+				<div className="autoClose minor-text">
+					{GarageButton.getAutoClose(this.props.room)}
+				</div>
 				{this.props.room.name}
 			</div>
 		</Button>
