@@ -109,13 +109,18 @@ class RoomButton extends React.Component {
 	getButtonStyle() {
 		return isOn(this.props.room) ? "success" : "default";
 	}
+
+	//expose for reducer
+	static isOn = (room) => {
+		return isOn(room);
+	};
 }
 
-export const isOn = function (theRoom) {
-	if (theRoom.devices == null) {
+export const isOn = function (room) {
+	if (room.devices == null) {
 		return false;
 	}
-	let anOnDevice = theRoom.devices.find((theDevice) => {
+	let onDevice = room.devices.find((theDevice) => {
 		return (
 			RoomButton.isLight(theDevice) &&
 			theDevice.status === "1" &&
@@ -123,7 +128,7 @@ export const isOn = function (theRoom) {
 			!theDevice.name.includes("Override")
 		);
 	});
-	return anOnDevice != null;
+	return onDevice != null;
 };
 
 export default RoomButton;
