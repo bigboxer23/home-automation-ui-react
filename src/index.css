@@ -294,6 +294,7 @@ body {
 	text-transform: none !important;
 	font-size: inherit !important;
 	padding-left: 1rem !important;
+	border-color: transparent !important;
 }
 
 .MuiToggleButton-root.mdi:before {
