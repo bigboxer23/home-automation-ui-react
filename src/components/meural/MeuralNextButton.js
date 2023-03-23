@@ -26,6 +26,13 @@ export default function MeuralNextButton(props) {
 			: "Fetching Next Image";
 	};
 
+	const shouldDisplay = (status) => {
+		return (
+			"mb-3 m-1 position-relative d-flex justify-content-center" +
+			("4" === status ? " d-none" : "")
+		);
+	};
+
 	const getIconStyle = (status) => {
 		return "mdi mdi-image-" + ("1" === status ? "refresh-outline" : "move");
 	};
@@ -36,7 +43,7 @@ export default function MeuralNextButton(props) {
 				onClick={handleClick}
 				variant=""
 				size="lg"
-				className={"mb-3 m-1 position-relative d-flex justify-content-center"}
+				className={shouldDisplay(props.device?.status)}
 			>
 				<i className={getIconStyle(props.device?.status)} />
 				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">

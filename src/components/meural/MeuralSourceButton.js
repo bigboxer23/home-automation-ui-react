@@ -71,6 +71,13 @@ export default connect(
 				>
 					ChatGPT-4
 				</ToggleButton>
+				<ToggleButton
+					disableRipple
+					value="4"
+					className={"mdi mdi-check-circle"}
+				>
+					James Webb Space Telescope
+				</ToggleButton>
 			</ToggleButtonGroup>
 			<Snackbar
 				open={open}
