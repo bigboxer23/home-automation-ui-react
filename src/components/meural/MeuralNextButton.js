@@ -27,10 +27,8 @@ export default function MeuralNextButton(props) {
 	};
 
 	const shouldDisplay = (status) => {
-		return (
-			"mb-3 m-1 position-relative d-flex justify-content-center" +
-			("4" === status ? " d-none" : "")
-		);
+		return "mb-3 m-1 position-relative d-flex justify-content-center" /*+
+			("4" === status ? " d-none" : "")*/;
 	};
 
 	const getIconStyle = (status) => {

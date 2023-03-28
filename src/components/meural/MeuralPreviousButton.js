@@ -19,7 +19,7 @@ export default function MeuralPreviousButton(props) {
 	const shouldDisplay = (status) => {
 		return (
 			"m-1 position-relative d-flex justify-content-center" +
-			("0" === status ? "" : " d-none")
+			("0" === status || "4" === status ? "" : " d-none")
 		);
 	};
 
