@@ -322,3 +322,24 @@ body {
 	background-color: #fff;
 	height: auto;
 }
+
+.meural-prompt-display:hover {
+	background-color: #fff;
+}
+
+.meural-prompt-display:hover .mdi-chevron-right,
+.meural-prompt-display:active .mdi-chevron-right {
+	color: rgba(0, 0, 0, 1);
+}
+
+.meural-prompt-display:hover .mdi-chevron-right.mdi-24px.mdi:before,
+.meural-prompt-display:active
+	.mdi-chevron-right
+	.mdi-chevron-right.mdi-24px.mdi:before {
+	font-weight: 900;
+}
+
+.btn:active {
+	background-color: #fff !important;
+	border-color: transparent !important;
+}
