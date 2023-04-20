@@ -343,3 +343,8 @@ body {
 	background-color: #fff !important;
 	border-color: transparent !important;
 }
+
+.prompt-textarea {
+	border: none;
+	resize: none;
+}
