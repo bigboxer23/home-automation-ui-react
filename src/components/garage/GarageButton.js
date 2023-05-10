@@ -34,11 +34,19 @@ class GarageButton extends React.Component {
 				<div className="autoClose minor-text">
 					{GarageButton.getAutoClose(this.props.room)}
 				</div>
+				<div className={this.getLastOpenStyle()}>
+					{GarageButton.getLastOpen(this.props.room)}
+				</div>
 				{this.props.room.name}
 			</div>
 		</Button>
 	);
 
+	getLastOpenStyle() {
+		return (
+			"minor-text" + (GarageButton.isDoorOpen(this.props.room) ? " d-none" : "")
+		);
+	}
 	getButtonStyle() {
 		return GarageButton.isDoorOpen(this.props.room)
 			? "danger"
@@ -62,18 +70,31 @@ class GarageButton extends React.Component {
 		return "true" === GarageButton.findGarageDevice(room)?.status;
 	}
 
+	static getLastOpen(room) {
+		let lastOpened = GarageButton.findGarageDevice(room)?.historicOpenTime;
+		if (lastOpened === undefined || lastOpened === 0) {
+			return "";
+		}
+		let minutes = Math.floor((lastOpened / (1000 * 60)) % 60),
+			hours = Math.floor((lastOpened / (1000 * 60 * 60)) % 24);
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		return (
+			(hours > 12 ? hours % 12 : hours) +
+			":" +
+			minutes +
+			(hours > 12 ? " pm" : " am")
+		);
+	}
+
 	static getAutoClose(room) {
-		if (GarageButton.findGarageDevice(room) == null) {
+		let autoClose = GarageButton.findGarageDevice(room)?.autoClose;
+		if (autoClose === undefined || autoClose === 0) {
 			return "";
 		}
-		let anAutoClose = GarageButton.findGarageDevice(room)?.autoClose;
-		if (anAutoClose === 0) {
-			return "";
-		}
-		anAutoClose = anAutoClose / 1000;
-		let hours = ~~(anAutoClose / 3600);
-		let minutes = ~~((anAutoClose % 3600) / 60);
-		let seconds = ~~anAutoClose % 60;
+		autoClose = autoClose / 1000;
+		let hours = ~~(autoClose / 3600);
+		let minutes = ~~((autoClose % 3600) / 60);
+		let seconds = ~~autoClose % 60;
 		let aAutoCloseString = "";
 		if (hours > 0) {
 			aAutoCloseString += "" + hours + ":" + (minutes < 10 ? "0" : "");

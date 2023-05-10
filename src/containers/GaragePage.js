@@ -33,11 +33,13 @@ export const getHeader = (room) => {
 	if (room == null) {
 		return "";
 	}
-	let anAutoClose = GarageButton.getAutoClose(room);
-	if (anAutoClose !== "") {
-		anAutoClose = " - " + anAutoClose;
+	let autoClose = GarageButton.getAutoClose(room);
+	if (autoClose === "") {
+		autoClose = "Last opened: " + GarageButton.getLastOpen(room);
+	} else {
+		autoClose = "Closing in: " + autoClose;
 	}
-	return room.name + anAutoClose;
+	return room.name + " (" + autoClose + ")";
 };
 
 export const getAutoCloseDelay = (room) => {
