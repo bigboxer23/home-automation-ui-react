@@ -75,8 +75,9 @@ class GarageButton extends React.Component {
 		if (lastOpened === undefined || lastOpened === 0) {
 			return "";
 		}
-		let minutes = Math.floor((lastOpened / (1000 * 60)) % 60),
-			hours = Math.floor((lastOpened / (1000 * 60 * 60)) % 24);
+		let date = new Date(lastOpened);
+		let minutes = date.getMinutes(),
+			hours = date.getHours();
 		minutes = minutes < 10 ? "0" + minutes : minutes;
 		return (
 			(hours > 12 ? hours % 12 : hours) +
