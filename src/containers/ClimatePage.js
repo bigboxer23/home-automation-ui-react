@@ -36,7 +36,7 @@ export const getThermometerItems = (deviceMap) => {
 	let aSensorNames = Object.keys(deviceMap)
 		.filter((theDeviceName) => theDeviceName.endsWith(" Air Quality"))
 		.map((theDeviceName) =>
-			theDeviceName.substr(0, theDeviceName.indexOf(" Air Quality"))
+			theDeviceName.substr(0, theDeviceName.indexOf(" Air Quality")),
 		);
 	let aSensors = aSensorNames.map((theSensorName) => {
 		return Object.keys(deviceMap)
@@ -161,7 +161,7 @@ const mapDispatchToProps = (dispatch) =>
 			fanModeChange: (value) => fanModeChange(value),
 			hvacModeChange: (value) => hvacModeChange(value),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClimatePage);

@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) =>
 			toggleOnOff: (devices) => (dispatch) =>
 				dispatch(setMeuralOn(!isOn(devices))),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(null, mapDispatchToProps)(MeuralOnOffButton);

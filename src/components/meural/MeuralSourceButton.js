@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) =>
 				dispatch(setMeuralSource(value));
 			},
 		},
-		dispatch
+		dispatch,
 	);
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -21,7 +21,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default connect(
 	null,
-	mapDispatchToProps
+	mapDispatchToProps,
 )(function MeuralSourceButton(props) {
 	const [open, setOpen] = React.useState(false);
 

@@ -78,7 +78,7 @@ const fetchStatus = function () {
 				}
 			})
 			.finally(() =>
-				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)))
+				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))),
 			);
 	};
 };
@@ -101,7 +101,7 @@ export function setDimLocal(level, id) {
 export function setDim(setPoint, id) {
 	return (dispatch, getState) => {
 		fetchWithCookies("/S/OpenHAB/" + id + "/" + setPoint).finally(() =>
-			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)))
+			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))),
 		);
 	};
 }
@@ -112,7 +112,7 @@ export function setOnOff(on, id) {
 		dispatch(updateOnOff(id, on));
 		fetchWithCookies("/S/OpenHAB/" + id + "/" + (on ? "ON" : "OFF")).finally(
 			() =>
-				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)))
+				dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))),
 		);
 	};
 }
@@ -184,9 +184,9 @@ export function setThermostatSetPoint(setPoint) {
 				getSetpointDevice(getClimateData(getState().house.rooms)).id +
 				"/" +
 				setPoint +
-				" °F"
+				" °F",
 		).finally(() =>
-			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000)))
+			dispatch(setTimerId(setTimeout(() => dispatch(fetchStatus()), 3000))),
 		);
 	};
 }
@@ -211,7 +211,7 @@ export function disableAutoClose(delay) {
 export function setMeuralOn(setOn) {
 	return (dispatch, getState) => {
 		fetchWithCookies(
-			getPostRequest("/S/meural/" + (setOn ? "wakeup" : "sleep"))
+			getPostRequest("/S/meural/" + (setOn ? "wakeup" : "sleep")),
 		).finally(dispatch(statusUpdated(getState().house.rooms)));
 	};
 }
@@ -227,7 +227,7 @@ export function previousMeuralImage() {
 export function setMeuralSource(sourceInt) {
 	return (dispatch, getState) => {
 		fetchWithCookies(
-			getPostRequest("/S/meural/changeSource?source=" + sourceInt)
+			getPostRequest("/S/meural/changeSource?source=" + sourceInt),
 		).finally(dispatch(statusUpdated(getState().house.rooms)));
 	};
 }
@@ -235,8 +235,8 @@ export function setMeuralSource(sourceInt) {
 export function updateOpenAIPrompt(prompt) {
 	fetchWithCookies(
 		getPostRequest(
-			"/S/meural/updateOpenAIPrompt?prompt=" + encodeURIComponent(prompt)
-		)
+			"/S/meural/updateOpenAIPrompt?prompt=" + encodeURIComponent(prompt),
+		),
 	);
 }
 
@@ -259,7 +259,7 @@ function getBody() {
 		headers: {
 			"X-XSRF-TOKEN": document.cookie.replace(
 				/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
-				"$1"
+				"$1",
 			),
 		},
 	};

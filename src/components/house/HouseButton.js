@@ -38,11 +38,11 @@ const mapDispatchToProps = (dispatch) =>
 				let aScene = getScene(time, scenes);
 				return sceneClicked(
 					aScene.replace(" Off", "").replace(" On", ""),
-					aScene.indexOf(" Off") > -1 ? "OFF" : "ON"
+					aScene.indexOf(" Off") > -1 ? "OFF" : "ON",
 				);
 			},
 		},
-		dispatch
+		dispatch,
 	);
 
 const getButtonStyling = (time, scenes) => {

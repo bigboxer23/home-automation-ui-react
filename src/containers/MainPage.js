@@ -58,8 +58,8 @@ const getRooms = (rooms) => {
 					"Climate" !== theRoom.name &&
 					"Scenes" !== theRoom.name &&
 					"Time" !== theRoom.name &&
-					"Meural" !== theRoom.name
-			)
+					"Meural" !== theRoom.name,
+			),
 		);
 };
 
@@ -96,7 +96,7 @@ export const mapRoom = function (
 	handleClick,
 	handleGarageClick,
 	handleMoreClick,
-	handleGarageMoreClick
+	handleGarageMoreClick,
 ) {
 	if ("Garage" === theRoom.name) {
 		return (
@@ -158,7 +158,7 @@ const mapDispatchToProps = (dispatch) =>
 				dispatch(push("/Garage"));
 			},
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

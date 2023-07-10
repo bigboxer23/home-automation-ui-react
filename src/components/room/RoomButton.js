@@ -7,7 +7,7 @@ class RoomButton extends React.Component {
 			onClick={() =>
 				this.props.handleClick(
 					this.props.room.id,
-					isOn(this.props.room) ? 0 : 100
+					isOn(this.props.room) ? 0 : 100,
 				)
 			}
 			variant={this.getButtonStyle()}
@@ -78,7 +78,7 @@ class RoomButton extends React.Component {
 				(device) =>
 					device.name != null &&
 					device.name.includes("Override") &&
-					device.status === "1"
+					device.status === "1",
 			)
 		) {
 			return " mdi-lock-outline";
