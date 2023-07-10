@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch) =>
 				dispatch(push("/Meural"));
 			},
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(null, mapDispatchToProps)(MeuralButton);

@@ -37,10 +37,10 @@ const mapDispatchToProps = (dispatch) =>
 			back: () => push("/"),
 			load: (o) => (dispatch) => initializeIframe(o),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	mapDispatchToProps,
 )(FrontDoorSecurityPage);

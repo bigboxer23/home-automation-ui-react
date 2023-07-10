@@ -139,7 +139,7 @@ const mapDispatchToProps = (dispatch) =>
 			},
 			fetchStatus: () => fetchStatusIfNecessary(),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

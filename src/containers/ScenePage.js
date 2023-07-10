@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch) =>
 			fetchStatus: () => fetchStatusIfNecessary(),
 			gotoSecurity: () => push("Security"),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScenePage);

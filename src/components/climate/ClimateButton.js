@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch) =>
 		{
 			changePage: () => push("/Climate"),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClimateButton);

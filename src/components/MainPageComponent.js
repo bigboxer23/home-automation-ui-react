@@ -19,8 +19,8 @@ const MainPageComponent = ({
 					handleClick,
 					handleGarageClick,
 					handleMoreClick,
-					handleGarageMoreClick
-				)
+					handleGarageMoreClick,
+				),
 			)}
 		</div>
 	</div>

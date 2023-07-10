@@ -32,9 +32,9 @@ export default function configureStore(preloadedState) {
 		compose(
 			applyMiddleware(
 				thunkMiddleware,
-				routerMiddleware(history) // for dispatching history actions
-			)
-		)
+				routerMiddleware(history), // for dispatching history actions
+			),
+		),
 	);
 }
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -51,5 +51,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 			<Route path="/Meural/prompt" component={MeuralPromptPage} />
 			<Route path="/error" component={ErrorPage} />
 		</ConnectedRouter>
-	</Provider>
+	</Provider>,
 );

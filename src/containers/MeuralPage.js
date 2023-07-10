@@ -21,7 +21,7 @@ export const mapStateToProps = (state) => ({
 
 const findMeuralDeviceFromRooms = (rooms) => {
 	return findMeuralDeviceFromRoom(
-		rooms?.find((theRoom) => "Meural" === theRoom.name)
+		rooms?.find((theRoom) => "Meural" === theRoom.name),
 	);
 };
 
@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) =>
 			back: () => push("/"),
 			fetchStatus: () => fetchStatusIfNecessary(),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MeuralPage);

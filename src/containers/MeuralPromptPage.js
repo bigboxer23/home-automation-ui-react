@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) =>
 			},
 			handleClick: () => (dispatch) => handleClose(dispatch),
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MeuralPromptPage);

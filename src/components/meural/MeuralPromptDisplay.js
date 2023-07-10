@@ -40,7 +40,7 @@ const mapDispatchToProps = (dispatch) =>
 				dispatch(push("/Meural/prompt"));
 			},
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(null, mapDispatchToProps)(MeuralPromptDisplay);

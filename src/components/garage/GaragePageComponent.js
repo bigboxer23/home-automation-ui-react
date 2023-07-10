@@ -69,7 +69,7 @@ export default function GaragePageComponent({
 						/>
 					) : (
 						""
-					)
+					),
 				)}
 			</div>
 		</div>

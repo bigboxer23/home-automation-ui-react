@@ -13,7 +13,7 @@ class GarageButton extends React.Component {
 		<Button
 			onClick={() =>
 				this.props.handleGarageClick(
-					GarageButton.isDoorOpen(this.props.room) ? "Close" : "Open"
+					GarageButton.isDoorOpen(this.props.room) ? "Close" : "Open",
 				)
 			}
 			variant={this.getButtonStyle()}
@@ -24,7 +24,7 @@ class GarageButton extends React.Component {
 			<div
 				className="temp-display pe-1 ps-1 position-absolute"
 				style={getTempStyle(
-					GarageButton.findGarageTemperature(this.props.room)
+					GarageButton.findGarageTemperature(this.props.room),
 				)}
 				onClick={(event) => this.props.handleGarageMoreClick(event)}
 			>

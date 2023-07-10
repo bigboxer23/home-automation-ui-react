@@ -78,7 +78,7 @@ const mapDispatchToProps = (dispatch) =>
 				dispatch(disableAutoClose(delay));
 			},
 		},
-		dispatch
+		dispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(GaragePage);
