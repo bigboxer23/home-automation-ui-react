@@ -63,7 +63,7 @@ const RoomPageComponent = ({
 					<MotionSensorComponent key={device.name} device={device} />
 				) : (
 					""
-				)
+				),
 			)}
 		</div>
 	</div>
