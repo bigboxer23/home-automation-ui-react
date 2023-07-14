@@ -92,7 +92,8 @@ body {
 .mdi-image-refresh-outline,
 .mdi-message-image-outline,
 .mdi-information-outline,
-.mdi-information-off-outline {
+.mdi-information-off-outline,
+.mdi-video-wireless-outline {
 	color: rgba(0, 0, 0, 0.3);
 }
 

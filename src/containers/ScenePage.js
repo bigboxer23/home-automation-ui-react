@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) =>
 			back: () => push("/"),
 			handleClick: (id, state) => sceneClicked(id, state),
 			fetchStatus: () => fetchStatusIfNecessary(),
-			gotoSecurity: () => push("Security"),
+			gotoPage: (where) => push(where),
 		},
 		dispatch,
 	);
