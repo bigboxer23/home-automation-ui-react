@@ -3,7 +3,7 @@ import HeaderComponent from "../HeaderComponent";
 import SceneButton from "./SceneButton";
 import { Button } from "react-bootstrap";
 
-const ScenePageComponent = ({ back, rooms, handleClick, gotoSecurity }) => (
+const ScenePageComponent = ({ back, rooms, handleClick, gotoPage }) => (
 	<div>
 		<div className="background"></div>
 		<HeaderComponent back={back} name={"Scenes"} />
@@ -11,16 +11,30 @@ const ScenePageComponent = ({ back, rooms, handleClick, gotoSecurity }) => (
 			{rooms.map((room) => (
 				<SceneButton key={room.name} room={room} handleClick={handleClick} />
 			))}
-			<Button
-				onClick={() => gotoSecurity()}
-				variant=""
-				size="lg"
-				className={"mb-3 m-1 position-relative d-flex justify-content-center"}
-			>
-				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
-					Front Door Security
-				</div>
-			</Button>
+			<div>
+				<Button
+					onClick={() => gotoPage("Security")}
+					variant=""
+					size="lg"
+					className={"mb-3 m-1 position-relative d-flex justify-content-center"}
+				>
+					<i className="mdi mdi-video-wireless-outline" />
+					<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+						Front Door Security
+					</div>
+				</Button>
+				<Button
+					onClick={() => gotoPage("Grow")}
+					variant=""
+					size="lg"
+					className={"mb-3 m-1 position-relative d-flex justify-content-center"}
+				>
+					<i className="mdi mdi-video-wireless-outline" />
+					<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+						Grow Tent
+					</div>
+				</Button>
+			</div>
 		</div>
 	</div>
 );

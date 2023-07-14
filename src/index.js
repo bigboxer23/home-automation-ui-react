@@ -18,7 +18,7 @@ import "./index.css";
 import RoomPage from "./containers/RoomPage";
 import GaragePage from "./containers/GaragePage";
 import HousePage from "./containers/HousePage";
-import FrontDoorSecurity from "./containers/FrontDoorSecurityPage";
+import CameraPage from "./containers/CameraPage";
 import ErrorPage from "./containers/ErrorPage";
 import MeuralPage from "./containers/MeuralPage";
 import MeuralPromptPage from "./containers/MeuralPromptPage";
@@ -46,7 +46,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 			<Route path="/Climate" component={ClimatePage} />
 			<Route path="/Room/:name" component={RoomPage} />
 			<Route path="/Garage" component={GaragePage} />
-			<Route path="/Security" component={FrontDoorSecurity} />
+			<Route path="/Security" component={CameraPage} />
+			<Route path="/Grow" component={CameraPage} />
 			<Route path="/Meural" exact={true} component={MeuralPage} />
 			<Route path="/Meural/prompt" component={MeuralPromptPage} />
 			<Route path="/error" component={ErrorPage} />

@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { bindActionCreators } from "redux";
-import FrontDoorSecurityComponent from "../components/FrontDoorSecurityComponent";
+import CameraComponent from "../components/CameraComponent";
 
-class FrontDoorSecurityPage extends React.Component {
+class CameraPage extends React.Component {
 	render() {
-		return <FrontDoorSecurityComponent {...this.props} />;
+		return <CameraComponent {...this.props} />;
 	}
 }
 
@@ -14,7 +14,7 @@ let intervalId = null;
 
 const initializeIframe = function (iframe) {
 	if (intervalId == null) {
-		intervalId = setInterval(resizeImgContent, 300, iframe);
+		intervalId = setInterval(resizeImgContent, 250, iframe);
 	}
 };
 
@@ -34,13 +34,18 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-			back: () => push("/"),
+			back: () => push("/Scenes"),
 			load: (o) => (dispatch) => initializeIframe(o),
+			getSource: () => (dispatch) =>
+				window.location.pathname === "/Security"
+					? "/FrontDoor"
+					: "/GrowPi/index.html",
+			getName: () => (dispatch) =>
+				window.location.pathname === "/Security"
+					? "Front Door Security"
+					: "Grow Tent",
 		},
 		dispatch,
 	);
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(FrontDoorSecurityPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CameraPage);
