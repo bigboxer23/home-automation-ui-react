@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import { bindActionCreators } from "redux";
 import {
 	fetchStatusIfNecessary,
+	sceneClicked,
 	setDim,
 	setDimLocal,
 	setOnOff,
@@ -122,6 +123,7 @@ export const getIntegerLevel = (device) => {
 
 const mapStateToProps = (state, props) => ({
 	room: filterRoom(state.house.rooms, props.match.params.name),
+	rooms: state.house.rooms,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -138,6 +140,9 @@ const mapDispatchToProps = (dispatch) =>
 				dispatch(setOnOff(status, id));
 			},
 			fetchStatus: () => fetchStatusIfNecessary(),
+			handleFrontPorchClick: (id) => (dispatch) => {
+				dispatch(setOnOff("ON", id));
+			},
 		},
 		dispatch,
 	);

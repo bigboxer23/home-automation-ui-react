@@ -10,6 +10,7 @@ import {
 import MotionSensorComponent from "./MotionSensorComponent";
 import IOSSlider from "../ui/IOSSlider";
 import IOSSwitch from "../ui/IOSSwitch";
+import FrontPorchColorComponent from "../front_porch/FrontPorchColorsComponent";
 
 const RoomPageComponent = ({
 	back,
@@ -17,6 +18,8 @@ const RoomPageComponent = ({
 	sliderChange,
 	slideStop,
 	setDeviceStatus,
+	rooms,
+	handleFrontPorchClick,
 }) => (
 	<div className={"room_component"}>
 		<div className="background"></div>
@@ -66,6 +69,14 @@ const RoomPageComponent = ({
 				),
 			)}
 		</div>
+		{room.name === "Front Porch" ? (
+			<FrontPorchColorComponent
+				rooms={rooms}
+				handleClick={handleFrontPorchClick}
+			/>
+		) : (
+			""
+		)}
 	</div>
 );
 
