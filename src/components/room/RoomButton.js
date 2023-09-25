@@ -45,12 +45,7 @@ class RoomButton extends React.Component {
 			return aCount;
 		}
 		room.devices.forEach((device) => {
-			if (
-				RoomButton.isLight(device) &&
-				device.status === "1" &&
-				device.level !== "NULL" &&
-				!device.name.includes("Override")
-			) {
+			if (isDeviceOn(device)) {
 				aCount++;
 			}
 		});
@@ -120,15 +115,19 @@ export const isOn = function (room) {
 	if (room.devices == null) {
 		return false;
 	}
-	let onDevice = room.devices.find((theDevice) => {
-		return (
-			RoomButton.isLight(theDevice) &&
-			theDevice.status === "1" &&
-			theDevice.level !== "NULL" &&
-			!theDevice.name.includes("Override")
-		);
+	let onDevice = room.devices.find((device) => {
+		return isDeviceOn(device);
 	});
 	return onDevice != null;
+};
+
+export const isDeviceOn = function (device) {
+	return (
+		RoomButton.isLight(device) &&
+		device.status === "1" &&
+		device.level !== "NULL" &&
+		!device.name.includes("Override")
+	);
 };
 
 export default RoomButton;

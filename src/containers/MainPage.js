@@ -26,7 +26,7 @@ class MainPage extends React.Component {
 	}
 }
 const getTime = (rooms) => {
-	return rooms?.find((theRoom) => "Time" === theRoom.name);
+	return rooms?.find((room) => "Time" === room.name);
 };
 
 const getRooms = (rooms) => {
@@ -34,31 +34,32 @@ const getRooms = (rooms) => {
 		return [];
 	}
 	let allItems = rooms
-		.filter((theRoom) => shouldDisplay(theRoom))
-		.sort((theRoom, theRoom2) => {
-			if (theRoom.name < theRoom2.name) {
+		.filter((room) => shouldDisplay(room))
+		.sort((room, room2) => {
+			if (room.name < room2.name) {
 				return -1;
 			}
-			if (theRoom.name > theRoom2.name) {
+			if (room.name > room2.name) {
 				return 1;
 			}
 			return 0;
 		});
-	const aScenes = allItems.find((theRoom) => "Scenes" === theRoom.name);
+	const aScenes = allItems.find((room) => "Scenes" === room.name);
 	aScenes.totalLights = countTotalLights(rooms);
 	return allItems
-		.filter((theRoom) => "Climate" === theRoom.name)
-		.concat(allItems.filter((theRoom) => "Garage" === theRoom.name))
+		.filter((room) => "Climate" === room.name)
+		.concat(allItems.filter((room) => "Garage" === room.name))
 		.concat(aScenes)
-		.concat(allItems.filter((theRoom) => "Meural" === theRoom.name))
+		.concat(allItems.filter((room) => "Meural" === room.name))
 		.concat(
 			allItems.filter(
-				(theRoom) =>
-					"Garage" !== theRoom.name &&
-					"Climate" !== theRoom.name &&
-					"Scenes" !== theRoom.name &&
-					"Time" !== theRoom.name &&
-					"Meural" !== theRoom.name,
+				(room) =>
+					"Garage" !== room.name &&
+					"Climate" !== room.name &&
+					"Scenes" !== room.name &&
+					"Time" !== room.name &&
+					"Meural" !== room.name &&
+					"Front Porch Color" !== room.name,
 			),
 		);
 };
@@ -73,57 +74,53 @@ const countTotalLights = function (rooms) {
 	return aLightCount;
 };
 
-const shouldDisplay = function (theRoom) {
+const shouldDisplay = function (room) {
 	return (
-		hasLights(theRoom) ||
-		theRoom.name === "Climate" ||
-		theRoom.name === "Scenes" ||
-		theRoom.name === "Meural"
+		(hasLights(room) ||
+			room.name === "Climate" ||
+			room.name === "Scenes" ||
+			room.name === "Meural") &&
+		room.name !== "Front Porch Colors"
 	);
 };
 
-const hasLights = function (theRoom) {
+const hasLights = function (room) {
 	return (
-		theRoom.devices != null &&
-		theRoom.devices.filter((theDevice) => RoomButton.isLight(theDevice))
-			.length > 0
+		room.devices != null &&
+		room.devices.filter((theDevice) => RoomButton.isLight(theDevice)).length > 0
 	);
 };
 
 export const mapRoom = function (
-	theTime,
-	theRoom,
+	time,
+	room,
 	handleClick,
 	handleGarageClick,
 	handleMoreClick,
 	handleGarageMoreClick,
 ) {
-	if ("Garage" === theRoom.name) {
+	if ("Garage" === room.name) {
 		return (
 			<GarageButton
-				key={theRoom.name}
-				room={theRoom}
+				key={room.name}
+				room={room}
 				handleGarageClick={handleGarageClick}
 				handleGarageMoreClick={handleGarageMoreClick}
 			/>
 		);
-	} else if ("Climate" === theRoom.name) {
+	} else if ("Climate" === room.name) {
 		return (
-			<ClimateButton
-				key={theRoom.name}
-				room={theRoom}
-				handleClick={handleClick}
-			/>
+			<ClimateButton key={room.name} room={room} handleClick={handleClick} />
 		);
-	} else if ("Scenes" === theRoom.name) {
-		return <HouseButton key={theRoom.name} room={theRoom} time={theTime} />;
-	} else if ("Meural" === theRoom.name) {
-		return <MeuralButton key={theRoom.name} room={theRoom} />;
+	} else if ("Scenes" === room.name) {
+		return <HouseButton key={room.name} room={room} time={time} />;
+	} else if ("Meural" === room.name) {
+		return <MeuralButton key={room.name} room={room} />;
 	}
 	return (
 		<RoomButton
-			key={theRoom.name}
-			room={theRoom}
+			key={room.name}
+			room={room}
 			handleClick={handleClick}
 			handleMoreClick={handleMoreClick}
 		/>
