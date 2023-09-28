@@ -94,7 +94,14 @@ body {
 .mdi-message-image-outline,
 .mdi-information-outline,
 .mdi-information-off-outline,
-.mdi-video-wireless-outline {
+.mdi-video-wireless-outline,
+.mdi-forest,
+.mdi-looks,
+.mdi-heart-outline,
+.mdi-halloween,
+.mdi-turkey,
+.mdi-lamps,
+.mdi-string-lights-off {
 	color: rgba(0, 0, 0, 0.3);
 }
 
