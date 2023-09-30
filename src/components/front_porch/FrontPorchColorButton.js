@@ -36,6 +36,8 @@ const getIconStyle = function (name) {
 			return mdi + "mdi-lamps";
 		case "Easter":
 			return mdi + "mdi-rabbit-variant-outline";
+		case "4th of July":
+			return mdi + "mdi-firework";
 		case "Normal":
 			return mdi + "mdi-lightbulb-group-off-outline";
 	}
