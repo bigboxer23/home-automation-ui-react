@@ -34,6 +34,8 @@ const getIconStyle = function (name) {
 			return mdi + "mdi-turkey";
 		case "Retro":
 			return mdi + "mdi-lamps";
+		case "Easter":
+			return mdi + "mdi-rabbit-variant-outline";
 		case "Normal":
 			return mdi + "mdi-lightbulb-group-off-outline";
 	}
