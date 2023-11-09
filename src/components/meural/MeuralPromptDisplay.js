@@ -12,6 +12,11 @@ function MeuralPromptDisplay(props) {
 		);
 	};
 
+	const getPrompt = () => {
+		let raw = props.device?.temperature;
+		return raw === undefined ? "" : JSON.parse(raw).prompt;
+	};
+
 	return (
 		<Button
 			onClick={props.changePage}
@@ -24,7 +29,7 @@ function MeuralPromptDisplay(props) {
 					<div className={"mb-2 meural-source-button-label fw-bold"}>
 						Active Prompt
 					</div>
-					{props.device?.temperature}
+					{getPrompt()}
 				</div>
 				<div className={"mdi mdi-chevron-right mdi-24px position-inherit"} />
 			</div>
