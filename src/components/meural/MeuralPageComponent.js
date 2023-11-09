@@ -7,6 +7,8 @@ import MeuralSourceButton from "./MeuralSourceButton";
 import MeuralGenerateImageButton from "./MeuralGenerateImageButton";
 import MeuralPromptDisplay from "./MeuralPromptDisplay";
 import MeuralShowInfoButton from "./MeuralShowInfoButton";
+import MeuralQualityButton from "./MeuralQualityButton";
+import MeuralStyleButton from "./MeuralStyleButton";
 
 const MeuralPageComponent = ({ back, device }) => (
 	<div>
@@ -15,6 +17,8 @@ const MeuralPageComponent = ({ back, device }) => (
 		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 			<MeuralSourceButton device={device} />
 			<MeuralPromptDisplay device={device} />
+			<MeuralQualityButton device={device} />
+			<MeuralStyleButton device={device} />
 			<MeuralOnOffButton key={device} device={device} />
 			<MeuralPreviousButton key={"previous"} device={device} />
 			<MeuralNextButton key={"next"} device={device} />

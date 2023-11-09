@@ -232,6 +232,22 @@ export function setMeuralSource(sourceInt) {
 	};
 }
 
+export function updateOpenAIQuality(quality) {
+	fetchWithCookies(
+		getPostRequest(
+			"/S/meural/updateOpenAIQuality?quality=" + encodeURIComponent(quality),
+		),
+	);
+}
+
+export function updateOpenAIStyle(style) {
+	fetchWithCookies(
+		getPostRequest(
+			"/S/meural/updateOpenAIStyle?style=" + encodeURIComponent(style),
+		),
+	);
+}
+
 export function updateOpenAIPrompt(prompt) {
 	fetchWithCookies(
 		getPostRequest(
