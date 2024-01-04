@@ -51,8 +51,8 @@ class GarageButton extends React.Component {
 		return GarageButton.isDoorOpen(this.props.room)
 			? "danger"
 			: isOn(this.props.room)
-			? "success"
-			: "default";
+				? "success"
+				: "default";
 	}
 
 	static findGarageDevice(room) {
