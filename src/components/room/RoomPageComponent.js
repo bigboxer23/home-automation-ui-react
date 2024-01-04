@@ -73,6 +73,7 @@ const RoomPageComponent = ({
 			<FrontPorchColorComponent
 				rooms={rooms}
 				handleClick={handleFrontPorchClick}
+				handleHueSceneClick={slideStop}
 			/>
 		) : (
 			""
