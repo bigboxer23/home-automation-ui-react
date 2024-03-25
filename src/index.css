@@ -103,7 +103,8 @@ body {
 .mdi-lamps,
 .mdi-string-lights-off,
 .mdi-rabbit-variant-outline,
-.mdi-firework {
+.mdi-firework,
+.mdi-chevron-left {
 	color: rgba(0, 0, 0, 0.3);
 }
 
@@ -176,13 +177,16 @@ body {
 }
 
 .header {
-	background-color: rgba(255, 255, 255, 0.2);
+	background-color: rgba(255, 255, 255, 0.8);
 	height: 60px;
 	width: 100%;
-	color: #fff;
 	position: fixed;
 	z-index: 2;
 	max-width: 1024px;
+}
+
+.room-component .header {
+	height: 100px;
 }
 
 .sub-header {
@@ -191,6 +195,10 @@ body {
 
 .room-content {
 	padding-top: 70px !important;
+}
+
+.room-component .room-content {
+	padding-top: 110px !important;
 }
 
 .btn-success .mdi-dots-horizontal:before,

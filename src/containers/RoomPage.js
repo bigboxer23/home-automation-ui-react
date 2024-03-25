@@ -90,15 +90,14 @@ export const isMotionDevice = (theDevice) => {
 	return theDevice.name.endsWith("Battery");
 };
 
-export const getHeaderTitle = (room) => {
-	let aTemp = RoomButton.getRoomTemp(room);
-	if (aTemp === "") {
-		return room.name;
-	}
+export const getHeaderTitle = (room, className = "") => {
+	const temperature = RoomButton.getRoomTemp(room);
 	return (
-		<div>
+		<div className={className}>
 			{room.name}{" "}
-			<div className="header-temperature">{RoomButton.getRoomTemp(room)}</div>
+			{temperature !== "" && (
+				<div className="header-temperature">{temperature}</div>
+			)}
 		</div>
 	);
 };
