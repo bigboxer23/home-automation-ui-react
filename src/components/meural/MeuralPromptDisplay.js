@@ -27,7 +27,7 @@ function MeuralPromptDisplay(props) {
 			<div className={"meural-source-button-label d-flex align-items-center"}>
 				<div>
 					<div className={"mb-2 meural-source-button-label fw-bold"}>
-						Active Prompt
+						Prompt
 					</div>
 					{getPrompt()}
 				</div>
