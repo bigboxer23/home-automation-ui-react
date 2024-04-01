@@ -10,14 +10,13 @@ function MeuralStyleButton(props) {
 
 	const getClassnames = (status) => {
 		return (
-			"meural-source-button pb-2" +
+			"meural-source-button pt-3 pb-2" +
 			("0" === status || "4" === status ? " d-none" : "")
 		);
 	};
 
 	return (
 		<div className={getClassnames(props.device?.status)}>
-			<div className={"ms-3 meural-source-button-label fw-bold"}>Quality</div>
 			<ToggleButtonGroup
 				type="radio"
 				name="quality"
@@ -30,6 +29,9 @@ function MeuralStyleButton(props) {
 					}
 				}}
 			>
+				<div className={"ms-3 meural-source-button-label fw-bold pt-3 pb-2"}>
+					Style
+				</div>
 				<ToggleButton
 					disableRipple
 					variant="secondary"
