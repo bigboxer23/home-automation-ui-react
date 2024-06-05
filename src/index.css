@@ -136,6 +136,10 @@ body {
 	color: rgb(248, 204, 70);
 }
 
+.house-button .total-lights-bg {
+	background-color: rgb(248, 204, 70);
+}
+
 .bottom {
 	bottom: 0;
 }
