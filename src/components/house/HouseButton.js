@@ -7,7 +7,7 @@ import { sceneClicked } from "../../actions";
 
 const HouseButton = (props) => (
 	<Button
-		onClick={() => props.houseOff(props.time, props.room.devices)}
+		onClick={(event) => props.changePage(event)}
 		variant=""
 		size="lg"
 		className={
@@ -15,13 +15,13 @@ const HouseButton = (props) => (
 		}
 	>
 		<i className={getButtonStyling(props.time, props.room.devices)} />
-		<div
-			className="temp-display pe-1 ps-1 position-absolute total-lights-bg"
-			onClick={(event) => props.changePage(event)}
-		>
+		<div className="temp-display pe-1 ps-1 position-absolute total-lights-bg">
 			{props.room.totalLights}
 		</div>
-		<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+		<div
+			className="position-absolute bottom w-100 m-2 ps-2 pe-2"
+			onClick={(event) => props.houseOff(event, props.time, props.room.devices)}
+		>
 			{getScene(props.time, props.room.devices)}
 		</div>
 	</Button>
@@ -34,7 +34,8 @@ const mapDispatchToProps = (dispatch) =>
 				event.stopPropagation();
 				dispatch(push("/Scenes"));
 			},
-			houseOff: (time, scenes) => {
+			houseOff: (event, time, scenes) => {
+				event.stopPropagation();
 				let aScene = getScene(time, scenes);
 				return sceneClicked(
 					aScene.replace(" Off", "").replace(" On", ""),
