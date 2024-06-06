@@ -4,13 +4,12 @@ import { push } from "connected-react-router";
 import { bindActionCreators } from "redux";
 import {
 	fetchStatusIfNecessary,
-	sceneClicked,
 	setDim,
 	setDimLocal,
 	setOnOff,
 } from "../actions";
 import RoomPageComponent from "../components/room/RoomPageComponent";
-import RoomButton from "../components/room/RoomButton";
+import { getRoomTemp, isFan, isLight } from "../components/room/RoomUtils";
 
 class RoomPage extends React.Component {
 	componentDidMount() {
@@ -29,10 +28,10 @@ const filterRoom = (rooms, name) => {
 	let aRoom = rooms.filter((theRoom) => name === theRoom.name);
 	if (aRoom.length > 0) {
 		aRoom[0].devices.sort((theDevice, theDevice2) => {
-			if (RoomButton.isFan(theDevice) && !RoomButton.isFan(theDevice2)) {
+			if (isFan(theDevice) && !isFan(theDevice2)) {
 				return -1;
 			}
-			if (!RoomButton.isFan(theDevice) && RoomButton.isFan(theDevice2)) {
+			if (!isFan(theDevice) && isFan(theDevice2)) {
 				return 1;
 			}
 			if (isMotionDevice(theDevice) && !isMotionDevice(theDevice2)) {
@@ -91,7 +90,7 @@ export const isMotionDevice = (theDevice) => {
 };
 
 export const getHeaderTitle = (room, className = "") => {
-	const temperature = RoomButton.getRoomTemp(room);
+	const temperature = getRoomTemp(room);
 	return (
 		<div className={className}>
 			{room.name}{" "}
@@ -107,7 +106,7 @@ export const getRoomDimLevel = (room) => {
 	if (room != null) {
 		room.devices
 			.filter((device) => device.level != null)
-			.filter((device) => RoomButton.isLight(device))
+			.filter((device) => isLight(device))
 			.filter((device) => !device.name.includes("Override"))
 			.forEach((device) => {
 				level = Math.max(level, getIntegerLevel(device));

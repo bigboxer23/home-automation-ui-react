@@ -1,8 +1,8 @@
 import React from "react";
-import RoomButton from "./RoomButton";
 import IOSSlider from "../ui/IOSSlider";
 import IOSSwitch from "../ui/IOSSwitch";
 import { getIntegerLevel } from "../../containers/RoomPage";
+import { isFan } from "./RoomUtils";
 
 export default function LightComponent({
 	device,
@@ -10,7 +10,7 @@ export default function LightComponent({
 	slideStop,
 	setDeviceStatus,
 }) {
-	if (RoomButton.isFan(device)) {
+	if (isFan(device)) {
 		return (
 			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 				<div className="form-group w-100 mt-2 mb-2">

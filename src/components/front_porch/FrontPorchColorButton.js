@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { isDeviceOn } from "../room/RoomButton";
+import { isDeviceOn } from "../room/RoomUtils";
 
 export default function FrontPorchColorButton(props) {
 	const getIconStyle = function (name) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { getFormattedTemp, getTempStyle } from "../../utils/WeatherUtilities";
-import { isOn } from "../room/RoomButton";
+import { isOn } from "../room/RoomUtils";
 
 class GarageButton extends React.Component {
 	constructor(props) {

@@ -5,24 +5,24 @@ import { bindActionCreators } from "redux";
 import { push } from "connected-react-router";
 import { sceneClicked } from "../../actions";
 
-const HouseButton = (props) => (
+const HouseButton = ({ room, time, changePage, houseOff }) => (
 	<Button
-		onClick={(event) => props.changePage(event)}
+		onClick={(event) => changePage(event)}
 		variant=""
 		size="lg"
 		className={
 			"m-1 position-relative d-flex justify-content-center house-button"
 		}
 	>
-		<i className={getButtonStyling(props.time, props.room.devices)} />
+		<i className={getButtonStyling(time, room.devices)} />
 		<div className="temp-display pe-1 ps-1 position-absolute total-lights-bg">
-			{props.room.totalLights}
+			{room.totalLights}
 		</div>
 		<div
 			className="position-absolute bottom w-100 m-2 ps-2 pe-2"
-			onClick={(event) => props.houseOff(event, props.time, props.room.devices)}
+			onClick={(event) => houseOff(event, time, room.devices)}
 		>
-			{getScene(props.time, props.room.devices)}
+			{getScene(time, room.devices)}
 		</div>
 	</Button>
 );
