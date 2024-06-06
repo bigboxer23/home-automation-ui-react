@@ -5,20 +5,19 @@ import { setMeuralOn } from "../../actions";
 import { isOn } from "../../containers/MeuralPage";
 import { connect } from "react-redux";
 
-const MeuralHeaderComponent = function (props) {
+const MeuralHeaderComponent = ({ back, name, device, toggleOnOff }) => {
 	return (
 		<div className="header d-flex flex-column">
 			<div className="d-flex align-items-center w-100 flex-row">
-				<span
-					className="mdi mdi-chevron-left mdi-36px z-index-1 "
-					onClick={props.back}
-				></span>
-				{props.name}
+				<span className="d-flex align-items-center flex-row" onClick={back}>
+					<span className="mdi mdi-chevron-left mdi-36px z-index-1 "></span>
+					{name}
+				</span>
 				<div className={"flex-grow-1"} />
 				<IOSSwitch
 					className="me-4"
-					checked={isOn(props.device)}
-					onChange={() => props.toggleOnOff(props.device)}
+					checked={isOn(device)}
+					onChange={() => toggleOnOff(device)}
 				/>
 			</div>
 		</div>

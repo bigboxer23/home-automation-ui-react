@@ -1,7 +1,5 @@
 import React from "react";
-import HeaderComponent from "../HeaderComponent";
 import MeuralNextButton from "./MeuralNextButton";
-import MeuralOnOffButton from "./MeuralOnOffButton";
 import MeuralPreviousButton from "./MeuralPreviousButton";
 import MeuralSourceButton from "./MeuralSourceButton";
 import MeuralPromptDisplay from "./MeuralPromptDisplay";
