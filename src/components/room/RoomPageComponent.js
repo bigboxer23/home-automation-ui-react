@@ -1,10 +1,10 @@
 import React from "react";
 import LightComponent from "./LightComponent";
-import RoomButton from "./RoomButton";
 import { isMotionDevice } from "../../containers/RoomPage";
 import MotionSensorComponent from "./MotionSensorComponent";
 import FrontPorchColorComponent from "../front_porch/FrontPorchColorsComponent";
 import { RoomHeaderComponent } from "./RoomHeaderComponent";
+import { isLight } from "./RoomUtils";
 
 const RoomPageComponent = ({
 	back,
@@ -26,7 +26,7 @@ const RoomPageComponent = ({
 		/>
 		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
 			{room.devices.map((device) =>
-				RoomButton.isLight(device) ? (
+				isLight(device) ? (
 					<LightComponent
 						key={device.name}
 						device={device}

@@ -1,4 +1,4 @@
-import RoomButton from "../components/room/RoomButton";
+import { isOn as isOn2 } from "../components/room/RoomUtils";
 
 const roomReducer = (state = {}, action) => {
 	switch (action.type) {
@@ -18,7 +18,7 @@ const roomReducer = (state = {}, action) => {
 					if (room.id !== id) {
 						return room;
 					}
-					let isOn = RoomButton.isOn(room) ? "0" : "1";
+					let isOn = isOn2(room) ? "0" : "1";
 					return {
 						...room,
 						devices: room.devices.map((theDevice) => {

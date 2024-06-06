@@ -5,12 +5,12 @@ import {
 	getAutoCloseDelay,
 	getHeader,
 } from "../../containers/GaragePage";
-import RoomButton from "../room/RoomButton";
 import LightComponent from "../room/LightComponent";
 import { getRoomDimLevel } from "../../containers/RoomPage";
 import GarageAutoCloseButton from "./GarageAutoCloseButton";
 import IOSSlider from "../ui/IOSSlider";
 import IOSSwitch from "../ui/IOSSwitch";
+import { isLight } from "../room/RoomUtils";
 
 export default function GaragePageComponent({
 	back,
@@ -59,7 +59,7 @@ export default function GaragePageComponent({
 					</div>
 				</div>
 				{room.devices.map((device) =>
-					RoomButton.isLight(device) ? (
+					isLight(device) ? (
 						<LightComponent
 							key={device.name}
 							device={device}

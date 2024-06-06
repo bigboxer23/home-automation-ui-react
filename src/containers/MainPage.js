@@ -10,6 +10,7 @@ import GarageButton from "../components/garage/GarageButton";
 import ClimateButton from "../components/climate/ClimateButton";
 import HouseButton from "../components/house/HouseButton";
 import MeuralButton from "../components/meural/MeuralButton";
+import { isLight, onCount } from "../components/room/RoomUtils";
 
 class MainPage extends React.Component {
 	componentDidMount() {
@@ -68,7 +69,7 @@ const countTotalLights = function (rooms) {
 	let aLightCount = 0;
 	rooms.forEach((room) => {
 		if (hasLights(room) && "Scenes" !== room.name) {
-			aLightCount += RoomButton.onCount(room);
+			aLightCount += onCount(room);
 		}
 	});
 	return aLightCount;
@@ -87,7 +88,7 @@ const shouldDisplay = function (room) {
 const hasLights = function (room) {
 	return (
 		room.devices != null &&
-		room.devices.filter((theDevice) => RoomButton.isLight(theDevice)).length > 0
+		room.devices.filter((theDevice) => isLight(theDevice)).length > 0
 	);
 };
 
@@ -137,7 +138,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-			handleClick: (id, state) => (dispatch) => {
+			handleClick: (event, id, state) => (dispatch) => {
+				event.stopPropagation();
 				dispatch(roomClicked(id, state));
 			},
 			fetchStatus: () => (dispatch) => {
