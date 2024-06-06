@@ -1,8 +1,6 @@
 import React from "react";
-import HeaderComponent from "../HeaderComponent";
 import SceneButton from "./SceneButton";
 import { Button } from "react-bootstrap";
-import MeuralHeaderComponent from "../meural/MeuralHeaderComponent";
 import SceneHeaderComponent from "./SceneHeaderComponent";
 
 const ScenePageComponent = ({ back, rooms, handleClick, gotoPage }) => (

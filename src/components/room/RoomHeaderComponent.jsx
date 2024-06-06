@@ -3,23 +3,23 @@ import { getHeaderTitle, getRoomDimLevel } from "../../containers/RoomPage";
 import IOSSwitch from "../ui/IOSSwitch";
 import IOSSlider from "../ui/IOSSlider";
 
-export const RoomHeaderComponent = function ({
+export const RoomHeaderComponent = ({
 	room,
 	back,
 	setDeviceStatus,
 	sliderChange,
 	slideStop,
-}) {
+}) => {
 	const name = getHeaderTitle(room, "flex-grow-1");
 
 	return (
 		<div className="header d-flex flex-column">
 			<div className="d-flex align-items-center w-100 flex-row">
-				<span
-					className="mdi mdi-chevron-left mdi-36px z-index-1 "
-					onClick={back}
-				></span>
-				{name}
+				<span className="d-flex align-items-center flex-row" onClick={back}>
+					<span className="mdi mdi-chevron-left mdi-36px z-index-1 "></span>
+					{name}
+				</span>
+				<div className={"flex-grow-1"} />
 				<IOSSwitch
 					className="me-4"
 					checked={getRoomDimLevel(room) > 0}
