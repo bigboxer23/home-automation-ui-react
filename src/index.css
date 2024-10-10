@@ -120,7 +120,7 @@ body {
 }
 
 .btn-danger {
-	background-color: #dc3545;
+	background-color: #dc3545 !important;
 }
 
 .btn-success .mdi-lightbulb-outline:before {
