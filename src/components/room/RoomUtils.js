@@ -18,7 +18,7 @@ export const isDeviceOn = function (device) {
 		isLight(device) &&
 		device.status === "1" &&
 		device.level !== "NULL" &&
-		!device.name.includes("Override")
+		!device.name?.includes("Override")
 	);
 };
 
