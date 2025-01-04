@@ -79,7 +79,6 @@ class GarageButton extends React.Component {
 		let minutes = date.getMinutes(),
 			hours = date.getHours();
 		minutes = minutes < 10 ? "0" + minutes : minutes;
-		let today = new Date();
 		let extra = "";
 		if (new Date().getDate() !== date.getDate()) {
 			extra = " " + (date.getMonth() + 1) + "/" + date.getDate();
