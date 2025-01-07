@@ -87,6 +87,10 @@ body {
 .mdi-lightbulb-group,
 .mdi-lightbulb-group-off-outline,
 .mdi-thermometer-lines,
+.mdi-gauge,
+.mdi-gauge-empty,
+.mdi-gauge-low,
+.mdi-gauge-full,
 .mdi-image-frame,
 .mdi-image-filter-frames,
 .mdi-image-move,
@@ -371,7 +375,8 @@ body {
 	color: #ffffff;
 }
 
-.front-porch-color .btn-success .mdi {
+.front-porch-color .btn-success .mdi,
+.btn-active {
 	color: #3880ff;
 }
 

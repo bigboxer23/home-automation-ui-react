@@ -7,7 +7,9 @@ import {
 	getClimateData,
 	getCurrentOutsideTemp,
 	getThermostatDisplayInfo,
-	getThermostatModeStyle,
+	getWaterHeaterGaugeClass,
+	getWaterHeaterHoverText,
+	getWaterHeaterTemperature,
 } from "../../containers/ClimatePage";
 import { getFormattedTemp, getTempStyle } from "../../utils/WeatherUtilities";
 
@@ -19,8 +21,8 @@ const ClimateButton = (props) => (
 		className={"m-1 position-relative d-flex justify-content-center"}
 	>
 		<i
-			className="mdi mdi-thermometer-lines"
-			style={getThermostatModeStyle(props.deviceMap)}
+			className={getWaterHeaterGaugeClass(props.deviceMap)}
+			title={getWaterHeaterHoverText(props.deviceMap)}
 		></i>
 		<div
 			className="temp-display pe-1 ps-1 position-absolute"
@@ -29,6 +31,9 @@ const ClimateButton = (props) => (
 			{getFormattedTemp(getCurrentOutsideTemp(props.deviceMap))}
 		</div>
 		<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+			<div className="minor-text">
+				{getWaterHeaterTemperature(props.deviceMap)}
+			</div>
 			{getThermostatDisplayInfo(props.deviceMap)}
 			Climate
 		</div>
