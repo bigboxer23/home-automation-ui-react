@@ -79,6 +79,55 @@ export const getThermostatDisplayInfo = (deviceMap) => {
 	);
 };
 
+export const getWaterHeaterGaugeClass = (deviceMap) => {
+	const tankFullness =
+		deviceMap["Water Heater"] && deviceMap["Water Heater"].humidity;
+	const compressorRunning =
+		deviceMap["Water Heater"] && deviceMap["Water Heater"].level;
+	const mdi =
+		"mdi " +
+		(compressorRunning !== null && compressorRunning !== "" && tankFullness > 0
+			? "btn-active "
+			: "");
+	switch (tankFullness) {
+		case 0.33:
+			return mdi + "mdi-gauge-low";
+		case 0.66:
+			return mdi + "mdi-gauge";
+		case 1:
+			return mdi + "mdi-gauge-full";
+		default:
+			return mdi + "mdi-gauge-empty danger";
+	}
+};
+
+export const getWaterHeaterHoverText = (deviceMap) => {
+	const tankFullness =
+		deviceMap["Water Heater"] && deviceMap["Water Heater"].humidity;
+	const compressorRunning =
+		deviceMap["Water Heater"] && deviceMap["Water Heater"].level;
+	const status =
+		compressorRunning !== null && compressorRunning !== "" && tankFullness > 0
+			? "Compressor is running, "
+			: "";
+	switch (tankFullness) {
+		case 0.33:
+			return status + "tank 1/3 full.";
+		case 0.66:
+			return status + "tank 2/3 full.";
+		case 1:
+			return status + "tank is full.";
+		default:
+			return status + "tank is empty.";
+	}
+};
+
+export const getWaterHeaterTemperature = (deviceMap) => {
+	return getFormattedTemp(
+		deviceMap["Water Heater"] && deviceMap["Water Heater"].temperature,
+	);
+};
+
 export const getThermostatModeStyle = (deviceMap) => {
 	let aMode =
 		deviceMap["Thermostat Mode"] != null
