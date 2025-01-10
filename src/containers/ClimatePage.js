@@ -74,7 +74,7 @@ export const getThermostatDisplayInfo = (deviceMap) => {
 	}
 	return (
 		<div className="currentTemp minor-text">
-			{getFormattedTemp(anIndoorTemp)}/{anIndoorHumidity}
+			{getFormattedTemp(anIndoorTemp)} / {anIndoorHumidity}
 		</div>
 	);
 };
@@ -123,9 +123,15 @@ export const getWaterHeaterHoverText = (deviceMap) => {
 };
 
 export const getWaterHeaterTemperature = (deviceMap) => {
-	return getFormattedTemp(
-		deviceMap["Water Heater"] && deviceMap["Water Heater"].temperature,
-	);
+	if (deviceMap["Water Heater"]) {
+		return (
+			getFormattedTemp(deviceMap["Water Heater"].temperature) +
+			" / " +
+			Math.round(parseFloat(deviceMap["Water Heater"].level) * 10) / 10 +
+			"kWh"
+		);
+	}
+	return "";
 };
 
 export const getThermostatModeStyle = (deviceMap) => {
