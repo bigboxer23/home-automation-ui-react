@@ -83,7 +83,7 @@ export const getWaterHeaterGaugeClass = (deviceMap) => {
 	const tankFullness =
 		deviceMap["Water Heater"] && deviceMap["Water Heater"].humidity;
 	const compressorRunning =
-		deviceMap["Water Heater"] && deviceMap["Water Heater"].level;
+		deviceMap["Water Heater"] && deviceMap["Water Heater"].status;
 	const mdi =
 		"mdi " +
 		(compressorRunning !== null && compressorRunning !== "" && tankFullness > 0
