@@ -22,6 +22,7 @@ const HouseButton = ({ room, time, changePage, houseOff }) => (
 			className="position-absolute bottom w-100 m-2 ps-2 pe-2"
 			onClick={(event) => houseOff(event, time, room.devices)}
 		>
+			<div className="minor-text">{getTransitionTime(time, room.devices)}</div>
 			{getScene(time, room.devices)}
 		</div>
 	</Button>
@@ -47,43 +48,44 @@ const mapDispatchToProps = (dispatch) =>
 	);
 
 const getButtonStyling = (time, scenes) => {
-	let aButtonText = getScene(time, scenes);
-	let aPrefix = "mdi mdi-";
-	switch (aButtonText) {
-		case "Vacation Mode":
-			return aPrefix + "calendar";
-		case "Evening Off":
-		case "House Off":
-			return aPrefix + "weather-night";
-		case "Evening On":
-			return aPrefix + "lightbulb-group-outline";
-		default:
-			return aPrefix + "clock";
+	const buttonText = getScene(time, scenes);
+	const iconMap = {
+		"Vacation Mode": "calendar",
+		"Evening Off": "weather-night",
+		"House Off": "weather-night",
+		"Evening On": "lightbulb-group-outline",
+	};
+	return "mdi mdi-" + (iconMap[buttonText] || "clock");
+};
+
+const getTransitionTime = (time, scenes) => {
+	const scene = getScene(time, scenes);
+	const transitionScene =
+		scene === "Evening On" ? "vSunset_Time" : "vSunrise_Time";
+	const device = time?.devices?.find((d) => d.id === transitionScene);
+	const transitionTime = device?.level;
+	if (!transitionTime || isNaN(new Date(transitionTime))) {
+		return ""; // Or return some default like "--"
 	}
+	return new Date(transitionTime)
+		.toLocaleTimeString([], {
+			hour: "numeric",
+			minute: "2-digit",
+			hour12: true,
+		})
+		.toLowerCase();
 };
 
 const getScene = (time, scenes) => {
-	if (isVacationMode(scenes)) {
-		return "Vacation Mode";
-	}
-	if (time != null) {
-		if (
-			time.devices.find((theDevice) => "IsMorning" === theDevice.id).status ===
-			"1"
-		) {
-			return "House Off";
-		} else if (
-			time.devices.find((theDevice) => "IsDay" === theDevice.id).status === "1"
-		) {
-			return "Evening On";
-		} else if (
-			time.devices.find((theDevice) => "IsEvening" === theDevice.id).status ===
-				"1" ||
-			time.devices.find((theDevice) => "IsNight" === theDevice.id).status ===
-				"1"
-		) {
+	if (isVacationMode(scenes)) return "Vacation Mode";
+	if (time?.devices) {
+		const deviceStatus = Object.fromEntries(
+			time.devices.map((d) => [d.id, d.status]),
+		);
+		if (deviceStatus["IsMorning"] === "1") return "House Off";
+		if (deviceStatus["IsDay"] === "1") return "Evening On";
+		if (deviceStatus["IsEvening"] === "1" || deviceStatus["IsNight"] === "1")
 			return "Evening Off";
-		}
 	}
 	return "House Off";
 };
