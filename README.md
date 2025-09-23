@@ -23,3 +23,105 @@ To build this project, run `yarn build`
 To debug/develop run `yarn start`
 
 deploy.sh can be used to push content to the public directory created with a deployed VeraAutomationHub so the content can be served.
+
+## Testing
+
+This project uses Jest and React Testing Library for testing.
+
+### Quick Start
+
+```bash
+# Run tests in watch mode
+npm test
+
+# Run tests once with coverage
+npm run test:ci
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+### Test Structure
+
+#### Test Files
+
+- Component tests: `src/__tests__/components/**/*.test.js`
+- Action tests: `src/__tests__/actions/**/*.test.js`
+- Test utilities: `src/test-utils.js`
+- Setup: `src/setupTests.js`
+
+#### Test Utilities
+
+Import from `src/test-utils.js` for enhanced testing:
+
+```js
+import { renderWithProviders, mockFetch, mockRoomData } from "../test-utils";
+
+// Render component with Redux store and router
+renderWithProviders(<MyComponent />);
+
+// Mock API calls
+mockFetch({ rooms: [] });
+
+// Use mock data
+const { rooms } = mockRoomData;
+```
+
+### Writing Tests
+
+#### Component Tests
+
+```js
+import React from "react";
+import { screen } from "@testing-library/react";
+import { renderWithProviders } from "../../../test-utils";
+import MyComponent from "../../../components/MyComponent";
+
+test("renders component", () => {
+	renderWithProviders(<MyComponent />);
+	expect(screen.getByText("Hello")).toBeInTheDocument();
+});
+```
+
+#### Action Tests
+
+```js
+import * as actions from "../../actions/index";
+import { mockFetch } from "../../test-utils";
+
+test("action dispatches correctly", () => {
+	const dispatch = jest.fn();
+	const getState = jest.fn(() => ({ house: { rooms: [] } }));
+
+	mockFetch();
+	const action = actions.myAction();
+	action(dispatch, getState);
+
+	expect(dispatch).toHaveBeenCalled();
+});
+```
+
+### Coverage
+
+Current coverage thresholds:
+
+- Statements: 12%
+- Branches: 3%
+- Functions: 5%
+- Lines: 12%
+
+Coverage excludes:
+
+- `src/index.js`
+- `src/setupTests.js`
+- `src/test-utils.js`
+- `src/__tests__/**`
+
+### Best Practices
+
+1. **Test behavior, not implementation**
+2. **Use descriptive test names**
+3. **Keep tests focused and simple**
+4. **Mock external dependencies**
+5. **Test error cases**
+6. **Use data-testid for complex selectors**
