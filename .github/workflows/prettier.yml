@@ -1,24 +1,45 @@
-name: Prettier CI Check
+name: CI
 
 on:
   pull_request:
   push:
+    branches:
+      - master
 
 jobs:
-  prettier:
+  test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.ref }}
-      - uses: actions/cache@v3
-        name: Configure npm caching
+
+      - name: Configure npm caching
+        uses: actions/cache@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/workflows/prettier.yml') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run tests
+        run: npm test -- --watchAll=false --coverage
+
       - name: Run prettier
-        run: |-
-          npx prettier --check .
+        run: npx prettier --check .
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: bigboxer23/home-automation-ui-react
