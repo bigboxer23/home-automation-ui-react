@@ -44,6 +44,7 @@ npm run test:coverage
 ### Test Structure
 
 #### Test Files
+
 - Component tests: `src/__tests__/components/**/*.test.js`
 - Action tests: `src/__tests__/actions/**/*.test.js`
 - Test utilities: `src/test-utils.js`
@@ -54,7 +55,7 @@ npm run test:coverage
 Import from `src/test-utils.js` for enhanced testing:
 
 ```js
-import { renderWithProviders, mockFetch, mockRoomData } from '../test-utils';
+import { renderWithProviders, mockFetch, mockRoomData } from "../test-utils";
 
 // Render component with Redux store and router
 renderWithProviders(<MyComponent />);
@@ -69,44 +70,48 @@ const { rooms } = mockRoomData;
 ### Writing Tests
 
 #### Component Tests
-```js
-import React from 'react';
-import { screen } from '@testing-library/react';
-import { renderWithProviders } from '../../../test-utils';
-import MyComponent from '../../../components/MyComponent';
 
-test('renders component', () => {
-  renderWithProviders(<MyComponent />);
-  expect(screen.getByText('Hello')).toBeInTheDocument();
+```js
+import React from "react";
+import { screen } from "@testing-library/react";
+import { renderWithProviders } from "../../../test-utils";
+import MyComponent from "../../../components/MyComponent";
+
+test("renders component", () => {
+	renderWithProviders(<MyComponent />);
+	expect(screen.getByText("Hello")).toBeInTheDocument();
 });
 ```
 
 #### Action Tests
+
 ```js
-import * as actions from '../../actions/index';
-import { mockFetch } from '../../test-utils';
+import * as actions from "../../actions/index";
+import { mockFetch } from "../../test-utils";
 
-test('action dispatches correctly', () => {
-  const dispatch = jest.fn();
-  const getState = jest.fn(() => ({ house: { rooms: [] } }));
+test("action dispatches correctly", () => {
+	const dispatch = jest.fn();
+	const getState = jest.fn(() => ({ house: { rooms: [] } }));
 
-  mockFetch();
-  const action = actions.myAction();
-  action(dispatch, getState);
+	mockFetch();
+	const action = actions.myAction();
+	action(dispatch, getState);
 
-  expect(dispatch).toHaveBeenCalled();
+	expect(dispatch).toHaveBeenCalled();
 });
 ```
 
 ### Coverage
 
 Current coverage thresholds:
+
 - Statements: 12%
 - Branches: 3%
 - Functions: 5%
 - Lines: 12%
 
 Coverage excludes:
+
 - `src/index.js`
 - `src/setupTests.js`
 - `src/test-utils.js`
