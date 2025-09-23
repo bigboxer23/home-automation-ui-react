@@ -62,7 +62,7 @@ export const getClimateData = (rooms) => {
 		.filter((theRoom) => "Climate" === theRoom.name)
 		.map((room) => room.devices)[0]
 		.reduce((map, device) => {
-			return (map[device.name] = device), map;
+			return ((map[device.name] = device), map);
 		}, {});
 };
 
