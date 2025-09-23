@@ -51,6 +51,7 @@ const getButtonStyling = (time, scenes) => {
 	const buttonText = getScene(time, scenes);
 	const iconMap = {
 		"Vacation Mode": "calendar",
+		"PTO Mode": "calendar",
 		"Evening Off": "weather-night",
 		"House Off": "weather-night",
 		"Evening On": "lightbulb-group-outline",
@@ -77,7 +78,8 @@ const getTransitionTime = (time, scenes) => {
 };
 
 const getScene = (time, scenes) => {
-	if (isVacationMode(scenes)) return "Vacation Mode";
+	if (isModeActive(scenes, "Vacation Mode")) return "Vacation Mode";
+	if (isModeActive(scenes, "Is PTO")) return "PTO Mode";
 	if (time?.devices) {
 		const deviceStatus = Object.fromEntries(
 			time.devices.map((d) => [d.id, d.status]),
@@ -90,8 +92,8 @@ const getScene = (time, scenes) => {
 	return "House Off";
 };
 
-const isVacationMode = (scenes) => {
-	return scenes?.find((scene) => "Vacation Mode" === scene.name)?.level === "1";
+const isModeActive = (scenes, modeName) => {
+	return scenes?.find((scene) => modeName === scene.name)?.level === "1";
 };
 
 export default connect(null, mapDispatchToProps)(HouseButton);
