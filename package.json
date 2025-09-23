@@ -47,7 +47,6 @@
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
 	},
-	"proxy": "http://192.168.0.7:8080",
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.20.5",
 		"prettier": "3.6.2",
