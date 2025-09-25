@@ -85,5 +85,4 @@ describe("MeuralPromptPageComponent", () => {
 		);
 		expect(textareaContainer).toBeInTheDocument();
 	});
-
 });
