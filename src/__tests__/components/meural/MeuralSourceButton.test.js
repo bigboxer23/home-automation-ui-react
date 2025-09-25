@@ -14,6 +14,9 @@ jest.mock("../../../actions", () => ({
 describe("MeuralSourceButton", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
+		actions.setMeuralSource.mockImplementation(() => (dispatch) => {
+			dispatch({ type: "SET_MEURAL_SOURCE" });
+		});
 		jest.useFakeTimers();
 	});
 
@@ -134,10 +137,10 @@ describe("MeuralSourceButton", () => {
 		const props = { device: { status: "0" } };
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
-		const googlePhotosButton = screen
-			.getByText("Google Photos")
+		const openAIButton = screen
+			.getByText("OpenAI TextCompletion")
 			.closest("button");
-		fireEvent.click(googlePhotosButton);
+		fireEvent.click(openAIButton);
 
 		await waitFor(() => {
 			expect(screen.getByText("Changing Source...")).toBeInTheDocument();
@@ -157,10 +160,10 @@ describe("MeuralSourceButton", () => {
 		const props = { device: { status: "0" } };
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
-		const googlePhotosButton = screen
-			.getByText("Google Photos")
+		const openAIButton = screen
+			.getByText("OpenAI TextCompletion")
 			.closest("button");
-		fireEvent.click(googlePhotosButton);
+		fireEvent.click(openAIButton);
 
 		await waitFor(() => {
 			expect(screen.getByText("Changing Source...")).toBeInTheDocument();
