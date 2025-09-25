@@ -13,9 +13,9 @@ class MeuralPromptPage extends React.Component {
 }
 
 const handleClose = (dispatch) => {
-	let value = document.getElementById("creationPrompt").value;
-	if (value != null && value.length > 0) {
-		updateOpenAIPrompt(value);
+	let element = document.getElementById("creationPrompt");
+	if (element && element.value != null && element.value.length > 0) {
+		updateOpenAIPrompt(element.value);
 		dispatch(push("/Meural"));
 	}
 };
