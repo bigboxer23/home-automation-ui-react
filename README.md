@@ -1,4 +1,5 @@
 [![CodeQL](https://github.com/bigboxer23/home-automation-ui-react/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/bigboxer23/home-automation-ui-react/actions/workflows/github-code-scanning/codeql)
+[![codecov](https://codecov.io/gh/bigboxer23/home-automation-ui-react/branch/master/graph/badge.svg)](https://codecov.io/gh/bigboxer23/home-automation-ui-react)
 
 ## About
 
@@ -103,25 +104,9 @@ test("action dispatches correctly", () => {
 
 ### Coverage
 
-Current coverage thresholds:
-
-- Statements: 12%
-- Branches: 3%
-- Functions: 5%
-- Lines: 12%
-
 Coverage excludes:
 
 - `src/index.js`
 - `src/setupTests.js`
 - `src/test-utils.js`
 - `src/__tests__/**`
-
-### Best Practices
-
-1. **Test behavior, not implementation**
-2. **Use descriptive test names**
-3. **Keep tests focused and simple**
-4. **Mock external dependencies**
-5. **Test error cases**
-6. **Use data-testid for complex selectors**
