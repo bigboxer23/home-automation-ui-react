@@ -19,9 +19,10 @@ const getSceneRoom = (rooms) => {
 	if (rooms == null) {
 		return [];
 	}
-	return rooms
+	const scenesRoom = rooms
 		.filter((theRoom) => "Scenes" === theRoom.name)
 		.map((room) => room.devices)[0];
+	return scenesRoom || [];
 };
 
 const mapStateToProps = (state) => ({
