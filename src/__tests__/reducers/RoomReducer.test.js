@@ -91,10 +91,7 @@ describe("roomReducer", () => {
 				data: newRooms,
 			};
 
-			const result = roomReducer(
-				{ ...initialState, isFetching: true },
-				action,
-			);
+			const result = roomReducer({ ...initialState, isFetching: true }, action);
 
 			expect(result.rooms).toEqual(newRooms);
 			expect(result.isFetching).toBe(false);
