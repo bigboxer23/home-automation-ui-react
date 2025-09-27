@@ -1,11 +1,14 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { thunk } from "redux-thunk";
 import rootReducer from "./reducers";
-import NavigationProvider from "./components/NavigationProvider";
+
+// Mock Router component for tests
+const MockRouter = ({ children }) => (
+	<div data-testid="mock-router">{children}</div>
+);
 
 // Create a custom render function that includes providers
 export function renderWithProviders(
@@ -19,9 +22,7 @@ export function renderWithProviders(
 	function Wrapper({ children }) {
 		return (
 			<Provider store={store}>
-				<BrowserRouter>
-					<NavigationProvider>{children}</NavigationProvider>
-				</BrowserRouter>
+				<MockRouter>{children}</MockRouter>
 			</Provider>
 		);
 	}

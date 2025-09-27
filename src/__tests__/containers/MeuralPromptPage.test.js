@@ -6,8 +6,8 @@ import { renderWithProviders, mockFetch } from "../../test-utils";
 import { updateOpenAIPrompt } from "../../actions";
 
 // Mock the actions and router
-jest.mock("../utils/navigation", () => ({
-	...jest.requireActual("../utils/navigation"),
+jest.mock("../../utils/navigation", () => ({
+	...jest.requireActual("../../utils/navigation"),
 	push: jest.fn(() => ({
 		type: "@@router/CALL_HISTORY_METHOD",
 		payload: { method: "push", args: ["/Meural"] },
@@ -37,7 +37,7 @@ describe("MeuralPromptPage", () => {
 		}));
 
 		// Re-setup push mock after clearAllMocks
-		const { push } = require("../utils/navigation");
+		const { push } = require("../../utils/navigation");
 		push.mockImplementation(() => ({
 			type: "@@router/CALL_HISTORY_METHOD",
 			payload: { method: "push", args: ["/Meural"] },
@@ -175,7 +175,7 @@ describe("MeuralPromptPage", () => {
 		});
 
 		// Get reference to the push function to spy on
-		const { push } = require("../utils/navigation");
+		const { push } = require("../../utils/navigation");
 
 		const createButton = screen.getByRole("button", {
 			name: "Create New Image",
@@ -262,7 +262,7 @@ describe("MeuralPromptPage", () => {
 		});
 
 		// Get reference to the push function to spy on
-		const { push } = require("../utils/navigation");
+		const { push } = require("../../utils/navigation");
 
 		const textarea = screen.getByPlaceholderText(
 			"Enter prompt to generate image from",
@@ -329,7 +329,7 @@ describe("MeuralPromptPage", () => {
 		});
 
 		// Get reference to the push function to spy on
-		const { push } = require("../utils/navigation");
+		const { push } = require("../../utils/navigation");
 
 		const textarea = screen.getByPlaceholderText(
 			"Enter prompt to generate image from",
@@ -350,7 +350,7 @@ describe("MeuralPromptPage", () => {
 		});
 
 		// Get reference to the push function to spy on
-		const { push } = require("../utils/navigation");
+		const { push } = require("../../utils/navigation");
 
 		const headerSpan = screen.getByText("Meural Control").closest("span");
 
@@ -374,7 +374,7 @@ describe("MeuralPromptPage mapDispatchToProps", () => {
 		mockFetch({ rooms: mockRooms });
 
 		// Re-setup push mock after clearAllMocks
-		const { push } = require("../utils/navigation");
+		const { push } = require("../../utils/navigation");
 		push.mockImplementation(() => ({
 			type: "@@router/CALL_HISTORY_METHOD",
 			payload: { method: "push", args: ["/Meural"] },

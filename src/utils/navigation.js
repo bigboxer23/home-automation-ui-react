@@ -20,8 +20,8 @@ export const push = (path) => {
 		}
 		// Return a dummy action to keep Redux happy
 		return {
-			type: '@@router/NAVIGATE',
-			payload: { path }
+			type: "@@router/NAVIGATE",
+			payload: { path },
 		};
 	};
 };
