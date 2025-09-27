@@ -4,8 +4,8 @@ import { renderWithProviders } from "../../test-utils";
 import MainPage, { mapRoom } from "../../containers/MainPage";
 
 // Mock the connected-react-router push action
-jest.mock("connected-react-router", () => ({
-	...jest.requireActual("connected-react-router"),
+jest.mock("../../utils/navigation", () => ({
+	...jest.requireActual("../../utils/navigation"),
 	push: jest.fn(),
 }));
 

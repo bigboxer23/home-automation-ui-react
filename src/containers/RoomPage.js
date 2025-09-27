@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { useParams } from "react-router-dom";
+import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import {
 	fetchStatusIfNecessary,
@@ -11,14 +12,25 @@ import {
 import RoomPageComponent from "../components/room/RoomPageComponent";
 import { getRoomTemp, isFan, isLight } from "../components/room/RoomUtils";
 
-class RoomPage extends React.Component {
-	componentDidMount() {
-		this.props.fetchStatus();
-	}
+function RoomPage(props) {
+	useEffect(() => {
+		props.fetchStatus();
+	}, [props]);
 
-	render() {
-		return <RoomPageComponent {...this.props} />;
-	}
+	return <RoomPageComponent {...props} />;
+}
+
+function RoomPageWithParams() {
+	const { name } = useParams();
+	const ConnectedRoomPage = connect(
+		(state) => ({
+			room: filterRoom(state.house.rooms, name),
+			rooms: state.house.rooms,
+		}),
+		mapDispatchToProps,
+	)(RoomPage);
+
+	return <ConnectedRoomPage />;
 }
 
 const filterRoom = (rooms, name) => {
@@ -119,11 +131,6 @@ export const getIntegerLevel = (device) => {
 	return device.level === "NULL" ? 0 : parseInt(device.level, 10);
 };
 
-const mapStateToProps = (state, props) => ({
-	room: filterRoom(state.house.rooms, props.match.params.name),
-	rooms: state.house.rooms,
-});
-
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
@@ -145,4 +152,4 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch,
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
+export default RoomPageWithParams;

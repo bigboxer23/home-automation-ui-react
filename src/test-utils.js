@@ -1,42 +1,40 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { ConnectedRouter } from "connected-react-router";
-import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware } from "redux";
 import { thunk } from "redux-thunk";
-import createRootReducer from "./reducers";
+import rootReducer from "./reducers";
+
+// Mock Router component for tests
+const MockRouter = ({ children }) => (
+	<div data-testid="mock-router">{children}</div>
+);
 
 // Create a custom render function that includes providers
 export function renderWithProviders(
 	ui,
 	{
 		preloadedState = {},
-		history = createBrowserHistory(),
-		store = createTestStore(preloadedState, history),
+		store = createTestStore(preloadedState),
 		...renderOptions
 	} = {},
 ) {
 	function Wrapper({ children }) {
 		return (
 			<Provider store={store}>
-				<ConnectedRouter history={history}>{children}</ConnectedRouter>
+				<MockRouter>{children}</MockRouter>
 			</Provider>
 		);
 	}
 
 	return {
 		store,
-		history,
 		...render(ui, { wrapper: Wrapper, ...renderOptions }),
 	};
 }
 
 // Create a test store
-export function createTestStore(
-	preloadedState = {},
-	history = createBrowserHistory(),
-) {
+export function createTestStore(preloadedState = {}) {
 	const defaultState = {
 		house: {
 			rooms: [],
@@ -47,7 +45,7 @@ export function createTestStore(
 	};
 
 	return createStore(
-		createRootReducer(history),
+		rootReducer,
 		{ ...defaultState, ...preloadedState },
 		applyMiddleware(thunk),
 	);

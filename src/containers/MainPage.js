@@ -3,7 +3,7 @@ import { fetchStatusIfNecessary, garageClicked, roomClicked } from "../actions";
 import MainPageComponent from "../components/MainPageComponent";
 import React from "react";
 import RoomButton from "../components/room/RoomButton";
-import { push } from "connected-react-router";
+import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import LoadingStatusComponent from "../components/LoadingStatusComponent";
 import GarageButton from "../components/garage/GarageButton";

@@ -6,8 +6,8 @@ import MeuralButton, {
 } from "../../../components/meural/MeuralButton";
 
 // Mock the connected-react-router push action
-jest.mock("connected-react-router", () => ({
-	...jest.requireActual("connected-react-router"),
+jest.mock("../../../utils/navigation", () => ({
+	...jest.requireActual("../../../utils/navigation"),
 	push: jest.fn(),
 }));
 
