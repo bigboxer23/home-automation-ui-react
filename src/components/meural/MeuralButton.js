@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { push } from "connected-react-router";
+import { push } from "../../utils/navigation";
 import { setMeuralOn } from "../../actions";
 import { findMeuralDeviceFromRoom, isOn } from "../../containers/MeuralPage";
 

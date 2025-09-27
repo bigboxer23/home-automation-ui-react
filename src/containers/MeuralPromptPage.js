@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import MeuralPromptPageComponent from "../components/meural/MeuralPromptPageComponent";
 import { mapStateToProps } from "./MeuralPage";

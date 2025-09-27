@@ -1,42 +1,39 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { ConnectedRouter } from "connected-react-router";
-import { createBrowserHistory } from "history";
+import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { thunk } from "redux-thunk";
-import createRootReducer from "./reducers";
+import rootReducer from "./reducers";
+import NavigationProvider from "./components/NavigationProvider";
 
 // Create a custom render function that includes providers
 export function renderWithProviders(
 	ui,
 	{
 		preloadedState = {},
-		history = createBrowserHistory(),
-		store = createTestStore(preloadedState, history),
+		store = createTestStore(preloadedState),
 		...renderOptions
 	} = {},
 ) {
 	function Wrapper({ children }) {
 		return (
 			<Provider store={store}>
-				<ConnectedRouter history={history}>{children}</ConnectedRouter>
+				<BrowserRouter>
+					<NavigationProvider>{children}</NavigationProvider>
+				</BrowserRouter>
 			</Provider>
 		);
 	}
 
 	return {
 		store,
-		history,
 		...render(ui, { wrapper: Wrapper, ...renderOptions }),
 	};
 }
 
 // Create a test store
-export function createTestStore(
-	preloadedState = {},
-	history = createBrowserHistory(),
-) {
+export function createTestStore(preloadedState = {}) {
 	const defaultState = {
 		house: {
 			rooms: [],
@@ -47,7 +44,7 @@ export function createTestStore(
 	};
 
 	return createStore(
-		createRootReducer(history),
+		rootReducer,
 		{ ...defaultState, ...preloadedState },
 		applyMiddleware(thunk),
 	);

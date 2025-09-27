@@ -4,8 +4,8 @@ import { renderWithProviders, mockRoomData } from "../../../test-utils";
 import HouseButton from "../../../components/house/HouseButton";
 
 // Mock the connected-react-router push action
-jest.mock("connected-react-router", () => ({
-	...jest.requireActual("connected-react-router"),
+jest.mock("../utils/navigation", () => ({
+	...jest.requireActual("../utils/navigation"),
 	push: jest.fn(),
 }));
 

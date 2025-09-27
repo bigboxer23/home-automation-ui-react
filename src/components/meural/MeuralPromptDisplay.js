@@ -1,6 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
-import { push } from "connected-react-router";
+import { push } from "../../utils/navigation";
 import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
 

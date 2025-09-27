@@ -7,10 +7,9 @@ import { thunk } from "redux-thunk";
 import ScenePage from "./containers/ScenePage";
 import MainPage from "./containers/MainPage";
 import ClimatePage from "./containers/ClimatePage";
-import { routerMiddleware, ConnectedRouter } from "connected-react-router";
-import { Route } from "react-router";
-import { createBrowserHistory } from "history";
-import createRootReducer from "./reducers";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import rootReducer from "./reducers";
+import NavigationProvider from "./components/NavigationProvider";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "@mdi/font/css/materialdesignicons.min.css";
@@ -23,34 +22,31 @@ import ErrorPage from "./containers/ErrorPage";
 import MeuralPage from "./containers/MeuralPage";
 import MeuralPromptPage from "./containers/MeuralPromptPage";
 
-export const history = createBrowserHistory();
-
 export default function configureStore(preloadedState) {
 	return createStore(
-		createRootReducer(history), // root reducer with router state
+		rootReducer,
 		preloadedState,
-		compose(
-			applyMiddleware(
-				thunk,
-				routerMiddleware(history), // for dispatching history actions
-			),
-		),
+		compose(applyMiddleware(thunk)),
 	);
 }
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<Provider store={configureStore({})}>
-		<ConnectedRouter history={history}>
-			<Route exact path="/" component={MainPage} />
-			<Route path="/Scenes" component={ScenePage} />
-			<Route path="/House" component={HousePage} />
-			<Route path="/Climate" component={ClimatePage} />
-			<Route path="/Room/:name" component={RoomPage} />
-			<Route path="/Garage" component={GaragePage} />
-			<Route path="/Security" component={CameraPage} />
-			<Route path="/Grow" component={CameraPage} />
-			<Route path="/Meural" exact={true} component={MeuralPage} />
-			<Route path="/Meural/prompt" component={MeuralPromptPage} />
-			<Route path="/error" component={ErrorPage} />
-		</ConnectedRouter>
+		<BrowserRouter>
+			<NavigationProvider>
+				<Routes>
+					<Route path="/" element={<MainPage />} />
+					<Route path="/Scenes" element={<ScenePage />} />
+					<Route path="/House" element={<HousePage />} />
+					<Route path="/Climate" element={<ClimatePage />} />
+					<Route path="/Room/:name" element={<RoomPage />} />
+					<Route path="/Garage" element={<GaragePage />} />
+					<Route path="/Security" element={<CameraPage />} />
+					<Route path="/Grow" element={<CameraPage />} />
+					<Route path="/Meural" element={<MeuralPage />} />
+					<Route path="/Meural/prompt" element={<MeuralPromptPage />} />
+					<Route path="/error" element={<ErrorPage />} />
+				</Routes>
+			</NavigationProvider>
+		</BrowserRouter>
 	</Provider>,
 );
