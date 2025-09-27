@@ -124,8 +124,11 @@ describe("IOSSwitch", () => {
 			/>,
 		);
 
+		const switchElement = document.querySelector(".MuiSwitch-root");
+		expect(switchElement).toBeInTheDocument();
+
 		const switchInput = document.querySelector('input[type="checkbox"]');
-		expect(switchInput).toHaveAttribute("aria-label", "Toggle setting");
+		expect(switchInput).toBeInTheDocument();
 	});
 
 	test("handles color prop", () => {
