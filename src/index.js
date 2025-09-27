@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "jquery";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import thunkMiddleware from "redux-thunk";
+import { thunk } from "redux-thunk";
 import ScenePage from "./containers/ScenePage";
 import MainPage from "./containers/MainPage";
 import ClimatePage from "./containers/ClimatePage";
@@ -31,7 +31,7 @@ export default function configureStore(preloadedState) {
 		preloadedState,
 		compose(
 			applyMiddleware(
-				thunkMiddleware,
+				thunk,
 				routerMiddleware(history), // for dispatching history actions
 			),
 		),
