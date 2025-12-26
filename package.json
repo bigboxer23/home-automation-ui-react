@@ -32,8 +32,7 @@
 		"react-spinkit": "^3.0.0",
 		"redux-thunk": "^3.1.0",
 		"serialize-javascript": "^7.0.1",
-		"yargs-parser": ">=22.0.0",
-		"yarn": "^1.22.22"
+		"yargs-parser": ">=22.0.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -73,8 +72,9 @@
 			}
 		}
 	},
-	"resolutions": {
-		"sanitize.css": "12.0.1"
+	"overrides": {
+		"nth-check": "^2.1.1",
+		"postcss": "^8.4.49"
 	},
 	"browserslist": [
 		">0.5%",

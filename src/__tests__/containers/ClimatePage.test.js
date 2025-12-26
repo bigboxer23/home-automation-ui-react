@@ -6,8 +6,9 @@ import ClimatePage, {
 	getThermostatBattery,
 	getClimateData,
 	getThermostatDisplayInfo,
-	getWaterHeaterGaugeClass,
-	getWaterHeaterHoverText,
+	getWaterHeaterColor,
+	getWaterHeaterWidth,
+	getWaterHeaterCurrentTemp,
 	getWaterHeaterTemperature,
 	getThermostatModeStyle,
 	getCurrentOutsideTemp,
@@ -237,79 +238,111 @@ describe("getThermostatDisplayInfo utility function", () => {
 	});
 });
 
-describe("getWaterHeaterGaugeClass utility function", () => {
-	test("returns gauge-low for 1/3 tank", () => {
+describe("getWaterHeaterColor utility function", () => {
+	test("returns btn-danger for low tank (<=20%)", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 0.33, status: "" },
+			"Water Heater": { humidity: 0.2, status: "" },
 		};
-		const result = getWaterHeaterGaugeClass(deviceMap);
-		expect(result).toBe("mdi mdi-gauge-low");
+		const result = getWaterHeaterColor(deviceMap);
+		expect(result).toBe("btn-danger");
 	});
 
-	test("returns gauge for 2/3 tank", () => {
-		const deviceMap = {
-			"Water Heater": { humidity: 0.66, status: "" },
-		};
-		const result = getWaterHeaterGaugeClass(deviceMap);
-		expect(result).toBe("mdi mdi-gauge");
-	});
-
-	test("returns gauge-full for full tank", () => {
-		const deviceMap = {
-			"Water Heater": { humidity: 1, status: "" },
-		};
-		const result = getWaterHeaterGaugeClass(deviceMap);
-		expect(result).toBe("mdi mdi-gauge-full");
-	});
-
-	test("returns gauge-empty danger for empty tank", () => {
+	test("returns btn-danger for empty tank", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0, status: "" },
 		};
-		const result = getWaterHeaterGaugeClass(deviceMap);
-		expect(result).toBe("mdi mdi-gauge-empty danger");
+		const result = getWaterHeaterColor(deviceMap);
+		expect(result).toBe("btn-danger");
 	});
 
-	test("includes btn-active when compressor running", () => {
+	test("returns opacity-0 for inactive compressor with partial tank", () => {
+		const deviceMap = {
+			"Water Heater": { humidity: 0.66, status: "" },
+		};
+		const result = getWaterHeaterColor(deviceMap);
+		expect(result).toBe("opacity-0");
+	});
+
+	test("returns wh-temp-gauge-active for running compressor with partial tank", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66, status: "1" },
 		};
-		const result = getWaterHeaterGaugeClass(deviceMap);
-		expect(result).toBe("mdi btn-active mdi-gauge");
+		const result = getWaterHeaterColor(deviceMap);
+		expect(result).toBe("wh-temp-gauge-active ");
+	});
+
+	test("returns wh-temp-gauge-full for full tank with inactive compressor", () => {
+		const deviceMap = {
+			"Water Heater": { humidity: 1, status: "" },
+		};
+		const result = getWaterHeaterColor(deviceMap);
+		expect(result).toBe("opacity-0 wh-temp-gauge-full");
+	});
+
+	test("returns wh-temp-gauge-active and wh-temp-gauge-full for full tank with running compressor", () => {
+		const deviceMap = {
+			"Water Heater": { humidity: 1, status: "1" },
+		};
+		const result = getWaterHeaterColor(deviceMap);
+		expect(result).toBe("wh-temp-gauge-active  wh-temp-gauge-full");
 	});
 });
 
-describe("getWaterHeaterHoverText utility function", () => {
-	test("returns correct text for 1/3 tank", () => {
+describe("getWaterHeaterWidth utility function", () => {
+	test("returns correct width for 0% tank", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 0.33, level: "" },
+			"Water Heater": { humidity: 0 },
 		};
-		const result = getWaterHeaterHoverText(deviceMap);
-		expect(result).toBe("tank 1/3 full.");
+		const result = getWaterHeaterWidth(deviceMap);
+		expect(result).toEqual({ width: "0px" });
 	});
 
-	test("returns correct text for 2/3 tank", () => {
+	test("returns correct width for 50% tank", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 0.66, level: "" },
+			"Water Heater": { humidity: 0.5 },
 		};
-		const result = getWaterHeaterHoverText(deviceMap);
-		expect(result).toBe("tank 2/3 full.");
+		const result = getWaterHeaterWidth(deviceMap);
+		expect(result).toEqual({ width: "20px" });
 	});
 
-	test("returns correct text for full tank", () => {
+	test("returns correct width for full tank", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 1, level: "" },
+			"Water Heater": { humidity: 1 },
 		};
-		const result = getWaterHeaterHoverText(deviceMap);
-		expect(result).toBe("tank is full.");
+		const result = getWaterHeaterWidth(deviceMap);
+		expect(result).toEqual({ width: "40px" });
 	});
 
-	test("includes compressor status when running", () => {
+	test("returns correct width for partial tank (66%)", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 0.66, level: "2.5" },
+			"Water Heater": { humidity: 0.66 },
 		};
-		const result = getWaterHeaterHoverText(deviceMap);
-		expect(result).toBe("Compressor is running, tank 2/3 full.");
+		const result = getWaterHeaterWidth(deviceMap);
+		expect(result.width).toMatch(/^26\.4/); // Account for floating point precision
+	});
+});
+
+describe("getWaterHeaterCurrentTemp utility function", () => {
+	test("returns formatted temperature from category field", () => {
+		const deviceMap = {
+			"Water Heater": { category: 120 },
+		};
+		const result = getWaterHeaterCurrentTemp(deviceMap);
+		expect(result).toBe("120°");
+	});
+
+	test("returns formatted temperature for numeric string", () => {
+		const deviceMap = {
+			"Water Heater": { category: "125" },
+		};
+		const result = getWaterHeaterCurrentTemp(deviceMap);
+		expect(result).toBe("125°");
+	});
+
+	test("handles missing water heater gracefully", () => {
+		const deviceMap = {};
+		const result = getWaterHeaterCurrentTemp(deviceMap);
+		expect(result).toBe("NaN°");
 	});
 });
 

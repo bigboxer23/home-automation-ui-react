@@ -173,6 +173,29 @@ body {
 	justify-content: center;
 }
 
+.wh-temp-display {
+	border-radius: 0.5rem;
+	color: white;
+	right: inherit;
+	left: 0.5rem;
+	max-width: 40px;
+	width: 100%;
+	min-height: 24px;
+}
+
+.wh-temp-gauge {
+	left: 0 !important;
+	border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.wh-temp-gauge-full {
+	border-radius: 0.5rem !important;
+}
+
+.wh-temp-gauge-active {
+	background-color: #3880ff !important;
+}
+
 .currentTemp {
 	color: rgba(0, 0, 0, 0.8);
 }
@@ -223,7 +246,8 @@ body {
 }
 
 .btn-success .temp-display,
-.total-lights-bg {
+.total-lights-bg,
+.wh-temp-display {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -272,6 +296,11 @@ body {
 
 .danger {
 	color: #dc3545;
+	font-weight: 700;
+}
+
+.danger-important {
+	color: #dc3545 !important;
 	font-weight: 700;
 }
 
