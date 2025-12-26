@@ -7,9 +7,10 @@ import {
 	getClimateData,
 	getCurrentOutsideTemp,
 	getThermostatDisplayInfo,
-	getWaterHeaterGaugeClass,
-	getWaterHeaterHoverText,
+	getWaterHeaterColor,
+	getWaterHeaterCurrentTemp,
 	getWaterHeaterTemperature,
+	getWaterHeaterWidth,
 } from "../../containers/ClimatePage";
 import { getFormattedTemp, getTempStyle } from "../../utils/WeatherUtilities";
 
@@ -20,10 +21,22 @@ const ClimateButton = (props) => (
 		size="lg"
 		className={"m-1 position-relative d-flex justify-content-center"}
 	>
-		<i
-			className={getWaterHeaterGaugeClass(props.deviceMap)}
-			title={getWaterHeaterHoverText(props.deviceMap)}
-		></i>
+		<div
+			className={
+				"temp-display wh-temp-display position-absolute d-flex justify-content-center align-items-center"
+			}
+		>
+			<div
+				className={
+					"wh-temp-display wh-temp-gauge position-absolute " +
+					getWaterHeaterColor(props.deviceMap)
+				}
+				style={getWaterHeaterWidth(props.deviceMap)}
+			></div>
+			<div className={"minor-text"}>
+				{getWaterHeaterCurrentTemp(props.deviceMap)}
+			</div>
+		</div>
 		<div
 			className="temp-display pe-1 ps-1 position-absolute"
 			style={getTempStyle(getCurrentOutsideTemp(props.deviceMap))}

@@ -58,13 +58,13 @@ describe("ClimateButton", () => {
 		expect(screen.getByRole("button")).toBeInTheDocument();
 	});
 
-	test("displays water heater gauge icon", () => {
+	test("displays water heater gauge visual display", () => {
 		renderWithProviders(<ClimateButton />, {
 			preloadedState: mockState,
 		});
 
-		const gaugeIcon = document.querySelector(".mdi-gauge");
-		expect(gaugeIcon).toBeInTheDocument();
+		const gaugeDisplay = document.querySelector(".wh-temp-gauge");
+		expect(gaugeDisplay).toBeInTheDocument();
 	});
 
 	test("displays outside temperature", () => {
@@ -114,8 +114,7 @@ describe("ClimateButton", () => {
 		expect(screen.getByText("Climate")).toBeInTheDocument();
 	});
 
-	test("displays low tank gauge state", () => {
-		// Test tank 1/3 full
+	test("displays danger state for low tank (<=20%)", () => {
 		const lowTankState = {
 			house: {
 				rooms: [
@@ -125,7 +124,8 @@ describe("ClimateButton", () => {
 							{
 								name: "Water Heater",
 								temperature: 120,
-								humidity: 0.33,
+								category: 115,
+								humidity: 0.15,
 								level: "1.5",
 								status: "",
 							},
@@ -139,11 +139,11 @@ describe("ClimateButton", () => {
 			preloadedState: lowTankState,
 		});
 
-		const gaugeIcon = document.querySelector(".mdi-gauge-low");
-		expect(gaugeIcon).toBeInTheDocument();
+		const gaugeDisplay = document.querySelector(".btn-danger");
+		expect(gaugeDisplay).toBeInTheDocument();
 	});
 
-	test("displays full tank gauge state", () => {
+	test("displays full tank gauge state with appropriate class", () => {
 		// Test tank full
 		const fullTankState = {
 			house: {
@@ -154,6 +154,7 @@ describe("ClimateButton", () => {
 							{
 								name: "Water Heater",
 								temperature: 120,
+								category: 130,
 								humidity: 1,
 								level: "3.0",
 								status: "1",
@@ -168,12 +169,12 @@ describe("ClimateButton", () => {
 			preloadedState: fullTankState,
 		});
 
-		const gaugeIcon = document.querySelector(".mdi-gauge-full");
-		expect(gaugeIcon).toBeInTheDocument();
+		const gaugeDisplay = document.querySelector(".wh-temp-gauge-full");
+		expect(gaugeDisplay).toBeInTheDocument();
 	});
 
-	test("shows empty gauge for invalid tank state", () => {
-		const emptyTankState = {
+	test("displays active gauge when compressor is running", () => {
+		const activeCompressorState = {
 			house: {
 				rooms: [
 					{
@@ -182,9 +183,10 @@ describe("ClimateButton", () => {
 							{
 								name: "Water Heater",
 								temperature: 120,
-								humidity: 0,
-								level: "0",
-								status: "",
+								category: 118,
+								humidity: 0.66,
+								level: "2.5",
+								status: "1",
 							},
 						],
 					},
@@ -193,10 +195,10 @@ describe("ClimateButton", () => {
 		};
 
 		renderWithProviders(<ClimateButton />, {
-			preloadedState: emptyTankState,
+			preloadedState: activeCompressorState,
 		});
 
-		const gaugeIcon = document.querySelector(".mdi-gauge-empty");
-		expect(gaugeIcon).toBeInTheDocument();
+		const gaugeDisplay = document.querySelector(".wh-temp-gauge-active");
+		expect(gaugeDisplay).toBeInTheDocument();
 	});
 });
