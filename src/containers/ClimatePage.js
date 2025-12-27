@@ -88,7 +88,7 @@ export const getWaterHeaterColor = (deviceMap) => {
 		return "btn-danger";
 	}
 	let whClass =
-		compressorRunning !== null && compressorRunning !== ""
+		compressorRunning !== null && compressorRunning !== "off"
 			? "wh-temp-gauge-active "
 			: "opacity-0";
 	if (tankFullness >= 1) {

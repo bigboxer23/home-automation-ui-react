@@ -241,7 +241,7 @@ describe("getThermostatDisplayInfo utility function", () => {
 describe("getWaterHeaterColor utility function", () => {
 	test("returns btn-danger for low tank (<=20%)", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 0.2, status: "" },
+			"Water Heater": { humidity: 0.2, status: "off" },
 		};
 		const result = getWaterHeaterColor(deviceMap);
 		expect(result).toBe("btn-danger");
@@ -249,7 +249,7 @@ describe("getWaterHeaterColor utility function", () => {
 
 	test("returns btn-danger for empty tank", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 0, status: "" },
+			"Water Heater": { humidity: 0, status: "off" },
 		};
 		const result = getWaterHeaterColor(deviceMap);
 		expect(result).toBe("btn-danger");
@@ -257,7 +257,7 @@ describe("getWaterHeaterColor utility function", () => {
 
 	test("returns opacity-0 for inactive compressor with partial tank", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 0.66, status: "" },
+			"Water Heater": { humidity: 0.66, status: "off" },
 		};
 		const result = getWaterHeaterColor(deviceMap);
 		expect(result).toBe("opacity-0");
@@ -271,9 +271,17 @@ describe("getWaterHeaterColor utility function", () => {
 		expect(result).toBe("wh-temp-gauge-active ");
 	});
 
+	test("treats empty string status as active (not off)", () => {
+		const deviceMap = {
+			"Water Heater": { humidity: 0.66, status: "" },
+		};
+		const result = getWaterHeaterColor(deviceMap);
+		expect(result).toBe("wh-temp-gauge-active ");
+	});
+
 	test("returns wh-temp-gauge-full for full tank with inactive compressor", () => {
 		const deviceMap = {
-			"Water Heater": { humidity: 1, status: "" },
+			"Water Heater": { humidity: 1, status: "off" },
 		};
 		const result = getWaterHeaterColor(deviceMap);
 		expect(result).toBe("opacity-0 wh-temp-gauge-full");
