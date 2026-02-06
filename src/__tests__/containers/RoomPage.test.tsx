@@ -70,24 +70,24 @@ describe("RoomPage", () => {
 	});
 
 	test("renders RoomPageComponent", () => {
-		renderWithProviders(<RoomPage {...mockRouterProps} />, {
-			preloadedState: mockRoomsState,
+		renderWithProviders(<RoomPage {...(mockRouterProps as any)} />, {
+			preloadedState: mockRoomsState as any,
 		});
 
 		expect(screen.getByText("Living Room")).toBeInTheDocument();
 	});
 
 	test("componentDidMount calls fetchStatus", () => {
-		renderWithProviders(<RoomPage {...mockRouterProps} />, {
-			preloadedState: mockRoomsState,
+		renderWithProviders(<RoomPage {...(mockRouterProps as any)} />, {
+			preloadedState: mockRoomsState as any,
 		});
 
-		expect(global.fetch).toHaveBeenCalled();
+		expect((globalThis as any).fetch).toHaveBeenCalled();
 	});
 
 	test("filters and sorts room devices correctly", () => {
-		renderWithProviders(<RoomPage {...mockRouterProps} />, {
-			preloadedState: mockRoomsState,
+		renderWithProviders(<RoomPage {...(mockRouterProps as any)} />, {
+			preloadedState: mockRoomsState as any,
 		});
 
 		// Should display devices from the Living Room that are lights or motion sensors
@@ -105,8 +105,8 @@ describe("RoomPage", () => {
 			},
 		};
 
-		renderWithProviders(<RoomPage {...nonExistentRoomProps} />, {
-			preloadedState: mockRoomsState,
+		renderWithProviders(<RoomPage {...(nonExistentRoomProps as any)} />, {
+			preloadedState: mockRoomsState as any,
 		});
 
 		// Should still render basic room component structure
@@ -121,8 +121,8 @@ describe("RoomPage", () => {
 			},
 		};
 
-		renderWithProviders(<RoomPage {...mockRouterProps} />, {
-			preloadedState: nullRoomsState,
+		renderWithProviders(<RoomPage {...(mockRouterProps as any)} />, {
+			preloadedState: nullRoomsState as any,
 		});
 
 		// Should render basic structure even with null rooms
@@ -134,55 +134,55 @@ describe("RoomPage", () => {
 describe("RoomPage utility functions", () => {
 	describe("getBatteryStyle", () => {
 		test("returns green for 100% battery", () => {
-			const device = { level: "100" };
+			const device = { level: "100" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#03902B");
 		});
 
 		test("returns green for 0% battery", () => {
-			const device = { level: "0" };
+			const device = { level: "0" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#03902B");
 		});
 
 		test("returns light green for 95% battery", () => {
-			const device = { level: "95" };
+			const device = { level: "95" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#2DC558");
 		});
 
 		test("returns yellow for 70% battery", () => {
-			const device = { level: "70" };
+			const device = { level: "70" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#FECF3B");
 		});
 
 		test("returns orange for 50% battery", () => {
-			const device = { level: "50" };
+			const device = { level: "50" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#EC9800");
 		});
 
 		test("returns red-orange for 35% battery", () => {
-			const device = { level: "35" };
+			const device = { level: "35" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#DD531E");
 		});
 
 		test("returns red for 25% battery", () => {
-			const device = { level: "25" };
+			const device = { level: "25" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#C53600");
 		});
 
 		test("returns dark red for 15% battery", () => {
-			const device = { level: "15" };
+			const device = { level: "15" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#B10909");
 		});
 
 		test("returns darkest red for 5% battery", () => {
-			const device = { level: "5" };
+			const device = { level: "5" } as any;
 			const style = getBatteryStyle(device);
 			expect(style.backgroundColor).toBe("#6F0015");
 		});
@@ -190,44 +190,44 @@ describe("RoomPage utility functions", () => {
 
 	describe("getBatteryContent", () => {
 		test("returns percentage for valid level", () => {
-			const device = { level: "85" };
+			const device = { level: "85" } as any;
 			expect(getBatteryContent(device)).toBe("85%");
 		});
 
 		test("returns 'Not Available' for NULL level", () => {
-			const device = { level: "NULL" };
+			const device = { level: "NULL" } as any;
 			expect(getBatteryContent(device)).toBe("Not Available");
 		});
 
 		test("returns percentage for 0% level", () => {
-			const device = { level: "0" };
+			const device = { level: "0" } as any;
 			expect(getBatteryContent(device)).toBe("0%");
 		});
 
 		test("returns percentage for 100% level", () => {
-			const device = { level: "100" };
+			const device = { level: "100" } as any;
 			expect(getBatteryContent(device)).toBe("100%");
 		});
 	});
 
 	describe("isMotionDevice", () => {
 		test("returns true for device ending with Battery", () => {
-			const device = { name: "Motion Battery" };
+			const device = { name: "Motion Battery" } as any;
 			expect(isMotionDevice(device)).toBe(true);
 		});
 
 		test("returns true for complex name ending with Battery", () => {
-			const device = { name: "Living Room Motion Sensor Battery" };
+			const device = { name: "Living Room Motion Sensor Battery" } as any;
 			expect(isMotionDevice(device)).toBe(true);
 		});
 
 		test("returns false for device not ending with Battery", () => {
-			const device = { name: "Light Switch" };
+			const device = { name: "Light Switch" } as any;
 			expect(isMotionDevice(device)).toBe(false);
 		});
 
 		test("returns false for device with Battery in middle", () => {
-			const device = { name: "Battery Powered Light" };
+			const device = { name: "Battery Powered Light" } as any;
 			expect(isMotionDevice(device)).toBe(false);
 		});
 	});
@@ -237,9 +237,9 @@ describe("RoomPage utility functions", () => {
 			const room = {
 				name: "Living Room",
 				devices: [],
-			};
+			} as any;
 
-			const title = getHeaderTitle(room);
+			const title: any = getHeaderTitle(room);
 			expect(title.props.children[0]).toBe("Living Room");
 		});
 
@@ -247,9 +247,9 @@ describe("RoomPage utility functions", () => {
 			const room = {
 				name: "Bedroom",
 				devices: [],
-			};
+			} as any;
 
-			const title = getHeaderTitle(room, "custom-class");
+			const title: any = getHeaderTitle(room, "custom-class");
 			expect(title.props.className).toBe("custom-class");
 		});
 	});
@@ -260,7 +260,7 @@ describe("RoomPage utility functions", () => {
 		});
 
 		test("returns 0 for room with no devices", () => {
-			const room = { devices: [] };
+			const room = { devices: [] } as any;
 			expect(getRoomDimLevel(room)).toBe(0);
 		});
 
@@ -271,7 +271,7 @@ describe("RoomPage utility functions", () => {
 					{ name: "Light 2", level: "75", type: "light" },
 					{ name: "Fan", level: "25", type: "fan" },
 				],
-			};
+			} as any;
 			// Assuming isLight function checks for name containing "Light"
 			expect(getRoomDimLevel(room)).toBeGreaterThanOrEqual(0);
 		});
@@ -282,7 +282,7 @@ describe("RoomPage utility functions", () => {
 					{ name: "Light 1", level: "NULL", type: "light" },
 					{ name: "Light 2", level: "50", type: "light" },
 				],
-			};
+			} as any;
 			expect(getRoomDimLevel(room)).toBeGreaterThanOrEqual(0);
 		});
 
@@ -292,34 +292,34 @@ describe("RoomPage utility functions", () => {
 					{ name: "Light Override", level: "100", type: "light" },
 					{ name: "Normal Light", level: "50", type: "light" },
 				],
-			};
+			} as any;
 			expect(getRoomDimLevel(room)).toBeGreaterThanOrEqual(0);
 		});
 	});
 
 	describe("getIntegerLevel", () => {
 		test("returns 0 for NULL level", () => {
-			const device = { level: "NULL" };
+			const device = { level: "NULL" } as any;
 			expect(getIntegerLevel(device)).toBe(0);
 		});
 
 		test("parses string level to integer", () => {
-			const device = { level: "75" };
+			const device = { level: "75" } as any;
 			expect(getIntegerLevel(device)).toBe(75);
 		});
 
 		test("handles zero level", () => {
-			const device = { level: "0" };
+			const device = { level: "0" } as any;
 			expect(getIntegerLevel(device)).toBe(0);
 		});
 
 		test("handles max level", () => {
-			const device = { level: "100" };
+			const device = { level: "100" } as any;
 			expect(getIntegerLevel(device)).toBe(100);
 		});
 
 		test("handles float strings by truncating", () => {
-			const device = { level: "75.5" };
+			const device = { level: "75.5" } as any;
 			expect(getIntegerLevel(device)).toBe(75);
 		});
 	});

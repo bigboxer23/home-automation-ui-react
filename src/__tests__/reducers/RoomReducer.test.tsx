@@ -1,8 +1,9 @@
 import roomReducer from "../../reducers/RoomReducer";
+import type { HouseState } from "../../types";
 
 describe("roomReducer", () => {
-	let initialState;
-	let mockRooms;
+	let initialState: HouseState;
+	let mockRooms: any;
 
 	beforeEach(() => {
 		mockRooms = [
@@ -66,7 +67,7 @@ describe("roomReducer", () => {
 
 	describe("default behavior", () => {
 		test("returns initial state when no state provided", () => {
-			const result = roomReducer(undefined, { type: "UNKNOWN_ACTION" });
+			const result = roomReducer(undefined, { type: "UNKNOWN_ACTION" } as any);
 			expect(result).toEqual({
 				rooms: [],
 				isFetching: false,
@@ -76,7 +77,9 @@ describe("roomReducer", () => {
 		});
 
 		test("returns current state for unknown action", () => {
-			const result = roomReducer(initialState, { type: "UNKNOWN_ACTION" });
+			const result = roomReducer(initialState, {
+				type: "UNKNOWN_ACTION",
+			} as any);
 			expect(result).toEqual(initialState);
 		});
 	});
@@ -92,7 +95,7 @@ describe("roomReducer", () => {
 			];
 
 			const action = {
-				type: "STATUS_UPDATED",
+				type: "STATUS_UPDATED" as const,
 				data: newRooms,
 			};
 
@@ -100,19 +103,19 @@ describe("roomReducer", () => {
 
 			expect(result.rooms).toEqual(newRooms);
 			expect(result.isFetching).toBe(false);
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 			expect(result.timer).toBe(initialState.timer);
 		});
 
 		test("preserves other state properties", () => {
 			const action = {
-				type: "STATUS_UPDATED",
+				type: "STATUS_UPDATED" as const,
 				data: [],
 			};
 
 			const stateWithTimer = {
 				...initialState,
-				timer: "someTimerId",
+				timer: "someTimerId" as any,
 				authError: true,
 			};
 
@@ -153,7 +156,7 @@ describe("roomReducer", () => {
 			};
 
 			const action = {
-				type: "ROOM_CLICKED",
+				type: "ROOM_CLICKED" as const,
 				room: "room1",
 			};
 
@@ -162,7 +165,7 @@ describe("roomReducer", () => {
 			expect(result.isFetching).toBe(true);
 			expect(result.rooms[0].devices[0].status).toBe("1");
 			expect(result.rooms[0].devices[1].status).toBe("1");
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 		});
 
 		test("toggles room devices from on to off", () => {
@@ -194,7 +197,7 @@ describe("roomReducer", () => {
 			};
 
 			const action = {
-				type: "ROOM_CLICKED",
+				type: "ROOM_CLICKED" as const,
 				room: "room1",
 			};
 
@@ -233,7 +236,7 @@ describe("roomReducer", () => {
 			};
 
 			const action = {
-				type: "ROOM_CLICKED",
+				type: "ROOM_CLICKED" as const,
 				room: "room1",
 			};
 
@@ -248,7 +251,7 @@ describe("roomReducer", () => {
 
 		test("only affects the specified room", () => {
 			const action = {
-				type: "ROOM_CLICKED",
+				type: "ROOM_CLICKED" as const,
 				room: "room1",
 			};
 
@@ -269,35 +272,35 @@ describe("roomReducer", () => {
 	describe("GARAGE_STATE_CHANGE", () => {
 		test("updates garage door state to open", () => {
 			const action = {
-				type: "GARAGE_STATE_CHANGE",
+				type: "GARAGE_STATE_CHANGE" as const,
 				state: "Open",
 			};
 
 			const result = roomReducer(initialState, action);
 
 			expect(result.isFetching).toBe(true);
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 
 			const garageRoom = result.rooms.find((room) => room.name === "Garage");
-			const garageOpener = garageRoom.devices.find(
+			const garageOpener = garageRoom!.devices.find(
 				(device) => device.name === "Garage Opener",
 			);
-			expect(garageOpener.door).toBe(true);
+			expect(garageOpener!.door).toBe(true);
 		});
 
 		test("updates garage door state to closed", () => {
 			const action = {
-				type: "GARAGE_STATE_CHANGE",
+				type: "GARAGE_STATE_CHANGE" as const,
 				state: "Closed",
 			};
 
 			const result = roomReducer(initialState, action);
 
 			const garageRoom = result.rooms.find((room) => room.name === "Garage");
-			const garageOpener = garageRoom.devices.find(
+			const garageOpener = garageRoom!.devices.find(
 				(device) => device.name === "Garage Opener",
 			);
-			expect(garageOpener.door).toBe(false);
+			expect(garageOpener!.door).toBe(false);
 		});
 
 		test("only affects Garage Opener device in Garage room", () => {
@@ -326,20 +329,20 @@ describe("roomReducer", () => {
 			};
 
 			const action = {
-				type: "GARAGE_STATE_CHANGE",
+				type: "GARAGE_STATE_CHANGE" as const,
 				state: "Open",
 			};
 
 			const result = roomReducer(stateWithMultipleGarageDevices, action);
 
 			const garageRoom = result.rooms.find((room) => room.name === "Garage");
-			expect(garageRoom.devices[0].door).toBe(true); // Garage Opener updated
-			expect(garageRoom.devices[1].status).toBe("0"); // Garage Light unchanged
+			expect(garageRoom!.devices[0].door).toBe(true); // Garage Opener updated
+			expect(garageRoom!.devices[1].status).toBe("0"); // Garage Light unchanged
 		});
 
 		test("does not affect non-garage rooms", () => {
 			const action = {
-				type: "GARAGE_STATE_CHANGE",
+				type: "GARAGE_STATE_CHANGE" as const,
 				state: "Open",
 			};
 
@@ -353,7 +356,7 @@ describe("roomReducer", () => {
 
 	describe("REQUEST_STATUS", () => {
 		test("sets isFetching to true", () => {
-			const action = { type: "REQUEST_STATUS" };
+			const action = { type: "REQUEST_STATUS" as const };
 			const result = roomReducer(initialState, action);
 
 			expect(result.isFetching).toBe(true);
@@ -363,13 +366,13 @@ describe("roomReducer", () => {
 		});
 
 		test("preserves all other state properties", () => {
-			const stateWithData = {
+			const stateWithData: any = {
 				...initialState,
 				customProperty: "should be preserved",
 			};
 
-			const action = { type: "REQUEST_STATUS" };
-			const result = roomReducer(stateWithData, action);
+			const action = { type: "REQUEST_STATUS" as const };
+			const result: any = roomReducer(stateWithData, action);
 
 			expect(result.customProperty).toBe("should be preserved");
 		});
@@ -378,8 +381,8 @@ describe("roomReducer", () => {
 	describe("SET_TIMER_ID", () => {
 		test("sets timer id", () => {
 			const action = {
-				type: "SET_TIMER_ID",
-				timer: "newTimerId123",
+				type: "SET_TIMER_ID" as const,
+				timer: "newTimerId123" as any,
 			};
 
 			const result = roomReducer(initialState, action);
@@ -392,11 +395,11 @@ describe("roomReducer", () => {
 		test("can clear timer by setting to null", () => {
 			const stateWithTimer = {
 				...initialState,
-				timer: "existingTimer",
+				timer: "existingTimer" as any,
 			};
 
 			const action = {
-				type: "SET_TIMER_ID",
+				type: "SET_TIMER_ID" as const,
 				timer: null,
 			};
 
@@ -409,44 +412,44 @@ describe("roomReducer", () => {
 	describe("UPDATE_THERMOSTAT_SET_POINT", () => {
 		test("updates heating setpoint in climate room", () => {
 			const action = {
-				type: "UPDATE_THERMOSTAT_SET_POINT",
+				type: "UPDATE_THERMOSTAT_SET_POINT" as const,
 				setPoint: 72,
 			};
 
 			const result = roomReducer(initialState, action);
 
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 
 			const climateRoom = result.rooms.find((room) => room.name === "Climate");
-			const heatingSetpoint = climateRoom.devices.find(
+			const heatingSetpoint = climateRoom!.devices.find(
 				(device) => device.name === "Heating Setpoint",
 			);
-			expect(heatingSetpoint.level).toBe("72");
+			expect(heatingSetpoint!.level).toBe("72");
 
-			const coolingSetpoint = climateRoom.devices.find(
+			const coolingSetpoint = climateRoom!.devices.find(
 				(device) => device.name === "Cooling Setpoint",
 			);
-			expect(coolingSetpoint.level).toBe("72");
+			expect(coolingSetpoint!.level).toBe("72");
 		});
 
 		test("converts numeric setpoint to string", () => {
 			const action = {
-				type: "UPDATE_THERMOSTAT_SET_POINT",
+				type: "UPDATE_THERMOSTAT_SET_POINT" as const,
 				setPoint: 68.5,
 			};
 
 			const result = roomReducer(initialState, action);
 
 			const climateRoom = result.rooms.find((room) => room.name === "Climate");
-			const heatingSetpoint = climateRoom.devices.find(
+			const heatingSetpoint = climateRoom!.devices.find(
 				(device) => device.name === "Heating Setpoint",
 			);
-			expect(heatingSetpoint.level).toBe("68.5");
+			expect(heatingSetpoint!.level).toBe("68.5");
 		});
 
 		test("only affects Climate room", () => {
 			const action = {
-				type: "UPDATE_THERMOSTAT_SET_POINT",
+				type: "UPDATE_THERMOSTAT_SET_POINT" as const,
 				setPoint: 75,
 			};
 
@@ -487,56 +490,56 @@ describe("roomReducer", () => {
 			};
 
 			const action = {
-				type: "UPDATE_THERMOSTAT_SET_POINT",
+				type: "UPDATE_THERMOSTAT_SET_POINT" as const,
 				setPoint: 68,
 			};
 
-			const result = roomReducer(stateWithExtraClimateDevices, action);
+			const result = roomReducer(stateWithExtraClimateDevices, action as any);
 
 			const climateRoom = result.rooms.find((room) => room.name === "Climate");
-			expect(climateRoom.devices[0].level).toBe("68"); // Heating updated
-			expect(climateRoom.devices[1].level).toBe("68"); // Cooling updated
-			expect(climateRoom.devices[2].level).toBe("72"); // Temperature sensor unchanged
+			expect(climateRoom!.devices[0].level).toBe("68"); // Heating updated
+			expect(climateRoom!.devices[1].level).toBe("68"); // Cooling updated
+			expect(climateRoom!.devices[2].level).toBe("72"); // Temperature sensor unchanged
 		});
 	});
 
 	describe("UPDATE_ON_OFF", () => {
 		test("turns device on (level 100)", () => {
 			const action = {
-				type: "UPDATE_ON_OFF",
+				type: "UPDATE_ON_OFF" as const,
 				id: "device1",
 				on: true,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 
 			const device = result.rooms[0].devices.find((d) => d.id === "device1");
-			expect(device.level).toBe("100");
+			expect(device!.level).toBe("100");
 		});
 
 		test("turns device off (level 0)", () => {
 			const action = {
-				type: "UPDATE_ON_OFF",
+				type: "UPDATE_ON_OFF" as const,
 				id: "device2",
 				on: false,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			const device = result.rooms[0].devices.find((d) => d.id === "device2");
-			expect(device.level).toBe("0");
+			expect(device!.level).toBe("0");
 		});
 
 		test("only affects the specified device", () => {
 			const action = {
-				type: "UPDATE_ON_OFF",
+				type: "UPDATE_ON_OFF" as const,
 				id: "device1",
 				on: true,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			// device1 should be updated
 			expect(result.rooms[0].devices[0].level).toBe("100");
@@ -546,12 +549,12 @@ describe("roomReducer", () => {
 
 		test("does not affect devices in other rooms", () => {
 			const action = {
-				type: "UPDATE_ON_OFF",
+				type: "UPDATE_ON_OFF" as const,
 				id: "device1",
 				on: true,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			// Other rooms should be unchanged
 			expect(result.rooms[1]).toEqual(initialState.rooms[1]);
@@ -560,30 +563,30 @@ describe("roomReducer", () => {
 
 		test("handles device not found gracefully", () => {
 			const action = {
-				type: "UPDATE_ON_OFF",
+				type: "UPDATE_ON_OFF" as const,
 				id: "nonexistentDevice",
 				on: true,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			// State should be unchanged except for lastUpdate
 			expect(result.rooms).toEqual(initialState.rooms);
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 		});
 	});
 
 	describe("UPDATE_DIM", () => {
 		test("dims whole room when id matches room id", () => {
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "room1",
 				level: "80",
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 
 			// Only category "2" devices should be updated
 			const room = result.rooms[0];
@@ -623,12 +626,12 @@ describe("roomReducer", () => {
 			};
 
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "room1",
 				level: "90",
 			};
 
-			const result = roomReducer(stateWithMixedDevices, action);
+			const result = roomReducer(stateWithMixedDevices, action as any);
 
 			expect(result.rooms[0].devices[0].level).toBe("90"); // category "2" updated
 			expect(result.rooms[0].devices[1].level).toBe("60"); // category "3" unchanged
@@ -637,12 +640,12 @@ describe("roomReducer", () => {
 
 		test("dims individual device when id matches device id", () => {
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "device2",
 				level: "25",
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			// Only device2 should be updated
 			expect(result.rooms[0].devices[0].level).toBe("50"); // unchanged
@@ -651,26 +654,26 @@ describe("roomReducer", () => {
 
 		test("handles device not found in any room", () => {
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "nonexistentDevice",
 				level: "30",
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			// All devices should remain unchanged
 			expect(result.rooms).toEqual(initialState.rooms);
-			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate);
+			expect(result.lastUpdate).toBeGreaterThan(initialState.lastUpdate!);
 		});
 
 		test("only affects the room containing the device", () => {
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "device1", // in room1
 				level: "40",
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			// Room1 device should be updated
 			expect(result.rooms[0].devices[0].level).toBe("40");
@@ -683,11 +686,11 @@ describe("roomReducer", () => {
 	describe("AUTH_ERROR", () => {
 		test("sets authError to true", () => {
 			const action = {
-				type: "AUTH_ERROR",
+				type: "AUTH_ERROR" as const,
 				authError: true,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			expect(result.authError).toBe(true);
 			expect(result.rooms).toEqual(initialState.rooms);
@@ -702,22 +705,22 @@ describe("roomReducer", () => {
 			};
 
 			const action = {
-				type: "AUTH_ERROR",
+				type: "AUTH_ERROR" as const,
 				authError: false,
 			};
 
-			const result = roomReducer(stateWithAuthError, action);
+			const result = roomReducer(stateWithAuthError, action as any);
 
 			expect(result.authError).toBe(false);
 		});
 
 		test("preserves all other state properties", () => {
 			const action = {
-				type: "AUTH_ERROR",
+				type: "AUTH_ERROR" as const,
 				authError: true,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			expect(result.rooms).toEqual(initialState.rooms);
 			expect(result.isFetching).toBe(initialState.isFetching);
@@ -730,10 +733,10 @@ describe("roomReducer", () => {
 		test("does not mutate original state", () => {
 			const originalState = { ...initialState };
 			const action = {
-				type: "REQUEST_STATUS",
+				type: "REQUEST_STATUS" as const,
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			expect(initialState).toEqual(originalState);
 			expect(result).not.toBe(initialState);
@@ -742,12 +745,12 @@ describe("roomReducer", () => {
 		test("does not mutate rooms array", () => {
 			const originalRooms = [...initialState.rooms];
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "device1",
 				level: "80",
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			expect(initialState.rooms).toEqual(originalRooms);
 			expect(result.rooms).not.toBe(initialState.rooms);
@@ -756,12 +759,12 @@ describe("roomReducer", () => {
 		test("does not mutate individual room objects", () => {
 			const originalRoom = { ...initialState.rooms[0] };
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "device1",
 				level: "80",
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			expect(initialState.rooms[0]).toEqual(originalRoom);
 			expect(result.rooms[0]).not.toBe(initialState.rooms[0]);
@@ -770,12 +773,12 @@ describe("roomReducer", () => {
 		test("does not mutate device objects", () => {
 			const originalDevice = { ...initialState.rooms[0].devices[0] };
 			const action = {
-				type: "UPDATE_DIM",
+				type: "UPDATE_DIM" as const,
 				id: "device1",
 				level: "80",
 			};
 
-			const result = roomReducer(initialState, action);
+			const result = roomReducer(initialState, action as any);
 
 			expect(initialState.rooms[0].devices[0]).toEqual(originalDevice);
 			expect(result.rooms[0].devices[0]).not.toBe(

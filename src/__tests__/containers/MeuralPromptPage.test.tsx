@@ -33,26 +33,31 @@ describe("MeuralPromptPage", () => {
 		mockFetch({ rooms: mockRooms });
 
 		// Reset document.getElementById mock
-		global.document.getElementById = vi.fn(() => ({
+		(globalThis as any).document.getElementById = vi.fn(() => ({
 			value: "",
 		}));
 
 		// Re-setup push mock after clearAllMocks
-		push.mockImplementation(() => ({
+		(push as any).mockImplementation(() => ({
 			type: "@@router/CALL_HISTORY_METHOD",
 			payload: { method: "push", args: ["/Meural"] },
 		}));
 	});
 
 	afterEach(() => {
-		delete global.document.getElementById;
+		delete (globalThis as any).document.getElementById;
 	});
 
 	test("renders MeuralPromptPageComponent", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		expect(screen.getByText("Meural Control")).toBeInTheDocument();
@@ -67,8 +72,13 @@ describe("MeuralPromptPage", () => {
 	test("header renders with back functionality", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		// Test that the header with back capability is rendered
@@ -92,7 +102,7 @@ describe("MeuralPromptPage", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
 				house: { rooms: roomsWithMeural },
-			},
+			} as any,
 		});
 
 		// Verify the component renders (indicating mapStateToProps worked)
@@ -102,8 +112,13 @@ describe("MeuralPromptPage", () => {
 	test("handleClick button is present", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const createButton = screen.getByRole("button", {
@@ -116,8 +131,13 @@ describe("MeuralPromptPage", () => {
 	test("textarea has proper attributes", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const textarea = screen.getByPlaceholderText(
@@ -131,8 +151,13 @@ describe("MeuralPromptPage", () => {
 	test("component renders with empty rooms", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: [] },
-			},
+				house: {
+					rooms: [] as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		expect(screen.getByText("Meural Control")).toBeInTheDocument();
@@ -141,8 +166,13 @@ describe("MeuralPromptPage", () => {
 	test("component renders with null rooms", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: null },
-			},
+				house: {
+					rooms: null as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		expect(screen.getByText("Meural Control")).toBeInTheDocument();
@@ -151,8 +181,13 @@ describe("MeuralPromptPage", () => {
 	test("handleClick button exists and renders correctly", () => {
 		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const createButton = screen.getByRole("button", {
@@ -165,12 +200,17 @@ describe("MeuralPromptPage", () => {
 
 	test("handleClick calls updateOpenAIPrompt and navigates when input has value", () => {
 		const mockElement = { value: "test prompt" };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const createButton = screen.getByRole("button", {
@@ -185,12 +225,17 @@ describe("MeuralPromptPage", () => {
 
 	test("handleClick does not call actions when input is empty", () => {
 		const mockElement = { value: "" };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const dispatchSpy = vi.spyOn(store, "dispatch");
@@ -206,12 +251,19 @@ describe("MeuralPromptPage", () => {
 	});
 
 	test("handleClick does not call actions when input is null", () => {
-		global.document.getElementById = vi.fn(() => ({ value: null }));
+		(globalThis as any).document.getElementById = vi.fn(() => ({
+			value: null,
+		}));
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const dispatchSpy = vi.spyOn(store, "dispatch");
@@ -227,12 +279,17 @@ describe("MeuralPromptPage", () => {
 	});
 
 	test("handleClick does not call actions when element not found", () => {
-		global.document.getElementById = vi.fn(() => null);
+		(globalThis as any).document.getElementById = vi.fn(() => null);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const dispatchSpy = vi.spyOn(store, "dispatch");
@@ -249,12 +306,17 @@ describe("MeuralPromptPage", () => {
 
 	test("handleKeyUp calls updateOpenAIPrompt and navigates on Enter key with value", () => {
 		const mockElement = { value: "test prompt from enter" };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const textarea = screen.getByPlaceholderText(
@@ -269,12 +331,17 @@ describe("MeuralPromptPage", () => {
 
 	test("handleKeyUp does not call actions on non-Enter key", () => {
 		const mockElement = { value: "test prompt" };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const dispatchSpy = vi.spyOn(store, "dispatch");
@@ -291,12 +358,17 @@ describe("MeuralPromptPage", () => {
 
 	test("handleKeyUp does not call actions on Enter with empty value", () => {
 		const mockElement = { value: "" };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const dispatchSpy = vi.spyOn(store, "dispatch");
@@ -313,12 +385,17 @@ describe("MeuralPromptPage", () => {
 
 	test("handleKeyUp with Enter and whitespace-only value calls actions (actual behavior)", () => {
 		const mockElement = { value: "   " };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const textarea = screen.getByPlaceholderText(
@@ -335,13 +412,18 @@ describe("MeuralPromptPage", () => {
 	test("back action dispatches push to /Meural", () => {
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const headerSpan = screen.getByText("Meural Control").closest("span");
 
-		fireEvent.click(headerSpan);
+		fireEvent.click(headerSpan!);
 
 		expect(push).toHaveBeenCalledWith("/Meural");
 	});
@@ -357,25 +439,30 @@ describe("MeuralPromptPage mapDispatchToProps", () => {
 
 	beforeEach(() => {
 		vi.clearAllMocks();
-		global.document.getElementById = vi.fn(() => ({ value: "" }));
+		(globalThis as any).document.getElementById = vi.fn(() => ({ value: "" }));
 		mockFetch({ rooms: mockRooms });
 
 		// Re-setup push mock after clearAllMocks
-		push.mockImplementation(() => ({
+		(push as any).mockImplementation(() => ({
 			type: "@@router/CALL_HISTORY_METHOD",
 			payload: { method: "push", args: ["/Meural"] },
 		}));
 	});
 
 	afterEach(() => {
-		delete global.document.getElementById;
+		delete (globalThis as any).document.getElementById;
 	});
 
 	test("back action returns push(/Meural)", () => {
 		const { container } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		// Test that back function exists and can be called
@@ -385,12 +472,17 @@ describe("MeuralPromptPage mapDispatchToProps", () => {
 
 	test("handleClick function dispatches correctly with valid input", () => {
 		const mockElement = { value: "test prompt" };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const dispatchSpy = vi.spyOn(store, "dispatch");
@@ -406,12 +498,17 @@ describe("MeuralPromptPage mapDispatchToProps", () => {
 
 	test("handleKeyUp function only responds to Enter key", () => {
 		const mockElement = { value: "test prompt" };
-		global.document.getElementById = vi.fn(() => mockElement);
+		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
 		const { store } = renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
-				house: { rooms: mockRooms },
-			},
+				house: {
+					rooms: mockRooms as any,
+					isFetching: false,
+					timer: null,
+					authError: false,
+				},
+			} as any,
 		});
 
 		const dispatchSpy = vi.spyOn(store, "dispatch");

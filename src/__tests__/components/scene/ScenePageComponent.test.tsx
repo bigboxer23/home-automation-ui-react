@@ -14,7 +14,7 @@ describe("ScenePageComponent", () => {
 		rooms: mockRooms,
 		handleClick: vi.fn(),
 		gotoPage: vi.fn(),
-	};
+	} as any;
 
 	beforeEach(() => {
 		vi.clearAllMocks();
@@ -47,7 +47,7 @@ describe("ScenePageComponent", () => {
 
 		const securityButton = screen
 			.getByText("Front Door Security")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(securityButton);
 
 		expect(mockProps.gotoPage).toHaveBeenCalledWith("Security");
@@ -56,7 +56,7 @@ describe("ScenePageComponent", () => {
 	test("handles Grow Tent button click", () => {
 		renderWithProviders(<ScenePageComponent {...mockProps} />);
 
-		const growButton = screen.getByText("Grow Tent").closest("button");
+		const growButton = screen.getByText("Grow Tent").closest("button")!;
 		fireEvent.click(growButton);
 
 		expect(mockProps.gotoPage).toHaveBeenCalledWith("Grow");
@@ -67,7 +67,7 @@ describe("ScenePageComponent", () => {
 
 		const livingRoomOnButton = screen
 			.getByText("Living Room On")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(livingRoomOnButton);
 
 		expect(mockProps.handleClick).toHaveBeenCalledWith("room1", "ON");

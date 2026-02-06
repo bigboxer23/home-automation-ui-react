@@ -124,7 +124,7 @@ describe("LightComponent", () => {
 		);
 
 		const switchInput = document.querySelector("input[type='checkbox']");
-		fireEvent.click(switchInput);
+		fireEvent.click(switchInput!);
 
 		expect(mockSetDeviceStatus).toHaveBeenCalledWith("light2", true);
 	});
@@ -140,7 +140,7 @@ describe("LightComponent", () => {
 		);
 
 		const switchInput = document.querySelector("input[type='checkbox']");
-		fireEvent.click(switchInput);
+		fireEvent.click(switchInput!);
 
 		expect(mockSetDeviceStatus).toHaveBeenCalledWith("light1", false);
 	});
@@ -228,7 +228,7 @@ describe("LightComponent", () => {
 			);
 
 			const switchInput = document.querySelector("input[type='checkbox']");
-			fireEvent.click(switchInput);
+			fireEvent.click(switchInput!);
 
 			expect(mockSetDeviceStatus).toHaveBeenCalledWith("fan1", false);
 		});

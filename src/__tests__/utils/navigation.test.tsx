@@ -11,7 +11,7 @@ describe("navigation utils", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 		// Reset the navigation instance
-		setNavigationInstance(null);
+		setNavigationInstance(null as any);
 	});
 
 	describe("setNavigationInstance", () => {
@@ -33,7 +33,7 @@ describe("navigation utils", () => {
 
 		test("can set to null", () => {
 			setNavigationInstance(mockNavigate);
-			setNavigationInstance(null);
+			setNavigationInstance(null as any);
 			expect(getNavigationInstance()).toBe(null);
 		});
 	});
@@ -59,7 +59,7 @@ describe("navigation utils", () => {
 			setNavigationInstance(mockNavigate);
 			const pushAction = push("/test-path");
 
-			const result = pushAction(mockDispatch);
+			const result = (pushAction as any)(mockDispatch);
 
 			expect(mockNavigate).toHaveBeenCalledWith("/test-path");
 			expect(result).toEqual({
@@ -70,23 +70,23 @@ describe("navigation utils", () => {
 
 		test("falls back to window.location when no navigation instance", () => {
 			const originalLocation = window.location;
-			delete window.location;
-			window.location = { href: "" };
+			delete (window as any).location;
+			(window as any).location = { href: "" };
 
 			const pushAction = push("/test-path");
-			pushAction(mockDispatch);
+			(pushAction as any)(mockDispatch);
 
 			expect(window.location.href).toBe("/test-path");
 
 			// Restore original location
-			window.location = originalLocation;
+			(window as any).location = originalLocation;
 		});
 
 		test("returns correct action object", () => {
 			setNavigationInstance(mockNavigate);
 			const pushAction = push("/some/path");
 
-			const result = pushAction(mockDispatch);
+			const result = (pushAction as any)(mockDispatch);
 
 			expect(result).toEqual({
 				type: "@@router/NAVIGATE",
@@ -99,22 +99,22 @@ describe("navigation utils", () => {
 
 			// Test absolute path
 			let pushAction = push("/absolute/path");
-			pushAction(mockDispatch);
+			(pushAction as any)(mockDispatch);
 			expect(mockNavigate).toHaveBeenCalledWith("/absolute/path");
 
 			// Test relative path
 			pushAction = push("relative/path");
-			pushAction(mockDispatch);
+			(pushAction as any)(mockDispatch);
 			expect(mockNavigate).toHaveBeenCalledWith("relative/path");
 
 			// Test path with query params
 			pushAction = push("/path?param=value");
-			pushAction(mockDispatch);
+			(pushAction as any)(mockDispatch);
 			expect(mockNavigate).toHaveBeenCalledWith("/path?param=value");
 
 			// Test path with hash
 			pushAction = push("/path#section");
-			pushAction(mockDispatch);
+			(pushAction as any)(mockDispatch);
 			expect(mockNavigate).toHaveBeenCalledWith("/path#section");
 		});
 
@@ -123,7 +123,7 @@ describe("navigation utils", () => {
 
 			// Simulate how Redux would call the thunk
 			const pushAction = push("/test-path");
-			const result = pushAction(mockDispatch);
+			const result = (pushAction as any)(mockDispatch);
 
 			expect(mockDispatch).toHaveBeenCalledTimes(0); // Our thunk doesn't dispatch anything
 			expect(result.type).toBe("@@router/NAVIGATE");
@@ -140,7 +140,7 @@ describe("navigation utils", () => {
 
 			// 3. Use push to navigate
 			const pushAction = push("/integration-test");
-			const result = pushAction(mockDispatch);
+			const result = (pushAction as any)(mockDispatch);
 
 			// 4. Verify navigation was called
 			expect(mockNavigate).toHaveBeenCalledWith("/integration-test");
@@ -156,14 +156,14 @@ describe("navigation utils", () => {
 			// Start with first navigate
 			setNavigationInstance(firstNavigate);
 			let pushAction = push("/path1");
-			pushAction(mockDispatch);
+			(pushAction as any)(mockDispatch);
 			expect(firstNavigate).toHaveBeenCalledWith("/path1");
 			expect(secondNavigate).not.toHaveBeenCalled();
 
 			// Switch to second navigate
 			setNavigationInstance(secondNavigate);
 			pushAction = push("/path2");
-			pushAction(mockDispatch);
+			(pushAction as any)(mockDispatch);
 			expect(secondNavigate).toHaveBeenCalledWith("/path2");
 			expect(firstNavigate).toHaveBeenCalledTimes(1); // Still only called once
 		});

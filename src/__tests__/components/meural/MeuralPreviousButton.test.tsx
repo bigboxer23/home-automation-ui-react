@@ -20,14 +20,14 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("renders Previous Image button", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		expect(screen.getByText("Previous Image")).toBeInTheDocument();
 	});
 
 	test("button is visible when device status is 0", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -41,7 +41,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("button is visible when device status is 4", () => {
-		const props = { device: { status: "4" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "4" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -49,7 +49,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("button is hidden when device status is not 0 or 4", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -57,7 +57,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("displays correct icon with flip-horizontal class", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		const { container } = renderWithProviders(
 			<MeuralPreviousButton {...props} />,
 		);
@@ -67,7 +67,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("calls previousMeuralImage action when button is clicked", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -77,7 +77,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("shows snackbar with correct message when clicked", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -89,7 +89,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("snackbar closes automatically after 3 seconds", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -112,7 +112,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("handles missing device prop", () => {
-		const props = {};
+		const props = {} as any;
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		expect(screen.getByText("Previous Image")).toBeInTheDocument();
@@ -122,7 +122,7 @@ describe("MeuralPreviousButton", () => {
 	});
 
 	test("snackbar can be closed manually", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");

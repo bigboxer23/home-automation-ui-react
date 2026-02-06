@@ -7,7 +7,7 @@ describe("RoomButton", () => {
 	const mockHandleClick = vi.fn();
 	const mockHandleMoreClick = vi.fn();
 
-	const mockRoomWithLights = {
+	const mockRoomWithLights: any = {
 		id: "room1",
 		name: "Living Room",
 		devices: [
@@ -32,7 +32,7 @@ describe("RoomButton", () => {
 		],
 	};
 
-	const mockRoomWithoutLights = {
+	const mockRoomWithoutLights: any = {
 		id: "room2",
 		name: "Bedroom",
 		devices: [
@@ -51,7 +51,7 @@ describe("RoomButton", () => {
 		],
 	};
 
-	const mockRoomWithLowBattery = {
+	const mockRoomWithLowBattery: any = {
 		id: "room3",
 		name: "Kitchen",
 		devices: [
@@ -70,7 +70,7 @@ describe("RoomButton", () => {
 		],
 	};
 
-	const mockRoomWithOverride = {
+	const mockRoomWithOverride: any = {
 		id: "room4",
 		name: "Office",
 		devices: [
@@ -209,7 +209,7 @@ describe("RoomButton", () => {
 	});
 
 	test("shows dots when no count content", () => {
-		const roomWithNoTemp = {
+		const roomWithNoTemp: any = {
 			id: "room5",
 			name: "Garage",
 			devices: [
@@ -307,7 +307,7 @@ describe("RoomButton", () => {
 	});
 
 	test("handles room with no devices", () => {
-		const emptyRoom = {
+		const emptyRoom: any = {
 			id: "empty",
 			name: "Empty Room",
 			devices: [],

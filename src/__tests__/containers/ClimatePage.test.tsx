@@ -84,7 +84,7 @@ describe("ClimatePage", () => {
 
 	test("renders ClimatePage component", () => {
 		renderWithProviders(<ClimatePage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		// ClimatePage should render without crashing
@@ -106,7 +106,7 @@ describe("ClimatePage", () => {
 		};
 
 		renderWithProviders(<ClimatePage />, {
-			preloadedState: emptyState,
+			preloadedState: emptyState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -124,13 +124,13 @@ describe("getThermometerItems utility function", () => {
 	};
 
 	test("returns thermometer components for air quality sensors", () => {
-		const result = getThermometerItems(mockDeviceMap);
+		const result = getThermometerItems(mockDeviceMap as any);
 		expect(result).toBeDefined();
-		expect(result.length).toBe(2);
+		expect((result as any).length).toBe(2);
 	});
 
 	test("returns empty string for null deviceMap", () => {
-		const result = getThermometerItems(null);
+		const result = getThermometerItems(null as any);
 		expect(result).toBe("");
 	});
 
@@ -138,8 +138,8 @@ describe("getThermometerItems utility function", () => {
 		const deviceMapNoAir = {
 			"Some Device": { name: "Some Device", level: "50" },
 		};
-		const result = getThermometerItems(deviceMapNoAir);
-		expect(result.length).toBe(0);
+		const result = getThermometerItems(deviceMapNoAir as any);
+		expect((result as any).length).toBe(0);
 	});
 });
 
@@ -148,14 +148,14 @@ describe("getThermostatBattery utility function", () => {
 		const deviceMap = {
 			"Thermostat Battery": { name: "Thermostat Battery", level: "85" },
 		};
-		const result = getThermostatBattery(deviceMap);
+		const result = getThermostatBattery(deviceMap as any);
 		expect(result.name).toBe("Thermostat Battery");
 		expect(result.level).toBe("85");
 	});
 
 	test("returns default battery when not present", () => {
 		const deviceMap = {};
-		const result = getThermostatBattery(deviceMap);
+		const result = getThermostatBattery(deviceMap as any);
 		expect(result.name).toBe("Thermostat Battery");
 		expect(result.level).toBe("100");
 	});
@@ -177,14 +177,14 @@ describe("getClimateData utility function", () => {
 			},
 		];
 
-		const result = getClimateData(rooms);
+		const result = getClimateData(rooms as any);
 		expect(result["Water Heater"]).toBeDefined();
 		expect(result["Outside Temperature"]).toBeDefined();
 		expect(result["Light"]).toBeUndefined();
 	});
 
 	test("returns empty object for null rooms", () => {
-		const result = getClimateData(null);
+		const result = getClimateData(null as any);
 		expect(result).toEqual({});
 	});
 
@@ -199,7 +199,7 @@ describe("getClimateData utility function", () => {
 		// This should not crash but will return an error in actual implementation
 		// Testing the behavior when devices is undefined
 		try {
-			const result = getClimateData(rooms);
+			const result = getClimateData(rooms as any);
 		} catch (error) {
 			expect(error).toBeDefined();
 		}
@@ -213,9 +213,9 @@ describe("getThermostatDisplayInfo utility function", () => {
 			"Inside Humidity": { level: "45" },
 		};
 
-		const result = getThermostatDisplayInfo(deviceMap);
-		expect(result.props.children).toContain("72°");
-		expect(result.props.children).toContain("45%");
+		const result = getThermostatDisplayInfo(deviceMap as any);
+		expect((result as any).props.children).toContain("72°");
+		expect((result as any).props.children).toContain("45%");
 	});
 
 	test("returns empty string for invalid temperature", () => {
@@ -224,7 +224,7 @@ describe("getThermostatDisplayInfo utility function", () => {
 			"Inside Humidity": { level: "45" },
 		};
 
-		const result = getThermostatDisplayInfo(deviceMap);
+		const result = getThermostatDisplayInfo(deviceMap as any);
 		expect(result).toBe("");
 	});
 
@@ -233,7 +233,7 @@ describe("getThermostatDisplayInfo utility function", () => {
 			"Inside Temperature": { level: "72" },
 		};
 
-		const result = getThermostatDisplayInfo(deviceMap);
+		const result = getThermostatDisplayInfo(deviceMap as any);
 		expect(result).toBe("");
 	});
 });
@@ -243,7 +243,7 @@ describe("getWaterHeaterColor utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.2, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap);
+		const result = getWaterHeaterColor(deviceMap as any);
 		expect(result).toBe("btn-danger");
 	});
 
@@ -251,7 +251,7 @@ describe("getWaterHeaterColor utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap);
+		const result = getWaterHeaterColor(deviceMap as any);
 		expect(result).toBe("btn-danger");
 	});
 
@@ -259,7 +259,7 @@ describe("getWaterHeaterColor utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap);
+		const result = getWaterHeaterColor(deviceMap as any);
 		expect(result).toBe("opacity-0");
 	});
 
@@ -267,7 +267,7 @@ describe("getWaterHeaterColor utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66, status: "1" },
 		};
-		const result = getWaterHeaterColor(deviceMap);
+		const result = getWaterHeaterColor(deviceMap as any);
 		expect(result).toBe("wh-temp-gauge-active ");
 	});
 
@@ -275,7 +275,7 @@ describe("getWaterHeaterColor utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66, status: "" },
 		};
-		const result = getWaterHeaterColor(deviceMap);
+		const result = getWaterHeaterColor(deviceMap as any);
 		expect(result).toBe("wh-temp-gauge-active ");
 	});
 
@@ -283,7 +283,7 @@ describe("getWaterHeaterColor utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 1, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap);
+		const result = getWaterHeaterColor(deviceMap as any);
 		expect(result).toBe("opacity-0 wh-temp-gauge-full");
 	});
 
@@ -291,7 +291,7 @@ describe("getWaterHeaterColor utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 1, status: "1" },
 		};
-		const result = getWaterHeaterColor(deviceMap);
+		const result = getWaterHeaterColor(deviceMap as any);
 		expect(result).toBe("wh-temp-gauge-active  wh-temp-gauge-full");
 	});
 });
@@ -301,7 +301,7 @@ describe("getWaterHeaterWidth utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0 },
 		};
-		const result = getWaterHeaterWidth(deviceMap);
+		const result = getWaterHeaterWidth(deviceMap as any);
 		expect(result).toEqual({ width: "0px" });
 	});
 
@@ -309,7 +309,7 @@ describe("getWaterHeaterWidth utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.5 },
 		};
-		const result = getWaterHeaterWidth(deviceMap);
+		const result = getWaterHeaterWidth(deviceMap as any);
 		expect(result).toEqual({ width: "20px" });
 	});
 
@@ -317,7 +317,7 @@ describe("getWaterHeaterWidth utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 1 },
 		};
-		const result = getWaterHeaterWidth(deviceMap);
+		const result = getWaterHeaterWidth(deviceMap as any);
 		expect(result).toEqual({ width: "40px" });
 	});
 
@@ -325,7 +325,7 @@ describe("getWaterHeaterWidth utility function", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66 },
 		};
-		const result = getWaterHeaterWidth(deviceMap);
+		const result = getWaterHeaterWidth(deviceMap as any);
 		expect(result.width).toMatch(/^26\.4/); // Account for floating point precision
 	});
 });
@@ -335,7 +335,7 @@ describe("getWaterHeaterCurrentTemp utility function", () => {
 		const deviceMap = {
 			"Water Heater": { category: 120 },
 		};
-		const result = getWaterHeaterCurrentTemp(deviceMap);
+		const result = getWaterHeaterCurrentTemp(deviceMap as any);
 		expect(result).toBe("120°");
 	});
 
@@ -343,13 +343,13 @@ describe("getWaterHeaterCurrentTemp utility function", () => {
 		const deviceMap = {
 			"Water Heater": { category: "125" },
 		};
-		const result = getWaterHeaterCurrentTemp(deviceMap);
+		const result = getWaterHeaterCurrentTemp(deviceMap as any);
 		expect(result).toBe("125°");
 	});
 
 	test("handles missing water heater gracefully", () => {
 		const deviceMap = {};
-		const result = getWaterHeaterCurrentTemp(deviceMap);
+		const result = getWaterHeaterCurrentTemp(deviceMap as any);
 		expect(result).toBe("0°");
 	});
 });
@@ -359,13 +359,13 @@ describe("getWaterHeaterTemperature utility function", () => {
 		const deviceMap = {
 			"Water Heater": { temperature: 120, level: "2.5" },
 		};
-		const result = getWaterHeaterTemperature(deviceMap);
+		const result = getWaterHeaterTemperature(deviceMap as any);
 		expect(result).toBe("120° / 2.5kWh");
 	});
 
 	test("returns empty string when no water heater", () => {
 		const deviceMap = {};
-		const result = getWaterHeaterTemperature(deviceMap);
+		const result = getWaterHeaterTemperature(deviceMap as any);
 		expect(result).toBe("");
 	});
 });
@@ -375,7 +375,7 @@ describe("getThermostatModeStyle utility function", () => {
 		const deviceMap = {
 			"Thermostat Mode": { level: "1" },
 		};
-		const result = getThermostatModeStyle(deviceMap);
+		const result = getThermostatModeStyle(deviceMap as any);
 		expect(result.color).toBe("#DD531E");
 	});
 
@@ -383,7 +383,7 @@ describe("getThermostatModeStyle utility function", () => {
 		const deviceMap = {
 			"Thermostat Mode": { level: "2" },
 		};
-		const result = getThermostatModeStyle(deviceMap);
+		const result = getThermostatModeStyle(deviceMap as any);
 		expect(result.color).toBe("#0772B8");
 	});
 
@@ -391,7 +391,7 @@ describe("getThermostatModeStyle utility function", () => {
 		const deviceMap = {
 			"Thermostat Mode": { level: "0" },
 		};
-		const result = getThermostatModeStyle(deviceMap);
+		const result = getThermostatModeStyle(deviceMap as any);
 		expect(result).toEqual({});
 	});
 });
@@ -401,7 +401,7 @@ describe("getCurrentOutsideTemp utility function", () => {
 		const deviceMap = {
 			"Outside Temperature": { level: "75 °F" },
 		};
-		const result = getCurrentOutsideTemp(deviceMap);
+		const result = getCurrentOutsideTemp(deviceMap as any);
 		expect(result).toBe("75");
 	});
 
@@ -409,7 +409,7 @@ describe("getCurrentOutsideTemp utility function", () => {
 		const deviceMap = {
 			"Outside Temperature": { level: "75" },
 		};
-		const result = getCurrentOutsideTemp(deviceMap);
+		const result = getCurrentOutsideTemp(deviceMap as any);
 		expect(result).toBe("75");
 	});
 
@@ -417,13 +417,13 @@ describe("getCurrentOutsideTemp utility function", () => {
 		const deviceMap = {
 			"Outside Temperature": { level: "NULL" },
 		};
-		const result = getCurrentOutsideTemp(deviceMap);
+		const result = getCurrentOutsideTemp(deviceMap as any);
 		expect(result).toBe(-1);
 	});
 
 	test("returns -1 for missing temperature", () => {
 		const deviceMap = {};
-		const result = getCurrentOutsideTemp(deviceMap);
+		const result = getCurrentOutsideTemp(deviceMap as any);
 		expect(result).toBe(-1);
 	});
 });
@@ -435,7 +435,7 @@ describe("getThermostatSetPoint utility function", () => {
 			"Cooling Setpoint": { level: "70" },
 			"Heating Setpoint": { level: "68" },
 		};
-		const result = getThermostatSetPoint(deviceMap);
+		const result = getThermostatSetPoint(deviceMap as any);
 		expect(result).toBe(70);
 	});
 
@@ -445,13 +445,13 @@ describe("getThermostatSetPoint utility function", () => {
 			"Cooling Setpoint": { level: "70" },
 			"Heating Setpoint": { level: "68" },
 		};
-		const result = getThermostatSetPoint(deviceMap);
+		const result = getThermostatSetPoint(deviceMap as any);
 		expect(result).toBe(68);
 	});
 
 	test("returns default 72 when no setpoint device", () => {
 		const deviceMap = {};
-		const result = getThermostatSetPoint(deviceMap);
+		const result = getThermostatSetPoint(deviceMap as any);
 		expect(result).toBe(72);
 	});
 });
@@ -463,7 +463,7 @@ describe("getSetpointDevice utility function", () => {
 			"Cooling Setpoint": { level: "70" },
 			"Heating Setpoint": { level: "68" },
 		};
-		const result = getSetpointDevice(deviceMap);
+		const result = getSetpointDevice(deviceMap as any);
 		expect(result.level).toBe("70");
 	});
 
@@ -473,7 +473,7 @@ describe("getSetpointDevice utility function", () => {
 			"Cooling Setpoint": { level: "70" },
 			"Heating Setpoint": { level: "68" },
 		};
-		const result = getSetpointDevice(deviceMap);
+		const result = getSetpointDevice(deviceMap as any);
 		expect(result.level).toBe("68");
 	});
 });
@@ -483,7 +483,7 @@ describe("getFanModeStyle utility function", () => {
 		const deviceMap = {
 			"Thermostat Fan Mode": { level: "0" },
 		};
-		const result = getFanModeStyle("0", deviceMap);
+		const result = getFanModeStyle("0", deviceMap as any);
 		expect(result).toBe("btn btn-secondary w-100 active");
 	});
 
@@ -491,7 +491,7 @@ describe("getFanModeStyle utility function", () => {
 		const deviceMap = {
 			"Thermostat Fan Mode": { level: "0" },
 		};
-		const result = getFanModeStyle("1", deviceMap);
+		const result = getFanModeStyle("1", deviceMap as any);
 		expect(result).toBe("btn btn-secondary w-100");
 	});
 });
@@ -501,7 +501,7 @@ describe("getHVACStyle utility function", () => {
 		const deviceMap = {
 			"Thermostat Mode": { level: "2" },
 		};
-		const result = getHVACStyle("2", deviceMap);
+		const result = getHVACStyle("2", deviceMap as any);
 		expect(result).toBe("btn btn-secondary w-100 active");
 	});
 
@@ -509,7 +509,7 @@ describe("getHVACStyle utility function", () => {
 		const deviceMap = {
 			"Thermostat Mode": { level: "2" },
 		};
-		const result = getHVACStyle("1", deviceMap);
+		const result = getHVACStyle("1", deviceMap as any);
 		expect(result).toBe("btn btn-secondary w-100");
 	});
 });

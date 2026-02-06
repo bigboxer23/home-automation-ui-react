@@ -15,18 +15,18 @@ vi.mock("../../../containers/RoomPage", () => ({
 }));
 
 vi.mock("../../../components/room/RoomUtils", () => ({
-	isLight: (device) => device.type === "light",
+	isLight: (device: any) => device.type === "light",
 }));
 
 // Mock the child components
 vi.mock("../../../components/room/LightComponent", () => ({
-	default: function MockLightComponent(props) {
+	default: function MockLightComponent(props: any) {
 		return <div data-testid="light-component">{props.device.name}</div>;
 	},
 }));
 
 vi.mock("../../../components/garage/GarageAutoCloseButton", () => ({
-	default: function MockGarageAutoCloseButton(props) {
+	default: function MockGarageAutoCloseButton(props: any) {
 		return (
 			<button data-testid="auto-close-button" onClick={props.onClick}>
 				{props.buttonText}
@@ -36,15 +36,20 @@ vi.mock("../../../components/garage/GarageAutoCloseButton", () => ({
 }));
 
 vi.mock("../../../components/ui/IOSSlider", () => ({
-	default: function MockIOSSlider(props) {
+	default: function MockIOSSlider(props: any) {
 		return (
 			<input
 				data-testid="ios-slider"
 				type="range"
 				value={props.value}
-				onChange={(e) => props.onChange?.(e, parseInt(e.target.value))}
+				onChange={(e) =>
+					props.onChange?.(e, parseInt((e.target as HTMLInputElement).value))
+				}
 				onMouseUp={(e) =>
-					props.onChangeCommitted?.(e, parseInt(e.target.value))
+					props.onChangeCommitted?.(
+						e,
+						parseInt((e.target as HTMLInputElement).value),
+					)
 				}
 				min={props.min}
 				max={props.max}
@@ -54,7 +59,7 @@ vi.mock("../../../components/ui/IOSSlider", () => ({
 }));
 
 vi.mock("../../../components/ui/IOSSwitch", () => ({
-	default: function MockIOSSwitch(props) {
+	default: function MockIOSSwitch(props: any) {
 		return (
 			<input
 				data-testid="ios-switch"
@@ -69,10 +74,23 @@ vi.mock("../../../components/ui/IOSSwitch", () => ({
 describe("GaragePageComponent", () => {
 	const mockRoom = {
 		id: "garage1",
+		name: "Garage",
 		devices: [
-			{ name: "Garage Light 1", type: "light", status: "1", level: "75" },
-			{ name: "Garage Light 2", type: "light", status: "0", level: "0" },
-			{ name: "Garage Sensor", type: "sensor", status: "0" },
+			{
+				id: "light1",
+				name: "Garage Light 1",
+				type: "light",
+				status: "1",
+				level: "75",
+			},
+			{
+				id: "light2",
+				name: "Garage Light 2",
+				type: "light",
+				status: "0",
+				level: "0",
+			},
+			{ id: "sensor1", name: "Garage Sensor", type: "sensor", status: "0" },
 		],
 	};
 

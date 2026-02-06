@@ -15,14 +15,14 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("renders Quality label", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		renderWithProviders(<MeuralQualityButton {...props} />);
 
 		expect(screen.getByText("Quality")).toBeInTheDocument();
 	});
 
 	test("renders Standard and HD toggle buttons", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		renderWithProviders(<MeuralQualityButton {...props} />);
 
 		expect(screen.getByText("Standard")).toBeInTheDocument();
@@ -30,7 +30,7 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("defaults to HD quality when no temperature data provided", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		const { container } = renderWithProviders(
 			<MeuralQualityButton {...props} />,
 		);
@@ -42,10 +42,12 @@ describe("MeuralQualityButton", () => {
 	test("sets quality from temperature data", () => {
 		const props = {
 			device: {
+				id: "meural1",
+				name: "Meural",
 				status: "1",
 				temperature: JSON.stringify({ quality: "standard" }),
 			},
-		};
+		} as any;
 		renderWithProviders(<MeuralQualityButton {...props} />);
 
 		const standardButton = screen.getByText("Standard").closest("button");
@@ -53,7 +55,7 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("is visible when device status is 1", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		const { container } = renderWithProviders(
 			<MeuralQualityButton {...props} />,
 		);
@@ -63,7 +65,7 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("is hidden when device status is 0", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		const { container } = renderWithProviders(
 			<MeuralQualityButton {...props} />,
 		);
@@ -73,7 +75,7 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("is hidden when device status is 4", () => {
-		const props = { device: { status: "4" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "4" } };
 		const { container } = renderWithProviders(
 			<MeuralQualityButton {...props} />,
 		);
@@ -83,10 +85,10 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("calls updateOpenAIQuality with standard when Standard is clicked", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		renderWithProviders(<MeuralQualityButton {...props} />);
 
-		const standardButton = screen.getByText("Standard").closest("button");
+		const standardButton = screen.getByText("Standard").closest("button")!;
 		fireEvent.click(standardButton);
 
 		expect(actions.updateOpenAIQuality).toHaveBeenCalledWith("standard");
@@ -98,20 +100,20 @@ describe("MeuralQualityButton", () => {
 				status: "1",
 				temperature: JSON.stringify({ quality: "standard" }),
 			},
-		};
+		} as any;
 		renderWithProviders(<MeuralQualityButton {...props} />);
 
-		const hdButton = screen.getByText("HD").closest("button");
+		const hdButton = screen.getByText("HD").closest("button")!;
 		fireEvent.click(hdButton);
 
 		expect(actions.updateOpenAIQuality).toHaveBeenCalledWith("hd");
 	});
 
 	test("does not call updateOpenAIQuality when clicking already selected button", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		renderWithProviders(<MeuralQualityButton {...props} />);
 
-		const hdButton = screen.getByText("HD").closest("button");
+		const hdButton = screen.getByText("HD").closest("button")!;
 		fireEvent.click(hdButton);
 
 		// Since HD is already selected by default, clicking it shouldn't trigger the action
@@ -119,7 +121,7 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("handles missing device prop", () => {
-		const props = {};
+		const props = {} as any;
 		renderWithProviders(<MeuralQualityButton {...props} />);
 
 		expect(screen.getByText("Quality")).toBeInTheDocument();
@@ -128,7 +130,7 @@ describe("MeuralQualityButton", () => {
 	});
 
 	test("has correct CSS classes", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		const { container } = renderWithProviders(
 			<MeuralQualityButton {...props} />,
 		);
