@@ -72,7 +72,7 @@ describe("MeuralPage", () => {
 
 	test("renders MeuralPage component", () => {
 		renderWithProviders(<MeuralPage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		// MeuralPage should render without crashing
@@ -81,7 +81,7 @@ describe("MeuralPage", () => {
 
 	test("renders with meural device on", () => {
 		renderWithProviders(<MeuralPage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe("MeuralPage", () => {
 
 	test("renders with meural device off", () => {
 		renderWithProviders(<MeuralPage />, {
-			preloadedState: mockStateOff,
+			preloadedState: mockStateOff as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -97,7 +97,7 @@ describe("MeuralPage", () => {
 
 	test("handles no meural device gracefully", () => {
 		renderWithProviders(<MeuralPage />, {
-			preloadedState: mockStateNoDevice,
+			preloadedState: mockStateNoDevice as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -113,7 +113,7 @@ describe("MeuralPage", () => {
 		};
 
 		renderWithProviders(<MeuralPage />, {
-			preloadedState: emptyState,
+			preloadedState: emptyState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -129,7 +129,7 @@ describe("MeuralPage", () => {
 		};
 
 		renderWithProviders(<MeuralPage />, {
-			preloadedState: nullState,
+			preloadedState: nullState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -150,7 +150,7 @@ describe("MeuralPage", () => {
 		};
 
 		renderWithProviders(<MeuralPage />, {
-			preloadedState: stateNoMeural,
+			preloadedState: stateNoMeural as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -174,9 +174,9 @@ describe("findMeuralDeviceFromRoom utility function", () => {
 			],
 		};
 
-		const result = findMeuralDeviceFromRoom(room);
-		expect(result.name).toBe("Meural");
-		expect(result.level).toBe("1.0");
+		const result = findMeuralDeviceFromRoom(room as any);
+		expect(result!.name).toBe("Meural");
+		expect(result!.level).toBe("1.0");
 	});
 
 	test("returns undefined when no meural device found", () => {
@@ -190,12 +190,12 @@ describe("findMeuralDeviceFromRoom utility function", () => {
 			],
 		};
 
-		const result = findMeuralDeviceFromRoom(room);
+		const result = findMeuralDeviceFromRoom(room as any);
 		expect(result).toBeUndefined();
 	});
 
 	test("returns undefined for null room", () => {
-		const result = findMeuralDeviceFromRoom(null);
+		const result = findMeuralDeviceFromRoom(null as any);
 		expect(result).toBeUndefined();
 	});
 
@@ -205,7 +205,7 @@ describe("findMeuralDeviceFromRoom utility function", () => {
 			devices: null,
 		};
 
-		const result = findMeuralDeviceFromRoom(room);
+		const result = findMeuralDeviceFromRoom(room as any);
 		expect(result).toBeUndefined();
 	});
 
@@ -215,7 +215,7 @@ describe("findMeuralDeviceFromRoom utility function", () => {
 			devices: [],
 		};
 
-		const result = findMeuralDeviceFromRoom(room);
+		const result = findMeuralDeviceFromRoom(room as any);
 		expect(result).toBeUndefined();
 	});
 });
@@ -227,7 +227,7 @@ describe("getOnOffText utility function", () => {
 			level: "1.0",
 		};
 
-		const result = getOnOffText(device);
+		const result = getOnOffText(device as any);
 		expect(result).toBe("Turn Off");
 	});
 
@@ -237,7 +237,7 @@ describe("getOnOffText utility function", () => {
 			level: "0.0",
 		};
 
-		const result = getOnOffText(device);
+		const result = getOnOffText(device as any);
 		expect(result).toBe("Turn On");
 	});
 
@@ -247,7 +247,7 @@ describe("getOnOffText utility function", () => {
 	});
 
 	test("returns 'Turn On' for null device", () => {
-		const result = getOnOffText(null);
+		const result = getOnOffText(null as any);
 		expect(result).toBe("Turn On");
 	});
 
@@ -257,7 +257,7 @@ describe("getOnOffText utility function", () => {
 			level: "0.5",
 		};
 
-		const result = getOnOffText(device);
+		const result = getOnOffText(device as any);
 		expect(result).toBe("Turn On");
 	});
 });
@@ -269,7 +269,7 @@ describe("isOn utility function", () => {
 			level: "1.0",
 		};
 
-		const result = isOn(device);
+		const result = isOn(device as any);
 		expect(result).toBe(true);
 	});
 
@@ -279,7 +279,7 @@ describe("isOn utility function", () => {
 			level: "0.0",
 		};
 
-		const result = isOn(device);
+		const result = isOn(device as any);
 		expect(result).toBe(false);
 	});
 
@@ -289,7 +289,7 @@ describe("isOn utility function", () => {
 			level: "0.5",
 		};
 
-		const result = isOn(device);
+		const result = isOn(device as any);
 		expect(result).toBe(false);
 	});
 
@@ -299,7 +299,7 @@ describe("isOn utility function", () => {
 	});
 
 	test("returns false for null device", () => {
-		const result = isOn(null);
+		const result = isOn(null as any);
 		expect(result).toBe(false);
 	});
 
@@ -308,7 +308,7 @@ describe("isOn utility function", () => {
 			name: "Meural",
 		};
 
-		const result = isOn(device);
+		const result = isOn(device as any);
 		expect(result).toBe(false);
 	});
 
@@ -318,7 +318,7 @@ describe("isOn utility function", () => {
 			level: null,
 		};
 
-		const result = isOn(device);
+		const result = isOn(device as any);
 		expect(result).toBe(false);
 	});
 });
@@ -342,9 +342,9 @@ describe("mapStateToProps utility function", () => {
 			},
 		};
 
-		const result = mapStateToProps(state);
-		expect(result.device.name).toBe("Meural");
-		expect(result.device.level).toBe("1.0");
+		const result = mapStateToProps(state as any);
+		expect(result.device!.name).toBe("Meural");
+		expect(result.device!.level).toBe("1.0");
 	});
 
 	test("returns undefined device for state without meural room", () => {
@@ -359,7 +359,7 @@ describe("mapStateToProps utility function", () => {
 			},
 		};
 
-		const result = mapStateToProps(state);
+		const result = mapStateToProps(state as any);
 		expect(result.device).toBeUndefined();
 	});
 
@@ -370,7 +370,7 @@ describe("mapStateToProps utility function", () => {
 			},
 		};
 
-		const result = mapStateToProps(state);
+		const result = mapStateToProps(state as any);
 		expect(result.device).toBeUndefined();
 	});
 
@@ -381,7 +381,7 @@ describe("mapStateToProps utility function", () => {
 			},
 		};
 
-		const result = mapStateToProps(state);
+		const result = mapStateToProps(state as any);
 		expect(result.device).toBeUndefined();
 	});
 });

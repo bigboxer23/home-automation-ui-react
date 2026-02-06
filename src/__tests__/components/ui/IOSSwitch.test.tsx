@@ -35,7 +35,7 @@ describe("IOSSwitch", () => {
 		renderWithProviders(<IOSSwitch checked={false} onChange={mockOnChange} />);
 
 		const switchInput = document.querySelector('input[type="checkbox"]');
-		fireEvent.click(switchInput);
+		fireEvent.click(switchInput!);
 
 		expect(mockOnChange).toHaveBeenCalled();
 	});
@@ -161,7 +161,7 @@ describe("IOSSwitch", () => {
 		renderWithProviders(<IOSSwitch checked={false} onChange={mockOnChange} />);
 
 		const switchInput = document.querySelector('input[type="checkbox"]');
-		fireEvent.focus(switchInput);
+		fireEvent.focus(switchInput!);
 
 		// Check that switch can receive focus
 		expect(switchInput).toBeInTheDocument();
@@ -183,10 +183,10 @@ describe("IOSSwitch", () => {
 		const switchInput = document.querySelector('input[type="checkbox"]');
 		expect(switchInput).not.toBeChecked();
 
-		fireEvent.click(switchInput);
+		fireEvent.click(switchInput!);
 		expect(switchInput).toBeChecked();
 
-		fireEvent.click(switchInput);
+		fireEvent.click(switchInput!);
 		expect(switchInput).not.toBeChecked();
 	});
 });

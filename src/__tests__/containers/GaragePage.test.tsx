@@ -74,7 +74,7 @@ describe("GaragePage", () => {
 
 	test("renders GaragePage component", () => {
 		renderWithProviders(<GaragePage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		// GaragePage should render without crashing
@@ -96,7 +96,7 @@ describe("GaragePage", () => {
 		};
 
 		renderWithProviders(<GaragePage />, {
-			preloadedState: emptyState,
+			preloadedState: emptyState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -104,7 +104,7 @@ describe("GaragePage", () => {
 
 	test("renders with garage room data", () => {
 		renderWithProviders(<GaragePage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -112,7 +112,7 @@ describe("GaragePage", () => {
 
 	test("renders with open garage door", () => {
 		renderWithProviders(<GaragePage />, {
-			preloadedState: mockStateOpen,
+			preloadedState: mockStateOpen as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -145,20 +145,20 @@ describe("getHeader utility function", () => {
 	};
 
 	test("returns formatted header with last opened time", () => {
-		const result = getHeader(mockRoomClosed);
+		const result = getHeader(mockRoomClosed as any);
 		expect(result).toContain("Garage");
 		expect(result).toContain("Last opened:");
 	});
 
 	test("returns formatted header with auto close time", () => {
-		const result = getHeader(mockRoomAutoClose);
+		const result = getHeader(mockRoomAutoClose as any);
 		expect(result).toContain("Garage");
 		expect(result).toContain("Closing in:");
 		expect(result).toContain("5:00");
 	});
 
 	test("returns empty string for null room", () => {
-		const result = getHeader(null);
+		const result = getHeader(null as any);
 		expect(result).toBe("");
 	});
 
@@ -166,7 +166,7 @@ describe("getHeader utility function", () => {
 		const roomWithoutGarage = {
 			name: "Garage",
 			devices: [{ name: "Light", status: "1" }],
-		};
+		} as any;
 		const result = getHeader(roomWithoutGarage);
 		expect(result).toContain("Garage");
 		expect(result).toContain("Last opened:");
@@ -183,7 +183,7 @@ describe("getAutoCloseDelay utility function", () => {
 				},
 			],
 		};
-		const result = getAutoCloseDelay(room);
+		const result = getAutoCloseDelay(room as any);
 		expect(result).toBe(10800000); // 3 hours
 	});
 
@@ -196,7 +196,7 @@ describe("getAutoCloseDelay utility function", () => {
 				},
 			],
 		};
-		const result = getAutoCloseDelay(room);
+		const result = getAutoCloseDelay(room as any);
 		expect(result).toBe(10800000 + 3600000); // 3 hours + 1 hour
 	});
 
@@ -209,7 +209,7 @@ describe("getAutoCloseDelay utility function", () => {
 				},
 			],
 		};
-		const result = getAutoCloseDelay(room);
+		const result = getAutoCloseDelay(room as any);
 		expect(result).toBe(10800000); // 3 hours
 	});
 
@@ -217,12 +217,12 @@ describe("getAutoCloseDelay utility function", () => {
 		const room = {
 			devices: [{ name: "Light", status: "1" }],
 		};
-		const result = getAutoCloseDelay(room);
+		const result = getAutoCloseDelay(room as any);
 		expect(result).toBe(10800000); // 3 hours
 	});
 
 	test("handles null room", () => {
-		const result = getAutoCloseDelay(null);
+		const result = getAutoCloseDelay(null as any);
 		expect(result).toBe(10800000); // 3 hours
 	});
 });
@@ -237,7 +237,7 @@ describe("getAutoCloseButtonStyle utility function", () => {
 				},
 			],
 		};
-		const result = getAutoCloseButtonStyle(room);
+		const result = getAutoCloseButtonStyle(room as any);
 		expect(result).toBe("");
 	});
 
@@ -250,12 +250,12 @@ describe("getAutoCloseButtonStyle utility function", () => {
 				},
 			],
 		};
-		const result = getAutoCloseButtonStyle(room);
+		const result = getAutoCloseButtonStyle(room as any);
 		expect(result).toBe("point-events-none ");
 	});
 
 	test("handles null room", () => {
-		const result = getAutoCloseButtonStyle(null);
+		const result = getAutoCloseButtonStyle(null as any);
 		expect(result).toBe("point-events-none ");
 	});
 
@@ -263,7 +263,7 @@ describe("getAutoCloseButtonStyle utility function", () => {
 		const room = {
 			devices: [{ name: "Light", status: "1" }],
 		};
-		const result = getAutoCloseButtonStyle(room);
+		const result = getAutoCloseButtonStyle(room as any);
 		expect(result).toBe("point-events-none ");
 	});
 });
@@ -295,7 +295,7 @@ describe("GaragePage state mapping", () => {
 		};
 
 		renderWithProviders(<GaragePage />, {
-			preloadedState: mockStateMultiple,
+			preloadedState: mockStateMultiple as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -316,7 +316,7 @@ describe("GaragePage state mapping", () => {
 		};
 
 		renderWithProviders(<GaragePage />, {
-			preloadedState: stateNoGarage,
+			preloadedState: stateNoGarage as any,
 		});
 
 		expect(document.body).toBeInTheDocument();

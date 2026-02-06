@@ -148,7 +148,7 @@ describe("HousePage", () => {
 
 	test("renders HousePage component", () => {
 		renderWithProviders(<HousePage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		// HousePage should render without crashing
@@ -170,7 +170,7 @@ describe("HousePage", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: emptyState,
+			preloadedState: emptyState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -186,7 +186,7 @@ describe("HousePage", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: nullState,
+			preloadedState: nullState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -194,7 +194,7 @@ describe("HousePage", () => {
 
 	test("renders with scene room data", () => {
 		renderWithProviders(<HousePage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -202,7 +202,7 @@ describe("HousePage", () => {
 
 	test("renders with PTO mode active", () => {
 		renderWithProviders(<HousePage />, {
-			preloadedState: mockStateWithPTO,
+			preloadedState: mockStateWithPTO as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -210,7 +210,7 @@ describe("HousePage", () => {
 
 	test("renders with Vacation mode active", () => {
 		renderWithProviders(<HousePage />, {
-			preloadedState: mockStateVacation,
+			preloadedState: mockStateVacation as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -237,7 +237,7 @@ describe("HousePage", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: stateWithoutScenes,
+			preloadedState: stateWithoutScenes as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -258,7 +258,7 @@ describe("HousePage", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: stateEmptyDevices,
+			preloadedState: stateEmptyDevices as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -266,7 +266,7 @@ describe("HousePage", () => {
 
 	test("extracts scene room devices correctly", () => {
 		renderWithProviders(<HousePage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		// Should extract the devices from the Scenes room
@@ -302,7 +302,7 @@ describe("HousePage", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: stateMultipleRooms,
+			preloadedState: stateMultipleRooms as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -339,7 +339,7 @@ describe("getSceneRoom utility function", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: state,
+			preloadedState: state as any,
 		});
 
 		// Component should render successfully with scene data
@@ -356,7 +356,7 @@ describe("getSceneRoom utility function", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: state,
+			preloadedState: state as any,
 		});
 
 		// Should handle null rooms gracefully
@@ -380,7 +380,7 @@ describe("getSceneRoom utility function", () => {
 		};
 
 		renderWithProviders(<HousePage />, {
-			preloadedState: state,
+			preloadedState: state as any,
 		});
 
 		// Should handle empty Scenes room gracefully

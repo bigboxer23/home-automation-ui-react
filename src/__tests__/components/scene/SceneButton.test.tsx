@@ -12,7 +12,7 @@ describe("SceneButton", () => {
 	const mockProps = {
 		room: mockRoom,
 		handleClick: vi.fn(),
-	};
+	} as any;
 
 	beforeEach(() => {
 		vi.clearAllMocks();
@@ -38,7 +38,7 @@ describe("SceneButton", () => {
 	test("calls handleClick with correct parameters for ON button", () => {
 		renderWithProviders(<SceneButton {...mockProps} />);
 
-		const onButton = screen.getByText("Living Room On").closest("button");
+		const onButton = screen.getByText("Living Room On").closest("button")!;
 		fireEvent.click(onButton);
 
 		expect(mockProps.handleClick).toHaveBeenCalledWith("room1", "ON");
@@ -47,7 +47,7 @@ describe("SceneButton", () => {
 	test("calls handleClick with correct parameters for OFF button", () => {
 		renderWithProviders(<SceneButton {...mockProps} />);
 
-		const offButton = screen.getByText("Living Room Off").closest("button");
+		const offButton = screen.getByText("Living Room Off").closest("button")!;
 		fireEvent.click(offButton);
 
 		expect(mockProps.handleClick).toHaveBeenCalledWith("room1", "OFF");

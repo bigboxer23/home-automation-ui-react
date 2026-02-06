@@ -12,11 +12,13 @@ vi.mock("../../../utils/navigation", async () => ({
 describe("HouseButton", () => {
 	const mockRoom = mockRoomData.rooms[0];
 	const mockTime = {
+		id: "time",
+		name: "Time",
 		devices: [
-			{ id: "IsMorning", status: "0" },
-			{ id: "IsDay", status: "1" },
-			{ id: "IsEvening", status: "0" },
-			{ id: "IsNight", status: "0" },
+			{ id: "IsMorning", name: "IsMorning", status: "0" },
+			{ id: "IsDay", name: "IsDay", status: "1" },
+			{ id: "IsEvening", name: "IsEvening", status: "0" },
+			{ id: "IsNight", name: "IsNight", status: "0" },
 		],
 	};
 
@@ -45,7 +47,7 @@ describe("HouseButton", () => {
 	test("shows PTO Mode when PTO scene is active", () => {
 		const roomWithPTO = {
 			...mockRoom,
-			devices: [...mockRoom.devices, { name: "Is PTO", level: "1" }],
+			devices: [...mockRoom.devices, { id: "pto", name: "Is PTO", level: "1" }],
 		};
 
 		renderWithProviders(<HouseButton room={roomWithPTO} time={mockTime} />);
@@ -56,7 +58,10 @@ describe("HouseButton", () => {
 	test("shows Vacation Mode when vacation scene is active", () => {
 		const roomWithVacation = {
 			...mockRoom,
-			devices: [...mockRoom.devices, { name: "Vacation Mode", level: "1" }],
+			devices: [
+				...mockRoom.devices,
+				{ id: "vacation", name: "Vacation Mode", level: "1" },
+			],
 		};
 
 		renderWithProviders(

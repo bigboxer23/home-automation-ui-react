@@ -13,9 +13,11 @@ vi.mock("../../../utils/navigation", async () => ({
 
 describe("MeuralButton", () => {
 	const mockRoomOn = {
+		id: "meural",
 		name: "Meural",
 		devices: [
 			{
+				id: "meural1",
 				name: "Meural",
 				status: "1",
 				level: "1.0",
@@ -24,9 +26,11 @@ describe("MeuralButton", () => {
 	};
 
 	const mockRoomOff = {
+		id: "meural",
 		name: "Meural",
 		devices: [
 			{
+				id: "meural1",
 				name: "Meural",
 				status: "0",
 				level: "0.0",
@@ -35,6 +39,7 @@ describe("MeuralButton", () => {
 	};
 
 	const mockRoomNoDevice = {
+		id: "meural",
 		name: "Meural",
 		devices: [],
 	};
@@ -92,7 +97,7 @@ describe("MeuralButton", () => {
 	});
 
 	test("handles null room gracefully", () => {
-		renderWithProviders(<MeuralButton room={null} />);
+		renderWithProviders(<MeuralButton room={null as any} />);
 
 		expect(screen.getByText("Meural")).toBeInTheDocument();
 		const icon = document.querySelector(".mdi-image-filter-frames");
@@ -110,6 +115,7 @@ describe("MeuralButton", () => {
 describe("getButtonStyling utility function", () => {
 	test("returns frame styling when device is on", () => {
 		const device = {
+			id: "meural1",
 			name: "Meural",
 			level: "1.0",
 		};
@@ -120,6 +126,7 @@ describe("getButtonStyling utility function", () => {
 
 	test("returns filter-frames styling when device is off", () => {
 		const device = {
+			id: "meural1",
 			name: "Meural",
 			level: "0.0",
 		};
@@ -134,12 +141,13 @@ describe("getButtonStyling utility function", () => {
 	});
 
 	test("returns filter-frames styling for null device", () => {
-		const result = getButtonStyling(null);
+		const result = getButtonStyling(null as any);
 		expect(result).toBe("mdi mdi-image-filter-frames");
 	});
 
 	test("returns filter-frames styling for device with different level", () => {
 		const device = {
+			id: "meural1",
 			name: "Meural",
 			level: "0.5",
 		};
@@ -150,6 +158,7 @@ describe("getButtonStyling utility function", () => {
 
 	test("returns filter-frames styling for device without level", () => {
 		const device = {
+			id: "meural1",
 			name: "Meural",
 		};
 

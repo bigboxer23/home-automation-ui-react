@@ -4,8 +4,8 @@ import CameraPage from "../../containers/CameraPage";
 import { renderWithProviders } from "../../test-utils";
 
 // Mock window.location.pathname
-delete window.location;
-window.location = { pathname: "/Security" };
+delete (window as any).location;
+(window as any).location = { pathname: "/Security" };
 
 describe("CameraPage", () => {
 	beforeEach(() => {

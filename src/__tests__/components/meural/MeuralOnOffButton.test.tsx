@@ -5,12 +5,14 @@ import MeuralOnOffButton from "../../../components/meural/MeuralOnOffButton";
 
 describe("MeuralOnOffButton", () => {
 	const mockDeviceOn = {
+		id: "meural1",
 		name: "Meural",
 		status: "1",
 		level: "1.0",
 	};
 
 	const mockDeviceOff = {
+		id: "meural1",
 		name: "Meural",
 		status: "0",
 		level: "0.0",
@@ -77,7 +79,7 @@ describe("MeuralOnOffButton", () => {
 	});
 
 	test("handles null device gracefully", () => {
-		renderWithProviders(<MeuralOnOffButton device={null} />);
+		renderWithProviders(<MeuralOnOffButton device={null as any} />);
 
 		expect(screen.getByText("Turn On")).toBeInTheDocument();
 		const icon = document.querySelector(".mdi-image-filter-frames");
@@ -86,6 +88,7 @@ describe("MeuralOnOffButton", () => {
 
 	test("handles device with no level property", () => {
 		const deviceNoLevel = {
+			id: "meural1",
 			name: "Meural",
 			status: "1",
 		};
@@ -105,7 +108,7 @@ describe("MeuralOnOffButton", () => {
 		const divContainer = container.querySelector("div");
 		expect(divContainer).toBeInTheDocument();
 
-		const button = divContainer.querySelector("button");
+		const button = divContainer!.querySelector("button");
 		expect(button).toBeInTheDocument();
 	});
 });

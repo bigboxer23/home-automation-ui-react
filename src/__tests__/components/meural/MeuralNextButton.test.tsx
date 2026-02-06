@@ -20,7 +20,7 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("renders Next Image button when device status is not 1", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		expect(screen.getByText("Next Image")).toBeInTheDocument();
@@ -34,14 +34,14 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("renders Generate New Image button when device status is 1", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		expect(screen.getByText("Generate New Image")).toBeInTheDocument();
 	});
 
 	test("displays correct icon for Next Image mode", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		const { container } = renderWithProviders(<MeuralNextButton {...props} />);
 
 		const icon = container.querySelector(".mdi-image-move");
@@ -49,7 +49,7 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("displays correct icon for Generate mode", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		const { container } = renderWithProviders(<MeuralNextButton {...props} />);
 
 		const icon = container.querySelector(".mdi-image-refresh-outline");
@@ -57,7 +57,7 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("calls nextMeuralImage action when button is clicked", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -67,7 +67,7 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("shows snackbar with correct message for Next Image", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -79,7 +79,7 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("shows snackbar with correct message for Generate mode", async () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -93,7 +93,7 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("snackbar closes automatically after 3 seconds", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		const button = screen.getByRole("button");
@@ -114,14 +114,14 @@ describe("MeuralNextButton", () => {
 	});
 
 	test("handles missing device prop", () => {
-		const props = {};
+		const props = {} as any;
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		expect(screen.getByText("Next Image")).toBeInTheDocument();
 	});
 
 	test("snackbar can be closed manually", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		renderWithProviders(<MeuralNextButton {...props} />);
 
 		const button = screen.getByRole("button");

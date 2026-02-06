@@ -86,7 +86,7 @@ describe("MainPage", () => {
 
 	test("renders MainPage with loading status component", () => {
 		renderWithProviders(<MainPage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		// MainPage should render without crashing
@@ -95,7 +95,7 @@ describe("MainPage", () => {
 
 	test("renders rooms that are displayed", () => {
 		renderWithProviders(<MainPage />, {
-			preloadedState: mockState,
+			preloadedState: mockState as any,
 		});
 
 		// Should display Climate, Meural, and Living Room buttons
@@ -119,7 +119,7 @@ describe("MainPage", () => {
 		};
 
 		renderWithProviders(<MainPage />, {
-			preloadedState: emptyState,
+			preloadedState: emptyState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -135,7 +135,7 @@ describe("MainPage", () => {
 		};
 
 		renderWithProviders(<MainPage />, {
-			preloadedState: nullState,
+			preloadedState: nullState as any,
 		});
 
 		expect(document.body).toBeInTheDocument();
@@ -143,7 +143,7 @@ describe("MainPage", () => {
 });
 
 describe("mapRoom utility function", () => {
-	const mockTime = {
+	const mockTime: any = {
 		devices: [
 			{ name: "Is Day", status: "1" },
 			{ name: "Is Morning", status: "0" },
@@ -174,14 +174,14 @@ describe("mapRoom utility function", () => {
 
 		const result = mapRoom(
 			mockTime,
-			garageRoom,
+			garageRoom as any,
 			mockHandlers.handleClick,
 			mockHandlers.handleGarageClick,
 			mockHandlers.handleMoreClick,
 			mockHandlers.handleGarageMoreClick,
 		);
 
-		expect(result.type.name).toBe("GarageButton");
+		expect((result as any).type.name).toBe("GarageButton");
 		expect(result.key).toBe("Garage");
 	});
 
@@ -198,7 +198,7 @@ describe("mapRoom utility function", () => {
 
 		const result = mapRoom(
 			mockTime,
-			climateRoom,
+			climateRoom as any,
 			mockHandlers.handleClick,
 			mockHandlers.handleGarageClick,
 			mockHandlers.handleMoreClick,
@@ -222,7 +222,7 @@ describe("mapRoom utility function", () => {
 
 		const result = mapRoom(
 			mockTime,
-			scenesRoom,
+			scenesRoom as any,
 			mockHandlers.handleClick,
 			mockHandlers.handleGarageClick,
 			mockHandlers.handleMoreClick,
@@ -246,7 +246,7 @@ describe("mapRoom utility function", () => {
 
 		const result = mapRoom(
 			mockTime,
-			meuralRoom,
+			meuralRoom as any,
 			mockHandlers.handleClick,
 			mockHandlers.handleGarageClick,
 			mockHandlers.handleMoreClick,
@@ -272,14 +272,14 @@ describe("mapRoom utility function", () => {
 
 		const result = mapRoom(
 			mockTime,
-			regularRoom,
+			regularRoom as any,
 			mockHandlers.handleClick,
 			mockHandlers.handleGarageClick,
 			mockHandlers.handleMoreClick,
 			mockHandlers.handleGarageMoreClick,
 		);
 
-		expect(result.type.name).toBe("RoomButton");
+		expect((result as any).type.name).toBe("RoomButton");
 		expect(result.key).toBe("Living Room");
 	});
 });

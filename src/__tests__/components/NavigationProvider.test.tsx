@@ -24,7 +24,7 @@ describe("NavigationProvider", () => {
 
 	beforeEach(() => {
 		vi.clearAllMocks();
-		useNavigate.mockReturnValue(mockNavigate);
+		(useNavigate as any).mockReturnValue(mockNavigate);
 	});
 
 	test("renders children without modification", () => {
@@ -56,7 +56,7 @@ describe("NavigationProvider", () => {
 		);
 
 		// Change the mock return value
-		useNavigate.mockReturnValue(newMockNavigate);
+		(useNavigate as any).mockReturnValue(newMockNavigate);
 
 		rerender(<NavigationProvider>{mockChildren}</NavigationProvider>);
 

@@ -6,7 +6,7 @@ import * as actions from "../../../actions";
 
 // Mock the actions
 vi.mock("../../../actions", () => ({
-	setMeuralSource: vi.fn(() => (dispatch) => {
+	setMeuralSource: vi.fn(() => (dispatch: any) => {
 		dispatch({ type: "SET_MEURAL_SOURCE" });
 	}),
 }));
@@ -14,9 +14,11 @@ vi.mock("../../../actions", () => ({
 describe("MeuralSourceButton", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
-		actions.setMeuralSource.mockImplementation(() => (dispatch) => {
-			dispatch({ type: "SET_MEURAL_SOURCE" });
-		});
+		(actions.setMeuralSource as any).mockImplementation(
+			() => (dispatch: any) => {
+				dispatch({ type: "SET_MEURAL_SOURCE" });
+			},
+		);
 		vi.useFakeTimers({ shouldAdvanceTime: true });
 	});
 
@@ -25,7 +27,7 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("renders Source label and all toggle buttons", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		expect(screen.getByText("Source")).toBeInTheDocument();
@@ -37,7 +39,7 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("sets correct value from device status", () => {
-		const props = { device: { status: "2" } };
+		const props = { device: { status: "2" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const chatGPT3Button = screen.getByText("ChatGPT-3").closest("button");
@@ -45,12 +47,12 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("handles Google Photos button click", async () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { status: "1" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const googlePhotosButton = screen
 			.getByText("Google Photos")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(googlePhotosButton);
 
 		expect(actions.setMeuralSource).toHaveBeenCalledWith("0");
@@ -61,12 +63,12 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("handles OpenAI TextCompletion button click", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const openAIButton = screen
 			.getByText("OpenAI TextCompletion")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(openAIButton);
 
 		expect(actions.setMeuralSource).toHaveBeenCalledWith("1");
@@ -77,10 +79,10 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("handles ChatGPT-3 button click", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
-		const chatGPT3Button = screen.getByText("ChatGPT-3").closest("button");
+		const chatGPT3Button = screen.getByText("ChatGPT-3").closest("button")!;
 		fireEvent.click(chatGPT3Button);
 
 		expect(actions.setMeuralSource).toHaveBeenCalledWith("2");
@@ -91,10 +93,10 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("handles ChatGPT-4 button click", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
-		const chatGPT4Button = screen.getByText("ChatGPT-4").closest("button");
+		const chatGPT4Button = screen.getByText("ChatGPT-4").closest("button")!;
 		fireEvent.click(chatGPT4Button);
 
 		expect(actions.setMeuralSource).toHaveBeenCalledWith("3");
@@ -105,12 +107,12 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("handles James Webb Space Telescope button click", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const jamesWebbButton = screen
 			.getByText("James Webb Space Telescope")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(jamesWebbButton);
 
 		expect(actions.setMeuralSource).toHaveBeenCalledWith("4");
@@ -121,12 +123,12 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("does not call setMeuralSource when clicking already selected button", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { status: "1" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const openAIButton = screen
 			.getByText("OpenAI TextCompletion")
-			.closest("button");
+			.closest("button")!;
 
 		// The button is already selected, clicking should not trigger action
 		fireEvent.click(openAIButton);
@@ -134,12 +136,12 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("snackbar closes automatically after 3 seconds", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const openAIButton = screen
 			.getByText("OpenAI TextCompletion")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(openAIButton);
 
 		await waitFor(() => {
@@ -157,12 +159,12 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("snackbar can be closed manually", async () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const openAIButton = screen
 			.getByText("OpenAI TextCompletion")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(openAIButton);
 
 		await waitFor(() => {
@@ -179,7 +181,7 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("has correct CSS classes", () => {
-		const props = { device: { status: "0" } };
+		const props = { device: { status: "0" } } as any;
 		const { container } = renderWithProviders(
 			<MeuralSourceButton {...props} />,
 		);
@@ -195,7 +197,7 @@ describe("MeuralSourceButton", () => {
 	});
 
 	test("handles missing device prop", () => {
-		const props = {};
+		const props = {} as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		expect(screen.getByText("Source")).toBeInTheDocument();
@@ -204,13 +206,13 @@ describe("MeuralSourceButton", () => {
 		// Should still allow clicks
 		const googlePhotosButton = screen
 			.getByText("Google Photos")
-			.closest("button");
+			.closest("button")!;
 		fireEvent.click(googlePhotosButton);
 		expect(actions.setMeuralSource).toHaveBeenCalledWith("0");
 	});
 
 	test("toggle button group has correct aria attributes", () => {
-		const props = { device: { status: "1" } };
+		const props = { device: { status: "1" } } as any;
 		renderWithProviders(<MeuralSourceButton {...props} />);
 
 		const toggleGroup = screen.getByRole("group");

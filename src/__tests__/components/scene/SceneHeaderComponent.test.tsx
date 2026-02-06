@@ -33,7 +33,7 @@ describe("SceneHeaderComponent", () => {
 		renderWithProviders(<SceneHeaderComponent {...mockProps} />);
 
 		const backButton = screen.getByText("Test Scene").closest("span");
-		fireEvent.click(backButton);
+		fireEvent.click(backButton!);
 
 		expect(mockProps.back).toHaveBeenCalled();
 	});

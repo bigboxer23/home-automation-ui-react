@@ -31,7 +31,7 @@ describe("ScenePage", () => {
 
 	test("renders ScenePageComponent", () => {
 		renderWithProviders(<ScenePage />, {
-			preloadedState: mockRoomsState,
+			preloadedState: mockRoomsState as any,
 		});
 
 		expect(screen.getByText("Scenes")).toBeInTheDocument();
@@ -39,7 +39,7 @@ describe("ScenePage", () => {
 
 	test("passes correct rooms prop from Scenes room", () => {
 		renderWithProviders(<ScenePage />, {
-			preloadedState: mockRoomsState,
+			preloadedState: mockRoomsState as any,
 		});
 
 		// Should render scene devices from the "Scenes" room
@@ -59,7 +59,7 @@ describe("ScenePage", () => {
 		};
 
 		renderWithProviders(<ScenePage />, {
-			preloadedState: stateWithNullRooms,
+			preloadedState: stateWithNullRooms as any,
 		});
 
 		// Should still render the basic structure
@@ -79,7 +79,7 @@ describe("ScenePage", () => {
 		};
 
 		renderWithProviders(<ScenePage />, {
-			preloadedState: stateWithoutScenesRoom,
+			preloadedState: stateWithoutScenesRoom as any,
 		});
 
 		// Should still render basic structure but no scenes
@@ -91,16 +91,16 @@ describe("ScenePage", () => {
 	test("componentDidMount calls fetchStatus", () => {
 		// Mock fetch is already set up in beforeEach
 		renderWithProviders(<ScenePage />, {
-			preloadedState: mockRoomsState,
+			preloadedState: mockRoomsState as any,
 		});
 
 		// Verify that fetch was called during componentDidMount
-		expect(global.fetch).toHaveBeenCalled();
+		expect((globalThis as any).fetch).toHaveBeenCalled();
 	});
 
 	test("renders camera buttons for Security and Grow Tent", () => {
 		renderWithProviders(<ScenePage />, {
-			preloadedState: mockRoomsState,
+			preloadedState: mockRoomsState as any,
 		});
 
 		expect(screen.getByText("Front Door Security")).toBeInTheDocument();
@@ -120,7 +120,7 @@ describe("ScenePage", () => {
 		};
 
 		renderWithProviders(<ScenePage />, {
-			preloadedState: stateWithEmptyScenes,
+			preloadedState: stateWithEmptyScenes as any,
 		});
 
 		expect(screen.getByText("Scenes")).toBeInTheDocument();
@@ -132,7 +132,7 @@ describe("ScenePage", () => {
 
 	test("getSceneRoom function filters correctly", () => {
 		renderWithProviders(<ScenePage />, {
-			preloadedState: mockRoomsState,
+			preloadedState: mockRoomsState as any,
 		});
 
 		// Verify that only devices from "Scenes" room are displayed
@@ -154,7 +154,7 @@ describe("ScenePage", () => {
 		};
 
 		renderWithProviders(<ScenePage />, {
-			preloadedState: customState,
+			preloadedState: customState as any,
 		});
 
 		expect(screen.getByText("Custom Scene On")).toBeInTheDocument();

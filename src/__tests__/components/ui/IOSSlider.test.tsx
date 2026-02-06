@@ -116,7 +116,7 @@ describe("IOSSlider", () => {
 		);
 
 		const sliderInput = document.querySelector('input[type="range"]');
-		fireEvent.change(sliderInput, { target: { value: "75" } });
+		fireEvent.change(sliderInput!, { target: { value: "75" } });
 
 		expect(mockOnChange).toHaveBeenCalled();
 	});
@@ -133,9 +133,9 @@ describe("IOSSlider", () => {
 		const sliderInput = document.querySelector('input[type="range"]');
 
 		// Simulate a complete interaction - mouseDown, change, mouseUp
-		fireEvent.mouseDown(sliderInput);
-		fireEvent.change(sliderInput, { target: { value: "75" } });
-		fireEvent.mouseUp(sliderInput);
+		fireEvent.mouseDown(sliderInput!);
+		fireEvent.change(sliderInput!, { target: { value: "75" } });
+		fireEvent.mouseUp(sliderInput!);
 
 		// OnChangeCommitted should be called after the interaction is complete
 		expect(mockOnChangeCommitted).toHaveBeenCalled();
