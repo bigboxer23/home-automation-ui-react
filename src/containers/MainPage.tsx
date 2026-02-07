@@ -51,12 +51,15 @@ const getRooms = (rooms: Room[]): Room[] => {
 			}
 			return 0;
 		});
-	const aScenes = allItems.find((room: Room) => "Scenes" === room.name);
-	aScenes!.totalLights = countTotalLights(rooms);
+	const scenes = allItems.find((room: Room) => "Scenes" === room.name);
+	if (scenes == null) {
+		return allItems;
+	}
+	scenes.totalLights = countTotalLights(rooms);
 	return allItems
 		.filter((room: Room) => "Climate" === room.name)
 		.concat(allItems.filter((room: Room) => "Garage" === room.name))
-		.concat(aScenes!)
+		.concat(scenes)
 		.concat(allItems.filter((room: Room) => "Meural" === room.name))
 		.concat(
 			allItems.filter(

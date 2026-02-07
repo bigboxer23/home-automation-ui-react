@@ -125,6 +125,34 @@ describe("MainPage", () => {
 		expect(document.body).toBeInTheDocument();
 	});
 
+	test("handles rooms without Scenes room gracefully", () => {
+		const noScenesState = {
+			house: {
+				rooms: [
+					{
+						name: "Living Room",
+						devices: [
+							{
+								name: "Light 1",
+								status: "1",
+								level: "75",
+								category: "2",
+							},
+						],
+					},
+				],
+				lastUpdate: Date.now(),
+				authError: false,
+			},
+		};
+
+		renderWithProviders(<MainPage />, {
+			preloadedState: noScenesState as any,
+		});
+
+		expect(screen.getByText("Living Room")).toBeInTheDocument();
+	});
+
 	test("handles null rooms gracefully", () => {
 		const nullState = {
 			house: {
