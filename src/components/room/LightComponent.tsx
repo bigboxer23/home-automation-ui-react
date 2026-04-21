@@ -23,7 +23,7 @@ export default function LightComponent({
 			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 				<div className="form-group w-100 mt-2 mb-2">
 					<div className="w-100 d-flex">
-						<label className="ms-4 w-100">{device.name}</label>
+						<label className="ms-2 w-100">{device.name}</label>
 						<IOSSwitch
 							className="me-2"
 							checked={parseInt(device.level ?? "0", 10) > 0}
@@ -40,16 +40,9 @@ export default function LightComponent({
 		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 			<div className="form-group w-100">
 				<div className="w-100 d-flex">
-					<label className="ms-4 w-100">{device.name}</label>
-					<IOSSwitch
-						className="me-2"
-						checked={parseInt(device.level ?? "0", 10) > 0}
-						onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-							setDeviceStatus(device.id, event.target.checked)
-						}
-					/>
+					<label className="ms-2 w-100 small">{device.name}</label>
 				</div>
-				<div className=" d-flex btn-group btn-group-toggle justify-content-center">
+				<div className=" d-flex btn-group btn-group-toggle justify-content-center align-items-center">
 					<IOSSlider
 						value={getIntegerLevel(device)}
 						onChange={(event: Event, newValue: number | number[]) =>
@@ -62,6 +55,13 @@ export default function LightComponent({
 						valueLabelDisplay={"auto"}
 						min={0}
 						max={100}
+					/>
+					<IOSSwitch
+						className="me-2"
+						checked={parseInt(device.level ?? "0", 10) > 0}
+						onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+							setDeviceStatus(device.id, event.target.checked)
+						}
 					/>
 				</div>
 			</div>

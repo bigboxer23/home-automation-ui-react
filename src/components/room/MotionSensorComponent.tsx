@@ -17,7 +17,7 @@ const MotionSensorComponent: React.FC<MotionSensorComponentProps> = ({
 		(style || styleName) + " p-2 form-group w-100 d-flex light_slider mb-2";
 	return (
 		<div className={className}>
-			<label className="flex-grow-1 align-items-center ms-4 mt-2 mb-2">
+			<label className="flex-grow-1 align-items-center ms-2 mt-2 mb-2">
 				{device.name.replace(" Battery", "")}
 			</label>
 			<div
