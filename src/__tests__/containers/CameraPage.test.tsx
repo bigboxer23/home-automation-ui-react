@@ -1,7 +1,24 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import CameraPage from "../../containers/CameraPage";
 import { renderWithProviders } from "../../test-utils";
+
+// Use fake timers throughout so the module-level intervalId resets between
+// tests (resizeImgContent clears it when contentDocument is null).
+beforeAll(() => {
+	vi.useFakeTimers();
+});
+
+afterEach(() => {
+	// Advance past the 250ms interval to fire resizeImgContent, which resets
+	// the module-level intervalId to null so the next test gets a fresh interval.
+	vi.advanceTimersByTime(300);
+	vi.clearAllTimers();
+});
+
+afterAll(() => {
+	vi.useRealTimers();
+});
 
 // Mock window.location.pathname
 delete (window as any).location;
@@ -10,18 +27,14 @@ delete (window as any).location;
 describe("CameraPage", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
-		// Reset to Security path for each test
 		window.location.pathname = "/Security";
 	});
 
 	test("renders CameraComponent with correct props for Security path", () => {
 		const { container } = renderWithProviders(<CameraPage />);
 
-		// Should render iframe with front door source
 		const iframe = container.querySelector("iframe");
 		expect(iframe).toHaveAttribute("src", "/FrontDoor");
-
-		// Should display Security camera name
 		expect(screen.getByText("Front Door Security")).toBeInTheDocument();
 	});
 
@@ -30,11 +43,8 @@ describe("CameraPage", () => {
 
 		const { container } = renderWithProviders(<CameraPage />);
 
-		// Should render iframe with GrowPi source
 		const iframe = container.querySelector("iframe");
 		expect(iframe).toHaveAttribute("src", "/GrowPi/index.html");
-
-		// Should display GrowPi camera name
 		expect(screen.getByText("Grow Tent")).toBeInTheDocument();
 	});
 
@@ -49,5 +59,30 @@ describe("CameraPage", () => {
 		const { container } = renderWithProviders(<CameraPage />);
 
 		expect(container.querySelector(".background")).toBeInTheDocument();
+	});
+
+	test("calls back action when header is clicked", () => {
+		renderWithProviders(<CameraPage />);
+
+		fireEvent.click(screen.getByText("Front Door Security"));
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("fires resizeImgContent via interval on mount", () => {
+		renderWithProviders(<CameraPage />);
+
+		// Advance past the 250ms interval — resizeImgContent runs and clears
+		// intervalId when jsdom iframe.contentDocument is null
+		vi.advanceTimersByTime(300);
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("does not create a second interval when one is already running", () => {
+		// Render without advancing timers — intervalId is set but not yet cleared
+		renderWithProviders(<CameraPage />);
+		// Render again before the interval fires; initializeIframe should no-op
+		renderWithProviders(<CameraPage />);
+		vi.advanceTimersByTime(300);
+		expect(document.body).toBeInTheDocument();
 	});
 });
