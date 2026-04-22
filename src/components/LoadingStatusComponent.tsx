@@ -28,7 +28,7 @@ const getLoadContent = function (
 				</div>
 			</div>
 		);
-	} else if (theLoadedTime == null || true) {
+	} else if (theLoadedTime == null) {
 		return (
 			<div className="LoadingStatus d-flex justify-content-center align-items-center position-absolute">
 				<CircularProgress
