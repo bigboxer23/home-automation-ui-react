@@ -27,7 +27,7 @@ class MainPage extends React.Component<MainPageProps> {
 		return (
 			<div>
 				<LoadingStatusComponent {...(this.props as any)} />
-				<MainPageComponent {...(this.props as any)} />
+				{/*<MainPageComponent {...(this.props as any)} />*/}
 			</div>
 		);
 	}
