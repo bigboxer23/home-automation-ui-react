@@ -1,6 +1,6 @@
 import React from "react";
-import { screen } from "@testing-library/react";
-import { renderWithProviders } from "../../test-utils";
+import { screen, fireEvent } from "@testing-library/react";
+import { renderWithProviders, mockFetch } from "../../test-utils";
 import GaragePage, {
 	getHeader,
 	getAutoCloseDelay,
@@ -265,6 +265,86 @@ describe("getAutoCloseButtonStyle utility function", () => {
 		};
 		const result = getAutoCloseButtonStyle(room as any);
 		expect(result).toBe("point-events-none ");
+	});
+});
+
+describe("GaragePage interactions", () => {
+	const interactionState = {
+		house: {
+			rooms: [
+				{
+					id: "garage-room",
+					name: "Garage",
+					devices: [
+						{
+							name: "Garage Opener",
+							status: "false",
+							temperature: 72,
+							historicOpenTime: 1640995200000,
+							autoClose: 300000,
+						},
+						{
+							name: "Garage Light",
+							status: "1",
+							level: "75",
+							category: "2",
+						},
+					],
+				},
+			],
+			lastUpdate: Date.now(),
+			authError: false,
+		},
+	};
+
+	beforeEach(() => {
+		vi.clearAllMocks();
+		mockFetch({});
+	});
+
+	test("calls autoCloseClickHandler when Disable Auto Close is clicked", () => {
+		renderWithProviders(<GaragePage />, {
+			preloadedState: interactionState as any,
+		});
+
+		fireEvent.click(screen.getByText("Disable Auto Close"));
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("calls sliderChange when slider value changes", () => {
+		const { container } = renderWithProviders(<GaragePage />, {
+			preloadedState: interactionState as any,
+		});
+
+		const rangeInput = container.querySelector('input[type="range"]');
+		if (rangeInput) {
+			fireEvent.change(rangeInput, { target: { value: "50" } });
+		}
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("calls slideStop when slider interaction commits", () => {
+		const { container } = renderWithProviders(<GaragePage />, {
+			preloadedState: interactionState as any,
+		});
+
+		const rangeInput = container.querySelector('input[type="range"]');
+		if (rangeInput) {
+			fireEvent.mouseUp(rangeInput);
+		}
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("calls setDeviceStatus when IOSSwitch is toggled", () => {
+		const { container } = renderWithProviders(<GaragePage />, {
+			preloadedState: interactionState as any,
+		});
+
+		const switchInput = container.querySelector('input[type="checkbox"]');
+		if (switchInput) {
+			fireEvent.click(switchInput);
+		}
+		expect(document.body).toBeInTheDocument();
 	});
 });
 

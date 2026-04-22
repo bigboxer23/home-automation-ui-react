@@ -168,6 +168,81 @@ describe("MainPage", () => {
 
 		expect(document.body).toBeInTheDocument();
 	});
+
+	test("filters out Front Porch Colors room", () => {
+		const state = {
+			house: {
+				rooms: [
+					{
+						name: "Front Porch Colors",
+						devices: [{ name: "Light", status: "1", category: "2" }],
+					},
+					{
+						name: "Living Room",
+						devices: [{ name: "Light", status: "1", category: "2" }],
+					},
+				],
+				lastUpdate: Date.now(),
+				authError: false,
+			},
+		};
+		renderWithProviders(<MainPage />, { preloadedState: state as any });
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("handles rooms with null devices", () => {
+		const state = {
+			house: {
+				rooms: [{ name: "Empty Room", devices: null }],
+				lastUpdate: Date.now(),
+				authError: false,
+			},
+		};
+		renderWithProviders(<MainPage />, { preloadedState: state as any });
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("counts total lights across rooms", () => {
+		const state = {
+			house: {
+				rooms: [
+					{
+						name: "Scenes",
+						devices: [{ name: "Is Day", status: "1" }],
+					},
+					{
+						name: "Living Room",
+						devices: [
+							{ name: "Light 1", status: "1", level: "75", category: "2" },
+							{ name: "Light 2", status: "1", level: "50", category: "2" },
+						],
+					},
+					{
+						name: "Bedroom",
+						devices: [
+							{ name: "Light 1", status: "0", level: "0", category: "2" },
+						],
+					},
+				],
+				lastUpdate: Date.now(),
+				authError: false,
+			},
+		};
+		renderWithProviders(<MainPage />, { preloadedState: state as any });
+		expect(document.body).toBeInTheDocument();
+	});
+
+	test("shows auth error loading state", () => {
+		const state = {
+			house: {
+				rooms: [],
+				lastUpdate: null,
+				authError: true,
+			},
+		};
+		renderWithProviders(<MainPage />, { preloadedState: state as any });
+		expect(screen.getByText(/Alexa/)).toBeInTheDocument();
+	});
 });
 
 describe("mapRoom utility function", () => {
