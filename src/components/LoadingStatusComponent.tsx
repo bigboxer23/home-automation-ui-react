@@ -1,5 +1,5 @@
 import React from "react";
-import Spinner from "react-spinkit";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface LoadingStatusComponentProps {
 	loaded: number | null | undefined;
@@ -18,7 +18,11 @@ const getLoadContent = function (
 	if (authError) {
 		return (
 			<div className="LoadingStatus d-flex justify-content-center align-items-center position-absolute">
-				<Spinner name="ball-scale-ripple-multiple" color="#28a745" />
+				<CircularProgress
+					sx={{ color: "#28a745" }}
+					size="2rem"
+					className={"me-2"}
+				/>
 				<div className="authText">
 					Say <b>'Alexa, turn on Authorize'</b>
 				</div>
@@ -27,7 +31,11 @@ const getLoadContent = function (
 	} else if (theLoadedTime == null) {
 		return (
 			<div className="LoadingStatus d-flex justify-content-center align-items-center position-absolute">
-				<Spinner name="ball-scale-multiple" color="#28a745" />
+				<CircularProgress
+					sx={{ color: "#28a745" }}
+					size="2rem"
+					className={"me-2"}
+				/>
 				Loading...
 			</div>
 		);
