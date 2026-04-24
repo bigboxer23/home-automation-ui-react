@@ -119,7 +119,7 @@ describe("IOSSwitch", () => {
 		renderWithProviders(
 			<IOSSwitch
 				checked={false}
-				inputProps={{ "aria-label": "Toggle setting" }}
+				slotProps={{ input: { "aria-label": "Toggle setting" } }}
 				onChange={mockOnChange}
 			/>,
 		);
