@@ -43,14 +43,7 @@ export default function GaragePageComponent({
 				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
 					<div className="form-group w-100">
 						<div className="w-100 d-flex">
-							<label className="ms-4 w-100">Overall Room</label>
-							<IOSSwitch
-								className="me-2"
-								checked={getRoomDimLevel(room) > 0}
-								onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-									setDeviceStatus(room.id, event.target.checked)
-								}
-							/>
+							<label className="ms-2 w-100 small">Overall Room</label>
 						</div>
 						<div className="d-flex btn-group btn-group-toggle justify-content-center">
 							{
@@ -68,6 +61,13 @@ export default function GaragePageComponent({
 									max={100}
 								/>
 							}
+							<IOSSwitch
+								className="me-2"
+								checked={getRoomDimLevel(room) > 0}
+								onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+									setDeviceStatus(room.id, event.target.checked)
+								}
+							/>
 						</div>
 					</div>
 				</div>
