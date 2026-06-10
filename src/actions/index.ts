@@ -76,6 +76,7 @@ const fetchStatus = function (): AppThunk {
 	return (dispatch, getState) => {
 		dispatch(cancelFetchTimer() as any);
 		dispatch(requestStatus());
+		const lastUpdateAtStart = getState().house.lastUpdate;
 		return fetchWithCookies("/SceneStatus")
 			.then((response) => handleErrors(response, dispatch))
 			.then((theResults) => {
@@ -83,7 +84,12 @@ const fetchStatus = function (): AppThunk {
 			})
 			.then((theData) => {
 				if (theData != null && theData.rooms != null) {
-					dispatch(statusUpdated(theData.rooms));
+					// Discard stale data: if the user optimistically changed a device
+					// while this request was in flight, applying the (now old) server
+					// snapshot would revert their change until the next poll.
+					if (getState().house.lastUpdate === lastUpdateAtStart) {
+						dispatch(statusUpdated(theData.rooms));
+					}
 				}
 			})
 			.finally(() =>

@@ -50,6 +50,82 @@ describe("Actions", () => {
 		});
 	});
 
+	describe("fetchStatus stale-response guard", () => {
+		const makeStore = (house: any) => {
+			const actionsLog: any[] = [];
+			const state = { house };
+			const getState = () => state;
+			const dispatch: any = (action: any) =>
+				typeof action === "function"
+					? action(dispatch, getState)
+					: actionsLog.push(action);
+			return { dispatch, getState, actionsLog, state };
+		};
+
+		test("applies status when no user interaction occurs during the request", async () => {
+			const { dispatch, getState, actionsLog } = makeStore({
+				isFetching: false,
+				timer: null,
+				lastUpdate: 100,
+			});
+
+			mockFetch({ rooms: [{ id: "R1", name: "Room", devices: [] }] });
+
+			(actions.fetchStatusIfNecessary() as any)(dispatch, getState, undefined);
+			await new Promise((r) => setTimeout(r, 0));
+
+			expect(actionsLog.find((a) => a.type === "STATUS_UPDATED")).toEqual({
+				type: "STATUS_UPDATED",
+				data: [{ id: "R1", name: "Room", devices: [] }],
+			});
+		});
+
+		test("discards stale status if a user interaction happens while in flight", async () => {
+			const store = makeStore({
+				isFetching: false,
+				timer: null,
+				lastUpdate: 100,
+				rooms: [
+					{ id: "R1", name: "Room", devices: [{ id: "D1", level: "100" }] },
+				],
+			});
+			let resolveFetch: (v: any) => void = () => {};
+			globalThis.fetch = vi.fn(
+				() =>
+					new Promise((resolve) => {
+						resolveFetch = resolve;
+					}),
+			) as any;
+
+			(actions.fetchStatusIfNecessary() as any)(
+				store.dispatch,
+				store.getState,
+				undefined,
+			);
+
+			store.state.house.rooms = [
+				{ id: "R1", name: "Room", devices: [{ id: "D1", level: "0" }] },
+			];
+			store.state.house.lastUpdate = 200;
+
+			resolveFetch({
+				ok: true,
+				json: () =>
+					Promise.resolve({
+						rooms: [
+							{ id: "R1", name: "Room", devices: [{ id: "D1", level: "100" }] },
+						],
+					}),
+			});
+			await new Promise((r) => setTimeout(r, 0));
+
+			expect(store.actionsLog.some((a) => a.type === "STATUS_UPDATED")).toBe(
+				false,
+			);
+			expect(store.state.house.rooms[0].devices[0].level).toBe("0");
+		});
+	});
+
 	describe("setDimLocal", () => {
 		test("dispatches correct actions", () => {
 			const dispatch = vi.fn();
