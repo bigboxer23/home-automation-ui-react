@@ -29,6 +29,7 @@ export interface HouseState {
 	timer: ReturnType<typeof setTimeout> | null;
 	authError: boolean;
 	lastUpdate?: number;
+	lastUserActionAt?: number;
 }
 
 export interface RootState {

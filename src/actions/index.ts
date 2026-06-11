@@ -72,6 +72,8 @@ const handleErrors = function (
 	return response;
 };
 
+const USER_ACTION_SUPPRESS_MS = 5000;
+
 const fetchStatus = function (): AppThunk {
 	return (dispatch, getState) => {
 		dispatch(cancelFetchTimer() as any);
@@ -84,10 +86,11 @@ const fetchStatus = function (): AppThunk {
 			})
 			.then((theData) => {
 				if (theData != null && theData.rooms != null) {
-					// Discard stale data: if the user optimistically changed a device
-					// while this request was in flight, applying the (now old) server
-					// snapshot would revert their change until the next poll.
-					if (getState().house.lastUpdate === lastUpdateAtStart) {
+					const house = getState().house;
+					const withinSuppressWindow =
+						house.lastUserActionAt != null &&
+						Date.now() - house.lastUserActionAt < USER_ACTION_SUPPRESS_MS;
+					if (house.lastUpdate === lastUpdateAtStart && !withinSuppressWindow) {
 						dispatch(statusUpdated(theData.rooms));
 					}
 				}

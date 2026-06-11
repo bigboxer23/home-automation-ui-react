@@ -124,6 +124,41 @@ describe("Actions", () => {
 			);
 			expect(store.state.house.rooms[0].devices[0].level).toBe("0");
 		});
+
+		test("discards status within the suppression window after a user action", async () => {
+			// lastUpdate is unchanged during the request (in-flight guard passes),
+			// but a user action happened moments ago, so the (possibly stale, due to
+			// backend lag) server status must still be ignored.
+			const { dispatch, getState, actionsLog } = makeStore({
+				isFetching: false,
+				timer: null,
+				lastUpdate: 100,
+				lastUserActionAt: Date.now(),
+			});
+
+			mockFetch({ rooms: [{ id: "R1", name: "Room", devices: [] }] });
+
+			(actions.fetchStatusIfNecessary() as any)(dispatch, getState, undefined);
+			await new Promise((r) => setTimeout(r, 0));
+
+			expect(actionsLog.some((a) => a.type === "STATUS_UPDATED")).toBe(false);
+		});
+
+		test("applies status once the suppression window has elapsed", async () => {
+			const { dispatch, getState, actionsLog } = makeStore({
+				isFetching: false,
+				timer: null,
+				lastUpdate: 100,
+				lastUserActionAt: Date.now() - 6000,
+			});
+
+			mockFetch({ rooms: [{ id: "R1", name: "Room", devices: [] }] });
+
+			(actions.fetchStatusIfNecessary() as any)(dispatch, getState, undefined);
+			await new Promise((r) => setTimeout(r, 0));
+
+			expect(actionsLog.some((a) => a.type === "STATUS_UPDATED")).toBe(true);
+		});
 	});
 
 	describe("setDimLocal", () => {
