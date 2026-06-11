@@ -37,6 +37,11 @@ export default defineConfig(({ mode }) => {
 		test: {
 			globals: true,
 			environment: "jsdom",
+			server: {
+				deps: {
+					inline: ["react-transition-group", /@mui\//],
+				},
+			},
 			environmentOptions: {
 				jsdom: {
 					url: "http://localhost",

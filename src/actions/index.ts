@@ -72,10 +72,13 @@ const handleErrors = function (
 	return response;
 };
 
+const USER_ACTION_SUPPRESS_MS = 5000;
+
 const fetchStatus = function (): AppThunk {
 	return (dispatch, getState) => {
 		dispatch(cancelFetchTimer() as any);
 		dispatch(requestStatus());
+		const lastUpdateAtStart = getState().house.lastUpdate;
 		return fetchWithCookies("/SceneStatus")
 			.then((response) => handleErrors(response, dispatch))
 			.then((theResults) => {
@@ -83,7 +86,13 @@ const fetchStatus = function (): AppThunk {
 			})
 			.then((theData) => {
 				if (theData != null && theData.rooms != null) {
-					dispatch(statusUpdated(theData.rooms));
+					const house = getState().house;
+					const withinSuppressWindow =
+						house.lastUserActionAt != null &&
+						Date.now() - house.lastUserActionAt < USER_ACTION_SUPPRESS_MS;
+					if (house.lastUpdate === lastUpdateAtStart && !withinSuppressWindow) {
+						dispatch(statusUpdated(theData.rooms));
+					}
 				}
 			})
 			.finally(() =>

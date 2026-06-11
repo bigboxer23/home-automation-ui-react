@@ -41,6 +41,7 @@ const roomReducer = (
 					};
 				}),
 				lastUpdate: Date.now(),
+				lastUserActionAt: Date.now(),
 			};
 		}
 		case "GARAGE_STATE_CHANGE":
@@ -62,6 +63,7 @@ const roomReducer = (
 					};
 				}),
 				lastUpdate: Date.now(),
+				lastUserActionAt: Date.now(),
 			};
 		case "REQUEST_STATUS":
 			return { ...state, isFetching: true };
@@ -88,6 +90,7 @@ const roomReducer = (
 					};
 				}),
 				lastUpdate: Date.now(),
+				lastUserActionAt: Date.now(),
 			};
 		case "UPDATE_ON_OFF":
 			return {
@@ -109,6 +112,7 @@ const roomReducer = (
 					};
 				}),
 				lastUpdate: Date.now(),
+				lastUserActionAt: Date.now(),
 			};
 		case "UPDATE_DIM":
 			return {
@@ -142,6 +146,7 @@ const roomReducer = (
 					};
 				}),
 				lastUpdate: Date.now(),
+				lastUserActionAt: Date.now(),
 			};
 		case "AUTH_ERROR":
 			return { ...state, authError: action.authError };
