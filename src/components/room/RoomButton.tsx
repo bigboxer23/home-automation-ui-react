@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import type { Room } from "../../types";
 import {
 	areDotsHidden,
@@ -22,11 +22,11 @@ export default function RoomButton({
 	handleClick,
 }: RoomButtonProps) {
 	return (
-		<Button
+		<AppButton
 			onClick={(event: React.MouseEvent) => handleMoreClick(event, room.name)}
-			variant={getButtonStyle(room)}
+			state={getButtonStyle(room)}
 			size="lg"
-			className={"m-1 position-relative d-flex justify-content-center"}
+			className={"m-1 relative flex justify-center"}
 		>
 			<i
 				className={
@@ -39,17 +39,17 @@ export default function RoomButton({
 				className={"mdi mdi-dots-horizontal inFront" + areDotsHidden(room)}
 				/*onClick={(event) => handleMoreClick(event, room.name)}*/
 			/>
-			<div className="temp-display pe-1 ps-1 position-absolute total-lights-bg">
+			<div className="temp-display pe-1 ps-1 absolute total-lights-bg">
 				{getCountContent(room)}
 			</div>
 			<div
-				className="position-absolute bottom w-100 m-2 ps-2 pe-3"
+				className="absolute bottom w-full m-2 ps-2 pe-4"
 				onClick={(event: React.MouseEvent) =>
 					handleClick(event, room.id, isOn(room) ? 0 : 100)
 				}
 			>
 				{room.name}
 			</div>
-		</Button>
+		</AppButton>
 	);
 }

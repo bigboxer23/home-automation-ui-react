@@ -25,11 +25,11 @@ describe("MeuralNextButton", () => {
 
 		expect(screen.getByText("Next Image")).toBeInTheDocument();
 		expect(screen.getByRole("button")).toHaveClass(
-			"mb-3",
+			"mb-4",
 			"m-1",
-			"position-relative",
-			"d-flex",
-			"justify-content-center",
+			"relative",
+			"flex",
+			"justify-center",
 		);
 	});
 

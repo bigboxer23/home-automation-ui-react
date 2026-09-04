@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push } from "../../utils/navigation";
@@ -13,19 +13,16 @@ interface MeuralButtonProps {
 }
 
 const MeuralButton: React.FC<MeuralButtonProps> = (props) => (
-	<Button
+	<AppButton
 		onClick={(event: React.MouseEvent) =>
 			props.changePage(event, isOn(findMeuralDeviceFromRoom(props.room)))
 		}
-		variant=""
 		size="lg"
-		className={
-			"m-1 position-relative d-flex justify-content-center house-button"
-		}
+		className={"m-1 relative flex justify-center house-button"}
 	>
 		<i className={getButtonStyling(findMeuralDeviceFromRoom(props.room))} />
-		<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">Meural</div>
-	</Button>
+		<div className="absolute bottom w-full m-2 ps-2 pe-2">Meural</div>
+	</AppButton>
 );
 
 export const getButtonStyling = (device: Device | undefined): string => {

@@ -20,10 +20,10 @@ export default function LightComponent({
 }: LightComponentProps) {
 	if (isFan(device)) {
 		return (
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-				<div className="form-group w-100 mt-2 mb-2">
-					<div className="w-100 d-flex">
-						<label className="ms-2 w-100">{device.name}</label>
+			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start light_slider mb-2">
+				<div className="w-full mt-2 mb-2">
+					<div className="w-full flex">
+						<label className="ms-2 w-full">{device.name}</label>
 						<IOSSwitch
 							className="me-2"
 							checked={parseInt(device.level ?? "0", 10) > 0}
@@ -37,12 +37,12 @@ export default function LightComponent({
 		);
 	}
 	return (
-		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-			<div className="form-group w-100">
-				<div className="w-100 d-flex">
-					<label className="ms-2 w-100 small">{device.name}</label>
+		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start light_slider mb-2">
+			<div className="w-full">
+				<div className="w-full flex">
+					<label className="ms-2 w-full text-[0.875em]">{device.name}</label>
 				</div>
-				<div className=" d-flex btn-group btn-group-toggle justify-content-center align-items-center">
+				<div className="flex justify-center items-center">
 					<IOSSlider
 						value={getIntegerLevel(device)}
 						onChange={(event: Event, newValue: number | number[]) =>

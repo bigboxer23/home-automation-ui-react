@@ -1,7 +1,7 @@
 import React from "react";
 import type { Room } from "../../types";
 import SceneButton from "./SceneButton";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import SceneHeaderComponent from "./SceneHeaderComponent";
 
 interface ScenePageComponentProps {
@@ -20,33 +20,29 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 	<div>
 		<div className="background"></div>
 		<SceneHeaderComponent back={back} name={"Scenes"} />
-		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
+		<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 			{rooms.map((room) => (
 				<SceneButton key={room.name} room={room} handleClick={handleClick} />
 			))}
 			<div>
-				<Button
+				<AppButton
 					onClick={() => gotoPage("Security")}
-					variant=""
 					size="lg"
-					className={"mb-3 m-1 position-relative d-flex justify-content-center"}
+					className={"mb-4 m-1 relative flex justify-center"}
 				>
 					<i className="mdi mdi-video-wireless-outline" />
-					<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+					<div className="absolute bottom w-full m-2 ps-2 pe-2">
 						Front Door Security
 					</div>
-				</Button>
-				<Button
+				</AppButton>
+				<AppButton
 					onClick={() => gotoPage("Grow")}
-					variant=""
 					size="lg"
-					className={"mb-3 m-1 position-relative d-flex justify-content-center"}
+					className={"mb-4 m-1 relative flex justify-center"}
 				>
 					<i className="mdi mdi-video-wireless-outline" />
-					<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
-						Grow Tent
-					</div>
-				</Button>
+					<div className="absolute bottom w-full m-2 ps-2 pe-2">Grow Tent</div>
+				</AppButton>
 			</div>
 		</div>
 	</div>

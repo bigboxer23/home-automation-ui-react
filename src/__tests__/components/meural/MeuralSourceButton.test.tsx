@@ -187,10 +187,10 @@ describe("MeuralSourceButton", () => {
 		);
 
 		const mainContainer = container.querySelector(".meural-source-button");
-		expect(mainContainer).toHaveClass("pt-3", "pb-2");
+		expect(mainContainer).toHaveClass("pt-4", "pb-2");
 
 		const label = container.querySelector(".meural-source-button-label");
-		expect(label).toHaveClass("ms-3", "fw-bold", "pt-3", "pb-2");
+		expect(label).toHaveClass("ms-4", "font-bold", "pt-4", "pb-2");
 
 		const buttons = container.querySelectorAll(".mdi.mdi-check-circle");
 		expect(buttons).toHaveLength(5);

@@ -42,11 +42,11 @@ export default function ClimatePageComponent({
 		<div>
 			<div className="background"></div>
 			<HeaderComponent back={back} name={"Climate"} />
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
-				<div className="p-2 form-group w-100 d-flex light_slider mb-2">
-					<label className="flex-grow-1 mt-2 ms-2">Outside</label>
+			<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
+				<div className="p-2 w-full flex light_slider mb-2">
+					<label className="grow mt-2 ms-2">Outside</label>
 					<div
-						className="temp-display pe-1 ps-1 d-flex align-items-center me-2"
+						className="temp-display pe-1 ps-1 flex items-center me-2"
 						style={getTempStyle(getCurrentOutsideTemp(deviceMap))}
 					>
 						{getFormattedTemp(getCurrentOutsideTemp(deviceMap))} /{" "}
@@ -54,10 +54,10 @@ export default function ClimatePageComponent({
 					</div>
 				</div>
 				{getThermometerItems(deviceMap)}
-				<div className="thermostat-content w-100">
-					<div className="p-2 form-group w-100 disabled">
+				<div className="thermostat-content w-full">
+					<div className="p-2 w-full is-disabled">
 						<label>Fan Mode</label>
-						<div className="w-100 d-flex btn-group btn-group-toggle">
+						<div className="w-full flex segmented-control">
 							<label
 								className={getFanModeStyle("1", deviceMap)}
 								onClick={() => fanModeChange("1")}
@@ -72,9 +72,9 @@ export default function ClimatePageComponent({
 							</label>
 						</div>
 					</div>
-					<div className="p-2 form-group w-100 disabled">
+					<div className="p-2 w-full is-disabled">
 						<label>HVAC Mode</label>
-						<div className="w-100 d-flex btn-group btn-group-toggle">
+						<div className="w-full flex segmented-control">
 							<label
 								className={getHVACStyle("0", deviceMap)}
 								onClick={() => hvacModeChange("0")}
@@ -95,16 +95,16 @@ export default function ClimatePageComponent({
 							</label>
 						</div>
 					</div>
-					<div className="p-2 form-group w-100 d-flex disabled">
-						<label className="flex-grow-1">Thermostat</label>
+					<div className="p-2 w-full flex is-disabled">
+						<label className="grow">Thermostat</label>
 						<div
-							className="temp-display pe-1 ps-1 d-flex align-items-center"
+							className="temp-display pe-1 ps-1 flex items-center"
 							style={getIndoorTempStyle(getThermostatSetPoint(deviceMap))}
 						>
 							{getFormattedTemp(getThermostatSetPoint(deviceMap))}
 						</div>
 					</div>
-					<div className="p-2 form-group w-100 d-flex disabled">
+					<div className="p-2 w-full flex is-disabled">
 						{
 							<IOSSlider
 								value={getThermostatSetPoint(deviceMap)}
@@ -119,7 +119,7 @@ export default function ClimatePageComponent({
 					<MotionSensorComponent
 						key={getThermostatBattery(deviceMap).name}
 						device={getThermostatBattery(deviceMap)}
-						styleName={"disabled"}
+						styleName={"is-disabled"}
 					/>
 				</div>
 			</div>
