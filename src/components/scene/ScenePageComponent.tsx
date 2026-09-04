@@ -20,7 +20,7 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 	<div>
 		<div className="background"></div>
 		<SceneHeaderComponent back={back} name={"Scenes"} />
-		<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start room-content">
+		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 			{rooms.map((room) => (
 				<SceneButton key={room.name} room={room} handleClick={handleClick} />
 			))}
@@ -28,22 +28,20 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 				<AppButton
 					onClick={() => gotoPage("Security")}
 					size="lg"
-					className={"tw:mb-4 tw:m-1 tw:relative tw:flex tw:justify-center"}
+					className={"mb-4 m-1 relative flex justify-center"}
 				>
 					<i className="mdi mdi-video-wireless-outline" />
-					<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
+					<div className="absolute bottom w-full m-2 ps-2 pe-2">
 						Front Door Security
 					</div>
 				</AppButton>
 				<AppButton
 					onClick={() => gotoPage("Grow")}
 					size="lg"
-					className={"tw:mb-4 tw:m-1 tw:relative tw:flex tw:justify-center"}
+					className={"mb-4 m-1 relative flex justify-center"}
 				>
 					<i className="mdi mdi-video-wireless-outline" />
-					<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
-						Grow Tent
-					</div>
+					<div className="absolute bottom w-full m-2 ps-2 pe-2">Grow Tent</div>
 				</AppButton>
 			</div>
 		</div>

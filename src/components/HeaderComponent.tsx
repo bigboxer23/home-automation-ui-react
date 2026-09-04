@@ -6,9 +6,9 @@ interface HeaderComponentProps {
 }
 
 const HeaderComponent: React.FC<HeaderComponentProps> = ({ back, name }) => (
-	<div className="header tw:flex tw:items-center">
-		<div className="tw:flex tw:items-center sub-header tw:h-full tw:w-full">
-			<span className="tw:flex tw:items-center tw:flex-row" onClick={back}>
+	<div className="header flex items-center">
+		<div className="flex items-center sub-header h-full w-full">
+			<span className="flex items-center flex-row" onClick={back}>
 				<span className="mdi mdi-chevron-left mdi-36px z-index-1 "></span>
 				{name}
 			</span>

@@ -17,10 +17,10 @@ const MeuralOnOffButton: React.FC<MeuralOnOffButtonProps> = (props) => (
 		<AppButton
 			onClick={() => props.toggleOnOff(props.device)}
 			size="lg"
-			className={"tw:m-1 tw:relative tw:flex tw:justify-center house-button"}
+			className={"m-1 relative flex justify-center house-button"}
 		>
 			<i className={getButtonStyling(props.device)} />
-			<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
+			<div className="absolute bottom w-full m-2 ps-2 pe-2">
 				{getOnOffText(props.device)}
 			</div>
 		</AppButton>

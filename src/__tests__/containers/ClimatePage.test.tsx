@@ -260,7 +260,7 @@ describe("getWaterHeaterColor utility function", () => {
 			"Water Heater": { humidity: 0.66, status: "off" },
 		};
 		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("tw:opacity-0");
+		expect(result).toBe("opacity-0");
 	});
 
 	test("returns wh-temp-gauge-active for running compressor with partial tank", () => {
@@ -284,7 +284,7 @@ describe("getWaterHeaterColor utility function", () => {
 			"Water Heater": { humidity: 1, status: "off" },
 		};
 		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("tw:opacity-0 wh-temp-gauge-full");
+		expect(result).toBe("opacity-0 wh-temp-gauge-full");
 	});
 
 	test("returns wh-temp-gauge-active and wh-temp-gauge-full for full tank with running compressor", () => {
@@ -484,7 +484,7 @@ describe("getFanModeStyle utility function", () => {
 			"Thermostat Fan Mode": { level: "0" },
 		};
 		const result = getFanModeStyle("0", deviceMap as any);
-		expect(result).toBe("btn btn-secondary tw:w-full active");
+		expect(result).toBe("segmented-option w-full is-active");
 	});
 
 	test("returns inactive style when fan mode doesn't match", () => {
@@ -492,7 +492,7 @@ describe("getFanModeStyle utility function", () => {
 			"Thermostat Fan Mode": { level: "0" },
 		};
 		const result = getFanModeStyle("1", deviceMap as any);
-		expect(result).toBe("btn btn-secondary tw:w-full");
+		expect(result).toBe("segmented-option w-full");
 	});
 });
 
@@ -502,7 +502,7 @@ describe("getHVACStyle utility function", () => {
 			"Thermostat Mode": { level: "2" },
 		};
 		const result = getHVACStyle("2", deviceMap as any);
-		expect(result).toBe("btn btn-secondary tw:w-full active");
+		expect(result).toBe("segmented-option w-full is-active");
 	});
 
 	test("returns inactive style when HVAC mode doesn't match", () => {
@@ -510,6 +510,6 @@ describe("getHVACStyle utility function", () => {
 			"Thermostat Mode": { level: "2" },
 		};
 		const result = getHVACStyle("1", deviceMap as any);
-		expect(result).toBe("btn btn-secondary tw:w-full");
+		expect(result).toBe("segmented-option w-full");
 	});
 });

@@ -129,16 +129,16 @@ describe("FrontPorchColorsComponent", () => {
 
 		const mainContainer = container.querySelector(".front-porch-color");
 		expect(mainContainer).toHaveClass(
-			"tw:p-2",
-			"tw:w-full",
-			"tw:h-full",
-			"tw:flex",
-			"tw:flex-wrap",
-			"tw:justify-center",
-			"tw:content-start",
+			"p-2",
+			"w-full",
+			"h-full",
+			"flex",
+			"flex-wrap",
+			"justify-center",
+			"content-start",
 		);
 
 		const label = container.querySelector(".scenes-label");
-		expect(label).toHaveClass("tw:ms-4", "tw:mb-4", "tw:w-full");
+		expect(label).toHaveClass("ms-4", "mb-4", "w-full");
 	});
 });

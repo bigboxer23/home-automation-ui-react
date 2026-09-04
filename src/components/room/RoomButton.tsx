@@ -26,7 +26,7 @@ export default function RoomButton({
 			onClick={(event: React.MouseEvent) => handleMoreClick(event, room.name)}
 			state={getButtonStyle(room)}
 			size="lg"
-			className={"tw:m-1 tw:relative tw:flex tw:justify-center"}
+			className={"m-1 relative flex justify-center"}
 		>
 			<i
 				className={
@@ -39,11 +39,11 @@ export default function RoomButton({
 				className={"mdi mdi-dots-horizontal inFront" + areDotsHidden(room)}
 				/*onClick={(event) => handleMoreClick(event, room.name)}*/
 			/>
-			<div className="temp-display tw:pe-1 tw:ps-1 tw:absolute total-lights-bg">
+			<div className="temp-display pe-1 ps-1 absolute total-lights-bg">
 				{getCountContent(room)}
 			</div>
 			<div
-				className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-4"
+				className="absolute bottom w-full m-2 ps-2 pe-4"
 				onClick={(event: React.MouseEvent) =>
 					handleClick(event, room.id, isOn(room) ? 0 : 100)
 				}

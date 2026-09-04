@@ -3,12 +3,10 @@
 	"version": "1.0.4",
 	"private": true,
 	"dependencies": {
-		"@csstools/normalize.css": "csstools/normalize.css",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
 		"@mdi/font": "^7.4.47",
 		"@mui/material": "^9.0.0",
-		"bootstrap": "^5.3.8",
 		"minimatch": "^10.2.5",
 		"react": "^19.2.5",
 		"react-dom": "^19.2.5",

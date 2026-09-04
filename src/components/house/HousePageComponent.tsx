@@ -17,7 +17,7 @@ const HousePageComponent: React.FC<HousePageComponentProps> = ({
 	<div>
 		<div className="background"></div>
 		<HeaderComponent back={back} name={"Scenes"} />
-		<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start">
+		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start">
 			{rooms.map((room) => (
 				<SceneButton key={room.name} room={room} handleClick={handleClick} />
 			))}

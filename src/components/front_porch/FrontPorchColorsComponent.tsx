@@ -39,8 +39,8 @@ export default function FrontPorchColorComponent({
 
 	return (
 		<div>
-			<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start front-porch-color">
-				<label className="tw:ms-4 tw:mb-4 tw:w-full scenes-label">
+			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start front-porch-color">
+				<label className="ms-4 mb-4 w-full scenes-label">
 					Front Porch Scenes
 				</label>
 				{getOpenHabScenes(rooms).map((device) => (

@@ -1,31 +1,49 @@
-/* Tailwind is namespaced (`tw:flex`, `tw:p-4`) for the duration of the
-   migration. Bootstrap's utilities are all `!important` and share names with
-   Tailwind's at the 3/4/5 steps of the spacing scale, so an unprefixed `.p-4`
-   would silently resolve to Bootstrap's 1.5rem rather than Tailwind's 1rem.
-   The prefix removes the overlap entirely; strip it once Bootstrap is gone.
+/* Tailwind provides the reset (preflight) and all utilities. Nothing in this
+   file depends on a CSS framework any more.
 
-   Nothing here is in a cascade layer, deliberately. Layering Bootstrap looks
-   tempting, but `!important` reverses layer order, which flips every
-   `!important` in this file (`.room-content`, `.btn-lg`, ...) from winning
-   against Bootstrap to losing to it. Plain source order is what these rules
-   have always relied on, and the prefix means Tailwind needs no help.
+   Cascade note: Tailwind's utilities live in `@layer utilities`, and the rules
+   in this file are unlayered, so THESE RULES WIN over any utility regardless of
+   specificity. When a component class and a utility both set the same property
+   on the same element, the class wins. Avoid declaring properties here that a
+   utility is meant to control (display, width, ...). */
+@import "tailwindcss";
 
-   Preflight is deliberately omitted while Bootstrap's reboot is still loaded.
-   Teardown, once no Bootstrap classes remain in the components:
-     1. drop the bootstrap import
-     2. replace the two Tailwind imports with `@import "tailwindcss";`
-     3. strip the `tw:` prefix here and across src/ */
-@import "bootstrap/dist/css/bootstrap.css";
-@import "tailwindcss/theme.css" prefix(tw);
-@import "tailwindcss/utilities.css" prefix(tw);
+/* ---------------------------------------------------------------- page ---- */
+
+body,
+html {
+	height: 100%;
+	width: 100%;
+}
 
 body {
 	margin: 0;
 	padding: 0;
+	display: flex;
+	justify-content: center;
+	/* Let #root grow past the viewport instead of being stretched to it, so
+	   min-height below can pin the footer to the bottom of short pages. */
+	align-items: flex-start;
+	background-color: #f6f7f8;
+	/* Bootstrap's reboot set these; preflight leaves them at browser defaults
+	   (pure black, inline labels). */
+	color: #212529;
 	font-family:
 		-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
 		Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-	background-color: #f6f7f8 !important;
+}
+
+label {
+	display: inline-block;
+}
+
+#root {
+	width: 100%;
+	min-height: 100%;
+	max-width: 1024px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 
 .background {
@@ -39,47 +57,65 @@ body {
 	z-index: -2;
 }
 
-.light_slider {
-	background-color: rgba(255, 255, 255, 0.7);
-	border-radius: 1rem;
+/* ------------------------------------------------------------- buttons ---- */
+
+/* Base button. Previously inherited from Bootstrap's `.btn`; these are the
+   values that were actually taking effect, spelled out. */
+.btn {
+	/* Deliberately no `display`: rules in this file are unlayered and so beat
+	   Tailwind's `utilities` layer whatever the specificity. Setting display
+	   here would override `flex` and `hidden` on every button. Buttons are
+	   inline-block by default anyway. Same reasoning applies to any property a
+	   utility is expected to control - check before adding one. */
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+	user-select: none;
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 0.375rem;
+	transition: 0.3s;
 }
 
-body,
-html {
-	height: 100%;
-	width: 100%;
+/* Bootstrap suppressed the focus ring and replaced it with a box-shadow built
+   from a variable this project never set, so focused buttons have had no
+   visible indicator. Kept as-is to hold the migration to a refactor - worth
+   revisiting as an accessibility fix. */
+.btn:focus-visible {
+	outline: 0;
 }
 
-body {
-	justify-content: center;
-	/* Let #root grow past the viewport instead of being stretched to it, so
-	   min-height below can pin the footer to the bottom of short pages. */
-	align-items: flex-start;
-	display: flex;
+.btn:disabled {
+	pointer-events: none;
+	opacity: 0.65;
 }
 
-#root {
-	width: 100%;
-	min-height: 100%;
-	max-width: 1024px;
-	position: relative;
-	display: flex;
-	flex-direction: column;
+.btn:active {
+	background-color: #fff;
+	border-color: transparent;
 }
 
 .btn-lg {
 	height: 115px;
 	width: 115px;
-	font-size: 1rem !important;
-	white-space: normal !important;
-	border-radius: 0.75rem !important;
-	text-align: left !important;
-	padding: 0.5rem 2rem !important;
+	padding: 0.5rem 2rem;
+	font-size: 1rem;
+	white-space: normal;
+	border-radius: 0.75rem;
+	text-align: left;
 	background-color: rgba(255, 255, 255, 0.5);
 	color: rgba(0, 0, 0, 0.6);
 }
 
-.btn-lg:hover {
+/* Scoped to the default state so that the `on` and `alert` backgrounds below
+   no longer need `!important` to survive a hover. */
+.btn-lg[data-state="off"]:hover {
 	background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -90,6 +126,109 @@ body {
 	top: 0.5rem;
 	left: 0.5rem;
 }
+
+/* Semantic button state, set by AppButton as `data-state`. */
+[data-state="on"] {
+	background-color: rgba(255, 255, 255, 0.9);
+	border-color: rgba(255, 255, 255, 0.9);
+	color: #212529;
+}
+
+[data-state="alert"] {
+	background-color: #dc3545;
+	border-color: #dc3545;
+	color: #fff;
+}
+
+[data-state="primary"] {
+	background-color: #0d6efd;
+	border-color: #0d6efd;
+	color: #fff;
+}
+
+[data-state="primary"]:hover {
+	background-color: #0b5ed7;
+	border-color: #0a58ca;
+}
+
+[data-state="alert"] .mdi-garage,
+[data-state="alert"] .bottom {
+	color: #fff;
+}
+
+[data-state="on"] .mdi-lightbulb-outline,
+[data-state="on"] .mdi-garage {
+	color: rgb(248, 204, 70);
+}
+
+[data-state="on"] .mdi-lightbulb-outline:before {
+	content: "\F06E9";
+}
+
+[data-state="alert"] .mdi-garage:before {
+	content: "\F06DA";
+}
+
+/* --------------------------------------------------- segmented control ---- */
+
+/* Replaces Bootstrap's `.btn-group` + `.btn.btn-secondary` + `.active`, used
+   for the Fan Mode / HVAC Mode / auto-close pickers. */
+.segmented-control {
+	position: relative;
+	display: flex;
+	vertical-align: middle;
+	border-radius: 0.375rem;
+}
+
+.segmented-option {
+	position: relative;
+	flex: 1 1 auto;
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	user-select: none;
+	color: #fff;
+	background-color: #6c757d;
+	border: 1px solid #6c757d;
+	border-radius: 0.375rem;
+	transition: 0.3s;
+}
+
+/* Square off the inner edges and collapse the shared border so the options
+   read as one control. */
+.segmented-option:not(:last-child) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.segmented-option + .segmented-option {
+	margin-left: -1px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.segmented-option:hover {
+	background-color: #5c636a;
+	border-color: #565e64;
+	z-index: 1;
+}
+
+.segmented-option.is-active {
+	background-color: #565e64;
+	border-color: #51585e;
+	z-index: 1;
+}
+
+.segmented-option:active {
+	background-color: #fff;
+	border-color: transparent;
+}
+
+/* --------------------------------------------------------------- icons ---- */
 
 .mdi-dots-horizontal {
 	right: 0 !important;
@@ -140,107 +279,15 @@ body {
 	color: rgba(0, 0, 0, 0.3);
 }
 
-[data-state="alert"] .mdi-garage,
-[data-state="alert"] .bottom {
-	color: #fff;
-}
-
-[data-state="on"] {
-	background-color: rgba(255, 255, 255, 0.9) !important;
-	border-color: rgba(255, 255, 255, 0.9) !important;
-	color: #212529 !important;
-}
-
-[data-state="alert"] {
-	background-color: #dc3545 !important;
-	border-color: #dc3545;
-	color: #fff;
-}
-
-[data-state="on"] .mdi-lightbulb-outline:before {
-	content: "\F06E9";
-}
-
 .mdi-lightbulb-outline.mdi-lock-outline:before {
 	color: #dc3545;
 }
 
-[data-state="on"] .mdi-lightbulb-outline,
-[data-state="on"] .mdi-garage {
-	color: rgb(248, 204, 70);
+.flip-horizontal {
+	transform: scaleX(-1);
 }
 
-.house-button .total-lights-bg {
-	background-color: rgb(248, 204, 70);
-}
-
-.bottom {
-	bottom: 0;
-}
-
-[data-state="alert"] .mdi-garage:before {
-	content: "\F06DA";
-}
-
-.autoClose {
-	color: white;
-}
-
-.minor-text {
-	font-size: 0.8rem;
-	line-height: 1.3;
-	opacity: 0.7;
-}
-
-.temp-display {
-	border-radius: 0.5rem;
-	color: white;
-	right: 0.5rem;
-	top: 0.5rem;
-	min-width: 35px;
-	display: flex;
-	justify-content: center;
-}
-
-.wh-temp-display {
-	border-radius: 0.5rem;
-	color: white;
-	right: inherit;
-	left: 0.5rem;
-	max-width: 40px;
-	width: 100%;
-	min-height: 24px;
-}
-
-.wh-temp-gauge {
-	left: 0 !important;
-	border-radius: 0.5rem 0 0 0.5rem;
-}
-
-.wh-temp-gauge-full {
-	border-radius: 0.5rem !important;
-}
-
-.wh-temp-gauge-alert {
-	background-color: #dc3545 !important;
-}
-
-.wh-temp-gauge-active {
-	background-color: #3880ff !important;
-}
-
-.currentTemp {
-	color: rgba(0, 0, 0, 0.8);
-}
-
-.point-events-none {
-	pointer-events: none;
-}
-
-.disabled {
-	pointer-events: none;
-	opacity: 0.4;
-}
+/* -------------------------------------------------------- header / nav ---- */
 
 .header {
 	background-color: rgba(255, 255, 255, 0.8);
@@ -259,57 +306,110 @@ body {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
-.room-content {
-	padding-top: 70px !important;
-}
-
-.room-component .room-content {
-	padding-top: 110px !important;
-}
-
-[data-state="on"] .mdi-dots-horizontal:before,
-.hide {
-	opacity: 0;
-}
-
 .header-temperature {
 	display: inline;
 	font-weight: bold;
 	opacity: 0.5;
 }
 
-[data-state="on"] .temp-display,
-.total-lights-bg,
-.wh-temp-display {
+/* Clears the fixed header above. */
+.room-content {
+	padding-top: 70px;
+}
+
+.room-component .room-content {
+	padding-top: 110px;
+}
+
+/* ------------------------------------------------------------ readouts ---- */
+
+.temp-display {
+	border-radius: 0.5rem;
+	color: white;
+	right: 0.5rem;
+	top: 0.5rem;
+	min-width: 35px;
+	display: flex;
+	justify-content: center;
+}
+
+/* Only inside an "on" button. Standalone .temp-display readouts (sensors,
+   climate rows) take their background from an inline style instead. */
+[data-state="on"] .temp-display {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 
-.inFront {
-	z-index: 1;
+.total-lights-bg {
+	min-width: 35px;
+	display: flex;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.3);
 }
 
-.slider-horizontal {
-	width: 90% !important;
+.house-button .total-lights-bg {
+	background-color: rgb(248, 204, 70);
 }
 
-.z-index-1 {
-	z-index: 1;
+/* Water heater tank gauge. These follow .wh-temp-display so the fill colours
+   win on source order rather than on `!important`. */
+.wh-temp-display {
+	border-radius: 0.5rem;
+	color: white;
+	right: inherit;
+	left: 0.5rem;
+	max-width: 40px;
+	width: 100%;
+	min-height: 24px;
+	background-color: rgba(0, 0, 0, 0.3);
 }
 
-.flex-grow-1 {
-	flex-grow: 1;
+.wh-temp-gauge {
+	left: 0;
+	border-radius: 0.5rem 0 0 0.5rem;
 }
 
-.slider-handle {
-	transform: scale(1.6);
+.wh-temp-gauge-full {
+	border-radius: 0.5rem;
 }
 
-.h32 {
-	height: 32px;
+.wh-temp-gauge-active {
+	background-color: #3880ff;
 }
 
-.btn {
-	transition: 0.3s;
+.wh-temp-gauge-alert {
+	background-color: #dc3545;
+}
+
+.currentTemp {
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.minor-text {
+	font-size: 0.8rem;
+	line-height: 1.3;
+	opacity: 0.7;
+}
+
+.autoClose {
+	color: white;
+}
+
+.danger {
+	color: #dc3545;
+	font-weight: 700;
+}
+
+.scenes-label {
+	color: #ffffff;
+}
+
+.thermostat-content {
+	background-color: rgba(248, 249, 250, 0.34);
+}
+
+.light_slider {
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 1rem;
 }
 
 .LoadingStatus {
@@ -319,26 +419,6 @@ body {
 	right: 0;
 	color: #28a745;
 	background-color: white;
-}
-
-.total-lights-bg {
-	min-width: 35px !important;
-	display: flex;
-	justify-content: center;
-}
-
-.danger {
-	color: #dc3545;
-	font-weight: 700;
-}
-
-.danger-important {
-	color: #dc3545 !important;
-	font-weight: 700;
-}
-
-.sk-spinner {
-	width: 30px;
 }
 
 .authText {
@@ -351,14 +431,40 @@ body {
 	border: 0;
 }
 
-.thermostat-content {
-	background-color: rgba(248, 249, 250, 0.34);
+/* ---------------------------------------------------------- positional ---- */
+
+.bottom {
+	bottom: 0;
 }
 
-.flip-horizontal {
-	-webkit-transform: scaleX(-1);
-	transform: scaleX(-1);
+.inFront {
+	z-index: 1;
 }
+
+.z-index-1 {
+	z-index: 1;
+}
+
+[data-state="on"] .mdi-dots-horizontal:before,
+.hide {
+	opacity: 0;
+}
+
+.point-events-none {
+	pointer-events: none;
+}
+
+.is-disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+/* Overrides `.btn-lg .mdi`, which is more specific. */
+.position-inherit {
+	position: inherit !important;
+}
+
+/* --------------------------------------------------------------- meural ---- */
 
 .meural-source-button {
 	width: 100%;
@@ -367,6 +473,46 @@ body {
 .meural-source-button-label {
 	color: rgba(0, 0, 0, 0.6);
 }
+
+.meural-prompt-display {
+	background-color: #fff;
+	height: auto;
+	/* Overrides .btn-lg's fixed 115px box, which outranks the `w-full` on the
+	   element for the same reason as above. */
+	width: 100%;
+	/* Was `.p-3.btn-lg`, which stopped matching when p-3 became a Tailwind
+	   class; it belongs to this component rather than to a spacing utility. */
+	padding: 1rem;
+}
+
+.meural-prompt-display:hover {
+	background-color: #fff;
+}
+
+.meural-prompt-display:hover .mdi-chevron-right,
+.meural-prompt-display:active .mdi-chevron-right {
+	color: rgba(0, 0, 0, 1);
+}
+
+.meural-prompt-display:hover .mdi-chevron-right.mdi-24px.mdi:before,
+.meural-prompt-display:active
+	.mdi-chevron-right
+	.mdi-chevron-right.mdi-24px.mdi:before {
+	font-weight: 900;
+}
+
+.prompt-textarea {
+	border: none;
+	resize: none;
+}
+
+.front-porch-color [data-state="on"] .mdi {
+	color: #3880ff;
+}
+
+/* ------------------------------------------------------------------ mui ---- */
+
+/* These fight MUI's own injected styles, so the `!important`s stay. */
 
 .MuiToggleButtonGroup-root {
 	width: 100%;
@@ -399,63 +545,4 @@ body {
 
 .MuiToggleButton-root.Mui-selected.mdi:before {
 	visibility: visible;
-}
-
-.position-inherit {
-	position: inherit !important;
-}
-
-.p-3.btn-lg {
-	padding: 1rem !important;
-}
-
-.meural-prompt-display {
-	background-color: #fff;
-	height: auto;
-}
-
-.meural-prompt-display:hover {
-	background-color: #fff;
-}
-
-.meural-prompt-display:hover .mdi-chevron-right,
-.meural-prompt-display:active .mdi-chevron-right {
-	color: rgba(0, 0, 0, 1);
-}
-
-.meural-prompt-display:hover .mdi-chevron-right.mdi-24px.mdi:before,
-.meural-prompt-display:active
-	.mdi-chevron-right
-	.mdi-chevron-right.mdi-24px.mdi:before {
-	font-weight: 900;
-}
-
-.btn:active {
-	background-color: #fff !important;
-	border-color: transparent !important;
-}
-
-.scenes-label {
-	color: #ffffff;
-}
-
-.front-porch-color [data-state="on"] .mdi,
-.btn-active {
-	color: #3880ff;
-}
-
-.prompt-textarea {
-	border: none;
-	resize: none;
-}
-
-[data-state="primary"] {
-	background-color: #0d6efd;
-	border-color: #0d6efd;
-	color: #fff;
-}
-
-[data-state="primary"]:hover {
-	background-color: #0b5ed7;
-	border-color: #0a58ca;
 }

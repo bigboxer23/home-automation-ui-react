@@ -28,7 +28,7 @@ describe("MeuralPromptPageComponent", () => {
 		);
 		expect(textarea).toBeInTheDocument();
 		expect(textarea).toHaveAttribute("id", "creationPrompt");
-		expect(textarea).toHaveClass("tw:pt-6", "tw:w-full", "prompt-textarea");
+		expect(textarea).toHaveClass("pt-6", "w-full", "prompt-textarea");
 	});
 
 	test("renders Create New Image button", () => {
@@ -73,21 +73,21 @@ describe("MeuralPromptPageComponent", () => {
 
 		const mainContainer = container.querySelector(".room-content");
 		expect(mainContainer).toHaveClass(
-			"tw:p-2",
-			"tw:w-full",
-			"tw:h-full",
-			"tw:flex",
-			"tw:flex-wrap",
-			"tw:justify-center",
-			"tw:content-start",
+			"p-2",
+			"w-full",
+			"h-full",
+			"flex",
+			"flex-wrap",
+			"justify-center",
+			"content-start",
 		);
 
 		const flexColumn = mainContainer?.firstElementChild;
-		expect(flexColumn).toHaveClass("tw:w-full", "tw:flex", "tw:flex-col");
+		expect(flexColumn).toHaveClass("w-full", "flex", "flex-col");
 
 		const textareaContainer = container.querySelector(
 			".MuiToggleButtonGroup-root",
 		);
-		expect(textareaContainer).toHaveClass("tw:ps-4", "tw:pe-4", "tw:mb-2");
+		expect(textareaContainer).toHaveClass("ps-4", "pe-4", "mb-2");
 	});
 });

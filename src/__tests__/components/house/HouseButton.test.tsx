@@ -76,7 +76,7 @@ describe("HouseButton", () => {
 
 		const button = screen.getByRole("button");
 		expect(button).toHaveClass("house-button");
-		expect(button).toHaveClass("tw:m-1");
-		expect(button).toHaveClass("tw:relative");
+		expect(button).toHaveClass("m-1");
+		expect(button).toHaveClass("relative");
 	});
 });

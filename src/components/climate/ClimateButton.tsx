@@ -24,16 +24,16 @@ const ClimateButton: React.FC<ClimateButtonProps> = (props) => (
 	<AppButton
 		onClick={() => props.changePage()}
 		size="lg"
-		className={"tw:m-1 tw:relative tw:flex tw:justify-center"}
+		className={"m-1 relative flex justify-center"}
 	>
 		<div
 			className={
-				"temp-display wh-temp-display tw:absolute tw:flex tw:justify-center tw:items-center"
+				"temp-display wh-temp-display absolute flex justify-center items-center"
 			}
 		>
 			<div
 				className={
-					"wh-temp-display wh-temp-gauge tw:absolute " +
+					"wh-temp-display wh-temp-gauge absolute " +
 					getWaterHeaterColor(props.deviceMap)
 				}
 				style={getWaterHeaterWidth(props.deviceMap)}
@@ -43,12 +43,12 @@ const ClimateButton: React.FC<ClimateButtonProps> = (props) => (
 			</div>
 		</div>
 		<div
-			className="temp-display tw:pe-1 tw:ps-1 tw:absolute"
+			className="temp-display pe-1 ps-1 absolute"
 			style={getTempStyle(getCurrentOutsideTemp(props.deviceMap))}
 		>
 			{getFormattedTemp(getCurrentOutsideTemp(props.deviceMap))}
 		</div>
-		<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
+		<div className="absolute bottom w-full m-2 ps-2 pe-2">
 			<div className="minor-text">
 				{getWaterHeaterTemperature(props.deviceMap)}
 			</div>

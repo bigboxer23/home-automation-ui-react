@@ -15,8 +15,8 @@ function MeuralPromptDisplay(
 ): React.ReactElement {
 	const getClassnames = (status: string | undefined): string => {
 		return (
-			"meural-prompt-display tw:p-4 tw:relative tw:flex tw:justify-center tw:w-full tw:relative tw:flex tw:flex-col tw:justify-center" +
-			("0" === status || "4" === status ? " tw:hidden" : " tw:mb-1")
+			"meural-prompt-display relative flex justify-center w-full relative flex flex-col justify-center" +
+			("0" === status || "4" === status ? " hidden" : " mb-1")
 		);
 	};
 
@@ -31,9 +31,9 @@ function MeuralPromptDisplay(
 			size="lg"
 			className={getClassnames(props.device?.status)}
 		>
-			<div className={"meural-source-button-label tw:flex tw:items-center"}>
+			<div className={"meural-source-button-label flex items-center"}>
 				<div>
-					<div className={"tw:mb-2 meural-source-button-label tw:font-bold"}>
+					<div className={"mb-2 meural-source-button-label font-bold"}>
 						Prompt
 					</div>
 					{getPrompt()}

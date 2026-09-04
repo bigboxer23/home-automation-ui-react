@@ -172,14 +172,14 @@ describe("LightComponent", () => {
 
 		const container = document.querySelector(".light_slider");
 		expect(container).toBeInTheDocument();
-		expect(container).toHaveClass("tw:p-2");
-		expect(container).toHaveClass("tw:w-full");
-		expect(container).toHaveClass("tw:h-full");
-		expect(container).toHaveClass("tw:flex");
-		expect(container).toHaveClass("tw:flex-wrap");
-		expect(container).toHaveClass("tw:justify-center");
-		expect(container).toHaveClass("tw:content-start");
-		expect(container).toHaveClass("tw:mb-2");
+		expect(container).toHaveClass("p-2");
+		expect(container).toHaveClass("w-full");
+		expect(container).toHaveClass("h-full");
+		expect(container).toHaveClass("flex");
+		expect(container).toHaveClass("flex-wrap");
+		expect(container).toHaveClass("justify-center");
+		expect(container).toHaveClass("content-start");
+		expect(container).toHaveClass("mb-2");
 	});
 
 	describe("Fan component", () => {

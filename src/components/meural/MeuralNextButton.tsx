@@ -37,8 +37,8 @@ export default function MeuralNextButton(
 	};
 
 	const shouldDisplay = (status: string | undefined): string => {
-		return "tw:mb-4 tw:m-1 tw:relative tw:flex tw:justify-center"; /*+
-			("4" === status ? " tw:hidden" : "")*/
+		return "mb-4 m-1 relative flex justify-center"; /*+
+			("4" === status ? " hidden" : "")*/
 	};
 
 	const getIconStyle = (status: string | undefined): string => {
@@ -53,7 +53,7 @@ export default function MeuralNextButton(
 				className={shouldDisplay(props.device?.status)}
 			>
 				<i className={getIconStyle(props.device?.status)} />
-				<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
+				<div className="absolute bottom w-full m-2 ps-2 pe-2">
 					{generateButtonText(props.device?.status)}
 				</div>
 			</AppButton>

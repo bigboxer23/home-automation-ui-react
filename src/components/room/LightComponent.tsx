@@ -20,12 +20,12 @@ export default function LightComponent({
 }: LightComponentProps) {
 	if (isFan(device)) {
 		return (
-			<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start light_slider tw:mb-2">
-				<div className="tw:w-full tw:mt-2 tw:mb-2">
-					<div className="tw:w-full tw:flex">
-						<label className="tw:ms-2 tw:w-full">{device.name}</label>
+			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start light_slider mb-2">
+				<div className="w-full mt-2 mb-2">
+					<div className="w-full flex">
+						<label className="ms-2 w-full">{device.name}</label>
 						<IOSSwitch
-							className="tw:me-2"
+							className="me-2"
 							checked={parseInt(device.level ?? "0", 10) > 0}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 								setDeviceStatus(device.id, event.target.checked)
@@ -37,14 +37,12 @@ export default function LightComponent({
 		);
 	}
 	return (
-		<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start light_slider tw:mb-2">
-			<div className="tw:w-full">
-				<div className="tw:w-full tw:flex">
-					<label className="tw:ms-2 tw:w-full tw:text-[0.875em]">
-						{device.name}
-					</label>
+		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start light_slider mb-2">
+			<div className="w-full">
+				<div className="w-full flex">
+					<label className="ms-2 w-full text-[0.875em]">{device.name}</label>
 				</div>
-				<div className=" tw:flex btn-group tw:justify-center tw:items-center">
+				<div className="flex justify-center items-center">
 					<IOSSlider
 						value={getIntegerLevel(device)}
 						onChange={(event: Event, newValue: number | number[]) =>
@@ -59,7 +57,7 @@ export default function LightComponent({
 						max={100}
 					/>
 					<IOSSwitch
-						className="tw:me-2"
+						className="me-2"
 						checked={parseInt(device.level ?? "0", 10) > 0}
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 							setDeviceStatus(device.id, event.target.checked)

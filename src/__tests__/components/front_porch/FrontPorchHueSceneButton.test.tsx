@@ -78,11 +78,11 @@ describe("FrontPorchHueSceneButton", () => {
 
 		const button = screen.getByRole("button");
 		expect(button).toHaveClass(
-			"tw:mb-4",
-			"tw:m-1",
-			"tw:relative",
-			"tw:flex",
-			"tw:justify-center",
+			"mb-4",
+			"m-1",
+			"relative",
+			"flex",
+			"justify-center",
 			"btn-lg",
 		);
 	});
@@ -93,7 +93,7 @@ describe("FrontPorchHueSceneButton", () => {
 		);
 
 		const textDiv = container.querySelector(".bottom");
-		expect(textDiv).toHaveClass("tw:w-full", "tw:m-2", "tw:ps-2", "tw:pe-2");
+		expect(textDiv).toHaveClass("w-full", "m-2", "ps-2", "pe-2");
 		expect(textDiv).toHaveTextContent("Colorful");
 	});
 

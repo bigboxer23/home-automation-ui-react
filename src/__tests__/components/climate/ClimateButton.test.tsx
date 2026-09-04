@@ -89,10 +89,10 @@ describe("ClimateButton", () => {
 		});
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("tw:m-1");
-		expect(button).toHaveClass("tw:relative");
-		expect(button).toHaveClass("tw:flex");
-		expect(button).toHaveClass("tw:justify-center");
+		expect(button).toHaveClass("m-1");
+		expect(button).toHaveClass("relative");
+		expect(button).toHaveClass("flex");
+		expect(button).toHaveClass("justify-center");
 	});
 
 	test("handles empty device map gracefully", () => {

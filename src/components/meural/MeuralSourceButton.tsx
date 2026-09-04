@@ -50,7 +50,7 @@ export default connect(
 	};
 
 	return (
-		<div className={"meural-source-button tw:pt-4 tw:pb-2"}>
+		<div className={"meural-source-button pt-4 pb-2"}>
 			<ToggleButtonGroup
 				color="primary"
 				value={props.device?.status}
@@ -62,11 +62,7 @@ export default connect(
 				) => handleClick(event, value, props)}
 				orientation={"vertical"}
 			>
-				<div
-					className={
-						"tw:ms-4 meural-source-button-label tw:font-bold tw:pt-4 tw:pb-2"
-					}
-				>
+				<div className={"ms-4 meural-source-button-label font-bold pt-4 pb-2"}>
 					Source
 				</div>
 				<ToggleButton

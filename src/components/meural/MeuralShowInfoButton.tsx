@@ -12,8 +12,7 @@ export default function MeuralShowInfoButton(
 ): React.ReactElement {
 	const shouldDisplay = (status: string | undefined): string => {
 		return (
-			"tw:m-1 tw:relative tw:flex tw:justify-center" +
-			("0" === status ? " tw:hidden" : "")
+			"m-1 relative flex justify-center" + ("0" === status ? " hidden" : "")
 		);
 	};
 
@@ -25,7 +24,7 @@ export default function MeuralShowInfoButton(
 				className={shouldDisplay(props.device?.status)}
 			>
 				<i className="mdi mdi-information-outline" />
-				<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
+				<div className="absolute bottom w-full m-2 ps-2 pe-2">
 					Toggle Artwork Info
 				</div>
 			</AppButton>

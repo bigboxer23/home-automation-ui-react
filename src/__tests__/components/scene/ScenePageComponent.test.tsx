@@ -88,13 +88,13 @@ describe("ScenePageComponent", () => {
 
 		const mainContainer = container.querySelector(".room-content");
 		expect(mainContainer).toHaveClass(
-			"tw:p-2",
-			"tw:w-full",
-			"tw:h-full",
-			"tw:flex",
-			"tw:flex-wrap",
-			"tw:justify-center",
-			"tw:content-start",
+			"p-2",
+			"w-full",
+			"h-full",
+			"flex",
+			"flex-wrap",
+			"justify-center",
+			"content-start",
 		);
 	});
 
