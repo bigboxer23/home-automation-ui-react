@@ -11,7 +11,6 @@
 		"bootstrap": "^5.3.8",
 		"minimatch": "^10.2.5",
 		"react": "^19.2.5",
-		"react-bootstrap": "^2.10.10",
 		"react-dom": "^19.2.5",
 		"react-router-dom": "^7.14.2",
 		"redux-thunk": "^3.1.0"
@@ -25,6 +24,7 @@
 		"test:coverage": "vitest run --coverage --reporter=verbose"
 	},
 	"devDependencies": {
+		"@tailwindcss/vite": "^4.3.3",
 		"@testing-library/dom": "^10.4.1",
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/react": "^16.3.2",
@@ -34,9 +34,10 @@
 		"@vitejs/plugin-react": "^6.0.1",
 		"@vitest/coverage-v8": "^4.1.5",
 		"jsdom": "^29.0.2",
-		"prettier": "^3.8.3",
+		"prettier": "^3.9.6",
 		"react-redux": "^9.2.0",
 		"redux": "^5.0.1",
+		"tailwindcss": "^4.3.3",
 		"typescript": "^6.0.3",
 		"vite": "^8.0.9",
 		"vitest": "^4.1.5"

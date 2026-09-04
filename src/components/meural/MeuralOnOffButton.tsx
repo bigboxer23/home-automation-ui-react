@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import { getButtonStyling } from "./MeuralButton";
 import { getOnOffText, isOn } from "../../containers/MeuralPage";
 import { bindActionCreators } from "redux";
@@ -14,9 +14,8 @@ interface MeuralOnOffButtonProps {
 
 const MeuralOnOffButton: React.FC<MeuralOnOffButtonProps> = (props) => (
 	<div>
-		<Button
+		<AppButton
 			onClick={() => props.toggleOnOff(props.device)}
-			variant=""
 			size="lg"
 			className={
 				"m-1 position-relative d-flex justify-content-center house-button"
@@ -26,7 +25,7 @@ const MeuralOnOffButton: React.FC<MeuralOnOffButtonProps> = (props) => (
 			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 				{getOnOffText(props.device)}
 			</div>
-		</Button>
+		</AppButton>
 	</div>
 );
 

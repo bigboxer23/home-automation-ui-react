@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import { nextMeuralImage } from "../../actions";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
@@ -37,8 +37,8 @@ export default function MeuralNextButton(
 	};
 
 	const shouldDisplay = (status: string | undefined): string => {
-		return "mb-3 m-1 position-relative d-flex justify-content-center" /*+
-			("4" === status ? " d-none" : "")*/;
+		return "mb-3 m-1 position-relative d-flex justify-content-center"; /*+
+			("4" === status ? " d-none" : "")*/
 	};
 
 	const getIconStyle = (status: string | undefined): string => {
@@ -47,9 +47,8 @@ export default function MeuralNextButton(
 
 	return (
 		<div>
-			<Button
+			<AppButton
 				onClick={handleClick}
-				variant=""
 				size="lg"
 				className={shouldDisplay(props.device?.status)}
 			>
@@ -57,7 +56,7 @@ export default function MeuralNextButton(
 				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 					{generateButtonText(props.device?.status)}
 				</div>
-			</Button>
+			</AppButton>
 			<Snackbar
 				open={open}
 				autoHideDuration={3000}

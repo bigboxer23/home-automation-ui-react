@@ -2,7 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { push } from "../../utils/navigation";
 import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import type { Device } from "../../types";
 
 interface MeuralPromptDisplayProps {
@@ -26,9 +26,8 @@ function MeuralPromptDisplay(
 	};
 
 	return (
-		<Button
+		<AppButton
 			onClick={props.changePage}
-			variant=""
 			size="lg"
 			className={getClassnames(props.device?.status)}
 		>
@@ -41,7 +40,7 @@ function MeuralPromptDisplay(
 				</div>
 				<div className={"mdi mdi-chevron-right mdi-24px position-inherit"} />
 			</div>
-		</Button>
+		</AppButton>
 	);
 }
 

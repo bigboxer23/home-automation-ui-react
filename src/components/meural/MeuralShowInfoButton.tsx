@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import { hideInfo, showInfo } from "../../actions";
 import type { Device } from "../../types";
 
@@ -19,9 +19,8 @@ export default function MeuralShowInfoButton(
 
 	return (
 		<div>
-			<Button
+			<AppButton
 				onClick={showInfo}
-				variant=""
 				size="lg"
 				className={shouldDisplay(props.device?.status)}
 			>
@@ -29,7 +28,7 @@ export default function MeuralShowInfoButton(
 				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 					Toggle Artwork Info
 				</div>
-			</Button>
+			</AppButton>
 		</div>
 	);
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderComponent from "../HeaderComponent";
 import { TextareaAutosize } from "@mui/material";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 
 interface MeuralPromptPageComponentProps {
 	back: () => void;
@@ -28,7 +28,9 @@ const MeuralPromptPageComponent: React.FC<MeuralPromptPageComponentProps> = ({
 						className={"pt-4 w-100 prompt-textarea"}
 					/>
 				</div>
-				<Button onClick={handleClick}>Create New Image</Button>
+				<AppButton onClick={handleClick} state="primary">
+					Create New Image
+				</AppButton>
 			</div>
 		</div>
 	</div>

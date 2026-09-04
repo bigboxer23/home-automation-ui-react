@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push } from "../../utils/navigation";
@@ -21,9 +21,8 @@ interface ClimateButtonProps {
 }
 
 const ClimateButton: React.FC<ClimateButtonProps> = (props) => (
-	<Button
+	<AppButton
 		onClick={() => props.changePage()}
-		variant=""
 		size="lg"
 		className={"m-1 position-relative d-flex justify-content-center"}
 	>
@@ -56,7 +55,7 @@ const ClimateButton: React.FC<ClimateButtonProps> = (props) => (
 			{getThermostatDisplayInfo(props.deviceMap)}
 			Climate
 		</div>
-	</Button>
+	</AppButton>
 );
 
 const mapStateToProps = (state: RootState) => ({
