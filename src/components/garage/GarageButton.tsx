@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton, { type ButtonState } from "../ui/AppButton";
 import type { Device, Room } from "../../types";
 import { getFormattedTemp, getTempStyle } from "../../utils/WeatherUtilities";
 import { isOn } from "../room/RoomUtils";
@@ -17,13 +17,13 @@ class GarageButton extends React.Component<GarageButtonProps> {
 	}
 
 	render = () => (
-		<Button
+		<AppButton
 			onClick={() =>
 				this.props.handleGarageClick(
 					GarageButton.isDoorOpen(this.props.room) ? "Close" : "Open",
 				)
 			}
-			variant={this.getButtonStyle()}
+			state={this.getButtonStyle()}
 			size="lg"
 			className={"m-1 position-relative d-flex justify-content-center"}
 		>
@@ -48,7 +48,7 @@ class GarageButton extends React.Component<GarageButtonProps> {
 				</div>
 				{this.props.room.name}
 			</div>
-		</Button>
+		</AppButton>
 	);
 
 	getLastOpenStyle(): string {
@@ -56,12 +56,12 @@ class GarageButton extends React.Component<GarageButtonProps> {
 			"minor-text" + (GarageButton.isDoorOpen(this.props.room) ? " d-none" : "")
 		);
 	}
-	getButtonStyle(): string {
+	getButtonStyle(): ButtonState {
 		return GarageButton.isDoorOpen(this.props.room)
-			? "danger"
+			? "alert"
 			: isOn(this.props.room)
-				? "success"
-				: "default";
+				? "on"
+				: "off";
 	}
 
 	static findGarageDevice(room: Room | null): Device | null | undefined {

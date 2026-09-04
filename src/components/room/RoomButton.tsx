@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import type { Room } from "../../types";
 import {
 	areDotsHidden,
@@ -22,9 +22,9 @@ export default function RoomButton({
 	handleClick,
 }: RoomButtonProps) {
 	return (
-		<Button
+		<AppButton
 			onClick={(event: React.MouseEvent) => handleMoreClick(event, room.name)}
-			variant={getButtonStyle(room)}
+			state={getButtonStyle(room)}
 			size="lg"
 			className={"m-1 position-relative d-flex justify-content-center"}
 		>
@@ -50,6 +50,6 @@ export default function RoomButton({
 			>
 				{room.name}
 			</div>
-		</Button>
+		</AppButton>
 	);
 }

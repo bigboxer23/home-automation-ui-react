@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import type { Room } from "../../types";
 
 interface SceneButtonProps {
@@ -9,9 +9,8 @@ interface SceneButtonProps {
 
 const SceneButton: React.FC<SceneButtonProps> = (props) => (
 	<div>
-		<Button
+		<AppButton
 			onClick={() => props.handleClick(props.room.id, "ON")}
-			variant=""
 			size="lg"
 			className={"mb-3 m-1 position-relative d-flex justify-content-center"}
 		>
@@ -19,10 +18,9 @@ const SceneButton: React.FC<SceneButtonProps> = (props) => (
 			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 				{props.room.name} On
 			</div>
-		</Button>
-		<Button
+		</AppButton>
+		<AppButton
 			onClick={() => props.handleClick(props.room.id, "OFF")}
-			variant=""
 			size="lg"
 			className={"m-1 position-relative d-flex justify-content-center"}
 		>
@@ -30,7 +28,7 @@ const SceneButton: React.FC<SceneButtonProps> = (props) => (
 			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 				{props.room.name} Off
 			</div>
-		</Button>
+		</AppButton>
 	</div>
 );
 

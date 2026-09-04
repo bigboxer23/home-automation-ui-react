@@ -42,14 +42,14 @@ describe("FrontPorchHueSceneButton", () => {
 		expect(icon).toBeInTheDocument();
 	});
 
-	test("has default button style when level is OFF", () => {
+	test("marks the button off when level is OFF", () => {
 		renderWithProviders(<FrontPorchHueSceneButton {...mockProps} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-default");
+		expect(button).toHaveAttribute("data-state", "off");
 	});
 
-	test("has success button style when level is ON", () => {
+	test("marks the button on when level is ON", () => {
 		const propsWithOn = {
 			...mockProps,
 			device: { id: "hue1", name: "Colorful", level: "ON" },
@@ -58,7 +58,7 @@ describe("FrontPorchHueSceneButton", () => {
 		renderWithProviders(<FrontPorchHueSceneButton {...propsWithOn} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-success");
+		expect(button).toHaveAttribute("data-state", "on");
 	});
 
 	test("calls handleClick with correct parameters", () => {

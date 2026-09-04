@@ -1,3 +1,24 @@
+/* Tailwind is namespaced (`tw:flex`, `tw:p-4`) for the duration of the
+   migration. Bootstrap's utilities are all `!important` and share names with
+   Tailwind's at the 3/4/5 steps of the spacing scale, so an unprefixed `.p-4`
+   would silently resolve to Bootstrap's 1.5rem rather than Tailwind's 1rem.
+   The prefix removes the overlap entirely; strip it once Bootstrap is gone.
+
+   Nothing here is in a cascade layer, deliberately. Layering Bootstrap looks
+   tempting, but `!important` reverses layer order, which flips every
+   `!important` in this file (`.room-content`, `.btn-lg`, ...) from winning
+   against Bootstrap to losing to it. Plain source order is what these rules
+   have always relied on, and the prefix means Tailwind needs no help.
+
+   Preflight is deliberately omitted while Bootstrap's reboot is still loaded.
+   Teardown, once no Bootstrap classes remain in the components:
+     1. drop the bootstrap import
+     2. replace the two Tailwind imports with `@import "tailwindcss";`
+     3. strip the `tw:` prefix here and across src/ */
+@import "bootstrap/dist/css/bootstrap.css";
+@import "tailwindcss/theme.css" prefix(tw);
+@import "tailwindcss/utilities.css" prefix(tw);
+
 body {
 	margin: 0;
 	padding: 0;
@@ -119,22 +140,24 @@ body {
 	color: rgba(0, 0, 0, 0.3);
 }
 
-.btn-danger .mdi-garage,
-.btn-danger .bottom {
+[data-state="alert"] .mdi-garage,
+[data-state="alert"] .bottom {
 	color: #fff;
 }
 
-.btn-success {
+[data-state="on"] {
 	background-color: rgba(255, 255, 255, 0.9) !important;
 	border-color: rgba(255, 255, 255, 0.9) !important;
 	color: #212529 !important;
 }
 
-.btn-danger {
+[data-state="alert"] {
 	background-color: #dc3545 !important;
+	border-color: #dc3545;
+	color: #fff;
 }
 
-.btn-success .mdi-lightbulb-outline:before {
+[data-state="on"] .mdi-lightbulb-outline:before {
 	content: "\F06E9";
 }
 
@@ -142,8 +165,8 @@ body {
 	color: #dc3545;
 }
 
-.btn-success .mdi-lightbulb-outline,
-.btn-success .mdi-garage {
+[data-state="on"] .mdi-lightbulb-outline,
+[data-state="on"] .mdi-garage {
 	color: rgb(248, 204, 70);
 }
 
@@ -155,7 +178,7 @@ body {
 	bottom: 0;
 }
 
-.btn-danger .mdi-garage:before {
+[data-state="alert"] .mdi-garage:before {
 	content: "\F06DA";
 }
 
@@ -240,7 +263,7 @@ body {
 	padding-top: 110px !important;
 }
 
-.btn-success .mdi-dots-horizontal:before,
+[data-state="on"] .mdi-dots-horizontal:before,
 .hide {
 	opacity: 0;
 }
@@ -251,7 +274,7 @@ body {
 	opacity: 0.5;
 }
 
-.btn-success .temp-display,
+[data-state="on"] .temp-display,
 .total-lights-bg,
 .wh-temp-display {
 	background-color: rgba(0, 0, 0, 0.3);
@@ -412,7 +435,7 @@ body {
 	color: #ffffff;
 }
 
-.front-porch-color .btn-success .mdi,
+.front-porch-color [data-state="on"] .mdi,
 .btn-active {
 	color: #3880ff;
 }
@@ -420,4 +443,15 @@ body {
 .prompt-textarea {
 	border: none;
 	resize: none;
+}
+
+[data-state="primary"] {
+	background-color: #0d6efd;
+	border-color: #0d6efd;
+	color: #fff;
+}
+
+[data-state="primary"]:hover {
+	background-color: #0b5ed7;
+	border-color: #0a58ca;
 }

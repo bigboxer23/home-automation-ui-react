@@ -24,10 +24,10 @@ describe("PageFooter", () => {
 		const { container } = render(<PageFooter />);
 
 		expect(container.querySelector(".page-footer")).toHaveClass(
-			"d-flex",
-			"justify-content-center",
-			"p-3",
-			"mt-auto",
+			"tw:flex",
+			"tw:justify-center",
+			"tw:p-4",
+			"tw:mt-auto",
 		);
 		expect(container.querySelector(".minor-text")).toHaveClass("text-white");
 	});

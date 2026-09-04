@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 import { execSync } from "node:child_process";
 
 const gitSha = (): string => {
@@ -44,7 +45,7 @@ export default defineConfig(({ mode }) => {
 	const proxyTarget = env.VITE_PROXY_URL || "http://localhost:8080";
 
 	return {
-		plugins: [react()],
+		plugins: [react(), tailwindcss()],
 		server: {
 			port: 3000,
 			open: true,

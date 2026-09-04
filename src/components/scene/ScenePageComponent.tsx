@@ -1,7 +1,7 @@
 import React from "react";
 import type { Room } from "../../types";
 import SceneButton from "./SceneButton";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import SceneHeaderComponent from "./SceneHeaderComponent";
 
 interface ScenePageComponentProps {
@@ -25,9 +25,8 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 				<SceneButton key={room.name} room={room} handleClick={handleClick} />
 			))}
 			<div>
-				<Button
+				<AppButton
 					onClick={() => gotoPage("Security")}
-					variant=""
 					size="lg"
 					className={"mb-3 m-1 position-relative d-flex justify-content-center"}
 				>
@@ -35,10 +34,9 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 					<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 						Front Door Security
 					</div>
-				</Button>
-				<Button
+				</AppButton>
+				<AppButton
 					onClick={() => gotoPage("Grow")}
-					variant=""
 					size="lg"
 					className={"mb-3 m-1 position-relative d-flex justify-content-center"}
 				>
@@ -46,7 +44,7 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 					<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 						Grow Tent
 					</div>
-				</Button>
+				</AppButton>
 			</div>
 		</div>
 	</div>

@@ -109,7 +109,7 @@ describe("GarageButton", () => {
 		expect(mockHandleGarageClick).toHaveBeenCalledWith("Close");
 	});
 
-	test("applies danger variant when door is open", () => {
+	test("marks the button alert when door is open", () => {
 		renderWithProviders(
 			<GarageButton
 				room={mockRoomOpen}
@@ -119,10 +119,10 @@ describe("GarageButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-danger");
+		expect(button).toHaveAttribute("data-state", "alert");
 	});
 
-	test("applies default variant when door is closed", () => {
+	test("marks the button off when door is closed", () => {
 		renderWithProviders(
 			<GarageButton
 				room={mockRoomClosed}
@@ -132,7 +132,7 @@ describe("GarageButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-default");
+		expect(button).toHaveAttribute("data-state", "off");
 	});
 
 	test("calls handleGarageMoreClick when temperature is clicked", () => {

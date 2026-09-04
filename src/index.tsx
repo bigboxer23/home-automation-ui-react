@@ -11,7 +11,6 @@ import rootReducer from "./reducers";
 import NavigationProvider from "./components/NavigationProvider";
 import PageFooter from "./components/PageFooter";
 
-import "bootstrap/dist/css/bootstrap.css";
 import "@mdi/font/css/materialdesignicons.min.css";
 import "./index.css";
 import RoomPage from "./containers/RoomPage";
