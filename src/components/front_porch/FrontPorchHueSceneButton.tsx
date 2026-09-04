@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton, { type ButtonState } from "../ui/AppButton";
 import type { Device } from "../../types";
 
 interface FrontPorchHueSceneButtonProps {
@@ -18,15 +18,15 @@ export default function FrontPorchHueSceneButton(
 		}
 		return mdi + "mdi-lightbulb-group-outline";
 	};
-	const getButtonStyle = function (device: Device): string {
-		return device.level === "ON" ? "success" : "default";
+	const getButtonStyle = function (device: Device): ButtonState {
+		return device.level === "ON" ? "on" : "off";
 	};
 
 	return (
 		<div>
-			<Button
+			<AppButton
 				onClick={() => props.handleClick(props.device.id, "FrontPorchHueScene")}
-				variant={getButtonStyle(props.device)}
+				state={getButtonStyle(props.device)}
 				size="lg"
 				className={"mb-3 m-1 position-relative d-flex justify-content-center"}
 			>
@@ -34,7 +34,7 @@ export default function FrontPorchHueSceneButton(
 				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 					{props.device.name}
 				</div>
-			</Button>
+			</AppButton>
 		</div>
 	);
 }

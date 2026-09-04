@@ -143,7 +143,7 @@ describe("RoomButton", () => {
 		expect(screen.getByText("68°")).toBeInTheDocument();
 	});
 
-	test("applies success variant when lights are on", () => {
+	test("marks the button on when lights are on", () => {
 		renderWithProviders(
 			<RoomButton
 				room={mockRoomWithLights}
@@ -153,10 +153,10 @@ describe("RoomButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-success");
+		expect(button).toHaveAttribute("data-state", "on");
 	});
 
-	test("applies default variant when lights are off", () => {
+	test("marks the button off when lights are off", () => {
 		renderWithProviders(
 			<RoomButton
 				room={mockRoomWithoutLights}
@@ -166,7 +166,7 @@ describe("RoomButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-default");
+		expect(button).toHaveAttribute("data-state", "off");
 	});
 
 	test("shows battery warning style for low battery", () => {
@@ -323,6 +323,6 @@ describe("RoomButton", () => {
 
 		expect(screen.getByText("Empty Room")).toBeInTheDocument();
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-default");
+		expect(button).toHaveAttribute("data-state", "off");
 	});
 });

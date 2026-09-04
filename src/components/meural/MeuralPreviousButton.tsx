@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton from "../ui/AppButton";
 import { previousMeuralImage } from "../../actions";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
@@ -35,9 +35,8 @@ export default function MeuralPreviousButton(
 
 	return (
 		<div>
-			<Button
+			<AppButton
 				onClick={handleClick}
-				variant=""
 				size="lg"
 				className={shouldDisplay(props.device?.status)}
 			>
@@ -45,7 +44,7 @@ export default function MeuralPreviousButton(
 				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
 					Previous Image
 				</div>
-			</Button>
+			</AppButton>
 			<Snackbar
 				open={open}
 				autoHideDuration={3000}
