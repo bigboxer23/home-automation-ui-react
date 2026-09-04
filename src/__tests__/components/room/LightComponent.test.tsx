@@ -173,12 +173,12 @@ describe("LightComponent", () => {
 		const container = document.querySelector(".light_slider");
 		expect(container).toBeInTheDocument();
 		expect(container).toHaveClass("p-2");
-		expect(container).toHaveClass("w-100");
-		expect(container).toHaveClass("h-100");
-		expect(container).toHaveClass("d-flex");
+		expect(container).toHaveClass("w-full");
+		expect(container).toHaveClass("h-full");
+		expect(container).toHaveClass("flex");
 		expect(container).toHaveClass("flex-wrap");
-		expect(container).toHaveClass("justify-content-center");
-		expect(container).toHaveClass("align-content-start");
+		expect(container).toHaveClass("justify-center");
+		expect(container).toHaveClass("content-start");
 		expect(container).toHaveClass("mb-2");
 	});
 

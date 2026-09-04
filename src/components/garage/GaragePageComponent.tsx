@@ -34,18 +34,18 @@ export default function GaragePageComponent({
 		<div>
 			<div className="background"></div>
 			<HeaderComponent back={back} name={getHeader(room)} />
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
+			<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 				<GarageAutoCloseButton
 					onClick={() => autoCloseClickHandler(getAutoCloseDelay(room))}
 					buttonText="Disable Auto Close"
 					class={getAutoCloseButtonStyle(room)}
 				/>
-				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-					<div className="form-group w-100">
-						<div className="w-100 d-flex">
-							<label className="ms-2 w-100 small">Overall Room</label>
+				<div className="p-2 w-full h-full flex flex-wrap justify-center content-start light_slider mb-2">
+					<div className="w-full">
+						<div className="w-full flex">
+							<label className="ms-2 w-full text-[0.875em]">Overall Room</label>
 						</div>
-						<div className="d-flex btn-group btn-group-toggle justify-content-center">
+						<div className="flex justify-center">
 							{
 								<IOSSlider
 									value={getRoomDimLevel(room)}

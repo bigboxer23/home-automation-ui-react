@@ -17,7 +17,7 @@ const getLoadContent = function (
 ): React.ReactElement | string {
 	if (authError) {
 		return (
-			<div className="LoadingStatus d-flex justify-content-center align-items-center position-absolute">
+			<div className="LoadingStatus flex justify-center items-center absolute">
 				<CircularProgress
 					sx={{ color: "#28a745" }}
 					size="2rem"
@@ -30,7 +30,7 @@ const getLoadContent = function (
 		);
 	} else if (theLoadedTime == null) {
 		return (
-			<div className="LoadingStatus d-flex justify-content-center align-items-center position-absolute">
+			<div className="LoadingStatus flex justify-center items-center absolute">
 				<CircularProgress
 					sx={{ color: "#28a745" }}
 					size="2rem"

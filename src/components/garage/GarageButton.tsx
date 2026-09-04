@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import AppButton, { type ButtonState } from "../ui/AppButton";
 import type { Device, Room } from "../../types";
 import { getFormattedTemp, getTempStyle } from "../../utils/WeatherUtilities";
 import { isOn } from "../room/RoomUtils";
@@ -17,19 +17,19 @@ class GarageButton extends React.Component<GarageButtonProps> {
 	}
 
 	render = () => (
-		<Button
+		<AppButton
 			onClick={() =>
 				this.props.handleGarageClick(
 					GarageButton.isDoorOpen(this.props.room) ? "Close" : "Open",
 				)
 			}
-			variant={this.getButtonStyle()}
+			state={this.getButtonStyle()}
 			size="lg"
-			className={"m-1 position-relative d-flex justify-content-center"}
+			className={"m-1 relative flex justify-center"}
 		>
 			<i className="mdi mdi-garage" />
 			<div
-				className="temp-display pe-1 ps-1 position-absolute"
+				className="temp-display pe-1 ps-1 absolute"
 				style={getTempStyle(
 					GarageButton.findGarageTemperature(this.props.room),
 				)}
@@ -39,7 +39,7 @@ class GarageButton extends React.Component<GarageButtonProps> {
 			>
 				{getFormattedTemp(GarageButton.findGarageTemperature(this.props.room))}
 			</div>
-			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+			<div className="absolute bottom w-full m-2 ps-2 pe-2">
 				<div className="autoClose minor-text">
 					{GarageButton.getAutoClose(this.props.room)}
 				</div>
@@ -48,20 +48,20 @@ class GarageButton extends React.Component<GarageButtonProps> {
 				</div>
 				{this.props.room.name}
 			</div>
-		</Button>
+		</AppButton>
 	);
 
 	getLastOpenStyle(): string {
 		return (
-			"minor-text" + (GarageButton.isDoorOpen(this.props.room) ? " d-none" : "")
+			"minor-text" + (GarageButton.isDoorOpen(this.props.room) ? " hidden" : "")
 		);
 	}
-	getButtonStyle(): string {
+	getButtonStyle(): ButtonState {
 		return GarageButton.isDoorOpen(this.props.room)
-			? "danger"
+			? "alert"
 			: isOn(this.props.room)
-				? "success"
-				: "default";
+				? "on"
+				: "off";
 	}
 
 	static findGarageDevice(room: Room | null): Device | null | undefined {

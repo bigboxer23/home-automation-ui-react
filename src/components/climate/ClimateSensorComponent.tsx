@@ -15,11 +15,11 @@ const ClimateSensorComponent: React.FC<ClimateSensorComponentProps> = ({
 	deviceMap,
 }) => {
 	return (
-		<div className="p-2 form-group w-100 d-flex light_slider mb-2">
-			<label className="flex-grow-1 mt-2 ms-2">{getName(deviceMap)}</label>
+		<div className="p-2 w-full flex light_slider mb-2">
+			<label className="grow mt-2 ms-2">{getName(deviceMap)}</label>
 			{
 				<div
-					className="temp-display pe-1 ps-1 d-flex align-items-center me-2"
+					className="temp-display pe-1 ps-1 flex items-center me-2"
 					style={getIndoorTempStyle(getTemp(deviceMap))}
 				>
 					{getFormattedTemp(getTemp(deviceMap))} / {getHumidity(deviceMap)}%

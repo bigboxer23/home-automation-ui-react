@@ -25,7 +25,7 @@ const MeuralPageComponent: React.FC<MeuralPageComponentProps> = ({
 			name={"Meural Control"}
 			device={device}
 		/>
-		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
+		<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 			<MeuralPreviousButton key={"previous"} device={device} />
 			<MeuralNextButton key={"next"} device={device} />
 			<MeuralShowInfoButton device={device} />
