@@ -12,6 +12,7 @@ import {
 import GaragePageComponent from "../components/garage/GaragePageComponent";
 import GarageButton from "../components/garage/GarageButton";
 import type { Room, RootState } from "../types";
+import { findRoomOrEmpty } from "../utils/RoomLookup";
 
 interface GaragePageProps {
 	fetchStatus: () => void;
@@ -28,12 +29,8 @@ class GaragePage extends React.Component<GaragePageProps> {
 	}
 }
 
-const findGarageRoom = (rooms: Room[] | null): Room | { devices: never[] } => {
-	if (rooms == null) {
-		return { devices: [] };
-	}
-	return rooms.filter((theRoom: Room) => "Garage" === theRoom.name)[0];
-};
+const findGarageRoom = (rooms: Room[] | null): Room =>
+	findRoomOrEmpty(rooms, "Garage");
 
 export const getHeader = (room: Room): string => {
 	if (room == null) {

@@ -9,7 +9,6 @@ export interface Device {
 	category?: string;
 	temperature?: number;
 	humidity?: number;
-	door?: boolean;
 	historicOpenTime?: number;
 	autoClose?: number;
 }

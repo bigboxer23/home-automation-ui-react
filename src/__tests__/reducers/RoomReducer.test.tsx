@@ -34,7 +34,7 @@ describe("roomReducer", () => {
 					{
 						id: "device3",
 						name: "Garage Opener",
-						door: false,
+						status: "false",
 					},
 				],
 			},
@@ -285,7 +285,7 @@ describe("roomReducer", () => {
 			const garageOpener = garageRoom!.devices.find(
 				(device) => device.name === "Garage Opener",
 			);
-			expect(garageOpener!.door).toBe(true);
+			expect(garageOpener!.status).toBe("true");
 		});
 
 		test("updates garage door state to closed", () => {
@@ -300,7 +300,7 @@ describe("roomReducer", () => {
 			const garageOpener = garageRoom!.devices.find(
 				(device) => device.name === "Garage Opener",
 			);
-			expect(garageOpener!.door).toBe(false);
+			expect(garageOpener!.status).toBe("false");
 		});
 
 		test("only affects Garage Opener device in Garage room", () => {
@@ -315,7 +315,7 @@ describe("roomReducer", () => {
 							{
 								id: "device3",
 								name: "Garage Opener",
-								door: false,
+								status: "false",
 							},
 							{
 								id: "device6",
@@ -336,7 +336,7 @@ describe("roomReducer", () => {
 			const result = roomReducer(stateWithMultipleGarageDevices, action);
 
 			const garageRoom = result.rooms.find((room) => room.name === "Garage");
-			expect(garageRoom!.devices[0].door).toBe(true); // Garage Opener updated
+			expect(garageRoom!.devices[0].status).toBe("true"); // Garage Opener updated
 			expect(garageRoom!.devices[1].status).toBe("0"); // Garage Light unchanged
 		});
 

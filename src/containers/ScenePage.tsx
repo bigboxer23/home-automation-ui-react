@@ -5,6 +5,7 @@ import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import { fetchStatusIfNecessary, sceneClicked } from "../actions";
 import type { Device, Room, RootState } from "../types";
+import { findRoomDevices } from "../utils/RoomLookup";
 
 interface ScenePageProps {
 	fetchStatus: () => void;
@@ -21,15 +22,8 @@ class ScenePage extends React.Component<ScenePageProps> {
 	}
 }
 
-const getSceneRoom = (rooms: Room[] | null): Device[] => {
-	if (rooms == null) {
-		return [];
-	}
-	const scenesRoom = rooms
-		.filter((theRoom: Room) => "Scenes" === theRoom.name)
-		.map((room: Room) => room.devices)[0];
-	return scenesRoom || [];
-};
+const getSceneRoom = (rooms: Room[] | null): Device[] =>
+	findRoomDevices(rooms, "Scenes");
 
 const mapStateToProps = (state: RootState) => ({
 	rooms: getSceneRoom(state.house.rooms),

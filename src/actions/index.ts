@@ -73,10 +73,26 @@ const handleErrors = function (
 };
 
 const USER_ACTION_SUPPRESS_MS = 5000;
+const POLL_INTERVAL_MS = 3000;
+
+/**
+ * Queue the next status poll, replacing whatever poll is already queued.
+ * Scheduling without cancelling first strands the previous timeout: its id is no
+ * longer the one held in the store, so cancelFetchTimer can never clear it and
+ * two chains end up polling over the top of each other.
+ */
+const schedulePoll = (): AppThunk => {
+	return (dispatch) => {
+		dispatch(cancelFetchTimer());
+		dispatch(
+			setTimerId(setTimeout(() => dispatch(fetchStatus()), POLL_INTERVAL_MS)),
+		);
+	};
+};
 
 const fetchStatus = function (): AppThunk {
 	return (dispatch, getState) => {
-		dispatch(cancelFetchTimer() as any);
+		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		const lastUpdateAtStart = getState().house.lastUpdate;
 		return fetchWithCookies("/SceneStatus")
@@ -95,25 +111,24 @@ const fetchStatus = function (): AppThunk {
 					}
 				}
 			})
-			.finally(() =>
-				dispatch(
-					setTimerId(setTimeout(() => dispatch(fetchStatus() as any), 3000)),
-				),
-			);
+			.catch((error) => {
+				console.warn("Status poll failed", error);
+			})
+			.finally(() => dispatch(schedulePoll()));
 	};
 };
 
 export function fetchStatusIfNecessary(): AppThunk {
 	return (dispatch, getState) => {
 		if (!getState().house.isFetching && getState().house.timer == null) {
-			dispatch(fetchStatus() as any);
+			dispatch(fetchStatus());
 		}
 	};
 }
 
 export function setDimLocal(level: string, id: string): AppThunk {
 	return (dispatch, getState) => {
-		dispatch(cancelFetchTimer() as any);
+		dispatch(cancelFetchTimer());
 		dispatch(updateDim(id, level));
 	};
 }
@@ -121,22 +136,17 @@ export function setDimLocal(level: string, id: string): AppThunk {
 export function setDim(setPoint: string, id: string): AppThunk {
 	return (dispatch, getState) => {
 		fetchWithCookies("/S/OpenHAB/" + id + "/" + setPoint).finally(() =>
-			dispatch(
-				setTimerId(setTimeout(() => dispatch(fetchStatus() as any), 3000)),
-			),
+			dispatch(schedulePoll()),
 		);
 	};
 }
 
 export function setOnOff(on: boolean, id: string): AppThunk {
 	return (dispatch, getState) => {
-		dispatch(cancelFetchTimer() as any);
+		dispatch(cancelFetchTimer());
 		dispatch(updateOnOff(id, on));
 		fetchWithCookies("/S/OpenHAB/" + id + "/" + (on ? "ON" : "OFF")).finally(
-			() =>
-				dispatch(
-					setTimerId(setTimeout(() => dispatch(fetchStatus() as any), 3000)),
-				),
+			() => dispatch(schedulePoll()),
 		);
 	};
 }
@@ -151,13 +161,11 @@ export function cancelFetchTimer(): AppThunk {
 
 export function garageClicked(action: string): AppThunk {
 	return (dispatch, getState) => {
-		dispatch(cancelFetchTimer() as any);
+		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		dispatch(updateGarageState(action));
 		fetchWithCookies("/S/Garage/" + action).finally(() => {
-			dispatch(
-				setTimerId(setTimeout(() => dispatch(fetchStatus() as any), 3000)),
-			);
+			dispatch(schedulePoll());
 		});
 	};
 }
@@ -166,13 +174,11 @@ export function roomClicked(id: string, state: number | string): AppThunk {
 	return (dispatch, getState) => {
 		let aRoom = getState().house.rooms.find((theRoom) => theRoom.id === id);
 		if (aRoom != null) {
-			dispatch(cancelFetchTimer() as any);
+			dispatch(cancelFetchTimer());
 			dispatch(requestStatus());
 			dispatch(updateStoreRoom(id));
 			fetchWithCookies("/S/OpenHAB/" + id + "/" + state).finally(() => {
-				dispatch(
-					setTimerId(setTimeout(() => dispatch(fetchStatus() as any), 3000)),
-				);
+				dispatch(schedulePoll());
 			});
 		}
 	};
@@ -213,29 +219,23 @@ export function setThermostatSetPoint(setPoint: number): AppThunk {
 				"/" +
 				setPoint +
 				" °F",
-		).finally(() =>
-			dispatch(
-				setTimerId(setTimeout(() => dispatch(fetchStatus() as any), 3000)),
-			),
-		);
+		).finally(() => dispatch(schedulePoll()));
 	};
 }
 
 export function setLocalThermostatSetPoint(setPoint: number): AppThunk {
 	return (dispatch, getState) => {
-		dispatch(cancelFetchTimer() as any);
+		dispatch(cancelFetchTimer());
 		dispatch(updateThermostatSetPoint(setPoint));
 	};
 }
 
 export function disableAutoClose(delay: number): AppThunk {
 	return (dispatch, getState) => {
-		dispatch(cancelFetchTimer() as any);
+		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		fetchWithCookies("/S/Garage/SetAutoCloseDelay/" + delay).finally(() => {
-			dispatch(
-				setTimerId(setTimeout(() => dispatch(fetchStatus() as any), 3000)),
-			);
+			dispatch(schedulePoll());
 		});
 	};
 }
