@@ -12,8 +12,18 @@ jobs:
       pull-requests: write
       contents: write
     steps:
-      - name: Enable auto-merge for Dependabot PR
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Majors are deliberately excluded: they land as a normal PR for review.
+      - name: Enable auto-merge for minor and patch updates
+        if: >-
+          steps.metadata.outputs.update-type == 'version-update:semver-minor' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-patch'
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
           pull-request-number: ${{ github.event.pull_request.number }}
-          merge-method: squash  # or 'merge' or 'rebase'
+          merge-method: squash

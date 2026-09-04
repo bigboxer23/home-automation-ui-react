@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 
 // Wrap native Request to support relative URLs in jsdom/node environment
 const OriginalRequest = globalThis.Request;
