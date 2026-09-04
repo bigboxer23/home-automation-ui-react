@@ -24,20 +24,26 @@ body {
 }
 
 body,
-html,
-#root {
+html {
 	height: 100%;
 	width: 100%;
 }
 
 body {
 	justify-content: center;
+	/* Let #root grow past the viewport instead of being stretched to it, so
+	   min-height below can pin the footer to the bottom of short pages. */
+	align-items: flex-start;
 	display: flex;
 }
 
 #root {
+	width: 100%;
+	min-height: 100%;
 	max-width: 1024px;
 	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 
 .btn-lg {
