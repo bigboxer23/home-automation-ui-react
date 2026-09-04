@@ -19,25 +19,25 @@ export const RoomHeaderComponent: React.FC<RoomHeaderComponentProps> = ({
 	sliderChange,
 	slideStop,
 }) => {
-	const name = getHeaderTitle(room, "flex-grow-1");
+	const name = getHeaderTitle(room, "grow");
 
 	return (
-		<div className="header d-flex flex-column">
-			<div className="d-flex align-items-center w-100 flex-row">
-				<span className="d-flex align-items-center flex-row" onClick={back}>
+		<div className="header flex flex-col">
+			<div className="flex items-center w-full flex-row">
+				<span className="flex items-center flex-row" onClick={back}>
 					<span className="mdi mdi-chevron-left mdi-36px z-index-1 "></span>
 					{name}
 				</span>
-				<div className={"flex-grow-1"} />
+				<div className={"grow"} />
 				<IOSSwitch
-					className="me-4"
+					className="me-6"
 					checked={getRoomDimLevel(room) > 0}
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 						setDeviceStatus(room.id, event.target.checked)
 					}
 				/>
 			</div>
-			<div className="d-flex btn-group btn-group-toggle justify-content-center ms-3 me-3">
+			<div className="flex justify-center ms-4 me-4">
 				{
 					<IOSSlider
 						value={getRoomDimLevel(room)}

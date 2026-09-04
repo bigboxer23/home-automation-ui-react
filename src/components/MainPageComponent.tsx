@@ -25,7 +25,7 @@ const MainPageComponent: React.FC<MainPageComponentProps> = ({
 }) => (
 	<div>
 		<div className="background"></div>
-		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start">
+		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start">
 			{rooms.map((room) =>
 				mapRoom(
 					time,

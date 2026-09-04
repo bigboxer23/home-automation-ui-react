@@ -13,15 +13,14 @@ const MotionSensorComponent: React.FC<MotionSensorComponentProps> = ({
 	style = "",
 	styleName = "",
 }) => {
-	const className =
-		(style || styleName) + " p-2 form-group w-100 d-flex light_slider mb-2";
+	const className = (style || styleName) + " p-2 w-full flex light_slider mb-2";
 	return (
 		<div className={className}>
-			<label className="flex-grow-1 align-items-center ms-2 mt-2 mb-2">
+			<label className="grow items-center ms-2 mt-2 mb-2">
 				{device.name.replace(" Battery", "")}
 			</label>
 			<div
-				className="temp-display pe-3 ps-3 d-flex align-items-center me-2"
+				className="temp-display pe-4 ps-4 flex items-center me-2"
 				style={getBatteryStyle(device)}
 			>
 				{getBatteryContent(device)}

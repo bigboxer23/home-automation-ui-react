@@ -28,10 +28,10 @@ export default function FrontPorchHueSceneButton(
 				onClick={() => props.handleClick(props.device.id, "FrontPorchHueScene")}
 				state={getButtonStyle(props.device)}
 				size="lg"
-				className={"mb-3 m-1 position-relative d-flex justify-content-center"}
+				className={"mb-4 m-1 relative flex justify-center"}
 			>
 				<i className={getIconStyle(props.device.name)} />
-				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+				<div className="absolute bottom w-full m-2 ps-2 pe-2">
 					{props.device.name}
 				</div>
 			</AppButton>

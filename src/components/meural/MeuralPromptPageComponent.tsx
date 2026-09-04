@@ -17,15 +17,15 @@ const MeuralPromptPageComponent: React.FC<MeuralPromptPageComponentProps> = ({
 	<div>
 		<div className="background"></div>
 		<HeaderComponent back={back} name={"Meural Control"} />
-		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
-			<div className={"w-100 d-flex flex-column"}>
-				<div className={"ps-3 pe-3 mb-2 MuiToggleButtonGroup-root"}>
+		<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
+			<div className={"w-full flex flex-col"}>
+				<div className={"ps-4 pe-4 mb-2 MuiToggleButtonGroup-root"}>
 					<TextareaAutosize
 						onKeyUp={handleKeyUp}
 						autoFocus
 						id="creationPrompt"
 						placeholder="Enter prompt to generate image from"
-						className={"pt-4 w-100 prompt-textarea"}
+						className={"pt-6 w-full prompt-textarea"}
 					/>
 				</div>
 				<AppButton onClick={handleClick} state="primary">

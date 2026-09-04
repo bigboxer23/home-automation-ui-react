@@ -246,11 +246,11 @@ describe("FrontPorchColorButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("mb-3");
+		expect(button).toHaveClass("mb-4");
 		expect(button).toHaveClass("m-1");
-		expect(button).toHaveClass("position-relative");
-		expect(button).toHaveClass("d-flex");
-		expect(button).toHaveClass("justify-content-center");
+		expect(button).toHaveClass("relative");
+		expect(button).toHaveClass("flex");
+		expect(button).toHaveClass("justify-center");
 		expect(button).toHaveClass("btn-lg");
 	});
 
@@ -291,10 +291,10 @@ describe("FrontPorchColorButton", () => {
 			/>,
 		);
 
-		const nameDiv = document.querySelector(".position-absolute.bottom");
+		const nameDiv = document.querySelector(".bottom");
 		expect(nameDiv).toBeInTheDocument();
 		expect(nameDiv).toHaveTextContent("Pride");
-		expect(nameDiv).toHaveClass("w-100");
+		expect(nameDiv).toHaveClass("w-full");
 		expect(nameDiv).toHaveClass("m-2");
 		expect(nameDiv).toHaveClass("ps-2");
 		expect(nameDiv).toHaveClass("pe-2");

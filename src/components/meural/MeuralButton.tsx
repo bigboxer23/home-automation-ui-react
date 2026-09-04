@@ -18,12 +18,10 @@ const MeuralButton: React.FC<MeuralButtonProps> = (props) => (
 			props.changePage(event, isOn(findMeuralDeviceFromRoom(props.room)))
 		}
 		size="lg"
-		className={
-			"m-1 position-relative d-flex justify-content-center house-button"
-		}
+		className={"m-1 relative flex justify-center house-button"}
 	>
 		<i className={getButtonStyling(findMeuralDeviceFromRoom(props.room))} />
-		<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">Meural</div>
+		<div className="absolute bottom w-full m-2 ps-2 pe-2">Meural</div>
 	</AppButton>
 );
 

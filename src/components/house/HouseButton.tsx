@@ -26,16 +26,14 @@ const HouseButton: React.FC<HouseButtonProps> = ({
 	<AppButton
 		onClick={(event: React.MouseEvent) => changePage(event)}
 		size="lg"
-		className={
-			"m-1 position-relative d-flex justify-content-center house-button"
-		}
+		className={"m-1 relative flex justify-center house-button"}
 	>
 		<i className={getButtonStyling(time, room.devices)} />
-		<div className="temp-display pe-1 ps-1 position-absolute total-lights-bg">
+		<div className="temp-display pe-1 ps-1 absolute total-lights-bg">
 			{room.totalLights}
 		</div>
 		<div
-			className="position-absolute bottom w-100 m-2 ps-2 pe-2"
+			className="absolute bottom w-full m-2 ps-2 pe-2"
 			onClick={(event: React.MouseEvent) => houseOff(event, time, room.devices)}
 		>
 			<div className="minor-text">{getTransitionTime(time, room.devices)}</div>
