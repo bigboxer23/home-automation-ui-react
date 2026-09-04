@@ -2,6 +2,7 @@ import React from "react";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../test-utils";
 import GarageButton from "../../../components/garage/GarageButton";
+import roomReducer from "../../../reducers/RoomReducer";
 
 describe("GarageButton", () => {
 	const mockHandleGarageClick = vi.fn();
@@ -235,6 +236,28 @@ describe("GarageButton", () => {
 		);
 
 		expect(screen.getByText("5:00")).toBeInTheDocument();
+	});
+
+	test("shows the door as open straight after the optimistic update", () => {
+		const opened = roomReducer(
+			{
+				rooms: [mockRoomClosed],
+				isFetching: false,
+				timer: null,
+				authError: false,
+			},
+			{ type: "GARAGE_STATE_CHANGE", state: "Open" },
+		);
+
+		renderWithProviders(
+			<GarageButton
+				room={opened.rooms[0]}
+				handleGarageClick={mockHandleGarageClick}
+				handleGarageMoreClick={mockHandleGarageMoreClick}
+			/>,
+		);
+
+		expect(screen.getByRole("button")).toHaveAttribute("data-state", "alert");
 	});
 
 	test("applies correct CSS classes", () => {

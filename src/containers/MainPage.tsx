@@ -55,11 +55,11 @@ const getRooms = (rooms: Room[]): Room[] => {
 	if (scenes == null) {
 		return allItems;
 	}
-	scenes.totalLights = countTotalLights(rooms);
+	const scenesWithCount = { ...scenes, totalLights: countTotalLights(rooms) };
 	return allItems
 		.filter((room: Room) => "Climate" === room.name)
 		.concat(allItems.filter((room: Room) => "Garage" === room.name))
-		.concat(scenes)
+		.concat(scenesWithCount)
 		.concat(allItems.filter((room: Room) => "Meural" === room.name))
 		.concat(
 			allItems.filter(

@@ -19,6 +19,7 @@ import ThermostatComponent, {
 	getName,
 } from "../components/climate/ClimateSensorComponent";
 import type { Device, DeviceMap, Room, RootState } from "../types";
+import { findRoomDevices, toDeviceMap } from "../utils/RoomLookup";
 
 interface ClimatePageProps {
 	fetchStatus: () => void;
@@ -62,17 +63,8 @@ export const getThermostatBattery = (deviceMap: DeviceMap): Device => {
 		: deviceMap["Thermostat Battery"];
 };
 
-export const getClimateData = (rooms: Room[]): DeviceMap => {
-	if (rooms == null) {
-		return {};
-	}
-	return rooms
-		.filter((theRoom: Room) => "Climate" === theRoom.name)
-		.map((room: Room) => room.devices)[0]
-		.reduce((map: DeviceMap, device) => {
-			return ((map[device.name] = device), map);
-		}, {});
-};
+export const getClimateData = (rooms: Room[]): DeviceMap =>
+	toDeviceMap(findRoomDevices(rooms, "Climate"));
 
 export const getThermostatDisplayInfo = (
 	deviceMap: DeviceMap,

@@ -58,7 +58,10 @@ const roomReducer = (
 							if (theDevice.name !== "Garage Opener") {
 								return theDevice;
 							}
-							return { ...theDevice, door: action.state === "Open" };
+							return {
+								...theDevice,
+								status: action.state === "Open" ? "true" : "false",
+							};
 						}),
 					};
 				}),

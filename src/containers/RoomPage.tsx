@@ -12,6 +12,7 @@ import {
 import RoomPageComponent from "../components/room/RoomPageComponent";
 import { getRoomTemp, isFan, isLight } from "../components/room/RoomUtils";
 import type { Device, Room, RootState } from "../types";
+import { EMPTY_ROOM, findRoom } from "../utils/RoomLookup";
 
 interface RoomPageProps {
 	fetchStatus: () => void;
@@ -21,59 +22,43 @@ interface RoomPageProps {
 }
 
 function RoomPage(props: RoomPageProps) {
+	const { fetchStatus } = props;
 	useEffect(() => {
-		props.fetchStatus();
-	}, [props]);
+		fetchStatus();
+	}, [fetchStatus]);
 
 	return <RoomPageComponent {...(props as any)} />;
 }
 
-function RoomPageWithParams() {
-	const { name } = useParams<{ name: string }>();
-	const ConnectedRoomPage = connect(
-		(state: RootState) => ({
-			room: filterRoom(state.house.rooms, name),
-			rooms: state.house.rooms,
-		}),
-		mapDispatchToProps,
-	)(RoomPage as any);
-
-	return <ConnectedRoomPage />;
-}
-
-const filterRoom = (
-	rooms: Room[] | null,
-	name: string | undefined,
-): Room | { devices: Device[] } => {
-	if (rooms == null) {
-		return { devices: [] };
+const filterRoom = (rooms: Room[] | null, name: string | undefined): Room => {
+	const aRoom = findRoom(rooms, name ?? "");
+	if (aRoom != null) {
+		const devices = [...aRoom.devices].sort(
+			(theDevice: Device, theDevice2: Device) => {
+				if (isFan(theDevice) && !isFan(theDevice2)) {
+					return -1;
+				}
+				if (!isFan(theDevice) && isFan(theDevice2)) {
+					return 1;
+				}
+				if (isMotionDevice(theDevice) && !isMotionDevice(theDevice2)) {
+					return 1;
+				}
+				if (!isMotionDevice(theDevice) && isMotionDevice(theDevice2)) {
+					return -1;
+				}
+				if (theDevice.name < theDevice2.name) {
+					return -1;
+				}
+				if (theDevice.name > theDevice2.name) {
+					return 1;
+				}
+				return 0;
+			},
+		);
+		return { ...aRoom, devices };
 	}
-	let aRoom = rooms.filter((theRoom: Room) => name === theRoom.name);
-	if (aRoom.length > 0) {
-		aRoom[0].devices.sort((theDevice: Device, theDevice2: Device) => {
-			if (isFan(theDevice) && !isFan(theDevice2)) {
-				return -1;
-			}
-			if (!isFan(theDevice) && isFan(theDevice2)) {
-				return 1;
-			}
-			if (isMotionDevice(theDevice) && !isMotionDevice(theDevice2)) {
-				return 1;
-			}
-			if (!isMotionDevice(theDevice) && isMotionDevice(theDevice2)) {
-				return -1;
-			}
-			if (theDevice.name < theDevice2.name) {
-				return -1;
-			}
-			if (theDevice.name > theDevice2.name) {
-				return 1;
-			}
-			return 0;
-		});
-		return aRoom[0];
-	}
-	return { devices: [] };
+	return EMPTY_ROOM;
 };
 
 export const getBatteryStyle = (theDevice: Device): React.CSSProperties => {
@@ -167,5 +152,18 @@ const mapDispatchToProps = (dispatch: any) =>
 		},
 		dispatch,
 	);
+
+const ConnectedRoomPage = connect(
+	(state: RootState, ownProps: { name?: string }) => ({
+		room: filterRoom(state.house.rooms, ownProps.name),
+		rooms: state.house.rooms,
+	}),
+	mapDispatchToProps,
+)(RoomPage as any);
+
+function RoomPageWithParams() {
+	const { name } = useParams<{ name: string }>();
+	return <ConnectedRoomPage name={name} />;
+}
 
 export default RoomPageWithParams;
