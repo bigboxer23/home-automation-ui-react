@@ -19,9 +19,9 @@ It provides UI to control services exposed via VeraAutomationHub, including:
 
 ## Installation
 
-To build this project, run `yarn build`
+To build this project, run `npm run build`
 
-To debug/develop run `yarn start`
+To debug/develop run `npm start`
 
 deploy.sh can be used to push content to the public directory created with a deployed VeraAutomationHub so the content can be served.
 
