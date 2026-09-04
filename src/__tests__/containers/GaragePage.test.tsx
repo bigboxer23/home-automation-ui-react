@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders, mockFetch } from "../../test-utils";
 import GaragePage, {
 	getHeader,
@@ -144,17 +144,25 @@ describe("getHeader utility function", () => {
 		],
 	};
 
+	const renderHeader = (room: any) => {
+		const { container } = render(<div>{getHeader(room)}</div>);
+		return container;
+	};
+
 	test("returns formatted header with last opened time", () => {
-		const result = getHeader(mockRoomClosed as any);
-		expect(result).toContain("Garage");
-		expect(result).toContain("Last opened:");
+		const container = renderHeader(mockRoomClosed);
+		expect(container.textContent).toContain("Garage");
+		expect(container.querySelector("span")?.textContent).toContain(
+			"Last opened:",
+		);
 	});
 
 	test("returns formatted header with auto close time", () => {
-		const result = getHeader(mockRoomAutoClose as any);
-		expect(result).toContain("Garage");
-		expect(result).toContain("Closing in:");
-		expect(result).toContain("5:00");
+		const container = renderHeader(mockRoomAutoClose);
+		expect(container.textContent).toContain("Garage");
+		const detail = container.querySelector("span")?.textContent;
+		expect(detail).toContain("Closing in:");
+		expect(detail).toContain("5:00");
 	});
 
 	test("returns empty string for null room", () => {
@@ -167,9 +175,11 @@ describe("getHeader utility function", () => {
 			name: "Garage",
 			devices: [{ name: "Light", status: "1" }],
 		} as any;
-		const result = getHeader(roomWithoutGarage);
-		expect(result).toContain("Garage");
-		expect(result).toContain("Last opened:");
+		const container = renderHeader(roomWithoutGarage);
+		expect(container.textContent).toContain("Garage");
+		expect(container.querySelector("span")?.textContent).toContain(
+			"Last opened:",
+		);
 	});
 });
 
