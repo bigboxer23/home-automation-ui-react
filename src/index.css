@@ -221,6 +221,10 @@ body {
 	border-radius: 0.5rem !important;
 }
 
+.wh-temp-gauge-alert {
+	background-color: #dc3545 !important;
+}
+
 .wh-temp-gauge-active {
 	background-color: #3880ff !important;
 }

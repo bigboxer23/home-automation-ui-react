@@ -17,8 +17,8 @@ function MeuralQualityButton(
 
 	const getClassnames = (status: string | undefined): string => {
 		return (
-			"meural-source-button pt-3 pb-2" +
-			("0" === status || "4" === status ? " d-none" : "")
+			"meural-source-button tw:pt-4 tw:pb-2" +
+			("0" === status || "4" === status ? " tw:hidden" : "")
 		);
 	};
 	return (
@@ -33,7 +33,11 @@ function MeuralQualityButton(
 					}
 				}}
 			>
-				<div className={"ms-3 meural-source-button-label fw-bold pt-3 pb-2"}>
+				<div
+					className={
+						"tw:ms-4 meural-source-button-label tw:font-bold tw:pt-4 tw:pb-2"
+					}
+				>
 					Quality
 				</div>
 				<ToggleButton

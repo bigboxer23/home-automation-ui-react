@@ -7,11 +7,11 @@ interface GarageAutoCloseButtonProps {
 }
 
 const GarageAutoCloseButton: React.FC<GarageAutoCloseButtonProps> = (props) => (
-	<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-		<div className="pe-2 ps-2 pt-1 pb-1 w-100">
-			<div className="w-100 d-flex btn-group btn-group-toggle">
+	<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start light_slider tw:mb-2">
+		<div className="tw:pe-2 tw:ps-2 tw:pt-1 tw:pb-1 tw:w-full">
+			<div className="tw:w-full tw:flex btn-group">
 				<label
-					className={props.class + "btn btn-secondary w-100"}
+					className={props.class + "btn btn-secondary tw:w-full"}
 					onClick={() => props.onClick(props.buttonText)}
 				>
 					{props.buttonText}

@@ -20,12 +20,12 @@ export default function LightComponent({
 }: LightComponentProps) {
 	if (isFan(device)) {
 		return (
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-				<div className="form-group w-100 mt-2 mb-2">
-					<div className="w-100 d-flex">
-						<label className="ms-2 w-100">{device.name}</label>
+			<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start light_slider tw:mb-2">
+				<div className="tw:w-full tw:mt-2 tw:mb-2">
+					<div className="tw:w-full tw:flex">
+						<label className="tw:ms-2 tw:w-full">{device.name}</label>
 						<IOSSwitch
-							className="me-2"
+							className="tw:me-2"
 							checked={parseInt(device.level ?? "0", 10) > 0}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 								setDeviceStatus(device.id, event.target.checked)
@@ -37,12 +37,14 @@ export default function LightComponent({
 		);
 	}
 	return (
-		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-			<div className="form-group w-100">
-				<div className="w-100 d-flex">
-					<label className="ms-2 w-100 small">{device.name}</label>
+		<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start light_slider tw:mb-2">
+			<div className="tw:w-full">
+				<div className="tw:w-full tw:flex">
+					<label className="tw:ms-2 tw:w-full tw:text-[0.875em]">
+						{device.name}
+					</label>
 				</div>
-				<div className=" d-flex btn-group btn-group-toggle justify-content-center align-items-center">
+				<div className=" tw:flex btn-group tw:justify-center tw:items-center">
 					<IOSSlider
 						value={getIntegerLevel(device)}
 						onChange={(event: Event, newValue: number | number[]) =>
@@ -57,7 +59,7 @@ export default function LightComponent({
 						max={100}
 					/>
 					<IOSSwitch
-						className="me-2"
+						className="tw:me-2"
 						checked={parseInt(device.level ?? "0", 10) > 0}
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 							setDeviceStatus(device.id, event.target.checked)

@@ -25,11 +25,11 @@ class GarageButton extends React.Component<GarageButtonProps> {
 			}
 			state={this.getButtonStyle()}
 			size="lg"
-			className={"m-1 position-relative d-flex justify-content-center"}
+			className={"tw:m-1 tw:relative tw:flex tw:justify-center"}
 		>
 			<i className="mdi mdi-garage" />
 			<div
-				className="temp-display pe-1 ps-1 position-absolute"
+				className="temp-display tw:pe-1 tw:ps-1 tw:absolute"
 				style={getTempStyle(
 					GarageButton.findGarageTemperature(this.props.room),
 				)}
@@ -39,7 +39,7 @@ class GarageButton extends React.Component<GarageButtonProps> {
 			>
 				{getFormattedTemp(GarageButton.findGarageTemperature(this.props.room))}
 			</div>
-			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+			<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
 				<div className="autoClose minor-text">
 					{GarageButton.getAutoClose(this.props.room)}
 				</div>
@@ -53,7 +53,8 @@ class GarageButton extends React.Component<GarageButtonProps> {
 
 	getLastOpenStyle(): string {
 		return (
-			"minor-text" + (GarageButton.isDoorOpen(this.props.room) ? " d-none" : "")
+			"minor-text" +
+			(GarageButton.isDoorOpen(this.props.room) ? " tw:hidden" : "")
 		);
 	}
 	getButtonStyle(): ButtonState {

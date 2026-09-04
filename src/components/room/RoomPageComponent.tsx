@@ -35,7 +35,7 @@ const RoomPageComponent: React.FC<RoomPageComponentProps> = ({
 			sliderChange={sliderChange}
 			slideStop={slideStop}
 		/>
-		<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
+		<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start room-content">
 			{room.devices.map((device) =>
 				isLight(device) ? (
 					<LightComponent

@@ -34,18 +34,20 @@ export default function GaragePageComponent({
 		<div>
 			<div className="background"></div>
 			<HeaderComponent back={back} name={getHeader(room)} />
-			<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start room-content">
+			<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start room-content">
 				<GarageAutoCloseButton
 					onClick={() => autoCloseClickHandler(getAutoCloseDelay(room))}
 					buttonText="Disable Auto Close"
 					class={getAutoCloseButtonStyle(room)}
 				/>
-				<div className="p-2 w-100 h-100 d-flex flex-wrap justify-content-center align-content-start light_slider mb-2">
-					<div className="form-group w-100">
-						<div className="w-100 d-flex">
-							<label className="ms-2 w-100 small">Overall Room</label>
+				<div className="tw:p-2 tw:w-full tw:h-full tw:flex tw:flex-wrap tw:justify-center tw:content-start light_slider tw:mb-2">
+					<div className="tw:w-full">
+						<div className="tw:w-full tw:flex">
+							<label className="tw:ms-2 tw:w-full tw:text-[0.875em]">
+								Overall Room
+							</label>
 						</div>
-						<div className="d-flex btn-group btn-group-toggle justify-content-center">
+						<div className="tw:flex btn-group tw:justify-center">
 							{
 								<IOSSlider
 									value={getRoomDimLevel(room)}
@@ -62,7 +64,7 @@ export default function GaragePageComponent({
 								/>
 							}
 							<IOSSwitch
-								className="me-2"
+								className="tw:me-2"
 								checked={getRoomDimLevel(room) > 0}
 								onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 									setDeviceStatus(room.id, event.target.checked)

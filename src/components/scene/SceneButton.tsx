@@ -12,20 +12,20 @@ const SceneButton: React.FC<SceneButtonProps> = (props) => (
 		<AppButton
 			onClick={() => props.handleClick(props.room.id, "ON")}
 			size="lg"
-			className={"mb-3 m-1 position-relative d-flex justify-content-center"}
+			className={"tw:mb-4 tw:m-1 tw:relative tw:flex tw:justify-center"}
 		>
 			<i className="mdi mdi-lightbulb-group-outline" />
-			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+			<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
 				{props.room.name} On
 			</div>
 		</AppButton>
 		<AppButton
 			onClick={() => props.handleClick(props.room.id, "OFF")}
 			size="lg"
-			className={"m-1 position-relative d-flex justify-content-center"}
+			className={"tw:m-1 tw:relative tw:flex tw:justify-center"}
 		>
 			<i className="mdi mdi-lightbulb-group-off-outline" />
-			<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+			<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
 				{props.room.name} Off
 			</div>
 		</AppButton>

@@ -44,16 +44,21 @@ describe("SceneHeaderComponent", () => {
 		);
 
 		const header = container.querySelector(".header");
-		expect(header).toHaveClass("d-flex", "flex-column");
+		expect(header).toHaveClass("tw:flex", "tw:flex-col");
 
-		const innerDiv = container.querySelector(
-			".d-flex.align-items-center.w-100.flex-row",
+		const innerDiv = header?.firstElementChild;
+		expect(innerDiv).toHaveClass(
+			"tw:flex",
+			"tw:items-center",
+			"tw:w-full",
+			"tw:flex-row",
 		);
-		expect(innerDiv).toBeInTheDocument();
 
-		const clickableSpan = container.querySelector(
-			".d-flex.align-items-center.flex-row",
+		const clickableSpan = innerDiv?.querySelector("span");
+		expect(clickableSpan).toHaveClass(
+			"tw:flex",
+			"tw:items-center",
+			"tw:flex-row",
 		);
-		expect(clickableSpan).toBeInTheDocument();
 	});
 });

@@ -60,17 +60,17 @@ describe("SceneButton", () => {
 		const offButton = screen.getByText("Living Room Off").closest("button");
 
 		expect(onButton).toHaveClass(
-			"mb-3",
-			"m-1",
-			"position-relative",
-			"d-flex",
-			"justify-content-center",
+			"tw:mb-4",
+			"tw:m-1",
+			"tw:relative",
+			"tw:flex",
+			"tw:justify-center",
 		);
 		expect(offButton).toHaveClass(
-			"m-1",
-			"position-relative",
-			"d-flex",
-			"justify-content-center",
+			"tw:m-1",
+			"tw:relative",
+			"tw:flex",
+			"tw:justify-center",
 		);
 	});
 });

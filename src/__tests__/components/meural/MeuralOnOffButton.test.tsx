@@ -54,10 +54,10 @@ describe("MeuralOnOffButton", () => {
 		renderWithProviders(<MeuralOnOffButton device={mockDeviceOn} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("m-1");
-		expect(button).toHaveClass("position-relative");
-		expect(button).toHaveClass("d-flex");
-		expect(button).toHaveClass("justify-content-center");
+		expect(button).toHaveClass("tw:m-1");
+		expect(button).toHaveClass("tw:relative");
+		expect(button).toHaveClass("tw:flex");
+		expect(button).toHaveClass("tw:justify-center");
 		expect(button).toHaveClass("house-button");
 		expect(button).toHaveClass("btn-lg");
 	});

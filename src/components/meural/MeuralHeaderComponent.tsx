@@ -20,15 +20,15 @@ const MeuralHeaderComponent: React.FC<MeuralHeaderComponentProps> = ({
 	toggleOnOff,
 }) => {
 	return (
-		<div className="header d-flex flex-column">
-			<div className="d-flex align-items-center w-100 flex-row">
-				<span className="d-flex align-items-center flex-row" onClick={back}>
+		<div className="header tw:flex tw:flex-col">
+			<div className="tw:flex tw:items-center tw:w-full tw:flex-row">
+				<span className="tw:flex tw:items-center tw:flex-row" onClick={back}>
 					<span className="mdi mdi-chevron-left mdi-36px z-index-1 "></span>
 					{name}
 				</span>
-				<div className={"flex-grow-1"} />
+				<div className={"tw:grow"} />
 				<IOSSwitch
-					className="me-4"
+					className="tw:me-6"
 					checked={isOn(device)}
 					onChange={() => toggleOnOff(device)}
 				/>

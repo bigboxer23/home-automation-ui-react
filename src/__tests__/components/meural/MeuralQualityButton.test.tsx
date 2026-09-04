@@ -61,7 +61,7 @@ describe("MeuralQualityButton", () => {
 		);
 
 		const component = container.querySelector(".meural-source-button");
-		expect(component).not.toHaveClass("d-none");
+		expect(component).not.toHaveClass("tw:hidden");
 	});
 
 	test("is hidden when device status is 0", () => {
@@ -71,7 +71,7 @@ describe("MeuralQualityButton", () => {
 		);
 
 		const component = container.querySelector(".meural-source-button");
-		expect(component).toHaveClass("d-none");
+		expect(component).toHaveClass("tw:hidden");
 	});
 
 	test("is hidden when device status is 4", () => {
@@ -81,7 +81,7 @@ describe("MeuralQualityButton", () => {
 		);
 
 		const component = container.querySelector(".meural-source-button");
-		expect(component).toHaveClass("d-none");
+		expect(component).toHaveClass("tw:hidden");
 	});
 
 	test("calls updateOpenAIQuality with standard when Standard is clicked", () => {
@@ -136,7 +136,7 @@ describe("MeuralQualityButton", () => {
 		);
 
 		const label = container.querySelector(".meural-source-button-label");
-		expect(label).toHaveClass("ms-3", "fw-bold", "pt-3", "pb-2");
+		expect(label).toHaveClass("tw:ms-4", "tw:font-bold", "tw:pt-4", "tw:pb-2");
 
 		const buttons = container.querySelectorAll(".mdi.mdi-check-circle");
 		expect(buttons).toHaveLength(2);

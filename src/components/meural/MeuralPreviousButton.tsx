@@ -28,8 +28,8 @@ export default function MeuralPreviousButton(
 
 	const shouldDisplay = (status: string | undefined): string => {
 		return (
-			"m-1 position-relative d-flex justify-content-center" +
-			("0" === status || "4" === status ? "" : " d-none")
+			"tw:m-1 tw:relative tw:flex tw:justify-center" +
+			("0" === status || "4" === status ? "" : " tw:hidden")
 		);
 	};
 
@@ -41,7 +41,7 @@ export default function MeuralPreviousButton(
 				className={shouldDisplay(props.device?.status)}
 			>
 				<i className="mdi mdi-image-move flip-horizontal" />
-				<div className="position-absolute bottom w-100 m-2 ps-2 pe-2">
+				<div className="tw:absolute bottom tw:w-full tw:m-2 tw:ps-2 tw:pe-2">
 					Previous Image
 				</div>
 			</AppButton>

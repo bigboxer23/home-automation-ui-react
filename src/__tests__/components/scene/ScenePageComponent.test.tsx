@@ -86,10 +86,16 @@ describe("ScenePageComponent", () => {
 			<ScenePageComponent {...mockProps} />,
 		);
 
-		const mainContainer = container.querySelector(
-			".p-2.w-100.h-100.d-flex.flex-wrap.justify-content-center.align-content-start.room-content",
+		const mainContainer = container.querySelector(".room-content");
+		expect(mainContainer).toHaveClass(
+			"tw:p-2",
+			"tw:w-full",
+			"tw:h-full",
+			"tw:flex",
+			"tw:flex-wrap",
+			"tw:justify-center",
+			"tw:content-start",
 		);
-		expect(mainContainer).toBeInTheDocument();
 	});
 
 	test("displays correct icons for camera buttons", () => {
