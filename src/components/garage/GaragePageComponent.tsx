@@ -34,7 +34,7 @@ export default function GaragePageComponent({
 		<div>
 			<div className="background"></div>
 			<HeaderComponent back={back} name={getHeader(room)} />
-			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start room-content">
+			<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 				<GarageAutoCloseButton
 					onClick={() => autoCloseClickHandler(getAutoCloseDelay(room))}
 					buttonText="Disable Auto Close"

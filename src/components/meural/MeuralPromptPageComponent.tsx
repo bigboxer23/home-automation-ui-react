@@ -17,7 +17,7 @@ const MeuralPromptPageComponent: React.FC<MeuralPromptPageComponentProps> = ({
 	<div>
 		<div className="background"></div>
 		<HeaderComponent back={back} name={"Meural Control"} />
-		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start room-content">
+		<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 			<div className={"w-full flex flex-col"}>
 				<div className={"ps-4 pe-4 mb-2 MuiToggleButtonGroup-root"}>
 					<TextareaAutosize

@@ -1,513 +1,523 @@
-/* Tailwind provides the reset (preflight) and all utilities. Nothing in this
-   file depends on a CSS framework any more.
+/* Tailwind provides the reset (preflight) and all utilities.
 
-   Cascade note: Tailwind's utilities live in `@layer utilities`, and the rules
-   in this file are unlayered, so THESE RULES WIN over any utility regardless of
-   specificity. When a component class and a utility both set the same property
-   on the same element, the class wins. Avoid declaring properties here that a
-   utility is meant to control (display, width, ...). */
+   Everything from here to the MUI section lives in `@layer components`, which
+   sits below `utilities` in the cascade. That means a Tailwind utility always
+   beats a class in this file when both set the same property on the same
+   element - which is the behaviour Bootstrap's `!important` utilities used to
+   give, and what stops a rule like `.btn { display: ... }` from silently
+   overriding `flex` or `hidden` on every button.
+
+   Consequence to keep in mind: a rule here cannot out-specify a utility. The
+   page containers therefore use `px-2 pb-2` rather than `p-2`, so that
+   `.room-content` owns `padding-top` (the fixed-header clearance) without a
+   shorthand fighting it.
+
+   The MUI overrides at the end are deliberately left unlayered: they have to
+   beat MUI's own styles, which emotion injects unlayered at runtime. */
 @import "tailwindcss";
 
-/* ---------------------------------------------------------------- page ---- */
+@layer components {
+	/* ---------------------------------------------------------------- page ---- */
 
-body,
-html {
-	height: 100%;
-	width: 100%;
-}
+	body,
+	html {
+		height: 100%;
+		width: 100%;
+	}
 
-body {
-	margin: 0;
-	padding: 0;
-	display: flex;
-	justify-content: center;
-	/* Let #root grow past the viewport instead of being stretched to it, so
+	body {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		/* Let #root grow past the viewport instead of being stretched to it, so
 	   min-height below can pin the footer to the bottom of short pages. */
-	align-items: flex-start;
-	background-color: #f6f7f8;
-	/* Bootstrap's reboot set these; preflight leaves them at browser defaults
+		align-items: flex-start;
+		background-color: #f6f7f8;
+		/* Bootstrap's reboot set these; preflight leaves them at browser defaults
 	   (pure black, inline labels). */
-	color: #212529;
-	font-family:
-		-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
-		Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-}
+		color: #212529;
+		font-family:
+			-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
+			Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+	}
 
-label {
-	display: inline-block;
-}
+	label {
+		display: inline-block;
+	}
 
-#root {
-	width: 100%;
-	min-height: 100%;
-	max-width: 1024px;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-}
+	#root {
+		width: 100%;
+		min-height: 100%;
+		max-width: 1024px;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+	}
 
-.background {
-	width: 100%;
-	height: 100%;
-	background-image: url(https://node-sdk-sample-be63c44b-1e97-432d-ba78-7149b57a7bac.s3.amazonaws.com/background.jpeg);
-	position: fixed;
-	max-width: 1024px;
-	background-size: cover;
-	filter: blur(8px);
-	z-index: -2;
-}
+	.background {
+		width: 100%;
+		height: 100%;
+		background-image: url(https://node-sdk-sample-be63c44b-1e97-432d-ba78-7149b57a7bac.s3.amazonaws.com/background.jpeg);
+		position: fixed;
+		max-width: 1024px;
+		background-size: cover;
+		filter: blur(8px);
+		z-index: -2;
+	}
 
-/* ------------------------------------------------------------- buttons ---- */
+	/* ------------------------------------------------------------- buttons ---- */
 
-/* Base button. Previously inherited from Bootstrap's `.btn`; these are the
+	/* Base button. Previously inherited from Bootstrap's `.btn`; these are the
    values that were actually taking effect, spelled out. */
-.btn {
-	/* Deliberately no `display`: rules in this file are unlayered and so beat
+	.btn {
+		/* Deliberately no `display`: rules in this file are unlayered and so beat
 	   Tailwind's `utilities` layer whatever the specificity. Setting display
 	   here would override `flex` and `hidden` on every button. Buttons are
 	   inline-block by default anyway. Same reasoning applies to any property a
 	   utility is expected to control - check before adding one. */
-	padding: 0.375rem 0.75rem;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #212529;
-	text-align: center;
-	text-decoration: none;
-	vertical-align: middle;
-	cursor: pointer;
-	user-select: none;
-	background-color: transparent;
-	border: 1px solid transparent;
-	border-radius: 0.375rem;
-	transition: 0.3s;
-}
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #212529;
+		text-align: center;
+		text-decoration: none;
+		vertical-align: middle;
+		cursor: pointer;
+		user-select: none;
+		background-color: transparent;
+		border: 1px solid transparent;
+		border-radius: 0.375rem;
+		transition: 0.3s;
+	}
 
-/* Bootstrap suppressed the focus ring and replaced it with a box-shadow built
-   from a variable this project never set, so focused buttons have had no
-   visible indicator. Kept as-is to hold the migration to a refactor - worth
-   revisiting as an accessibility fix. */
-.btn:focus-visible {
-	outline: 0;
-}
+	/* Keyboard focus. Bootstrap used to suppress the outline and replace it with a
+   box-shadow built from a variable this project never set, so focused buttons
+   had no indicator at all. */
+	.btn:focus-visible {
+		outline: 2px solid #3880ff;
+		outline-offset: 2px;
+	}
 
-.btn:disabled {
-	pointer-events: none;
-	opacity: 0.65;
-}
+	.btn:disabled {
+		pointer-events: none;
+		opacity: 0.65;
+	}
 
-.btn:active {
-	background-color: #fff;
-	border-color: transparent;
-}
+	.btn:active {
+		background-color: #fff;
+		border-color: transparent;
+	}
 
-.btn-lg {
-	height: 115px;
-	width: 115px;
-	padding: 0.5rem 2rem;
-	font-size: 1rem;
-	white-space: normal;
-	border-radius: 0.75rem;
-	text-align: left;
-	background-color: rgba(255, 255, 255, 0.5);
-	color: rgba(0, 0, 0, 0.6);
-}
+	.btn-lg {
+		height: 115px;
+		width: 115px;
+		padding: 0.5rem 2rem;
+		font-size: 1rem;
+		white-space: normal;
+		border-radius: 0.75rem;
+		text-align: left;
+		background-color: rgba(255, 255, 255, 0.5);
+		color: rgba(0, 0, 0, 0.6);
+	}
 
-/* Scoped to the default state so that the `on` and `alert` backgrounds below
+	/* Scoped to the default state so that the `on` and `alert` backgrounds below
    no longer need `!important` to survive a hover. */
-.btn-lg[data-state="off"]:hover {
-	background-color: rgba(255, 255, 255, 0.7);
-}
+	.btn-lg[data-state="off"]:hover {
+		background-color: rgba(255, 255, 255, 0.7);
+	}
 
-.btn-lg .mdi {
-	font-size: 32px !important;
-	line-height: 32px !important;
-	position: absolute;
-	top: 0.5rem;
-	left: 0.5rem;
-}
+	.btn-lg .mdi {
+		font-size: 32px !important;
+		line-height: 32px !important;
+		position: absolute;
+		top: 0.5rem;
+		left: 0.5rem;
+	}
 
-/* Semantic button state, set by AppButton as `data-state`. */
-[data-state="on"] {
-	background-color: rgba(255, 255, 255, 0.9);
-	border-color: rgba(255, 255, 255, 0.9);
-	color: #212529;
-}
+	/* Semantic button state, set by AppButton as `data-state`. */
+	[data-state="on"] {
+		background-color: rgba(255, 255, 255, 0.9);
+		border-color: rgba(255, 255, 255, 0.9);
+		color: #212529;
+	}
 
-[data-state="alert"] {
-	background-color: #dc3545;
-	border-color: #dc3545;
-	color: #fff;
-}
+	[data-state="alert"] {
+		background-color: #dc3545;
+		border-color: #dc3545;
+		color: #fff;
+	}
 
-[data-state="primary"] {
-	background-color: #0d6efd;
-	border-color: #0d6efd;
-	color: #fff;
-}
+	[data-state="primary"] {
+		background-color: #0d6efd;
+		border-color: #0d6efd;
+		color: #fff;
+	}
 
-[data-state="primary"]:hover {
-	background-color: #0b5ed7;
-	border-color: #0a58ca;
-}
+	[data-state="primary"]:hover {
+		background-color: #0b5ed7;
+		border-color: #0a58ca;
+	}
 
-[data-state="alert"] .mdi-garage,
-[data-state="alert"] .bottom {
-	color: #fff;
-}
+	[data-state="alert"] .mdi-garage,
+	[data-state="alert"] .bottom {
+		color: #fff;
+	}
 
-[data-state="on"] .mdi-lightbulb-outline,
-[data-state="on"] .mdi-garage {
-	color: rgb(248, 204, 70);
-}
+	[data-state="on"] .mdi-lightbulb-outline,
+	[data-state="on"] .mdi-garage {
+		color: rgb(248, 204, 70);
+	}
 
-[data-state="on"] .mdi-lightbulb-outline:before {
-	content: "\F06E9";
-}
+	[data-state="on"] .mdi-lightbulb-outline:before {
+		content: "\F06E9";
+	}
 
-[data-state="alert"] .mdi-garage:before {
-	content: "\F06DA";
-}
+	[data-state="alert"] .mdi-garage:before {
+		content: "\F06DA";
+	}
 
-/* --------------------------------------------------- segmented control ---- */
+	/* --------------------------------------------------- segmented control ---- */
 
-/* Replaces Bootstrap's `.btn-group` + `.btn.btn-secondary` + `.active`, used
+	/* Replaces Bootstrap's `.btn-group` + `.btn.btn-secondary` + `.active`, used
    for the Fan Mode / HVAC Mode / auto-close pickers. */
-.segmented-control {
-	position: relative;
-	display: flex;
-	vertical-align: middle;
-	border-radius: 0.375rem;
-}
+	.segmented-control {
+		position: relative;
+		display: flex;
+		vertical-align: middle;
+		border-radius: 0.375rem;
+	}
 
-.segmented-option {
-	position: relative;
-	flex: 1 1 auto;
-	padding: 0.375rem 0.75rem;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-	user-select: none;
-	color: #fff;
-	background-color: #6c757d;
-	border: 1px solid #6c757d;
-	border-radius: 0.375rem;
-	transition: 0.3s;
-}
+	.segmented-option {
+		position: relative;
+		flex: 1 1 auto;
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		text-align: center;
+		vertical-align: middle;
+		cursor: pointer;
+		user-select: none;
+		color: #fff;
+		background-color: #6c757d;
+		border: 1px solid #6c757d;
+		border-radius: 0.375rem;
+		transition: 0.3s;
+	}
 
-/* Square off the inner edges and collapse the shared border so the options
+	/* Square off the inner edges and collapse the shared border so the options
    read as one control. */
-.segmented-option:not(:last-child) {
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-}
+	.segmented-option:not(:last-child) {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 
-.segmented-option + .segmented-option {
-	margin-left: -1px;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-}
+	.segmented-option + .segmented-option {
+		margin-left: -1px;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
 
-.segmented-option:hover {
-	background-color: #5c636a;
-	border-color: #565e64;
-	z-index: 1;
-}
+	.segmented-option:hover {
+		background-color: #5c636a;
+		border-color: #565e64;
+		z-index: 1;
+	}
 
-.segmented-option.is-active {
-	background-color: #565e64;
-	border-color: #51585e;
-	z-index: 1;
-}
+	.segmented-option.is-active {
+		background-color: #565e64;
+		border-color: #51585e;
+		z-index: 1;
+	}
 
-.segmented-option:active {
-	background-color: #fff;
-	border-color: transparent;
-}
+	.segmented-option:active {
+		background-color: #fff;
+		border-color: transparent;
+	}
 
-/* --------------------------------------------------------------- icons ---- */
+	/* --------------------------------------------------------------- icons ---- */
 
-.mdi-dots-horizontal {
-	right: 0 !important;
-	top: 0 !important;
-	width: 50px;
-	height: 50px;
-	left: auto !important;
-	opacity: 0.3;
-}
+	.mdi-dots-horizontal {
+		right: 0 !important;
+		top: 0 !important;
+		width: 50px;
+		height: 50px;
+		left: auto !important;
+		opacity: 0.3;
+	}
 
-.mdi-dots-horizontal::before {
-	position: absolute;
-	right: 0.5rem;
-	top: 0.5rem;
-}
+	.mdi-dots-horizontal::before {
+		position: absolute;
+		right: 0.5rem;
+		top: 0.5rem;
+	}
 
-.mdi-lightbulb-outline,
-.mdi-clock,
-.mdi-garage,
-.mdi-weather-night,
-.mdi-calendar,
-.mdi-lightbulb-group-outline,
-.mdi-lightbulb-group,
-.mdi-lightbulb-group-off-outline,
-.mdi-thermometer-lines,
-.mdi-gauge,
-.mdi-gauge-empty,
-.mdi-gauge-low,
-.mdi-gauge-full,
-.mdi-image-frame,
-.mdi-image-filter-frames,
-.mdi-image-move,
-.mdi-image-refresh-outline,
-.mdi-message-image-outline,
-.mdi-information-outline,
-.mdi-information-off-outline,
-.mdi-video-wireless-outline,
-.mdi-forest,
-.mdi-looks,
-.mdi-heart-outline,
-.mdi-halloween,
-.mdi-turkey,
-.mdi-lamps,
-.mdi-string-lights-off,
-.mdi-rabbit-variant-outline,
-.mdi-firework,
-.mdi-chevron-left {
-	color: rgba(0, 0, 0, 0.3);
-}
+	.mdi-lightbulb-outline,
+	.mdi-clock,
+	.mdi-garage,
+	.mdi-weather-night,
+	.mdi-calendar,
+	.mdi-lightbulb-group-outline,
+	.mdi-lightbulb-group,
+	.mdi-lightbulb-group-off-outline,
+	.mdi-thermometer-lines,
+	.mdi-gauge,
+	.mdi-gauge-empty,
+	.mdi-gauge-low,
+	.mdi-gauge-full,
+	.mdi-image-frame,
+	.mdi-image-filter-frames,
+	.mdi-image-move,
+	.mdi-image-refresh-outline,
+	.mdi-message-image-outline,
+	.mdi-information-outline,
+	.mdi-information-off-outline,
+	.mdi-video-wireless-outline,
+	.mdi-forest,
+	.mdi-looks,
+	.mdi-heart-outline,
+	.mdi-halloween,
+	.mdi-turkey,
+	.mdi-lamps,
+	.mdi-string-lights-off,
+	.mdi-rabbit-variant-outline,
+	.mdi-firework,
+	.mdi-chevron-left {
+		color: rgba(0, 0, 0, 0.3);
+	}
 
-.mdi-lightbulb-outline.mdi-lock-outline:before {
-	color: #dc3545;
-}
+	.mdi-lightbulb-outline.mdi-lock-outline:before {
+		color: #dc3545;
+	}
 
-.flip-horizontal {
-	transform: scaleX(-1);
-}
+	.flip-horizontal {
+		transform: scaleX(-1);
+	}
 
-/* -------------------------------------------------------- header / nav ---- */
+	/* -------------------------------------------------------- header / nav ---- */
 
-.header {
-	background-color: rgba(255, 255, 255, 0.8);
-	height: 60px;
-	width: 100%;
-	position: fixed;
-	z-index: 2;
-	max-width: 1024px;
-}
+	.header {
+		background-color: rgba(255, 255, 255, 0.8);
+		height: 60px;
+		width: 100%;
+		position: fixed;
+		z-index: 2;
+		max-width: 1024px;
+	}
 
-.room-component .header {
-	height: 100px;
-}
+	.room-component .header {
+		height: 100px;
+	}
 
-.sub-header {
-	background-color: rgba(255, 255, 255, 0.2);
-}
+	.sub-header {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
 
-.header-temperature {
-	display: inline;
-	font-weight: bold;
-	opacity: 0.5;
-}
+	.header-temperature {
+		display: inline;
+		font-weight: bold;
+		opacity: 0.5;
+	}
 
-/* Clears the fixed header above. */
-.room-content {
-	padding-top: 70px;
-}
+	/* Clears the fixed header above. */
+	.room-content {
+		padding-top: 70px;
+	}
 
-.room-component .room-content {
-	padding-top: 110px;
-}
+	.room-component .room-content {
+		padding-top: 110px;
+	}
 
-/* ------------------------------------------------------------ readouts ---- */
+	/* ------------------------------------------------------------ readouts ---- */
 
-.temp-display {
-	border-radius: 0.5rem;
-	color: white;
-	right: 0.5rem;
-	top: 0.5rem;
-	min-width: 35px;
-	display: flex;
-	justify-content: center;
-}
+	.temp-display {
+		border-radius: 0.5rem;
+		color: white;
+		right: 0.5rem;
+		top: 0.5rem;
+		min-width: 35px;
+		display: flex;
+		justify-content: center;
+	}
 
-/* Only inside an "on" button. Standalone .temp-display readouts (sensors,
+	/* Only inside an "on" button. Standalone .temp-display readouts (sensors,
    climate rows) take their background from an inline style instead. */
-[data-state="on"] .temp-display {
-	background-color: rgba(0, 0, 0, 0.3);
-}
+	[data-state="on"] .temp-display {
+		background-color: rgba(0, 0, 0, 0.3);
+	}
 
-.total-lights-bg {
-	min-width: 35px;
-	display: flex;
-	justify-content: center;
-	background-color: rgba(0, 0, 0, 0.3);
-}
+	.total-lights-bg {
+		min-width: 35px;
+		display: flex;
+		justify-content: center;
+		background-color: rgba(0, 0, 0, 0.3);
+	}
 
-.house-button .total-lights-bg {
-	background-color: rgb(248, 204, 70);
-}
+	.house-button .total-lights-bg {
+		background-color: rgb(248, 204, 70);
+	}
 
-/* Water heater tank gauge. These follow .wh-temp-display so the fill colours
+	/* Water heater tank gauge. These follow .wh-temp-display so the fill colours
    win on source order rather than on `!important`. */
-.wh-temp-display {
-	border-radius: 0.5rem;
-	color: white;
-	right: inherit;
-	left: 0.5rem;
-	max-width: 40px;
-	width: 100%;
-	min-height: 24px;
-	background-color: rgba(0, 0, 0, 0.3);
-}
+	.wh-temp-display {
+		border-radius: 0.5rem;
+		color: white;
+		right: inherit;
+		left: 0.5rem;
+		max-width: 40px;
+		width: 100%;
+		min-height: 24px;
+		background-color: rgba(0, 0, 0, 0.3);
+	}
 
-.wh-temp-gauge {
-	left: 0;
-	border-radius: 0.5rem 0 0 0.5rem;
-}
+	.wh-temp-gauge {
+		left: 0;
+		border-radius: 0.5rem 0 0 0.5rem;
+	}
 
-.wh-temp-gauge-full {
-	border-radius: 0.5rem;
-}
+	.wh-temp-gauge-full {
+		border-radius: 0.5rem;
+	}
 
-.wh-temp-gauge-active {
-	background-color: #3880ff;
-}
+	.wh-temp-gauge-active {
+		background-color: #3880ff;
+	}
 
-.wh-temp-gauge-alert {
-	background-color: #dc3545;
-}
+	.wh-temp-gauge-alert {
+		background-color: #dc3545;
+	}
 
-.currentTemp {
-	color: rgba(0, 0, 0, 0.8);
-}
+	.currentTemp {
+		color: rgba(0, 0, 0, 0.8);
+	}
 
-.minor-text {
-	font-size: 0.8rem;
-	line-height: 1.3;
-	opacity: 0.7;
-}
+	.minor-text {
+		font-size: 0.8rem;
+		line-height: 1.3;
+		opacity: 0.7;
+	}
 
-.autoClose {
-	color: white;
-}
+	.autoClose {
+		color: white;
+	}
 
-.danger {
-	color: #dc3545;
-	font-weight: 700;
-}
+	.danger {
+		color: #dc3545;
+		font-weight: 700;
+	}
 
-.scenes-label {
-	color: #ffffff;
-}
+	.scenes-label {
+		color: #ffffff;
+	}
 
-.thermostat-content {
-	background-color: rgba(248, 249, 250, 0.34);
-}
+	.thermostat-content {
+		background-color: rgba(248, 249, 250, 0.34);
+	}
 
-.light_slider {
-	background-color: rgba(255, 255, 255, 0.7);
-	border-radius: 1rem;
-}
+	.light_slider {
+		background-color: rgba(255, 255, 255, 0.7);
+		border-radius: 1rem;
+	}
 
-.LoadingStatus {
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	color: #28a745;
-	background-color: white;
-}
+	.LoadingStatus {
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		color: #28a745;
+		background-color: white;
+	}
 
-.authText {
-	max-width: 125px;
-}
+	.authText {
+		max-width: 125px;
+	}
 
-.security {
-	width: 100%;
-	height: 960px;
-	border: 0;
-}
+	.security {
+		width: 100%;
+		height: 960px;
+		border: 0;
+	}
 
-/* ---------------------------------------------------------- positional ---- */
+	/* ---------------------------------------------------------- positional ---- */
 
-.bottom {
-	bottom: 0;
-}
+	.bottom {
+		bottom: 0;
+	}
 
-.inFront {
-	z-index: 1;
-}
+	.inFront {
+		z-index: 1;
+	}
 
-.z-index-1 {
-	z-index: 1;
-}
+	.z-index-1 {
+		z-index: 1;
+	}
 
-[data-state="on"] .mdi-dots-horizontal:before,
-.hide {
-	opacity: 0;
-}
+	[data-state="on"] .mdi-dots-horizontal:before,
+	.hide {
+		opacity: 0;
+	}
 
-.point-events-none {
-	pointer-events: none;
-}
+	.point-events-none {
+		pointer-events: none;
+	}
 
-.is-disabled {
-	pointer-events: none;
-	opacity: 0.4;
-}
+	.is-disabled {
+		pointer-events: none;
+		opacity: 0.4;
+	}
 
-/* Overrides `.btn-lg .mdi`, which is more specific. */
-.position-inherit {
-	position: inherit !important;
-}
+	/* Overrides `.btn-lg .mdi`, which is more specific. */
+	.position-inherit {
+		position: inherit !important;
+	}
 
-/* --------------------------------------------------------------- meural ---- */
+	/* --------------------------------------------------------------- meural ---- */
 
-.meural-source-button {
-	width: 100%;
-}
+	.meural-source-button {
+		width: 100%;
+	}
 
-.meural-source-button-label {
-	color: rgba(0, 0, 0, 0.6);
-}
+	.meural-source-button-label {
+		color: rgba(0, 0, 0, 0.6);
+	}
 
-.meural-prompt-display {
-	background-color: #fff;
-	height: auto;
-	/* Overrides .btn-lg's fixed 115px box, which outranks the `w-full` on the
+	.meural-prompt-display {
+		background-color: #fff;
+		height: auto;
+		/* Overrides .btn-lg's fixed 115px box, which outranks the `w-full` on the
 	   element for the same reason as above. */
-	width: 100%;
-	/* Was `.p-3.btn-lg`, which stopped matching when p-3 became a Tailwind
+		width: 100%;
+		/* Was `.p-3.btn-lg`, which stopped matching when p-3 became a Tailwind
 	   class; it belongs to this component rather than to a spacing utility. */
-	padding: 1rem;
-}
+		padding: 1rem;
+	}
 
-.meural-prompt-display:hover {
-	background-color: #fff;
-}
+	.meural-prompt-display:hover {
+		background-color: #fff;
+	}
 
-.meural-prompt-display:hover .mdi-chevron-right,
-.meural-prompt-display:active .mdi-chevron-right {
-	color: rgba(0, 0, 0, 1);
-}
+	.meural-prompt-display:hover .mdi-chevron-right,
+	.meural-prompt-display:active .mdi-chevron-right {
+		color: rgba(0, 0, 0, 1);
+	}
 
-.meural-prompt-display:hover .mdi-chevron-right.mdi-24px.mdi:before,
-.meural-prompt-display:active
-	.mdi-chevron-right
-	.mdi-chevron-right.mdi-24px.mdi:before {
-	font-weight: 900;
-}
+	.meural-prompt-display:hover .mdi-chevron-right.mdi-24px.mdi:before,
+	.meural-prompt-display:active
+		.mdi-chevron-right
+		.mdi-chevron-right.mdi-24px.mdi:before {
+		font-weight: 900;
+	}
 
-.prompt-textarea {
-	border: none;
-	resize: none;
-}
+	.prompt-textarea {
+		border: none;
+		resize: none;
+	}
 
-.front-porch-color [data-state="on"] .mdi {
-	color: #3880ff;
+	.front-porch-color [data-state="on"] .mdi {
+		color: #3880ff;
+	}
 }
 
 /* ------------------------------------------------------------------ mui ---- */

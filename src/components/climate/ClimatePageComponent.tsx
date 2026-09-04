@@ -42,7 +42,7 @@ export default function ClimatePageComponent({
 		<div>
 			<div className="background"></div>
 			<HeaderComponent back={back} name={"Climate"} />
-			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start room-content">
+			<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 				<div className="p-2 w-full flex light_slider mb-2">
 					<label className="grow mt-2 ms-2">Outside</label>
 					<div

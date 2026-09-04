@@ -20,7 +20,7 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 	<div>
 		<div className="background"></div>
 		<SceneHeaderComponent back={back} name={"Scenes"} />
-		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start room-content">
+		<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
 			{rooms.map((room) => (
 				<SceneButton key={room.name} room={room} handleClick={handleClick} />
 			))}

@@ -88,7 +88,8 @@ describe("ScenePageComponent", () => {
 
 		const mainContainer = container.querySelector(".room-content");
 		expect(mainContainer).toHaveClass(
-			"p-2",
+			"px-2",
+			"pb-2",
 			"w-full",
 			"h-full",
 			"flex",
