@@ -213,7 +213,7 @@ describe("FrontPorchColorButton", () => {
 		expect(icon).toBeInTheDocument();
 	});
 
-	test("applies success variant when device is on", () => {
+	test("marks the button on when device is on", () => {
 		renderWithProviders(
 			<FrontPorchColorButton
 				device={mockDevicePride}
@@ -222,10 +222,10 @@ describe("FrontPorchColorButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-success");
+		expect(button).toHaveAttribute("data-state", "on");
 	});
 
-	test("applies default variant when device is off", () => {
+	test("marks the button off when device is off", () => {
 		renderWithProviders(
 			<FrontPorchColorButton
 				device={mockDeviceChristmas}
@@ -234,7 +234,7 @@ describe("FrontPorchColorButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-default");
+		expect(button).toHaveAttribute("data-state", "off");
 	});
 
 	test("applies correct CSS classes", () => {
@@ -246,11 +246,11 @@ describe("FrontPorchColorButton", () => {
 		);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("mb-3");
+		expect(button).toHaveClass("mb-4");
 		expect(button).toHaveClass("m-1");
-		expect(button).toHaveClass("position-relative");
-		expect(button).toHaveClass("d-flex");
-		expect(button).toHaveClass("justify-content-center");
+		expect(button).toHaveClass("relative");
+		expect(button).toHaveClass("flex");
+		expect(button).toHaveClass("justify-center");
 		expect(button).toHaveClass("btn-lg");
 	});
 
@@ -291,10 +291,10 @@ describe("FrontPorchColorButton", () => {
 			/>,
 		);
 
-		const nameDiv = document.querySelector(".position-absolute.bottom");
+		const nameDiv = document.querySelector(".bottom");
 		expect(nameDiv).toBeInTheDocument();
 		expect(nameDiv).toHaveTextContent("Pride");
-		expect(nameDiv).toHaveClass("w-100");
+		expect(nameDiv).toHaveClass("w-full");
 		expect(nameDiv).toHaveClass("m-2");
 		expect(nameDiv).toHaveClass("ps-2");
 		expect(nameDiv).toHaveClass("pe-2");
@@ -317,7 +317,7 @@ describe("FrontPorchColorButton", () => {
 			);
 
 			const button = screen.getByRole("button");
-			expect(button).toHaveClass("btn-default");
+			expect(button).toHaveAttribute("data-state", "off");
 		});
 
 		test("handles device with zero level as off", () => {
@@ -336,7 +336,7 @@ describe("FrontPorchColorButton", () => {
 			);
 
 			const button = screen.getByRole("button");
-			expect(button).toHaveClass("btn-default");
+			expect(button).toHaveAttribute("data-state", "off");
 		});
 
 		test("handles device with non-zero level as on", () => {
@@ -356,7 +356,7 @@ describe("FrontPorchColorButton", () => {
 			);
 
 			const button = screen.getByRole("button");
-			expect(button).toHaveClass("btn-success");
+			expect(button).toHaveAttribute("data-state", "on");
 		});
 	});
 });

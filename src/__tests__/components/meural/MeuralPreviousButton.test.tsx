@@ -31,13 +31,8 @@ describe("MeuralPreviousButton", () => {
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass(
-			"m-1",
-			"position-relative",
-			"d-flex",
-			"justify-content-center",
-		);
-		expect(button).not.toHaveClass("d-none");
+		expect(button).toHaveClass("m-1", "relative", "flex", "justify-center");
+		expect(button).not.toHaveClass("hidden");
 	});
 
 	test("button is visible when device status is 4", () => {
@@ -45,7 +40,7 @@ describe("MeuralPreviousButton", () => {
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
-		expect(button).not.toHaveClass("d-none");
+		expect(button).not.toHaveClass("hidden");
 	});
 
 	test("button is hidden when device status is not 0 or 4", () => {
@@ -53,7 +48,7 @@ describe("MeuralPreviousButton", () => {
 		renderWithProviders(<MeuralPreviousButton {...props} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("d-none");
+		expect(button).toHaveClass("hidden");
 	});
 
 	test("displays correct icon with flip-horizontal class", () => {
@@ -118,7 +113,7 @@ describe("MeuralPreviousButton", () => {
 		expect(screen.getByText("Previous Image")).toBeInTheDocument();
 		const button = screen.getByRole("button");
 		// When device prop is missing, status is undefined, so button should be hidden
-		expect(button).toHaveClass("d-none");
+		expect(button).toHaveClass("hidden");
 	});
 
 	test("snackbar can be closed manually", async () => {

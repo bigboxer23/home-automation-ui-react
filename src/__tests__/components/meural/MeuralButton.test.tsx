@@ -82,9 +82,9 @@ describe("MeuralButton", () => {
 
 		const button = screen.getByRole("button");
 		expect(button).toHaveClass("m-1");
-		expect(button).toHaveClass("position-relative");
-		expect(button).toHaveClass("d-flex");
-		expect(button).toHaveClass("justify-content-center");
+		expect(button).toHaveClass("relative");
+		expect(button).toHaveClass("flex");
+		expect(button).toHaveClass("justify-center");
 		expect(button).toHaveClass("house-button");
 	});
 

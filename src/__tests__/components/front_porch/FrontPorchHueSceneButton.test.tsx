@@ -42,14 +42,14 @@ describe("FrontPorchHueSceneButton", () => {
 		expect(icon).toBeInTheDocument();
 	});
 
-	test("has default button style when level is OFF", () => {
+	test("marks the button off when level is OFF", () => {
 		renderWithProviders(<FrontPorchHueSceneButton {...mockProps} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-default");
+		expect(button).toHaveAttribute("data-state", "off");
 	});
 
-	test("has success button style when level is ON", () => {
+	test("marks the button on when level is ON", () => {
 		const propsWithOn = {
 			...mockProps,
 			device: { id: "hue1", name: "Colorful", level: "ON" },
@@ -58,7 +58,7 @@ describe("FrontPorchHueSceneButton", () => {
 		renderWithProviders(<FrontPorchHueSceneButton {...propsWithOn} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-success");
+		expect(button).toHaveAttribute("data-state", "on");
 	});
 
 	test("calls handleClick with correct parameters", () => {
@@ -78,11 +78,11 @@ describe("FrontPorchHueSceneButton", () => {
 
 		const button = screen.getByRole("button");
 		expect(button).toHaveClass(
-			"mb-3",
+			"mb-4",
 			"m-1",
-			"position-relative",
-			"d-flex",
-			"justify-content-center",
+			"relative",
+			"flex",
+			"justify-center",
 			"btn-lg",
 		);
 	});
@@ -92,8 +92,8 @@ describe("FrontPorchHueSceneButton", () => {
 			<FrontPorchHueSceneButton {...mockProps} />,
 		);
 
-		const textDiv = container.querySelector(".position-absolute.bottom");
-		expect(textDiv).toHaveClass("w-100", "m-2", "ps-2", "pe-2");
+		const textDiv = container.querySelector(".bottom");
+		expect(textDiv).toHaveClass("w-full", "m-2", "ps-2", "pe-2");
 		expect(textDiv).toHaveTextContent("Colorful");
 	});
 

@@ -1,5 +1,6 @@
 import type { Device, Room } from "../../types";
 import { getTemp } from "../../utils/WeatherUtilities";
+import type { ButtonState } from "../ui/AppButton";
 
 export const onCount = (room: Room): number => {
 	let aCount = 0;
@@ -72,8 +73,8 @@ export const getBatteryWarningStyle = (room: Room): string => {
 	return "";
 };
 
-export const getButtonStyle = (room: Room): string => {
-	return isOn(room) ? "success" : "default";
+export const getButtonStyle = (room: Room): ButtonState => {
+	return isOn(room) ? "on" : "off";
 };
 
 export const isOn = function (room: Room): boolean {

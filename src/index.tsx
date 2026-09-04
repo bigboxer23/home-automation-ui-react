@@ -9,8 +9,8 @@ import ClimatePage from "./containers/ClimatePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import rootReducer from "./reducers";
 import NavigationProvider from "./components/NavigationProvider";
+import PageFooter from "./components/PageFooter";
 
-import "bootstrap/dist/css/bootstrap.css";
 import "@mdi/font/css/materialdesignicons.min.css";
 import "./index.css";
 import RoomPage from "./containers/RoomPage";
@@ -45,6 +45,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 					<Route path="/Meural/prompt" element={<MeuralPromptPage />} />
 					<Route path="/error" element={<ErrorPage />} />
 				</Routes>
+				<PageFooter />
 			</NavigationProvider>
 		</BrowserRouter>
 	</Provider>,

@@ -7,9 +7,9 @@ import { renderWithProviders } from "../../../test-utils";
 vi.mock("../../../containers/ClimatePage", () => ({
 	getCurrentOutsideTemp: () => 75,
 	getFanModeStyle: (mode: any, deviceMap: any) =>
-		mode === "1" ? "btn btn-primary active" : "btn btn-secondary",
+		mode === "1" ? "segmented-option is-active" : "segmented-option",
 	getHVACStyle: (mode: any, deviceMap: any) =>
-		mode === "2" ? "btn btn-primary active" : "btn btn-secondary",
+		mode === "2" ? "segmented-option is-active" : "segmented-option",
 	getThermostatSetPoint: () => 70,
 	getThermostatBattery: () => ({ name: "Thermostat Battery", level: "85" }),
 	getThermometerItems: () => [

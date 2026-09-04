@@ -95,7 +95,7 @@ export const getWaterHeaterColor = (deviceMap: DeviceMap): string => {
 	const compressorRunning =
 		deviceMap["Water Heater"] && deviceMap["Water Heater"].status;
 	if (tankFullness !== undefined && tankFullness <= 0.2) {
-		return "btn-danger";
+		return "wh-temp-gauge-alert";
 	}
 	let whClass =
 		compressorRunning !== null && compressorRunning !== "off"
@@ -193,8 +193,8 @@ export const getFanModeStyle = (
 	deviceMap: DeviceMap,
 ): string => {
 	return (
-		"btn btn-secondary w-100" +
-		(getFanMode(deviceMap) === fanOption ? " active" : "")
+		"segmented-option w-full" +
+		(getFanMode(deviceMap) === fanOption ? " is-active" : "")
 	);
 };
 
@@ -203,8 +203,8 @@ export const getHVACStyle = (
 	deviceMap: DeviceMap,
 ): string => {
 	return (
-		"btn btn-secondary w-100" +
-		(getMode(deviceMap) === hvacValue ? " active" : "")
+		"segmented-option w-full" +
+		(getMode(deviceMap) === hvacValue ? " is-active" : "")
 	);
 };
 
