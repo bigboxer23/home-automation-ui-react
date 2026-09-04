@@ -1,10 +1,9 @@
 import React from "react";
 
 /**
- * Semantic button state. This replaces react-bootstrap's `variant`, which used
- * to smuggle state into the markup as `btn-success` / `btn-danger` so that
- * descendant CSS rules could react to it. Those rules now key off `data-state`,
- * which survives the move off Bootstrap.
+ * Semantic button state, rendered as a `data-state` attribute. Descendant rules
+ * in index.css key off it - an "on" room swaps its bulb glyph, an "alert" garage
+ * turns red - so state stays out of the class list.
  */
 export type ButtonState = "on" | "off" | "alert" | "primary";
 

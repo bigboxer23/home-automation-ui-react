@@ -3,9 +3,8 @@
    Everything from here to the MUI section lives in `@layer components`, which
    sits below `utilities` in the cascade. That means a Tailwind utility always
    beats a class in this file when both set the same property on the same
-   element - which is the behaviour Bootstrap's `!important` utilities used to
-   give, and what stops a rule like `.btn { display: ... }` from silently
-   overriding `flex` or `hidden` on every button.
+   element. That is what stops a rule like `.btn { display: ... }` from
+   silently overriding `flex` or `hidden` on every button.
 
    Consequence to keep in mind: a rule here cannot out-specify a utility. The
    page containers therefore use `px-2 pb-2` rather than `p-2`, so that
@@ -34,8 +33,7 @@
 	   min-height below can pin the footer to the bottom of short pages. */
 		align-items: flex-start;
 		background-color: #f6f7f8;
-		/* Bootstrap's reboot set these; preflight leaves them at browser defaults
-	   (pure black, inline labels). */
+		/* Preflight sets no body colour; the browser default is pure black. */
 		color: #212529;
 		font-family:
 			-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
@@ -68,14 +66,7 @@
 
 	/* ------------------------------------------------------------- buttons ---- */
 
-	/* Base button. Previously inherited from Bootstrap's `.btn`; these are the
-   values that were actually taking effect, spelled out. */
 	.btn {
-		/* Deliberately no `display`: rules in this file are unlayered and so beat
-	   Tailwind's `utilities` layer whatever the specificity. Setting display
-	   here would override `flex` and `hidden` on every button. Buttons are
-	   inline-block by default anyway. Same reasoning applies to any property a
-	   utility is expected to control - check before adding one. */
 		padding: 0.375rem 0.75rem;
 		font-size: 1rem;
 		font-weight: 400;
@@ -92,9 +83,6 @@
 		transition: 0.3s;
 	}
 
-	/* Keyboard focus. Bootstrap used to suppress the outline and replace it with a
-   box-shadow built from a variable this project never set, so focused buttons
-   had no indicator at all. */
 	.btn:focus-visible {
 		outline: 2px solid #3880ff;
 		outline-offset: 2px;
@@ -180,8 +168,7 @@
 
 	/* --------------------------------------------------- segmented control ---- */
 
-	/* Replaces Bootstrap's `.btn-group` + `.btn.btn-secondary` + `.active`, used
-   for the Fan Mode / HVAC Mode / auto-close pickers. */
+	/* Fan Mode / HVAC Mode / auto-close pickers. */
 	.segmented-control {
 		position: relative;
 		display: flex;
@@ -329,8 +316,6 @@
 	.room-component .room-content {
 		padding-top: 110px;
 	}
-
-	/* ------------------------------------------------------------ readouts ---- */
 
 	.temp-display {
 		border-radius: 0.5rem;
@@ -486,11 +471,7 @@
 	.meural-prompt-display {
 		background-color: #fff;
 		height: auto;
-		/* Overrides .btn-lg's fixed 115px box, which outranks the `w-full` on the
-	   element for the same reason as above. */
-		width: 100%;
-		/* Was `.p-3.btn-lg`, which stopped matching when p-3 became a Tailwind
-	   class; it belongs to this component rather than to a spacing utility. */
+		/* Overrides .btn-lg's padding; this button is a wide panel, not a tile. */
 		padding: 1rem;
 	}
 
