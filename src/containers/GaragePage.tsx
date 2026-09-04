@@ -32,17 +32,20 @@ class GaragePage extends React.Component<GaragePageProps> {
 const findGarageRoom = (rooms: Room[] | null): Room =>
 	findRoomOrEmpty(rooms, "Garage");
 
-export const getHeader = (room: Room): string => {
+export const getHeader = (room: Room): React.ReactNode => {
 	if (room == null) {
 		return "";
 	}
-	let autoClose = GarageButton.getAutoClose(room);
-	if (autoClose === "") {
-		autoClose = "Last opened: " + GarageButton.getLastOpen(room);
-	} else {
-		autoClose = "Closing in: " + autoClose;
-	}
-	return room.name + " (" + autoClose + ")";
+	const autoClose = GarageButton.getAutoClose(room);
+	const detail =
+		autoClose === ""
+			? "Last opened: " + GarageButton.getLastOpen(room)
+			: "Closing in: " + autoClose;
+	return (
+		<div>
+			{room.name} <span className="text-[0.8em] opacity-50">{detail}</span>
+		</div>
+	);
 };
 
 export const getAutoCloseDelay = (room: Room): number => {

@@ -2,7 +2,7 @@ import React from "react";
 
 interface HeaderComponentProps {
 	back: () => void;
-	name: string;
+	name: React.ReactNode;
 }
 
 const HeaderComponent: React.FC<HeaderComponentProps> = ({ back, name }) => (

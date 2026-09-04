@@ -108,7 +108,7 @@ export const getHeaderTitle = (
 		<div className={className}>
 			{room.name}{" "}
 			{temperature !== "" && (
-				<div className="header-temperature">{temperature}</div>
+				<span className="text-[0.8em] opacity-50">{temperature}</span>
 			)}
 		</div>
 	);
