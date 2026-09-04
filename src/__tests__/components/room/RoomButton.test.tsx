@@ -179,7 +179,7 @@ describe("RoomButton", () => {
 		);
 
 		const lightbulbIcon = document.querySelector(".mdi-lightbulb-outline");
-		expect(lightbulbIcon).toHaveClass("danger");
+		expect(lightbulbIcon).toHaveClass("text-danger", "font-bold");
 	});
 
 	test("shows lock icon when override is active", () => {
@@ -205,7 +205,7 @@ describe("RoomButton", () => {
 		);
 
 		const dotsIcon = document.querySelector(".mdi-dots-horizontal");
-		expect(dotsIcon).toHaveClass("hide");
+		expect(dotsIcon).toHaveClass("opacity-0");
 	});
 
 	test("shows dots when no count content", () => {
@@ -231,7 +231,7 @@ describe("RoomButton", () => {
 		);
 
 		const dotsIcon = document.querySelector(".mdi-dots-horizontal");
-		expect(dotsIcon).not.toHaveClass("hide");
+		expect(dotsIcon).not.toHaveClass("opacity-0");
 	});
 
 	test("calls handleMoreClick when button is clicked", () => {

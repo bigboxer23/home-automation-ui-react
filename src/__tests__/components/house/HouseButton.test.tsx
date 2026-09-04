@@ -75,7 +75,6 @@ describe("HouseButton", () => {
 		renderWithProviders(<HouseButton room={mockRoom} time={mockTime} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("house-button");
 		expect(button).toHaveClass("m-1");
 		expect(button).toHaveClass("relative");
 	});

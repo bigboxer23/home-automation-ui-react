@@ -14,8 +14,8 @@ const SceneButton: React.FC<SceneButtonProps> = (props) => (
 			size="lg"
 			className={"mb-4 m-1 relative flex justify-center"}
 		>
-			<i className="mdi mdi-lightbulb-group-outline" />
-			<div className="absolute bottom w-full m-2 ps-2 pe-2">
+			<i className="mdi tile-icon mdi-lightbulb-group-outline text-black/30" />
+			<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 				{props.room.name} On
 			</div>
 		</AppButton>
@@ -24,8 +24,8 @@ const SceneButton: React.FC<SceneButtonProps> = (props) => (
 			size="lg"
 			className={"m-1 relative flex justify-center"}
 		>
-			<i className="mdi mdi-lightbulb-group-off-outline" />
-			<div className="absolute bottom w-full m-2 ps-2 pe-2">
+			<i className="mdi tile-icon mdi-lightbulb-group-off-outline text-black/30" />
+			<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 				{props.room.name} Off
 			</div>
 		</AppButton>

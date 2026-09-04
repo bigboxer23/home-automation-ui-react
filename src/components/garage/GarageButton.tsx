@@ -27,9 +27,14 @@ class GarageButton extends React.Component<GarageButtonProps> {
 			size="lg"
 			className={"m-1 relative flex justify-center"}
 		>
-			<i className="mdi mdi-garage" />
+			{/* The two state variants outrank the muted base on specificity, so
+			    they win regardless of the order Tailwind emits them in. */}
+			<i className="mdi tile-icon mdi-garage text-black/30 [[data-state=on]_&]:text-bulb [[data-state=alert]_&]:text-white" />
 			<div
-				className="temp-display pe-1 ps-1 absolute"
+				/* The `on` background is the last of `[data-state=on] .temp-display`.
+				   It only shows through when getTempStyle has no temperature to
+				   report and so returns opacity rather than a background colour. */
+				className="rounded-lg text-white right-2 top-2 min-w-8.75 flex justify-center pe-1 ps-1 absolute [[data-state=on]_&]:bg-black/30"
 				style={getTempStyle(
 					GarageButton.findGarageTemperature(this.props.room),
 				)}
@@ -39,8 +44,10 @@ class GarageButton extends React.Component<GarageButtonProps> {
 			>
 				{getFormattedTemp(GarageButton.findGarageTemperature(this.props.room))}
 			</div>
-			<div className="absolute bottom w-full m-2 ps-2 pe-2">
-				<div className="autoClose minor-text">
+			{/* Turns white on an open (alert) door, which used to be reached via
+			    `[data-state="alert"] .bottom` in index.css. */}
+			<div className="absolute bottom-0 w-full m-2 ps-2 pe-2 [[data-state=alert]_&]:text-white">
+				<div className="text-white text-[0.8rem] leading-[1.3] opacity-70">
 					{GarageButton.getAutoClose(this.props.room)}
 				</div>
 				<div className={this.getLastOpenStyle()}>
@@ -53,7 +60,8 @@ class GarageButton extends React.Component<GarageButtonProps> {
 
 	getLastOpenStyle(): string {
 		return (
-			"minor-text" + (GarageButton.isDoorOpen(this.props.room) ? " hidden" : "")
+			"text-[0.8rem] leading-[1.3] opacity-70" +
+			(GarageButton.isDoorOpen(this.props.room) ? " hidden" : "")
 		);
 	}
 	getButtonStyle(): ButtonState {

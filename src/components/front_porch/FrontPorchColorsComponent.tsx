@@ -40,7 +40,7 @@ export default function FrontPorchColorComponent({
 	return (
 		<div>
 			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start front-porch-color">
-				<label className="ms-4 mb-4 w-full scenes-label">
+				<label className="ms-4 mb-4 w-full text-white">
 					Front Porch Scenes
 				</label>
 				{getOpenHabScenes(rooms).map((device) => (

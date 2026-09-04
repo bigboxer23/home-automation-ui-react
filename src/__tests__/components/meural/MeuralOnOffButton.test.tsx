@@ -58,8 +58,7 @@ describe("MeuralOnOffButton", () => {
 		expect(button).toHaveClass("relative");
 		expect(button).toHaveClass("flex");
 		expect(button).toHaveClass("justify-center");
-		expect(button).toHaveClass("house-button");
-		expect(button).toHaveClass("btn-lg");
+		expect(button).toHaveClass("w-[115px]");
 	});
 
 	test("button is clickable", () => {

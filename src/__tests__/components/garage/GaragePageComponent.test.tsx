@@ -5,7 +5,7 @@ import { renderWithProviders } from "../../../test-utils";
 
 // Mock the utility functions
 vi.mock("../../../containers/GaragePage", () => ({
-	getAutoCloseButtonStyle: () => "point-events-none ",
+	getAutoCloseButtonStyle: () => "pointer-events-none ",
 	getAutoCloseDelay: () => 300,
 	getHeader: () => "Garage",
 }));

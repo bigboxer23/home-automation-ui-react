@@ -29,6 +29,6 @@ describe("PageFooter", () => {
 			"p-4",
 			"mt-auto",
 		);
-		expect(container.querySelector(".minor-text")).toHaveClass("text-white");
+		expect(container.querySelector(".opacity-70")).toHaveClass("text-white");
 	});
 });

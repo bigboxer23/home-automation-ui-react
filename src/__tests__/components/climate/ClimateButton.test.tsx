@@ -63,7 +63,7 @@ describe("ClimateButton", () => {
 			preloadedState: mockState as any,
 		});
 
-		const gaugeDisplay = document.querySelector(".wh-temp-gauge");
+		const gaugeDisplay = document.querySelector(".rounded-l-lg");
 		expect(gaugeDisplay).toBeInTheDocument();
 	});
 
@@ -139,7 +139,7 @@ describe("ClimateButton", () => {
 			preloadedState: lowTankState as any,
 		});
 
-		const gaugeDisplay = document.querySelector(".wh-temp-gauge-alert");
+		const gaugeDisplay = document.querySelector(".bg-danger");
 		expect(gaugeDisplay).toBeInTheDocument();
 	});
 
@@ -169,7 +169,7 @@ describe("ClimateButton", () => {
 			preloadedState: fullTankState as any,
 		});
 
-		const gaugeDisplay = document.querySelector(".wh-temp-gauge-full");
+		const gaugeDisplay = document.querySelector(".rounded-lg");
 		expect(gaugeDisplay).toBeInTheDocument();
 	});
 
@@ -198,7 +198,7 @@ describe("ClimateButton", () => {
 			preloadedState: activeCompressorState as any,
 		});
 
-		const gaugeDisplay = document.querySelector(".wh-temp-gauge-active");
+		const gaugeDisplay = document.querySelector(".bg-accent");
 		expect(gaugeDisplay).toBeInTheDocument();
 	});
 });

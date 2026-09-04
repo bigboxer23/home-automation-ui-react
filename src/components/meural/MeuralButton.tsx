@@ -18,15 +18,18 @@ const MeuralButton: React.FC<MeuralButtonProps> = (props) => (
 			props.changePage(event, isOn(findMeuralDeviceFromRoom(props.room)))
 		}
 		size="lg"
-		className={"m-1 relative flex justify-center house-button"}
+		className={"m-1 relative flex justify-center"}
 	>
 		<i className={getButtonStyling(findMeuralDeviceFromRoom(props.room))} />
-		<div className="absolute bottom w-full m-2 ps-2 pe-2">Meural</div>
+		<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">Meural</div>
 	</AppButton>
 );
 
 export const getButtonStyling = (device: Device | undefined): string => {
-	return "mdi mdi-image-" + (isOn(device) ? "frame" : "filter-frames");
+	return (
+		"mdi tile-icon text-black/30 mdi-image-" +
+		(isOn(device) ? "frame" : "filter-frames")
+	);
 };
 
 const mapDispatchToProps = (dispatch: any) =>

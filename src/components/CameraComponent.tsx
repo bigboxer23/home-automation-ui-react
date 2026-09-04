@@ -18,7 +18,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
 		<div className="background"></div>
 		<HeaderComponent back={back} name={"" + getName()} />
 		<iframe
-			className={"security room-content"}
+			className={"w-full h-[960px] border-0 room-content"}
 			src={"" + getSource()}
 			ref={load}
 		></iframe>

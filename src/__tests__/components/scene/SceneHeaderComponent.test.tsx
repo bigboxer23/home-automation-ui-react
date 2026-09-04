@@ -26,7 +26,7 @@ describe("SceneHeaderComponent", () => {
 
 		const chevronIcon = container.querySelector(".mdi-chevron-left");
 		expect(chevronIcon).toBeInTheDocument();
-		expect(chevronIcon).toHaveClass("mdi-36px", "z-index-1");
+		expect(chevronIcon).toHaveClass("mdi-36px", "z-1");
 	});
 
 	test("handles back button click", () => {

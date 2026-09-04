@@ -23,8 +23,8 @@ export default function MeuralShowInfoButton(
 				size="lg"
 				className={shouldDisplay(props.device?.status)}
 			>
-				<i className="mdi mdi-information-outline" />
-				<div className="absolute bottom w-full m-2 ps-2 pe-2">
+				<i className="mdi tile-icon mdi-information-outline text-black/30" />
+				<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 					Toggle Artwork Info
 				</div>
 			</AppButton>

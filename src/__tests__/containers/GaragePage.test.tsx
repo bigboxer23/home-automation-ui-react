@@ -261,12 +261,12 @@ describe("getAutoCloseButtonStyle utility function", () => {
 			],
 		};
 		const result = getAutoCloseButtonStyle(room as any);
-		expect(result).toBe("point-events-none ");
+		expect(result).toBe("pointer-events-none ");
 	});
 
 	test("handles null room", () => {
 		const result = getAutoCloseButtonStyle(null as any);
-		expect(result).toBe("point-events-none ");
+		expect(result).toBe("pointer-events-none ");
 	});
 
 	test("handles room without garage device", () => {
@@ -274,7 +274,7 @@ describe("getAutoCloseButtonStyle utility function", () => {
 			devices: [{ name: "Light", status: "1" }],
 		};
 		const result = getAutoCloseButtonStyle(room as any);
-		expect(result).toBe("point-events-none ");
+		expect(result).toBe("pointer-events-none ");
 	});
 });
 

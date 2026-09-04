@@ -17,20 +17,20 @@ const getLoadContent = function (
 ): React.ReactElement | string {
 	if (authError) {
 		return (
-			<div className="LoadingStatus flex justify-center items-center absolute">
+			<div className="inset-0 text-success bg-white flex justify-center items-center absolute">
 				<CircularProgress
 					sx={{ color: "#28a745" }}
 					size="2rem"
 					className={"me-2"}
 				/>
-				<div className="authText">
+				<div className="max-w-[125px]">
 					Say <b>'Alexa, turn on Authorize'</b>
 				</div>
 			</div>
 		);
 	} else if (theLoadedTime == null) {
 		return (
-			<div className="LoadingStatus flex justify-center items-center absolute">
+			<div className="inset-0 text-success bg-white flex justify-center items-center absolute">
 				<CircularProgress
 					sx={{ color: "#28a745" }}
 					size="2rem"

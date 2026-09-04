@@ -42,7 +42,10 @@ export default function MeuralNextButton(
 	};
 
 	const getIconStyle = (status: string | undefined): string => {
-		return "mdi mdi-image-" + ("1" === status ? "refresh-outline" : "move");
+		return (
+			"mdi tile-icon text-black/30 mdi-image-" +
+			("1" === status ? "refresh-outline" : "move")
+		);
 	};
 
 	return (
@@ -53,7 +56,7 @@ export default function MeuralNextButton(
 				className={shouldDisplay(props.device?.status)}
 			>
 				<i className={getIconStyle(props.device?.status)} />
-				<div className="absolute bottom w-full m-2 ps-2 pe-2">
+				<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 					{generateButtonText(props.device?.status)}
 				</div>
 			</AppButton>

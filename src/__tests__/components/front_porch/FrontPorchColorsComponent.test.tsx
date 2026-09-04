@@ -138,7 +138,7 @@ describe("FrontPorchColorsComponent", () => {
 			"content-start",
 		);
 
-		const label = container.querySelector(".scenes-label");
+		const label = container.querySelector(".text-white");
 		expect(label).toHaveClass("ms-4", "mb-4", "w-full");
 	});
 });

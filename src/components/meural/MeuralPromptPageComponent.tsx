@@ -25,7 +25,7 @@ const MeuralPromptPageComponent: React.FC<MeuralPromptPageComponentProps> = ({
 						autoFocus
 						id="creationPrompt"
 						placeholder="Enter prompt to generate image from"
-						className={"pt-6 w-full prompt-textarea"}
+						className={"pt-6 w-full border-none resize-none"}
 					/>
 				</div>
 				<AppButton onClick={handleClick} state="primary">

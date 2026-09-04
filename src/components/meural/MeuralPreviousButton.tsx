@@ -40,8 +40,8 @@ export default function MeuralPreviousButton(
 				size="lg"
 				className={shouldDisplay(props.device?.status)}
 			>
-				<i className="mdi mdi-image-move flip-horizontal" />
-				<div className="absolute bottom w-full m-2 ps-2 pe-2">
+				<i className="mdi tile-icon mdi-image-move -scale-x-100 text-black/30" />
+				<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 					Previous Image
 				</div>
 			</AppButton>

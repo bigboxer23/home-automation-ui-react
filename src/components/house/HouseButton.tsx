@@ -26,17 +26,19 @@ const HouseButton: React.FC<HouseButtonProps> = ({
 	<AppButton
 		onClick={(event: React.MouseEvent) => changePage(event)}
 		size="lg"
-		className={"m-1 relative flex justify-center house-button"}
+		className={"m-1 relative flex justify-center"}
 	>
 		<i className={getButtonStyling(time, room.devices)} />
-		<div className="temp-display pe-1 ps-1 absolute total-lights-bg">
+		<div className="rounded-lg text-white right-2 top-2 min-w-8.75 flex justify-center pe-1 ps-1 absolute bg-bulb">
 			{room.totalLights}
 		</div>
 		<div
-			className="absolute bottom w-full m-2 ps-2 pe-2"
+			className="absolute bottom-0 w-full m-2 ps-2 pe-2"
 			onClick={(event: React.MouseEvent) => houseOff(event, time, room.devices)}
 		>
-			<div className="minor-text">{getTransitionTime(time, room.devices)}</div>
+			<div className="text-[0.8rem] leading-[1.3] opacity-70">
+				{getTransitionTime(time, room.devices)}
+			</div>
 			{getScene(time, room.devices)}
 		</div>
 	</AppButton>
@@ -74,7 +76,7 @@ const getButtonStyling = (time: Room | undefined, scenes: Device[]): string => {
 		"House Off": "weather-night",
 		"Evening On": "lightbulb-group-outline",
 	};
-	return "mdi mdi-" + (iconMap[buttonText] || "clock");
+	return "mdi tile-icon text-black/30 mdi-" + (iconMap[buttonText] || "clock");
 };
 
 const getTransitionTime = (
