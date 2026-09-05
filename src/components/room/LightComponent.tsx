@@ -20,7 +20,7 @@ export default function LightComponent({
 }: LightComponentProps) {
 	if (isFan(device)) {
 		return (
-			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start light_slider mb-2">
+			<div className="p-2 w-full h-full flex flex-wrap justify-center content-start bg-white/70 rounded-2xl mb-2">
 				<div className="w-full mt-2 mb-2">
 					<div className="w-full flex">
 						<label className="ms-2 w-full">{device.name}</label>
@@ -37,7 +37,7 @@ export default function LightComponent({
 		);
 	}
 	return (
-		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start light_slider mb-2">
+		<div className="p-2 w-full h-full flex flex-wrap justify-center content-start bg-white/70 rounded-2xl mb-2">
 			<div className="w-full">
 				<div className="w-full flex">
 					<label className="ms-2 w-full text-[0.875em]">{device.name}</label>

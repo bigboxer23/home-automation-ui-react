@@ -83,7 +83,7 @@ describe("FrontPorchHueSceneButton", () => {
 			"relative",
 			"flex",
 			"justify-center",
-			"btn-lg",
+			"w-[115px]",
 		);
 	});
 
@@ -92,7 +92,7 @@ describe("FrontPorchHueSceneButton", () => {
 			<FrontPorchHueSceneButton {...mockProps} />,
 		);
 
-		const textDiv = container.querySelector(".bottom");
+		const textDiv = container.querySelector(".bottom-0");
 		expect(textDiv).toHaveClass("w-full", "m-2", "ps-2", "pe-2");
 		expect(textDiv).toHaveTextContent("Colorful");
 	});

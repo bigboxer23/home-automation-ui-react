@@ -11,7 +11,7 @@ export default function FrontPorchHueSceneButton(
 	props: FrontPorchHueSceneButtonProps,
 ) {
 	const getIconStyle = function (name: string): string {
-		const mdi = "mdi ";
+		const mdi = "mdi tile-icon text-black/30 [[data-state=on]_&]:text-accent ";
 		switch (name) {
 			case "Normal":
 				return mdi + "mdi-lightbulb-group-off-outline";
@@ -31,7 +31,7 @@ export default function FrontPorchHueSceneButton(
 				className={"mb-4 m-1 relative flex justify-center"}
 			>
 				<i className={getIconStyle(props.device.name)} />
-				<div className="absolute bottom w-full m-2 ps-2 pe-2">
+				<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 					{props.device.name}
 				</div>
 			</AppButton>

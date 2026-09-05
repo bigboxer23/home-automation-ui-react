@@ -15,8 +15,7 @@ function MeuralStyleButton(props: MeuralStyleButtonProps): React.ReactElement {
 
 	const getClassnames = (status: string | undefined): string => {
 		return (
-			"meural-source-button pt-4 pb-2" +
-			("0" === status || "4" === status ? " hidden" : "")
+			"w-full pt-4 pb-2" + ("0" === status || "4" === status ? " hidden" : "")
 		);
 	};
 
@@ -32,9 +31,7 @@ function MeuralStyleButton(props: MeuralStyleButtonProps): React.ReactElement {
 					}
 				}}
 			>
-				<div className={"ms-4 meural-source-button-label font-bold pt-4 pb-2"}>
-					Style
-				</div>
+				<div className={"ms-4 text-black/60 font-bold pt-4 pb-2"}>Style</div>
 				<ToggleButton
 					disableRipple
 					className={"mdi mdi-check-circle"}

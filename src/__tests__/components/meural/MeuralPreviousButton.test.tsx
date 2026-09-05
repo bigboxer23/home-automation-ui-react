@@ -51,13 +51,13 @@ describe("MeuralPreviousButton", () => {
 		expect(button).toHaveClass("hidden");
 	});
 
-	test("displays correct icon with flip-horizontal class", () => {
+	test("displays correct icon with a horizontal flip", () => {
 		const props = { device: { id: "meural1", name: "Meural", status: "0" } };
 		const { container } = renderWithProviders(
 			<MeuralPreviousButton {...props} />,
 		);
 
-		const icon = container.querySelector(".mdi-image-move.flip-horizontal");
+		const icon = container.querySelector(".mdi-image-move.-scale-x-100");
 		expect(icon).toBeInTheDocument();
 	});
 

@@ -170,7 +170,7 @@ describe("LightComponent", () => {
 			/>,
 		);
 
-		const container = document.querySelector(".light_slider");
+		const container = document.querySelector(".rounded-2xl");
 		expect(container).toBeInTheDocument();
 		expect(container).toHaveClass("p-2");
 		expect(container).toHaveClass("w-full");

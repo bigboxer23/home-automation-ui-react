@@ -6,7 +6,7 @@ import ClimatePage, {
 	getThermostatBattery,
 	getClimateData,
 	getThermostatDisplayInfo,
-	getWaterHeaterColor,
+	getWaterHeaterGaugeStyle,
 	getWaterHeaterWidth,
 	getWaterHeaterCurrentTemp,
 	getWaterHeaterTemperature,
@@ -14,8 +14,8 @@ import ClimatePage, {
 	getCurrentOutsideTemp,
 	getThermostatSetPoint,
 	getSetpointDevice,
-	getFanModeStyle,
-	getHVACStyle,
+	isFanModeActive,
+	isHVACModeActive,
 } from "../../containers/ClimatePage";
 
 // Mock the connected-react-router push action
@@ -238,61 +238,61 @@ describe("getThermostatDisplayInfo utility function", () => {
 	});
 });
 
-describe("getWaterHeaterColor utility function", () => {
-	test("returns the alert gauge class for low tank (<=20%)", () => {
+describe("getWaterHeaterGaugeStyle utility function", () => {
+	test("returns the alert fill for low tank (<=20%)", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.2, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("wh-temp-gauge-alert");
+		const result = getWaterHeaterGaugeStyle(deviceMap as any);
+		expect(result).toBe("bg-danger rounded-l-lg");
 	});
 
-	test("returns the alert gauge class for empty tank", () => {
+	test("returns the alert fill for empty tank", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("wh-temp-gauge-alert");
+		const result = getWaterHeaterGaugeStyle(deviceMap as any);
+		expect(result).toBe("bg-danger rounded-l-lg");
 	});
 
 	test("returns a transparent gauge for inactive compressor with partial tank", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("opacity-0");
+		const result = getWaterHeaterGaugeStyle(deviceMap as any);
+		expect(result).toBe("opacity-0 rounded-l-lg");
 	});
 
-	test("returns wh-temp-gauge-active for running compressor with partial tank", () => {
+	test("returns the active fill for running compressor with partial tank", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66, status: "1" },
 		};
-		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("wh-temp-gauge-active ");
+		const result = getWaterHeaterGaugeStyle(deviceMap as any);
+		expect(result).toBe("bg-accent rounded-l-lg");
 	});
 
 	test("treats empty string status as active (not off)", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 0.66, status: "" },
 		};
-		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("wh-temp-gauge-active ");
+		const result = getWaterHeaterGaugeStyle(deviceMap as any);
+		expect(result).toBe("bg-accent rounded-l-lg");
 	});
 
-	test("returns wh-temp-gauge-full for full tank with inactive compressor", () => {
+	test("returns the full-tank radius for full tank with inactive compressor", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 1, status: "off" },
 		};
-		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("opacity-0 wh-temp-gauge-full");
+		const result = getWaterHeaterGaugeStyle(deviceMap as any);
+		expect(result).toBe("opacity-0 rounded-lg");
 	});
 
-	test("returns wh-temp-gauge-active and wh-temp-gauge-full for full tank with running compressor", () => {
+	test("returns active fill and full-tank radius for full tank with running compressor", () => {
 		const deviceMap = {
 			"Water Heater": { humidity: 1, status: "1" },
 		};
-		const result = getWaterHeaterColor(deviceMap as any);
-		expect(result).toBe("wh-temp-gauge-active  wh-temp-gauge-full");
+		const result = getWaterHeaterGaugeStyle(deviceMap as any);
+		expect(result).toBe("bg-accent rounded-lg");
 	});
 });
 
@@ -478,38 +478,34 @@ describe("getSetpointDevice utility function", () => {
 	});
 });
 
-describe("getFanModeStyle utility function", () => {
-	test("returns active style when fan mode matches", () => {
+describe("isFanModeActive utility function", () => {
+	test("is true when fan mode matches", () => {
 		const deviceMap = {
 			"Thermostat Fan Mode": { level: "0" },
 		};
-		const result = getFanModeStyle("0", deviceMap as any);
-		expect(result).toBe("segmented-option w-full is-active");
+		expect(isFanModeActive("0", deviceMap as any)).toBe(true);
 	});
 
-	test("returns inactive style when fan mode doesn't match", () => {
+	test("is false when fan mode doesn't match", () => {
 		const deviceMap = {
 			"Thermostat Fan Mode": { level: "0" },
 		};
-		const result = getFanModeStyle("1", deviceMap as any);
-		expect(result).toBe("segmented-option w-full");
+		expect(isFanModeActive("1", deviceMap as any)).toBe(false);
 	});
 });
 
-describe("getHVACStyle utility function", () => {
-	test("returns active style when HVAC mode matches", () => {
+describe("isHVACModeActive utility function", () => {
+	test("is true when HVAC mode matches", () => {
 		const deviceMap = {
 			"Thermostat Mode": { level: "2" },
 		};
-		const result = getHVACStyle("2", deviceMap as any);
-		expect(result).toBe("segmented-option w-full is-active");
+		expect(isHVACModeActive("2", deviceMap as any)).toBe(true);
 	});
 
-	test("returns inactive style when HVAC mode doesn't match", () => {
+	test("is false when HVAC mode doesn't match", () => {
 		const deviceMap = {
 			"Thermostat Mode": { level: "2" },
 		};
-		const result = getHVACStyle("1", deviceMap as any);
-		expect(result).toBe("segmented-option w-full");
+		expect(isHVACModeActive("1", deviceMap as any)).toBe(false);
 	});
 });

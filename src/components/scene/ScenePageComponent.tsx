@@ -30,8 +30,8 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 					size="lg"
 					className={"mb-4 m-1 relative flex justify-center"}
 				>
-					<i className="mdi mdi-video-wireless-outline" />
-					<div className="absolute bottom w-full m-2 ps-2 pe-2">
+					<i className="mdi tile-icon mdi-video-wireless-outline text-black/30" />
+					<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 						Front Door Security
 					</div>
 				</AppButton>
@@ -40,8 +40,10 @@ const ScenePageComponent: React.FC<ScenePageComponentProps> = ({
 					size="lg"
 					className={"mb-4 m-1 relative flex justify-center"}
 				>
-					<i className="mdi mdi-video-wireless-outline" />
-					<div className="absolute bottom w-full m-2 ps-2 pe-2">Grow Tent</div>
+					<i className="mdi tile-icon mdi-video-wireless-outline text-black/30" />
+					<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
+						Grow Tent
+					</div>
 				</AppButton>
 			</div>
 		</div>

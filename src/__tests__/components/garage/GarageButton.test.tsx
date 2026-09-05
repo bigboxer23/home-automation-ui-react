@@ -145,7 +145,7 @@ describe("GarageButton", () => {
 			/>,
 		);
 
-		const tempDisplay = document.querySelector(".temp-display");
+		const tempDisplay = document.querySelector(".rounded-lg.absolute");
 		fireEvent.click(tempDisplay!);
 
 		expect(mockHandleGarageMoreClick).toHaveBeenCalled();

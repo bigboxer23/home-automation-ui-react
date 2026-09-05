@@ -186,10 +186,10 @@ describe("MeuralSourceButton", () => {
 			<MeuralSourceButton {...props} />,
 		);
 
-		const mainContainer = container.querySelector(".meural-source-button");
+		const mainContainer = container.querySelector(".w-full");
 		expect(mainContainer).toHaveClass("pt-4", "pb-2");
 
-		const label = container.querySelector(".meural-source-button-label");
+		const label = container.querySelector('[class~="text-black/60"]');
 		expect(label).toHaveClass("ms-4", "font-bold", "pt-4", "pb-2");
 
 		const buttons = container.querySelectorAll(".mdi.mdi-check-circle");

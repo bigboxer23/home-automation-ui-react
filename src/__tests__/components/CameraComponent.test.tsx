@@ -22,7 +22,12 @@ describe("CameraComponent", () => {
 
 		const iframe = container.querySelector("iframe");
 		expect(iframe).toHaveAttribute("src", "/test-source");
-		expect(iframe).toHaveClass("security", "room-content");
+		expect(iframe).toHaveClass(
+			"w-full",
+			"h-[960px]",
+			"border-0",
+			"room-content",
+		);
 	});
 
 	test("renders header with correct name", () => {

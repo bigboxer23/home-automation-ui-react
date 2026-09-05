@@ -13,7 +13,7 @@ export default function FrontPorchColorButton(
 ) {
 	const getIconStyle = function (name: string): string {
 		//Pride
-		const mdi = "mdi ";
+		const mdi = "mdi tile-icon text-black/30 [[data-state=on]_&]:text-accent ";
 		switch (name) {
 			case "Pride":
 				return mdi + "mdi-looks";
@@ -50,7 +50,7 @@ export default function FrontPorchColorButton(
 				className={"mb-4 m-1 relative flex justify-center"}
 			>
 				<i className={getIconStyle(props.device.name)} />
-				<div className="absolute bottom w-full m-2 ps-2 pe-2">
+				<div className="absolute bottom-0 w-full m-2 ps-2 pe-2">
 					{props.device.name}
 				</div>
 			</AppButton>

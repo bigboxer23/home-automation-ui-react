@@ -15,7 +15,9 @@ function MeuralPromptDisplay(
 ): React.ReactElement {
 	const getClassnames = (status: string | undefined): string => {
 		return (
-			"meural-prompt-display relative flex justify-center w-full relative flex flex-col justify-center" +
+			// `group` lets the chevron below darken on hover/active, which used
+			// to be `.meural-prompt-display:hover .mdi-chevron-right`.
+			"group relative flex flex-col justify-center w-full" +
 			("0" === status || "4" === status ? " hidden" : " mb-1")
 		);
 	};
@@ -28,17 +30,21 @@ function MeuralPromptDisplay(
 	return (
 		<AppButton
 			onClick={props.changePage}
-			size="lg"
+			size="panel"
 			className={getClassnames(props.device?.status)}
 		>
-			<div className={"meural-source-button-label flex items-center"}>
+			<div className={"text-black/60 flex items-center"}>
 				<div>
-					<div className={"mb-2 meural-source-button-label font-bold"}>
-						Prompt
-					</div>
+					<div className={"mb-2 text-black/60 font-bold"}>Prompt</div>
 					{getPrompt()}
 				</div>
-				<div className={"mdi mdi-chevron-right mdi-24px position-inherit"} />
+				<div
+					className={
+						"mdi mdi-chevron-right mdi-24px " +
+						"group-hover:text-black group-active:text-black " +
+						"group-hover:before:font-black"
+					}
+				/>
 			</div>
 		</AppButton>
 	);

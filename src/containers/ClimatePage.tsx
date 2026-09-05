@@ -75,28 +75,38 @@ export const getThermostatDisplayInfo = (
 		return "";
 	}
 	return (
-		<div className="currentTemp minor-text">
+		<div className="text-black/80 text-[0.8rem] leading-[1.3] opacity-70">
 			{getFormattedTemp(anIndoorTemp)} / {anIndoorHumidity}
 		</div>
 	);
 };
 
-export const getWaterHeaterColor = (deviceMap: DeviceMap): string => {
+/**
+ * Fill colour and corner rounding for the water heater tank gauge.
+ *
+ * The radius is decided here rather than layered over a base on the element: a
+ * conditional `rounded-lg` sitting on top of a `rounded-l-lg` would tie on
+ * specificity and be settled by Tailwind's output order. A full tank is rounded
+ * at both ends, a partial one only on the left, and exactly one of the two
+ * reaches the element.
+ */
+export const getWaterHeaterGaugeStyle = (deviceMap: DeviceMap): string => {
 	const tankFullness =
 		deviceMap["Water Heater"] && deviceMap["Water Heater"].humidity;
 	const compressorRunning =
 		deviceMap["Water Heater"] && deviceMap["Water Heater"].status;
+	const radius =
+		tankFullness !== undefined && tankFullness >= 1
+			? "rounded-lg"
+			: "rounded-l-lg";
 	if (tankFullness !== undefined && tankFullness <= 0.2) {
-		return "wh-temp-gauge-alert";
+		return "bg-danger " + radius;
 	}
-	let whClass =
+	const fill =
 		compressorRunning !== null && compressorRunning !== "off"
-			? "wh-temp-gauge-active "
+			? "bg-accent"
 			: "opacity-0";
-	if (tankFullness !== undefined && tankFullness >= 1) {
-		return whClass + " wh-temp-gauge-full";
-	}
-	return whClass;
+	return fill + " " + radius;
 };
 
 export const getWaterHeaterWidth = (
@@ -180,25 +190,15 @@ const getMode = (deviceMap: DeviceMap): string => {
 		: "";
 };
 
-export const getFanModeStyle = (
+export const isFanModeActive = (
 	fanOption: string,
 	deviceMap: DeviceMap,
-): string => {
-	return (
-		"segmented-option w-full" +
-		(getFanMode(deviceMap) === fanOption ? " is-active" : "")
-	);
-};
+): boolean => getFanMode(deviceMap) === fanOption;
 
-export const getHVACStyle = (
+export const isHVACModeActive = (
 	hvacValue: string,
 	deviceMap: DeviceMap,
-): string => {
-	return (
-		"segmented-option w-full" +
-		(getMode(deviceMap) === hvacValue ? " is-active" : "")
-	);
-};
+): boolean => getMode(deviceMap) === hvacValue;
 
 const mapStateToProps = (state: RootState) => ({
 	deviceMap: getClimateData(state.house.rooms),

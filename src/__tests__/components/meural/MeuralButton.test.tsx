@@ -85,7 +85,6 @@ describe("MeuralButton", () => {
 		expect(button).toHaveClass("relative");
 		expect(button).toHaveClass("flex");
 		expect(button).toHaveClass("justify-center");
-		expect(button).toHaveClass("house-button");
 	});
 
 	test("button is clickable", () => {
@@ -108,7 +107,7 @@ describe("MeuralButton", () => {
 		renderWithProviders(<MeuralButton room={mockRoomOn} />);
 
 		const button = screen.getByRole("button");
-		expect(button).toHaveClass("btn-lg");
+		expect(button).toHaveClass("w-[115px]");
 	});
 });
 
@@ -121,7 +120,7 @@ describe("getButtonStyling utility function", () => {
 		};
 
 		const result = getButtonStyling(device);
-		expect(result).toBe("mdi mdi-image-frame");
+		expect(result).toBe("mdi tile-icon text-black/30 mdi-image-frame");
 	});
 
 	test("returns filter-frames styling when device is off", () => {
@@ -132,17 +131,17 @@ describe("getButtonStyling utility function", () => {
 		};
 
 		const result = getButtonStyling(device);
-		expect(result).toBe("mdi mdi-image-filter-frames");
+		expect(result).toBe("mdi tile-icon text-black/30 mdi-image-filter-frames");
 	});
 
 	test("returns filter-frames styling for undefined device", () => {
 		const result = getButtonStyling(undefined);
-		expect(result).toBe("mdi mdi-image-filter-frames");
+		expect(result).toBe("mdi tile-icon text-black/30 mdi-image-filter-frames");
 	});
 
 	test("returns filter-frames styling for null device", () => {
 		const result = getButtonStyling(null as any);
-		expect(result).toBe("mdi mdi-image-filter-frames");
+		expect(result).toBe("mdi tile-icon text-black/30 mdi-image-filter-frames");
 	});
 
 	test("returns filter-frames styling for device with different level", () => {
@@ -153,7 +152,7 @@ describe("getButtonStyling utility function", () => {
 		};
 
 		const result = getButtonStyling(device);
-		expect(result).toBe("mdi mdi-image-filter-frames");
+		expect(result).toBe("mdi tile-icon text-black/30 mdi-image-filter-frames");
 	});
 
 	test("returns filter-frames styling for device without level", () => {
@@ -163,6 +162,6 @@ describe("getButtonStyling utility function", () => {
 		};
 
 		const result = getButtonStyling(device);
-		expect(result).toBe("mdi mdi-image-filter-frames");
+		expect(result).toBe("mdi tile-icon text-black/30 mdi-image-filter-frames");
 	});
 });

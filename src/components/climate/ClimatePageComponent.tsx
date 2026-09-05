@@ -3,8 +3,8 @@ import HeaderComponent from "../HeaderComponent";
 import type { Device, DeviceMap } from "../../types";
 import {
 	getCurrentOutsideTemp,
-	getFanModeStyle,
-	getHVACStyle,
+	isFanModeActive,
+	isHVACModeActive,
 	getThermostatSetPoint,
 	getThermostatBattery,
 	getThermometerItems,
@@ -17,6 +17,7 @@ import {
 } from "../../utils/WeatherUtilities";
 import MotionSensorComponent from "../room/MotionSensorComponent";
 import IOSSlider from "../ui/IOSSlider";
+import { SegmentedControl, SegmentedOption } from "../ui/SegmentedControl";
 
 interface ClimatePageComponentProps {
 	back: () => void;
@@ -43,10 +44,10 @@ export default function ClimatePageComponent({
 			<div className="background"></div>
 			<HeaderComponent back={back} name={"Climate"} />
 			<div className="px-2 pb-2 w-full h-full flex flex-wrap justify-center content-start room-content">
-				<div className="p-2 w-full flex light_slider mb-2">
+				<div className="p-2 w-full flex bg-white/70 rounded-2xl mb-2">
 					<label className="grow mt-2 ms-2">Outside</label>
 					<div
-						className="temp-display pe-1 ps-1 flex items-center me-2"
+						className="rounded-lg text-white min-w-8.75 flex justify-center pe-1 ps-1 items-center me-2"
 						style={getTempStyle(getCurrentOutsideTemp(deviceMap))}
 					>
 						{getFormattedTemp(getCurrentOutsideTemp(deviceMap))} /{" "}
@@ -54,57 +55,62 @@ export default function ClimatePageComponent({
 					</div>
 				</div>
 				{getThermometerItems(deviceMap)}
-				<div className="thermostat-content w-full">
-					<div className="p-2 w-full is-disabled">
+				<div className="bg-surface/34 w-full">
+					<div className="p-2 w-full pointer-events-none opacity-40">
 						<label>Fan Mode</label>
-						<div className="w-full flex segmented-control">
-							<label
-								className={getFanModeStyle("1", deviceMap)}
+						<SegmentedControl className="w-full">
+							<SegmentedOption
+								className="w-full"
+								active={isFanModeActive("1", deviceMap)}
 								onClick={() => fanModeChange("1")}
 							>
 								On
-							</label>
-							<label
-								className={getFanModeStyle("0", deviceMap)}
+							</SegmentedOption>
+							<SegmentedOption
+								className="w-full"
+								active={isFanModeActive("0", deviceMap)}
 								onClick={() => fanModeChange("0")}
 							>
 								Auto
-							</label>
-						</div>
+							</SegmentedOption>
+						</SegmentedControl>
 					</div>
-					<div className="p-2 w-full is-disabled">
+					<div className="p-2 w-full pointer-events-none opacity-40">
 						<label>HVAC Mode</label>
-						<div className="w-full flex segmented-control">
-							<label
-								className={getHVACStyle("0", deviceMap)}
+						<SegmentedControl className="w-full">
+							<SegmentedOption
+								className="w-full"
+								active={isHVACModeActive("0", deviceMap)}
 								onClick={() => hvacModeChange("0")}
 							>
 								Off
-							</label>
-							<label
-								className={getHVACStyle("2", deviceMap)}
+							</SegmentedOption>
+							<SegmentedOption
+								className="w-full"
+								active={isHVACModeActive("2", deviceMap)}
 								onClick={() => hvacModeChange("2")}
 							>
 								Cool
-							</label>
-							<label
-								className={getHVACStyle("1", deviceMap)}
+							</SegmentedOption>
+							<SegmentedOption
+								className="w-full"
+								active={isHVACModeActive("1", deviceMap)}
 								onClick={() => hvacModeChange("1")}
 							>
 								Heat
-							</label>
-						</div>
+							</SegmentedOption>
+						</SegmentedControl>
 					</div>
-					<div className="p-2 w-full flex is-disabled">
+					<div className="p-2 w-full flex pointer-events-none opacity-40">
 						<label className="grow">Thermostat</label>
 						<div
-							className="temp-display pe-1 ps-1 flex items-center"
+							className="rounded-lg text-white min-w-8.75 flex justify-center pe-1 ps-1 items-center"
 							style={getIndoorTempStyle(getThermostatSetPoint(deviceMap))}
 						>
 							{getFormattedTemp(getThermostatSetPoint(deviceMap))}
 						</div>
 					</div>
-					<div className="p-2 w-full flex is-disabled">
+					<div className="p-2 w-full flex pointer-events-none opacity-40">
 						{
 							<IOSSlider
 								value={getThermostatSetPoint(deviceMap)}
@@ -119,7 +125,7 @@ export default function ClimatePageComponent({
 					<MotionSensorComponent
 						key={getThermostatBattery(deviceMap).name}
 						device={getThermostatBattery(deviceMap)}
-						styleName={"is-disabled"}
+						styleName={"pointer-events-none opacity-40"}
 					/>
 				</div>
 			</div>

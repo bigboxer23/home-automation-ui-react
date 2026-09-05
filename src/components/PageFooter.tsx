@@ -6,7 +6,7 @@ const PageFooter: React.FC = () => {
 	return (
 		<div className="page-footer flex justify-center p-4 mt-auto">
 			<span
-				className="minor-text text-white"
+				className="text-[0.8rem] leading-[1.3] opacity-70 text-white"
 				title={formatBuildDetail(buildInfo)}
 			>
 				{buildInfo.version}

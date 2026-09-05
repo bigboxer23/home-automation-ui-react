@@ -59,7 +59,7 @@ export const getAutoCloseDelay = (room: Room): number => {
 };
 
 export const getAutoCloseButtonStyle = (room: Room): string => {
-	return GarageButton.getAutoClose(room) === "" ? "point-events-none " : "";
+	return GarageButton.getAutoClose(room) === "" ? "pointer-events-none " : "";
 };
 
 const mapStateToProps = (state: RootState) => ({

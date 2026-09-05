@@ -28,7 +28,12 @@ describe("MeuralPromptPageComponent", () => {
 		);
 		expect(textarea).toBeInTheDocument();
 		expect(textarea).toHaveAttribute("id", "creationPrompt");
-		expect(textarea).toHaveClass("pt-6", "w-full", "prompt-textarea");
+		expect(textarea).toHaveClass(
+			"pt-6",
+			"w-full",
+			"border-none",
+			"resize-none",
+		);
 	});
 
 	test("renders Create New Image button", () => {

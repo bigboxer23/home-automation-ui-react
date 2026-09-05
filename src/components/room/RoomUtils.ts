@@ -31,7 +31,7 @@ export const isLight = (device: Device): boolean =>
 export const isFan = (device: Device): boolean => device.category === "3";
 
 export const areDotsHidden = (room: Room): string =>
-	getCountContent(room) === "" ? "" : " hide";
+	getCountContent(room) === "" ? "" : " opacity-0";
 
 export const getRoomTemp = (room: Room): string => {
 	let temp = getTemp(room.devices);
@@ -58,6 +58,15 @@ export const getCountContent = (room: Room): string | number => {
 	return aCount === 0 ? getRoomTemp(room) : aCount;
 };
 
+/**
+ * The bulb's base colour, red when a device in the room is low on battery.
+ *
+ * This returns the muted default too, rather than only the warning, so that a
+ * single colour utility is ever emitted. Two competing ones would tie on
+ * specificity and be resolved by Tailwind's own output order instead of by
+ * anything visible here. The `[data-state=on]` variant on the element outranks
+ * whichever this returns, so an "on" room still shows the yellow bulb.
+ */
 export const getBatteryWarningStyle = (room: Room): string => {
 	let aLowBatteries = room.devices.find((device) => {
 		return (
@@ -68,9 +77,9 @@ export const getBatteryWarningStyle = (room: Room): string => {
 		);
 	});
 	if (aLowBatteries != null) {
-		return " danger";
+		return " text-danger font-bold";
 	}
-	return "";
+	return " text-black/30";
 };
 
 export const getButtonStyle = (room: Room): ButtonState => {

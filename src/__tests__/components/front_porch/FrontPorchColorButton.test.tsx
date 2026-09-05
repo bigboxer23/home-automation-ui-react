@@ -251,7 +251,7 @@ describe("FrontPorchColorButton", () => {
 		expect(button).toHaveClass("relative");
 		expect(button).toHaveClass("flex");
 		expect(button).toHaveClass("justify-center");
-		expect(button).toHaveClass("btn-lg");
+		expect(button).toHaveClass("w-[115px]");
 	});
 
 	test("calls handleClick with device id when clicked", () => {
@@ -291,7 +291,7 @@ describe("FrontPorchColorButton", () => {
 			/>,
 		);
 
-		const nameDiv = document.querySelector(".bottom");
+		const nameDiv = document.querySelector(".bottom-0");
 		expect(nameDiv).toBeInTheDocument();
 		expect(nameDiv).toHaveTextContent("Pride");
 		expect(nameDiv).toHaveClass("w-full");

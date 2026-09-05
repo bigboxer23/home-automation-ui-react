@@ -60,7 +60,7 @@ describe("MeuralQualityButton", () => {
 			<MeuralQualityButton {...props} />,
 		);
 
-		const component = container.querySelector(".meural-source-button");
+		const component = container.querySelector(".w-full");
 		expect(component).not.toHaveClass("hidden");
 	});
 
@@ -70,7 +70,7 @@ describe("MeuralQualityButton", () => {
 			<MeuralQualityButton {...props} />,
 		);
 
-		const component = container.querySelector(".meural-source-button");
+		const component = container.querySelector(".w-full");
 		expect(component).toHaveClass("hidden");
 	});
 
@@ -80,7 +80,7 @@ describe("MeuralQualityButton", () => {
 			<MeuralQualityButton {...props} />,
 		);
 
-		const component = container.querySelector(".meural-source-button");
+		const component = container.querySelector(".w-full");
 		expect(component).toHaveClass("hidden");
 	});
 
@@ -135,7 +135,7 @@ describe("MeuralQualityButton", () => {
 			<MeuralQualityButton {...props} />,
 		);
 
-		const label = container.querySelector(".meural-source-button-label");
+		const label = container.querySelector('[class~="text-black/60"]');
 		expect(label).toHaveClass("ms-4", "font-bold", "pt-4", "pb-2");
 
 		const buttons = container.querySelectorAll(".mdi.mdi-check-circle");

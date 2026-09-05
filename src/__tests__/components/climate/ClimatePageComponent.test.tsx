@@ -6,10 +6,8 @@ import { renderWithProviders } from "../../../test-utils";
 // Mock all the utility functions
 vi.mock("../../../containers/ClimatePage", () => ({
 	getCurrentOutsideTemp: () => 75,
-	getFanModeStyle: (mode: any, deviceMap: any) =>
-		mode === "1" ? "segmented-option is-active" : "segmented-option",
-	getHVACStyle: (mode: any, deviceMap: any) =>
-		mode === "2" ? "segmented-option is-active" : "segmented-option",
+	isFanModeActive: (mode: any, deviceMap: any) => mode === "1",
+	isHVACModeActive: (mode: any, deviceMap: any) => mode === "2",
 	getThermostatSetPoint: () => 70,
 	getThermostatBattery: () => ({ name: "Thermostat Battery", level: "85" }),
 	getThermometerItems: () => [
