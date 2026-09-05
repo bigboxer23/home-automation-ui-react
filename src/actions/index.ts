@@ -306,7 +306,7 @@ function getBody(): RequestInit {
 		body: "{}",
 		headers: {
 			"X-XSRF-TOKEN": document.cookie.replace(
-				/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+				/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/,
 				"$1",
 			),
 		},
