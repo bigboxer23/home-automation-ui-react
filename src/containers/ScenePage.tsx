@@ -7,10 +7,9 @@ import { fetchStatusIfNecessary, sceneClicked } from "../actions";
 import type { AppDispatch, Device, Room, RootState } from "../types";
 import { findRoomDevices } from "../utils/RoomLookup";
 
-interface ScenePageProps {
+type ScenePageProps = React.ComponentProps<typeof ScenePageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class ScenePage extends React.Component<ScenePageProps> {
 	componentDidMount() {
@@ -18,7 +17,7 @@ class ScenePage extends React.Component<ScenePageProps> {
 	}
 
 	render() {
-		return <ScenePageComponent {...(this.props as any)} />;
+		return <ScenePageComponent {...this.props} />;
 	}
 }
 

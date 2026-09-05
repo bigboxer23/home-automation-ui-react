@@ -15,7 +15,7 @@
 			"warn",
 			{ "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
 		],
-		"typescript/no-explicit-any": "warn"
+		"typescript/no-explicit-any": "error"
 	},
 	"overrides": [
 		{

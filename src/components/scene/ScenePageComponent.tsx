@@ -1,12 +1,12 @@
 import React from "react";
-import type { Room } from "../../types";
+import type { Device } from "../../types";
 import SceneButton from "./SceneButton";
 import AppButton from "../ui/AppButton";
 import SceneHeaderComponent from "./SceneHeaderComponent";
 
 interface ScenePageComponentProps {
 	back: () => void;
-	rooms: Room[];
+	rooms: Device[];
 	handleClick: (id: string, verb: string) => void;
 	gotoPage: (page: string) => void;
 }

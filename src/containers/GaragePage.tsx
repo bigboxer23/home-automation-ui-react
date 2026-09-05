@@ -14,10 +14,9 @@ import GarageButton from "../components/garage/GarageButton";
 import type { AppDispatch, Room, RootState } from "../types";
 import { findRoomOrEmpty } from "../utils/RoomLookup";
 
-interface GaragePageProps {
+type GaragePageProps = React.ComponentProps<typeof GaragePageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class GaragePage extends React.Component<GaragePageProps> {
 	componentDidMount() {
@@ -25,7 +24,7 @@ class GaragePage extends React.Component<GaragePageProps> {
 	}
 
 	render() {
-		return <GaragePageComponent {...(this.props as any)} />;
+		return <GaragePageComponent {...this.props} />;
 	}
 }
 
@@ -71,7 +70,8 @@ const mapDispatchToProps = (dispatch: AppDispatch) =>
 		{
 			back: () => push("/"),
 			sliderChange: (_event: unknown) => cancelFetchTimer(),
-			slideStop: (level: number, id: string) => setDim(String(level), id),
+			slideStop: (level: number | number[], id: string) =>
+				setDim(String(level), id),
 			setDeviceStatus: (id: string, status: boolean) => setOnOff(status, id),
 			fetchStatus: () => fetchStatusIfNecessary(),
 			autoCloseClickHandler: (delay: number) => disableAutoClose(delay),

@@ -7,13 +7,13 @@ import { mapStateToProps } from "./MeuralPage";
 import { updateOpenAIPrompt } from "../actions";
 import type { AppDispatch, AppThunk } from "../types";
 
-interface MeuralPromptPageProps {
-	[key: string]: any;
-}
+type MeuralPromptPageProps = React.ComponentProps<
+	typeof MeuralPromptPageComponent
+>;
 
 class MeuralPromptPage extends React.Component<MeuralPromptPageProps> {
 	render() {
-		return <MeuralPromptPageComponent {...(this.props as any)} />;
+		return <MeuralPromptPageComponent {...this.props} />;
 	}
 }
 

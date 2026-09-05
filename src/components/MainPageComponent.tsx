@@ -3,7 +3,7 @@ import type { Room } from "../types";
 import { mapRoom } from "../containers/MainPage";
 
 interface MainPageComponentProps {
-	time: Room;
+	time: Room | undefined;
 	rooms: Room[];
 	handleClick: (
 		event: React.MouseEvent,

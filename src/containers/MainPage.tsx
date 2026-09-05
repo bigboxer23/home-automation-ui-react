@@ -13,10 +13,11 @@ import MeuralButton from "../components/meural/MeuralButton";
 import { isLight, onCount } from "../components/room/RoomUtils";
 import type { AppDispatch, Room, RootState, Device } from "../types";
 
-interface MainPageProps {
-	fetchStatus: () => void;
-	[key: string]: any;
-}
+// The page renders both children off one set of connected props.
+type MainPageProps = React.ComponentProps<typeof LoadingStatusComponent> &
+	React.ComponentProps<typeof MainPageComponent> & {
+		fetchStatus: () => void;
+	};
 
 class MainPage extends React.Component<MainPageProps> {
 	componentDidMount() {
@@ -26,8 +27,8 @@ class MainPage extends React.Component<MainPageProps> {
 	render() {
 		return (
 			<div>
-				<LoadingStatusComponent {...(this.props as any)} />
-				<MainPageComponent {...(this.props as any)} />
+				<LoadingStatusComponent {...this.props} />
+				<MainPageComponent {...this.props} />
 			</div>
 		);
 	}
@@ -149,7 +150,11 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
-			handleClick: (event: React.MouseEvent, id: string, state: string) => {
+			handleClick: (
+				event: React.MouseEvent,
+				id: string,
+				state: string | number,
+			) => {
 				event.stopPropagation();
 				return roomClicked(id, state);
 			},

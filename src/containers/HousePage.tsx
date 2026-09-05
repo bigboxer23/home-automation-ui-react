@@ -7,10 +7,9 @@ import HousePageComponent from "../components/house/HousePageComponent";
 import type { AppDispatch, Device, Room, RootState } from "../types";
 import { findRoomDevices } from "../utils/RoomLookup";
 
-interface HousePageProps {
+type HousePageProps = React.ComponentProps<typeof HousePageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class HousePage extends React.Component<HousePageProps> {
 	componentDidMount() {
@@ -18,7 +17,7 @@ class HousePage extends React.Component<HousePageProps> {
 	}
 
 	render() {
-		return <HousePageComponent {...(this.props as any)} />;
+		return <HousePageComponent {...this.props} />;
 	}
 }
 

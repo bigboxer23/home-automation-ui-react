@@ -6,14 +6,13 @@ import { fetchStatusIfNecessary } from "../actions";
 import MeuralPageComponent from "../components/meural/MeuralPageComponent";
 import type { AppDispatch, Device, Room, RootState } from "../types";
 
-interface MeuralPageProps {
+type MeuralPageProps = React.ComponentProps<typeof MeuralPageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class MeuralPage extends React.Component<MeuralPageProps> {
 	render() {
-		return <MeuralPageComponent {...(this.props as any)} />;
+		return <MeuralPageComponent {...this.props} />;
 	}
 
 	componentDidMount() {
