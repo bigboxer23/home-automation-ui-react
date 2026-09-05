@@ -21,15 +21,14 @@ import ErrorPage from "./containers/ErrorPage";
 import MeuralPage from "./containers/MeuralPage";
 import MeuralPromptPage from "./containers/MeuralPromptPage";
 
-export default function configureStore(preloadedState: any = {}) {
-	return createStore(
-		rootReducer,
-		preloadedState,
-		compose(applyMiddleware(thunk)),
-	);
+// No preloaded state: the only caller is the render below. Redux's own
+// PreloadedState type resolves to `never` against this reducer, so a
+// parameter here could not be typed without an `any` to nobody's benefit.
+export default function configureStore() {
+	return createStore(rootReducer, undefined, compose(applyMiddleware(thunk)));
 }
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<Provider store={configureStore({})}>
+	<Provider store={configureStore()}>
 		<BrowserRouter>
 			<NavigationProvider>
 				<Routes>

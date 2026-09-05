@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
+import type { AppDispatch } from "../types";
 import CameraComponent from "../components/CameraComponent";
 
 interface CameraPageProps {
@@ -33,7 +34,7 @@ const resizeImgContent = function (iframe: HTMLIFrameElement): void {
 	}
 };
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/Scenes"),

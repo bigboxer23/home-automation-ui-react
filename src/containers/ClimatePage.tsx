@@ -18,7 +18,7 @@ import {
 import ThermostatComponent, {
 	getName,
 } from "../components/climate/ClimateSensorComponent";
-import type { Device, DeviceMap, Room, RootState } from "../types";
+import type { AppDispatch, Device, DeviceMap, Room, RootState } from "../types";
 import { findRoomDevices, toDeviceMap } from "../utils/RoomLookup";
 
 interface ClimatePageProps {
@@ -204,17 +204,15 @@ const mapStateToProps = (state: RootState) => ({
 	deviceMap: getClimateData(state.house.rooms),
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),
 			fetchStatus: () => fetchStatusIfNecessary(),
-			sliderChange: (event: any, newValue: number) => () => {
-				dispatch(setLocalThermostatSetPoint(newValue));
-			},
-			slideStop: (event: any, newValue: number) => () => {
-				dispatch(setThermostatSetPoint(newValue));
-			},
+			sliderChange: (_event: Event, newValue: number) =>
+				setLocalThermostatSetPoint(newValue),
+			slideStop: (_event: Event, newValue: number) =>
+				setThermostatSetPoint(newValue),
 			fanModeChange: (value: string) => fanModeChange(value),
 			hvacModeChange: (value: string) => hvacModeChange(value),
 		},

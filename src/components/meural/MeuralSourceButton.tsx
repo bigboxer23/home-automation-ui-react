@@ -5,21 +5,18 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import MuiAlert from "@mui/material/Alert";
 import type { AlertProps } from "@mui/material/Alert";
-import type { Device } from "../../types";
+import type { AppDispatch, Device } from "../../types";
 
 interface MeuralSourceButtonProps {
 	device: Device | undefined;
 	onChange: (event: React.MouseEvent<HTMLElement>, value: string) => void;
 }
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
-			onChange:
-				(event: React.MouseEvent<HTMLElement>, value: string) =>
-				(dispatch: any) => {
-					dispatch(setMeuralSource(value));
-				},
+			onChange: (_event: React.MouseEvent<HTMLElement>, value: string) =>
+				setMeuralSource(value),
 		},
 		dispatch,
 	);
@@ -41,7 +38,6 @@ export default connect(
 	const handleClick = (
 		event: React.MouseEvent<HTMLElement>,
 		value: string | null,
-		props: MeuralSourceButtonProps,
 	): void => {
 		if (value != null) {
 			setOpen(true);
@@ -59,7 +55,7 @@ export default connect(
 				onChange={(
 					event: React.MouseEvent<HTMLElement>,
 					value: string | null,
-				) => handleClick(event, value, props)}
+				) => handleClick(event, value)}
 				orientation={"vertical"}
 			>
 				<div className={"ms-4 text-black/60 font-bold pt-4 pb-2"}>Source</div>

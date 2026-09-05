@@ -3,7 +3,7 @@ import AppButton from "../ui/AppButton";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push } from "../../utils/navigation";
-import type { DeviceMap, RootState } from "../../types";
+import type { AppDispatch, DeviceMap, RootState } from "../../types";
 import {
 	getClimateData,
 	getCurrentOutsideTemp,
@@ -63,7 +63,7 @@ const mapStateToProps = (state: RootState) => ({
 	deviceMap: getClimateData(state.house.rooms),
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			changePage: () => push("/Climate"),

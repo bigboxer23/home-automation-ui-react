@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { push } from "../../utils/navigation";
 import { setMeuralOn } from "../../actions";
 import { findMeuralDeviceFromRoom, isOn } from "../../containers/MeuralPage";
-import type { Device, Room } from "../../types";
+import type { AppDispatch, AppThunk, Device, Room } from "../../types";
 
 interface MeuralButtonProps {
 	room: Room;
@@ -32,19 +32,20 @@ export const getButtonStyling = (device: Device | undefined): string => {
 	);
 };
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (storeDispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			changePage:
-				(event: React.MouseEvent, isOn: boolean) => (dispatch: any) => {
+				(event: React.MouseEvent, meuralIsOn: boolean): AppThunk =>
+				(dispatch) => {
 					event.stopPropagation();
-					if (!isOn) {
+					if (!meuralIsOn) {
 						dispatch(setMeuralOn(true));
 					}
 					dispatch(push("/Meural"));
 				},
 		},
-		dispatch,
+		storeDispatch,
 	);
 
 export default connect(null, mapDispatchToProps)(MeuralButton);

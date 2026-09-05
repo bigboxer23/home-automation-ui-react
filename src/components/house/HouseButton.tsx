@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push } from "../../utils/navigation";
 import { sceneClicked } from "../../actions";
-import type { Device, Room } from "../../types";
+import type { AppDispatch, Device, Room } from "../../types";
 
 interface HouseButtonProps {
 	room: Room;
@@ -44,12 +44,12 @@ const HouseButton: React.FC<HouseButtonProps> = ({
 	</AppButton>
 );
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
-			changePage: (event: React.MouseEvent) => (dispatch: any) => {
+			changePage: (event: React.MouseEvent) => {
 				event.stopPropagation();
-				dispatch(push("/Scenes"));
+				return push("/Scenes");
 			},
 			houseOff: (
 				event: React.MouseEvent,

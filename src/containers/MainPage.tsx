@@ -11,7 +11,7 @@ import ClimateButton from "../components/climate/ClimateButton";
 import HouseButton from "../components/house/HouseButton";
 import MeuralButton from "../components/meural/MeuralButton";
 import { isLight, onCount } from "../components/room/RoomUtils";
-import type { Room, RootState, Device } from "../types";
+import type { AppDispatch, Room, RootState, Device } from "../types";
 
 interface MainPageProps {
 	fetchStatus: () => void;
@@ -146,29 +146,22 @@ const mapStateToProps = (state: RootState) => ({
 	authError: state.house.authError,
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
-			handleClick:
-				(event: React.MouseEvent, id: string, state: string) =>
-				(dispatch: any) => {
-					event.stopPropagation();
-					dispatch(roomClicked(id, state));
-				},
-			fetchStatus: () => (dispatch: any) => {
-				dispatch(fetchStatusIfNecessary());
-			},
-			handleGarageClick: (action: string) => (dispatch: any) => {
-				dispatch(garageClicked(action));
-			},
-			handleMoreClick:
-				(event: React.MouseEvent, name: string) => (dispatch: any) => {
-					event.stopPropagation();
-					dispatch(push("/Room/" + name));
-				},
-			handleGarageMoreClick: (event: React.MouseEvent) => (dispatch: any) => {
+			handleClick: (event: React.MouseEvent, id: string, state: string) => {
 				event.stopPropagation();
-				dispatch(push("/Garage"));
+				return roomClicked(id, state);
+			},
+			fetchStatus: () => fetchStatusIfNecessary(),
+			handleGarageClick: (action: string) => garageClicked(action),
+			handleMoreClick: (event: React.MouseEvent, name: string) => {
+				event.stopPropagation();
+				return push("/Room/" + name);
+			},
+			handleGarageMoreClick: (event: React.MouseEvent) => {
+				event.stopPropagation();
+				return push("/Garage");
 			},
 		},
 		dispatch,

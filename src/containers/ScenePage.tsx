@@ -4,7 +4,7 @@ import ScenePageComponent from "../components/scene/ScenePageComponent";
 import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import { fetchStatusIfNecessary, sceneClicked } from "../actions";
-import type { Device, Room, RootState } from "../types";
+import type { AppDispatch, Device, Room, RootState } from "../types";
 import { findRoomDevices } from "../utils/RoomLookup";
 
 interface ScenePageProps {
@@ -29,7 +29,7 @@ const mapStateToProps = (state: RootState) => ({
 	rooms: getSceneRoom(state.house.rooms),
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),
