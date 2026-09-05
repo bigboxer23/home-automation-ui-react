@@ -31,9 +31,7 @@ describe("MeuralQualityButton", () => {
 
 	test("defaults to HD quality when no temperature data provided", () => {
 		const props = { device: { id: "meural1", name: "Meural", status: "1" } };
-		const { container } = renderWithProviders(
-			<MeuralQualityButton {...props} />,
-		);
+		renderWithProviders(<MeuralQualityButton {...props} />);
 
 		const hdButton = screen.getByText("HD").closest("button");
 		expect(hdButton).toHaveAttribute("aria-pressed", "true");

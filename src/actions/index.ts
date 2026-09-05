@@ -1,5 +1,5 @@
 import { getClimateData, getSetpointDevice } from "../containers/ClimatePage";
-import type { AppThunk, Room, HouseAction, RootState, Device } from "../types";
+import type { AppThunk, Room, HouseAction } from "../types";
 import type { Dispatch } from "redux";
 
 const statusUpdated = (data: Room[]): HouseAction => ({
@@ -127,14 +127,14 @@ export function fetchStatusIfNecessary(): AppThunk {
 }
 
 export function setDimLocal(level: string, id: string): AppThunk {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		dispatch(cancelFetchTimer());
 		dispatch(updateDim(id, level));
 	};
 }
 
 export function setDim(setPoint: string, id: string): AppThunk {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		fetchWithCookies("/S/OpenHAB/" + id + "/" + setPoint).finally(() =>
 			dispatch(schedulePoll()),
 		);
@@ -142,7 +142,7 @@ export function setDim(setPoint: string, id: string): AppThunk {
 }
 
 export function setOnOff(on: boolean, id: string): AppThunk {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		dispatch(cancelFetchTimer());
 		dispatch(updateOnOff(id, on));
 		fetchWithCookies("/S/OpenHAB/" + id + "/" + (on ? "ON" : "OFF")).finally(
@@ -160,7 +160,7 @@ export function cancelFetchTimer(): AppThunk {
 }
 
 export function garageClicked(action: string): AppThunk {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		dispatch(updateGarageState(action));
@@ -224,14 +224,14 @@ export function setThermostatSetPoint(setPoint: number): AppThunk {
 }
 
 export function setLocalThermostatSetPoint(setPoint: number): AppThunk {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		dispatch(cancelFetchTimer());
 		dispatch(updateThermostatSetPoint(setPoint));
 	};
 }
 
 export function disableAutoClose(delay: number): AppThunk {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		dispatch(cancelFetchTimer());
 		dispatch(requestStatus());
 		fetchWithCookies("/S/Garage/SetAutoCloseDelay/" + delay).finally(() => {

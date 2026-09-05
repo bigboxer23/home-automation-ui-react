@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderComponent from "../HeaderComponent";
-import type { Device, DeviceMap } from "../../types";
+import type { DeviceMap } from "../../types";
 import {
 	getCurrentOutsideTemp,
 	isFanModeActive,

@@ -1,6 +1,6 @@
 import React from "react";
 import AppButton from "../ui/AppButton";
-import { hideInfo, showInfo } from "../../actions";
+import { showInfo } from "../../actions";
 import type { Device } from "../../types";
 
 interface MeuralShowInfoButtonProps {

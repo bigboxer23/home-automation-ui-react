@@ -1,5 +1,4 @@
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../test-utils";
 import ClimatePage, {
 	getThermometerItems,
@@ -199,7 +198,7 @@ describe("getClimateData utility function", () => {
 		// This should not crash but will return an error in actual implementation
 		// Testing the behavior when devices is undefined
 		try {
-			const result = getClimateData(rooms as any);
+			getClimateData(rooms as any);
 		} catch (error) {
 			expect(error).toBeDefined();
 		}

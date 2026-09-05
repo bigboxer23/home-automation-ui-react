@@ -36,7 +36,7 @@ export default function MeuralNextButton(
 			: "Fetching Next Image";
 	};
 
-	const shouldDisplay = (status: string | undefined): string => {
+	const shouldDisplay = (_status: string | undefined): string => {
 		return "mb-4 m-1 relative flex justify-center"; /*+
 			("4" === status ? " hidden" : "")*/
 	};
