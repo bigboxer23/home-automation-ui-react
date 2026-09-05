@@ -14,7 +14,7 @@ export const setNavigationInstance = (navigate: NavigateFunction): void => {
 // Push function that works like connected-react-router's push
 // Returns a thunk action that can be dispatched
 export const push = (path: string): AppThunk => {
-	return (dispatch) => {
+	return () => {
 		if (navigationInstance) {
 			navigationInstance(path);
 		} else {

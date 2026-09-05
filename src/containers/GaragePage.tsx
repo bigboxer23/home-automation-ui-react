@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch: any) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),
-			sliderChange: (event: any) => (dispatch: any) => {
+			sliderChange: (_event: any) => (dispatch: any) => {
 				dispatch(cancelFetchTimer());
 			},
 			slideStop: (level: number, id: string) => (dispatch: any) => {

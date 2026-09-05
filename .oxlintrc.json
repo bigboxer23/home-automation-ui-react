@@ -1,0 +1,27 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["react", "typescript", "oxc"],
+	"categories": {
+		"correctness": "error",
+		"suspicious": "warn"
+	},
+	"ignorePatterns": ["build/**", "coverage/**", "public/**"],
+	"rules": {
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
+		"react/react-in-jsx-scope": "off",
+		"no-unused-vars": [
+			"warn",
+			{ "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+		],
+		"typescript/no-explicit-any": "warn"
+	},
+	"overrides": [
+		{
+			"files": ["src/__tests__/**", "src/setupTests.ts", "src/test-utils.tsx"],
+			"rules": {
+				"typescript/no-explicit-any": "off"
+			}
+		}
+	]
+}

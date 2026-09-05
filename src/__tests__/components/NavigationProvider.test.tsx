@@ -2,10 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { useNavigate } from "react-router-dom";
 import NavigationProvider from "../../components/NavigationProvider";
-import {
-	setNavigationInstance,
-	getNavigationInstance,
-} from "../../utils/navigation";
+import { setNavigationInstance } from "../../utils/navigation";
 
 // Mock react-router-dom
 vi.mock("react-router-dom", () => ({

@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../test-utils";
 import IOSSlider from "../../../components/ui/IOSSlider";
 

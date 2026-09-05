@@ -202,7 +202,7 @@ describe("MeuralPromptPage", () => {
 		const mockElement = { value: "test prompt" };
 		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
-		const { store } = renderWithProviders(<MeuralPromptPage />, {
+		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
 				house: {
 					rooms: mockRooms as any,
@@ -308,7 +308,7 @@ describe("MeuralPromptPage", () => {
 		const mockElement = { value: "test prompt from enter" };
 		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
-		const { store } = renderWithProviders(<MeuralPromptPage />, {
+		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
 				house: {
 					rooms: mockRooms as any,
@@ -387,7 +387,7 @@ describe("MeuralPromptPage", () => {
 		const mockElement = { value: "   " };
 		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
-		const { store } = renderWithProviders(<MeuralPromptPage />, {
+		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
 				house: {
 					rooms: mockRooms as any,
@@ -410,7 +410,7 @@ describe("MeuralPromptPage", () => {
 	});
 
 	test("back action dispatches push to /Meural", () => {
-		const { store } = renderWithProviders(<MeuralPromptPage />, {
+		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
 				house: {
 					rooms: mockRooms as any,
@@ -474,7 +474,7 @@ describe("MeuralPromptPage mapDispatchToProps", () => {
 		const mockElement = { value: "test prompt" };
 		(globalThis as any).document.getElementById = vi.fn(() => mockElement);
 
-		const { store } = renderWithProviders(<MeuralPromptPage />, {
+		renderWithProviders(<MeuralPromptPage />, {
 			preloadedState: {
 				house: {
 					rooms: mockRooms as any,
@@ -484,8 +484,6 @@ describe("MeuralPromptPage mapDispatchToProps", () => {
 				},
 			} as any,
 		});
-
-		const dispatchSpy = vi.spyOn(store, "dispatch");
 
 		const createButton = screen.getByRole("button", {
 			name: "Create New Image",

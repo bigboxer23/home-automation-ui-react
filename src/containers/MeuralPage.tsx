@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
-import { fetchStatusIfNecessary, sceneClicked, setMeuralOn } from "../actions";
+import { fetchStatusIfNecessary } from "../actions";
 import MeuralPageComponent from "../components/meural/MeuralPageComponent";
 import type { Device, Room, RootState } from "../types";
 

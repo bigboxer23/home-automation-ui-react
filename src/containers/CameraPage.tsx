@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import CameraComponent from "../components/CameraComponent";
-import type { RootState } from "../types";
 
 interface CameraPageProps {
 	[key: string]: any;
@@ -34,18 +33,16 @@ const resizeImgContent = function (iframe: HTMLIFrameElement): void {
 	}
 };
 
-const mapStateToProps = (state: RootState) => ({});
-
 const mapDispatchToProps = (dispatch: any) =>
 	bindActionCreators(
 		{
 			back: () => push("/Scenes"),
-			load: (o: HTMLIFrameElement) => (dispatch: any) => initializeIframe(o),
-			getSource: () => (dispatch: any) =>
+			load: (o: HTMLIFrameElement) => () => initializeIframe(o),
+			getSource: () => () =>
 				window.location.pathname === "/Security"
 					? "/FrontDoor"
 					: "/GrowPi/index.html",
-			getName: () => (dispatch: any) =>
+			getName: () => () =>
 				window.location.pathname === "/Security"
 					? "Front Door Security"
 					: "Grow Tent",
@@ -53,4 +50,4 @@ const mapDispatchToProps = (dispatch: any) =>
 		dispatch,
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(CameraPage);
+export default connect(null, mapDispatchToProps)(CameraPage);
