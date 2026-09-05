@@ -34,9 +34,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Both of these are fast and fail before the suite runs. `npm run build`
-      # is not repeated here - typecheck is the only part of it that can fail
-      # on a code change, and running it alone keeps the failure legible.
       - name: Run typecheck
         run: npm run typecheck
 
