@@ -4,13 +4,12 @@ import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import { fetchStatusIfNecessary, sceneClicked } from "../actions";
 import HousePageComponent from "../components/house/HousePageComponent";
-import type { Device, Room, RootState } from "../types";
+import type { AppDispatch, Device, Room, RootState } from "../types";
 import { findRoomDevices } from "../utils/RoomLookup";
 
-interface HousePageProps {
+type HousePageProps = React.ComponentProps<typeof HousePageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class HousePage extends React.Component<HousePageProps> {
 	componentDidMount() {
@@ -18,7 +17,7 @@ class HousePage extends React.Component<HousePageProps> {
 	}
 
 	render() {
-		return <HousePageComponent {...(this.props as any)} />;
+		return <HousePageComponent {...this.props} />;
 	}
 }
 
@@ -29,7 +28,7 @@ const mapStateToProps = (state: RootState) => ({
 	rooms: getSceneRoom(state.house.rooms),
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),

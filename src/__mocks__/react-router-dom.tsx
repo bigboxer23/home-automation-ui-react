@@ -24,7 +24,7 @@ export const Link = ({
 }: {
 	children: React.ReactNode;
 	to: string;
-	[key: string]: any;
+	[key: string]: unknown;
 }) => React.createElement("a", { href: to, ...props }, children);
 export const NavLink = ({
 	children,
@@ -33,5 +33,5 @@ export const NavLink = ({
 }: {
 	children: React.ReactNode;
 	to: string;
-	[key: string]: any;
+	[key: string]: unknown;
 }) => React.createElement("a", { href: to, ...props }, children);

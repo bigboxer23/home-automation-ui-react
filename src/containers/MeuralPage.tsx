@@ -4,16 +4,15 @@ import { push } from "../utils/navigation";
 import { bindActionCreators } from "redux";
 import { fetchStatusIfNecessary } from "../actions";
 import MeuralPageComponent from "../components/meural/MeuralPageComponent";
-import type { Device, Room, RootState } from "../types";
+import type { AppDispatch, Device, Room, RootState } from "../types";
 
-interface MeuralPageProps {
+type MeuralPageProps = React.ComponentProps<typeof MeuralPageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class MeuralPage extends React.Component<MeuralPageProps> {
 	render() {
-		return <MeuralPageComponent {...(this.props as any)} />;
+		return <MeuralPageComponent {...this.props} />;
 	}
 
 	componentDidMount() {
@@ -45,7 +44,7 @@ export const isOn = (device: Device | undefined): boolean => {
 	return "1.0" === device?.level;
 };
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),

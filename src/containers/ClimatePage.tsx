@@ -18,13 +18,12 @@ import {
 import ThermostatComponent, {
 	getName,
 } from "../components/climate/ClimateSensorComponent";
-import type { Device, DeviceMap, Room, RootState } from "../types";
+import type { AppDispatch, Device, DeviceMap, Room, RootState } from "../types";
 import { findRoomDevices, toDeviceMap } from "../utils/RoomLookup";
 
-interface ClimatePageProps {
+type ClimatePageProps = React.ComponentProps<typeof ClimatePageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class ClimatePage extends React.Component<ClimatePageProps> {
 	componentDidMount() {
@@ -32,7 +31,7 @@ class ClimatePage extends React.Component<ClimatePageProps> {
 	}
 
 	render() {
-		return <ClimatePageComponent {...(this.props as any)} />;
+		return <ClimatePageComponent {...this.props} />;
 	}
 }
 
@@ -204,17 +203,21 @@ const mapStateToProps = (state: RootState) => ({
 	deviceMap: getClimateData(state.house.rooms),
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+/** MUI types a slider value as `number | number[]`; ours are single-value. */
+const sliderValue = (value: number | number[]): number =>
+	Array.isArray(value) ? value[0] : value;
+
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),
 			fetchStatus: () => fetchStatusIfNecessary(),
-			sliderChange: (event: any, newValue: number) => () => {
-				dispatch(setLocalThermostatSetPoint(newValue));
-			},
-			slideStop: (event: any, newValue: number) => () => {
-				dispatch(setThermostatSetPoint(newValue));
-			},
+			sliderChange: (_event: Event, newValue: number | number[]) =>
+				setLocalThermostatSetPoint(sliderValue(newValue)),
+			slideStop: (
+				_event: Event | React.SyntheticEvent,
+				newValue: number | number[],
+			) => setThermostatSetPoint(sliderValue(newValue)),
 			fanModeChange: (value: string) => fanModeChange(value),
 			hvacModeChange: (value: string) => hvacModeChange(value),
 		},

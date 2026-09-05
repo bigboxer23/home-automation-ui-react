@@ -1,11 +1,11 @@
 import React from "react";
-import type { Room } from "../../types";
+import type { Device } from "../../types";
 import HeaderComponent from "../HeaderComponent";
 import SceneButton from "../scene/SceneButton";
 
 interface HousePageComponentProps {
 	back: () => void;
-	rooms: Room[];
+	rooms: Device[];
 	handleClick: (id: string, verb: string) => void;
 }
 

@@ -10,7 +10,7 @@ interface MeuralStyleButtonProps {
 function MeuralStyleButton(props: MeuralStyleButtonProps): React.ReactElement {
 	const getStyle = (): string => {
 		let raw = props.device?.temperature;
-		return raw === undefined ? "hd" : JSON.parse(raw as any).style;
+		return raw === undefined ? "hd" : JSON.parse(String(raw)).style;
 	};
 
 	const getClassnames = (status: string | undefined): string => {

@@ -11,13 +11,12 @@ import {
 } from "../actions";
 import GaragePageComponent from "../components/garage/GaragePageComponent";
 import GarageButton from "../components/garage/GarageButton";
-import type { Room, RootState } from "../types";
+import type { AppDispatch, Room, RootState } from "../types";
 import { findRoomOrEmpty } from "../utils/RoomLookup";
 
-interface GaragePageProps {
+type GaragePageProps = React.ComponentProps<typeof GaragePageComponent> & {
 	fetchStatus: () => void;
-	[key: string]: any;
-}
+};
 
 class GaragePage extends React.Component<GaragePageProps> {
 	componentDidMount() {
@@ -25,7 +24,7 @@ class GaragePage extends React.Component<GaragePageProps> {
 	}
 
 	render() {
-		return <GaragePageComponent {...(this.props as any)} />;
+		return <GaragePageComponent {...this.props} />;
 	}
 }
 
@@ -66,23 +65,16 @@ const mapStateToProps = (state: RootState) => ({
 	room: findGarageRoom(state.house.rooms),
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),
-			sliderChange: (_event: any) => (dispatch: any) => {
-				dispatch(cancelFetchTimer());
-			},
-			slideStop: (level: number, id: string) => (dispatch: any) => {
-				dispatch(setDim(String(level), id));
-			},
-			setDeviceStatus: (id: string, status: boolean) => (dispatch: any) => {
-				dispatch(setOnOff(status, id));
-			},
+			sliderChange: (_event: unknown) => cancelFetchTimer(),
+			slideStop: (level: number | number[], id: string) =>
+				setDim(String(level), id),
+			setDeviceStatus: (id: string, status: boolean) => setOnOff(status, id),
 			fetchStatus: () => fetchStatusIfNecessary(),
-			autoCloseClickHandler: (delay: number) => (dispatch: any) => {
-				dispatch(disableAutoClose(delay));
-			},
+			autoCloseClickHandler: (delay: number) => disableAutoClose(delay),
 		},
 		dispatch,
 	);

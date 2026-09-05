@@ -19,7 +19,7 @@ interface GaragePageComponentProps {
 	sliderChange: (newValue: number | number[], id: string) => void;
 	slideStop: (newValue: number | number[], id: string) => void;
 	setDeviceStatus: (id: string, checked: boolean) => void;
-	autoCloseClickHandler: (delay: any) => void;
+	autoCloseClickHandler: (delay: number) => void;
 }
 
 export default function GaragePageComponent({

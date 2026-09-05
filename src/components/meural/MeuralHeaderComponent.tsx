@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { setMeuralOn } from "../../actions";
 import { isOn } from "../../containers/MeuralPage";
 import { connect } from "react-redux";
-import type { Device } from "../../types";
+import type { AppDispatch, Device } from "../../types";
 
 interface MeuralHeaderComponentProps {
 	back: () => void;
@@ -37,11 +37,10 @@ const MeuralHeaderComponent: React.FC<MeuralHeaderComponentProps> = ({
 	);
 };
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
-			toggleOnOff: (devices: Device | undefined) => (dispatch: any) =>
-				dispatch(setMeuralOn(!isOn(devices))),
+			toggleOnOff: (devices: Device | undefined) => setMeuralOn(!isOn(devices)),
 		},
 		dispatch,
 	);

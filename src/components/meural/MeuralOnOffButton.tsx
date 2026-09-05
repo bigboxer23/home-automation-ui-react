@@ -5,7 +5,7 @@ import { getOnOffText, isOn } from "../../containers/MeuralPage";
 import { bindActionCreators } from "redux";
 import { setMeuralOn } from "../../actions";
 import { connect } from "react-redux";
-import type { Device } from "../../types";
+import type { AppDispatch, Device } from "../../types";
 
 interface MeuralOnOffButtonProps {
 	device: Device | undefined;
@@ -27,11 +27,10 @@ const MeuralOnOffButton: React.FC<MeuralOnOffButtonProps> = (props) => (
 	</div>
 );
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
-			toggleOnOff: (devices: Device | undefined) => (dispatch: any) =>
-				dispatch(setMeuralOn(!isOn(devices))),
+			toggleOnOff: (devices: Device | undefined) => setMeuralOn(!isOn(devices)),
 		},
 		dispatch,
 	);

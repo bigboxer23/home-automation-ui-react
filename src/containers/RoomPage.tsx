@@ -11,15 +11,13 @@ import {
 } from "../actions";
 import RoomPageComponent from "../components/room/RoomPageComponent";
 import { getRoomTemp, isFan, isLight } from "../components/room/RoomUtils";
-import type { Device, Room, RootState } from "../types";
+import type { AppDispatch, Device, Room, RootState } from "../types";
 import { EMPTY_ROOM, findRoom } from "../utils/RoomLookup";
 
-interface RoomPageProps {
+type RoomPageProps = React.ComponentProps<typeof RoomPageComponent> & {
 	fetchStatus: () => void;
-	room?: Room;
 	rooms?: Room[];
-	[key: string]: any;
-}
+};
 
 function RoomPage(props: RoomPageProps) {
 	const { fetchStatus } = props;
@@ -27,7 +25,7 @@ function RoomPage(props: RoomPageProps) {
 		fetchStatus();
 	}, [fetchStatus]);
 
-	return <RoomPageComponent {...(props as any)} />;
+	return <RoomPageComponent {...props} />;
 }
 
 const filterRoom = (rooms: Room[] | null, name: string | undefined): Room => {
@@ -132,23 +130,17 @@ export const getIntegerLevel = (device: Device): number => {
 	return device.level === "NULL" ? 0 : parseInt(device.level ?? "0", 10);
 };
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/"),
-			sliderChange: (level: number, id: string) => (dispatch: any) => {
-				dispatch(setDimLocal(String(level), id));
-			},
-			slideStop: (level: number | string, id: string) => (dispatch: any) => {
-				dispatch(setDim(String(level), id));
-			},
-			setDeviceStatus: (id: string, status: boolean) => (dispatch: any) => {
-				dispatch(setOnOff(status, id));
-			},
+			sliderChange: (level: number | number[], id: string) =>
+				setDimLocal(String(level), id),
+			slideStop: (level: number | number[] | string, id: string) =>
+				setDim(String(level), id),
+			setDeviceStatus: (id: string, status: boolean) => setOnOff(status, id),
 			fetchStatus: () => fetchStatusIfNecessary(),
-			handleFrontPorchClick: (id: string) => (dispatch: any) => {
-				dispatch(setOnOff(true, id));
-			},
+			handleFrontPorchClick: (id: string) => setOnOff(true, id),
 		},
 		dispatch,
 	);
@@ -159,7 +151,7 @@ const ConnectedRoomPage = connect(
 		rooms: state.house.rooms,
 	}),
 	mapDispatchToProps,
-)(RoomPage as any);
+)(RoomPage);
 
 function RoomPageWithParams() {
 	const { name } = useParams<{ name: string }>();

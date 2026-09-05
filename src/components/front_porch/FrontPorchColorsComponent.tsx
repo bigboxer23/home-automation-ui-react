@@ -14,13 +14,13 @@ export default function FrontPorchColorComponent({
 	handleClick,
 	handleHueSceneClick,
 }: FrontPorchColorComponentProps) {
-	const getOpenHabScenes = (rooms: Room[]) => {
+	const getOpenHabScenes = () => {
 		return rooms
 			.find((room) => room.name === "Front Porch Colors")!
 			.devices.filter((device) => device.id !== "FrontPorchHueScene");
 	};
 
-	const getHueScenes = (rooms: Room[]) => {
+	const getHueScenes = () => {
 		const status = rooms
 			.find((room) => room.name === "Front Porch Colors")!
 			.devices.find((device) => device.id === "FrontPorchHueScene");
@@ -43,14 +43,14 @@ export default function FrontPorchColorComponent({
 				<label className="ms-4 mb-4 w-full text-white">
 					Front Porch Scenes
 				</label>
-				{getOpenHabScenes(rooms).map((device) => (
+				{getOpenHabScenes().map((device) => (
 					<FrontPorchColorButton
 						key={device.name}
 						device={device}
 						handleClick={handleClick}
 					/>
 				))}
-				{getHueScenes(rooms).map((device) => (
+				{getHueScenes().map((device) => (
 					<FrontPorchHueSceneButton
 						key={device.id}
 						device={device}

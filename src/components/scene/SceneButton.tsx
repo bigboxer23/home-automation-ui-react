@@ -1,9 +1,9 @@
 import React from "react";
 import AppButton from "../ui/AppButton";
-import type { Room } from "../../types";
+import type { Device } from "../../types";
 
 interface SceneButtonProps {
-	room: Room;
+	room: Device;
 	handleClick: (id: string, verb: string) => void;
 }
 

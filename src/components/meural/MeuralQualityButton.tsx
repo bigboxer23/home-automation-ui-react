@@ -12,7 +12,7 @@ function MeuralQualityButton(
 ): React.ReactElement {
 	const getQuality = (): string => {
 		let raw = props.device?.temperature;
-		return raw === undefined ? "hd" : JSON.parse(raw as any).quality;
+		return raw === undefined ? "hd" : JSON.parse(String(raw)).quality;
 	};
 
 	const getClassnames = (status: string | undefined): string => {

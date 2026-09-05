@@ -5,18 +5,19 @@ import { bindActionCreators } from "redux";
 import MeuralPromptPageComponent from "../components/meural/MeuralPromptPageComponent";
 import { mapStateToProps } from "./MeuralPage";
 import { updateOpenAIPrompt } from "../actions";
+import type { AppDispatch, AppThunk } from "../types";
 
-interface MeuralPromptPageProps {
-	[key: string]: any;
-}
+type MeuralPromptPageProps = React.ComponentProps<
+	typeof MeuralPromptPageComponent
+>;
 
 class MeuralPromptPage extends React.Component<MeuralPromptPageProps> {
 	render() {
-		return <MeuralPromptPageComponent {...(this.props as any)} />;
+		return <MeuralPromptPageComponent {...this.props} />;
 	}
 }
 
-const handleClose = (dispatch: any): void => {
+const handleClose = (): AppThunk => (dispatch) => {
 	let element = document.getElementById("creationPrompt") as HTMLInputElement;
 	if (element && element.value != null && element.value.length > 0) {
 		updateOpenAIPrompt(element.value);
@@ -24,18 +25,20 @@ const handleClose = (dispatch: any): void => {
 	}
 };
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (storeDispatch: AppDispatch) =>
 	bindActionCreators(
 		{
 			back: () => push("/Meural"),
-			handleKeyUp: (event: React.KeyboardEvent) => (dispatch: any) => {
-				if (event.key === "Enter") {
-					handleClose(dispatch);
-				}
-			},
-			handleClick: () => (dispatch: any) => handleClose(dispatch),
+			handleKeyUp:
+				(event: React.KeyboardEvent): AppThunk =>
+				(dispatch) => {
+					if (event.key === "Enter") {
+						dispatch(handleClose());
+					}
+				},
+			handleClick: () => handleClose(),
 		},
-		dispatch,
+		storeDispatch,
 	);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MeuralPromptPage);

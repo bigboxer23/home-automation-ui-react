@@ -65,8 +65,8 @@ const handleErrors = function (
 	if (!response.ok && response.status === 401) {
 		console.log("Auth error, attempting registration.");
 		dispatch(setAuthError(true));
-		fetchWithCookies("/getToken").then((response) => {
-			dispatch(setAuthError(!response.ok));
+		fetchWithCookies("/getToken").then((tokenResponse) => {
+			dispatch(setAuthError(!tokenResponse.ok));
 		});
 	}
 	return response;

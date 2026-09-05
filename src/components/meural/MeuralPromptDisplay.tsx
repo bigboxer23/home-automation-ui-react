@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { push } from "../../utils/navigation";
 import { connect } from "react-redux";
 import AppButton from "../ui/AppButton";
-import type { Device } from "../../types";
+import type { AppDispatch, Device } from "../../types";
 
 interface MeuralPromptDisplayProps {
 	device: Device | undefined;
@@ -24,7 +24,7 @@ function MeuralPromptDisplay(
 
 	const getPrompt = (): string => {
 		let raw = props.device?.temperature;
-		return raw === undefined ? "" : JSON.parse(raw as any).prompt;
+		return raw === undefined ? "" : JSON.parse(String(raw)).prompt;
 	};
 
 	return (
@@ -50,12 +50,12 @@ function MeuralPromptDisplay(
 	);
 }
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: AppDispatch) =>
 	bindActionCreators(
 		{
-			changePage: (event: React.MouseEvent) => (dispatch: any) => {
+			changePage: (event: React.MouseEvent) => {
 				event.stopPropagation();
-				dispatch(push("/Meural/prompt"));
+				return push("/Meural/prompt");
 			},
 		},
 		dispatch,
