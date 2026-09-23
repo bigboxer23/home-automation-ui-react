@@ -2,10 +2,10 @@ import React from "react";
 import AppButton from "../ui/AppButton";
 import type { Room } from "../../types";
 import {
-	areDotsHidden,
 	getBatteryWarningStyle,
 	getButtonStyle,
 	getCountContent,
+	getDotsOpacity,
 	getLockedStatus,
 	isOn,
 } from "./RoomUtils";
@@ -37,8 +37,8 @@ export default function RoomButton({
 			/>
 			<i
 				className={
-					"mdi mdi-dots-horizontal z-1 absolute top-0 right-0 w-[50px] h-[50px] text-[32px] leading-[32px] opacity-30" +
-					areDotsHidden(room)
+					"mdi mdi-dots-horizontal z-1 absolute top-0 right-0 w-[50px] h-[50px] text-[32px] leading-[32px]" +
+					getDotsOpacity(room)
 				}
 				/*onClick={(event) => handleMoreClick(event, room.name)}*/
 			/>

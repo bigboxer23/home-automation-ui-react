@@ -206,6 +206,7 @@ describe("RoomButton", () => {
 
 		const dotsIcon = document.querySelector(".mdi-dots-horizontal");
 		expect(dotsIcon).toHaveClass("opacity-0");
+		expect(dotsIcon).not.toHaveClass("opacity-30");
 	});
 
 	test("shows dots when no count content", () => {
@@ -232,6 +233,7 @@ describe("RoomButton", () => {
 
 		const dotsIcon = document.querySelector(".mdi-dots-horizontal");
 		expect(dotsIcon).not.toHaveClass("opacity-0");
+		expect(dotsIcon).toHaveClass("opacity-30");
 	});
 
 	test("calls handleMoreClick when button is clicked", () => {
