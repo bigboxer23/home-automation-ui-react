@@ -30,8 +30,8 @@ export const isLight = (device: Device): boolean =>
 
 export const isFan = (device: Device): boolean => device.category === "3";
 
-export const areDotsHidden = (room: Room): string =>
-	getCountContent(room) === "" ? "" : " opacity-0";
+export const getDotsOpacity = (room: Room): string =>
+	getCountContent(room) === "" ? " opacity-30" : " opacity-0";
 
 export const getRoomTemp = (room: Room): string => {
 	let temp = getTemp(room.devices);
