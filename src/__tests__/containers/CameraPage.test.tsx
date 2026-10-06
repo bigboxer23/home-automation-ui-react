@@ -33,8 +33,9 @@ describe("CameraPage", () => {
 	test("renders CameraComponent with correct props for Security path", () => {
 		const { container } = renderWithProviders(<CameraPage />);
 
-		const iframe = container.querySelector("iframe");
-		expect(iframe).toHaveAttribute("src", "/FrontDoor");
+		const img = container.querySelector("img");
+		expect(img).toHaveAttribute("src", "/FrontDoor");
+		expect(container.querySelector("iframe")).not.toBeInTheDocument();
 		expect(screen.getByText("Front Door Security")).toBeInTheDocument();
 	});
 
@@ -49,6 +50,7 @@ describe("CameraPage", () => {
 	});
 
 	test("has correct CSS classes", () => {
+		window.location.pathname = "/GrowPi";
 		const { container } = renderWithProviders(<CameraPage />);
 
 		const iframe = container.querySelector("iframe");
@@ -74,6 +76,7 @@ describe("CameraPage", () => {
 	});
 
 	test("fires resizeImgContent via interval on mount", () => {
+		window.location.pathname = "/GrowPi";
 		renderWithProviders(<CameraPage />);
 
 		// Advance past the 250ms interval — resizeImgContent runs and clears
@@ -83,6 +86,7 @@ describe("CameraPage", () => {
 	});
 
 	test("does not create a second interval when one is already running", () => {
+		window.location.pathname = "/GrowPi";
 		// Render without advancing timers — intervalId is set but not yet cleared
 		renderWithProviders(<CameraPage />);
 		// Render again before the interval fires; initializeIframe should no-op
