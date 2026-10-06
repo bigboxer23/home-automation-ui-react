@@ -48,6 +48,8 @@ const staticProps = {
 		window.location.pathname === "/Security"
 			? "Front Door Security"
 			: "Grow Tent",
+	// The front door is a raw MJPEG stream, the grow tent an HTML page.
+	isStream: (): boolean => window.location.pathname === "/Security",
 };
 
 const mapStateToProps = () => staticProps;

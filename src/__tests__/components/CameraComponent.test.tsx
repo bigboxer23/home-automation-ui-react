@@ -9,6 +9,7 @@ describe("CameraComponent", () => {
 		load: vi.fn(),
 		getSource: () => "/test-source",
 		getName: () => "Test Camera",
+		isStream: () => false,
 	};
 
 	beforeEach(() => {
@@ -28,6 +29,19 @@ describe("CameraComponent", () => {
 			"border-0",
 			"room-content",
 		);
+	});
+
+	test("renders a stream as an img instead of an iframe", () => {
+		const { container } = renderWithProviders(
+			<CameraComponent {...mockProps} isStream={() => true} />,
+		);
+
+		const img = container.querySelector("img");
+		expect(img).toHaveAttribute("src", "/test-source");
+		expect(img).toHaveAttribute("alt", "Test Camera");
+		expect(img).toHaveClass("block", "w-full", "h-auto");
+		expect(container.querySelector("iframe")).not.toBeInTheDocument();
+		expect(mockProps.load).not.toHaveBeenCalled();
 	});
 
 	test("renders header with correct name", () => {
