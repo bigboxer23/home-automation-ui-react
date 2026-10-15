@@ -7,7 +7,7 @@
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
 		"@mdi/font": "^7.4.47",
-		"@mui/material": "^9.0.0",
+		"@mui/material": "^9.5.0",
 		"react": "^19.2.5",
 		"react-dom": "^19.3.0",
 		"react-redux": "^9.2.0",
