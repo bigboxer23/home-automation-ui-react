@@ -9,7 +9,7 @@
 		"@mdi/font": "^7.4.47",
 		"@mui/material": "^9.5.0",
 		"react": "^19.2.5",
-		"react-dom": "^19.3.0",
+		"react-dom": "^19.3.1",
 		"react-redux": "^9.2.0",
 		"react-router-dom": "^7.18.4",
 		"redux": "^5.0.1",
