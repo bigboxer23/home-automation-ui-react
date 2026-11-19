@@ -34,7 +34,7 @@
 		"@testing-library/user-event": "^14.6.11",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.3.0",
-		"@vitejs/plugin-react": "^6.1.2",
+		"@vitejs/plugin-react": "^6.3.0",
 		"@vitest/coverage-v8": "^5.0.5",
 		"jsdom": "^31.0.1",
 		"oxlint": "^1.93.0",
